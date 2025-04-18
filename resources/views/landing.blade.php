@@ -1,7 +1,7 @@
 @extends('layouts.anon')
 @section('content')
     <!-- Hero Section -->
-    @include('Components.UI.Anon.Hero')
+    {{-- @include('Components.UI.Anon.Hero')
 
     <!-- Stats Section -->
     @include('Components.UI.Anon.Stats')
@@ -22,5 +22,5 @@
     @include('Components.UI.Anon.Partners')
 
     <!-- CTA Section -->
-    @include('Components.UI.Anon.Cta')
+    @include('Components.UI.Anon.Cta') --}}
 @endsection

@@ -21,14 +21,14 @@
     </head>
     <body class="antialiased">
         <div class="min-h-screen bg-white">
-            @include('Components.Widget.User.Navbar')
+            {{-- @include('Components.Widget.User.Navbar') --}}
     
             <!-- Page Content -->
             <main>
                 @yield('content')
             </main>
     
-            @include('Components.Widget.User.Footer')
+            {{-- @include('Components.Widget.User.Footer') --}}
         </div>
     </body>
     <script>
