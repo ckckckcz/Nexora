@@ -28,7 +28,7 @@
                 @yield('content')
             </main>
     
-            {{-- @include('components.widget.user.footer') --}}
+            @include('components.widget.user.footer')
         </div>
     </body>
     <script>
