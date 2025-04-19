@@ -29,10 +29,10 @@
 
         <!-- Desktop Auth Links -->
         <div class="hidden md:flex items-center space-x-2">
-            <a href="/" class="text-[#1A3C34] font-medium px-3 py-2 hover:text-opacity-80 transition-colors">
+            <a href="/" class="text-[#1A3C34] font-medium bg-gray-100 hover:bg-gray-200 rounded-xl px-5 py-2 hover:text-opacity-80 transition-colors">
                 Login
             </a>
-            <a href="/" class="bg-[#DEFC79] text-[#1A3C34] font-medium px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors">
+            <a href="/" class="bg-[#DEFC79] hover:bg-[#c9eb5b] text-[#1A3C34] font-medium px-4 py-2 rounded-xl hover:bg-opacity-90 transition-colors">
                 Sign up
             </a>
         </div>

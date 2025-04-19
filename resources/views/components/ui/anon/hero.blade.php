@@ -6,7 +6,7 @@
         <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
             Get more sales and maximize the conversion rates. Discover the most productive channels.
         </p>
-        <a href="/" class="inline-block bg-blue-900 text-gray-100 font-medium px-6 py-3 rounded-xl mb-12 hover:bg-opacity-90 transition-colors">
+        <a href="/" class="inline-block bg-[#DEFC79] hover:bg-[#c9eb5b] text-blue-900 font-medium px-6 py-3 rounded-xl mb-12 hover:bg-opacity-90 transition-colors">
             Cari Magang
         </a>
     
