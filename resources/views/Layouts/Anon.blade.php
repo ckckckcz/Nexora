@@ -20,7 +20,7 @@
         @endif
     </head>
     <body class="antialiased">
-        <div class="min-h-screen bg-white">
+        <div class="min-h-screen">
             @include('components.widget.user.navbar')
     
             <!-- Page Content -->

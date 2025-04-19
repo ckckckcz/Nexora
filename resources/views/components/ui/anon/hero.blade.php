@@ -7,7 +7,7 @@
             Get more sales and maximize the conversion rates. Discover the most productive channels.
         </p>
         <div class="text-left lg:text-center">
-            <a href="/" class="inline-block bg-[#DEFC79] hover:bg-[#c9eb5b] text-blue-900 font-medium px-6 py-3 rounded-xl mb-12 hover:bg-opacity-90 transition-colors">
+            <a href="/" class="inline-block bg-[#DEFC79] hover:bg-[#c9eb5b] text-blue-900 font-medium px-6 py-3 rounded-xl mb-5 hover:bg-opacity-90 transition-colors">
                 Cari Magang
             </a>
         </div>                
