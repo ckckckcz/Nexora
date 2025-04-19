@@ -10,52 +10,52 @@
             Get Started
         </a>
     
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 w-full mx-auto">
-            <div class="bg-[#024751] text-white rounded-xl pt-4 pr-4 pl-4 flex flex-col items-center transform hover:scale-105 transition-transform">
-                <div class="title">
+        <div class="grid grid-cols-5 gap-4 w-full items-end">
+            <div class="bg-[#024751] text-white rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center transform hover:scale-105 transition-transform h-full">
+                <div class="text-center">
                     <h3 class="font-medium mt-2">Sabrina Uliyana</h3>
                     <p class="text-sm text-gray-300">UI/UX Designer</p>
                 </div>
-                <div class="w-full h-full mt-5 relative overflow-hidden rounded-t-lg">
-                    <img src="{{ asset('images/riovaldo.png') }}" alt="Sabrina Uliyana" class="object-cover w-full h-full" />
+                <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
+                    <img src="{{ asset('images/riovaldo.png') }}" alt="Sabrina Uliyana" class="object-contain w-full" />
+                </div>
+            </div>          
+            <div class="bg-[#024751] text-white rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center transform hover:scale-105 transition-transform h-[400px]">
+                <div class="text-center">
+                    <h3 class="font-medium mt-2">Ayu Lestari</h3>
+                    <p class="text-sm text-gray-300">Data Analyst</p>
+                </div>
+                <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
+                    <img src="{{ asset('images/riovaldo.png') }}" alt="Ayu Lestari" class="object-contain h-[310px] w-full" />
                 </div>
             </div>
-            <div class="bg-[#024751] text-white rounded-xl pt-4 pr-4 pl-4 flex flex-col items-center transform hover:scale-105 transition-transform">
-                <div class="title">
+            <div class="bg-[#024751] text-white rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center transform hover:scale-105 transition-transform h-[350px]">
+                <div class="text-center">
+                    <h3 class="font-medium mt-2">Budi Pratama</h3>
+                    <p class="text-sm text-gray-300">Web Developer</p>
+                </div>
+                <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
+                    <img src="{{ asset('images/riovaldo.png') }}" alt="Budi Pratama" class="object-contain h-[260px] w-full" />
+                </div>
+            </div>
+            <div class="bg-[#024751] text-white rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center transform hover:scale-105 transition-transform h-[400px]">
+                <div class="text-center">
+                    <h3 class="font-medium mt-2">Ayu Lestari</h3>
+                    <p class="text-sm text-gray-300">Data Analyst</p>
+                </div>
+                <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
+                    <img src="{{ asset('images/riovaldo.png') }}" alt="Ayu Lestari" class="object-contain h-[310px] w-full" />
+                </div>
+            </div>
+            <div class="bg-[#024751] text-white rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center transform hover:scale-105 transition-transform h-full">
+                <div class="text-center">
                     <h3 class="font-medium mt-2">Sabrina Uliyana</h3>
                     <p class="text-sm text-gray-300">UI/UX Designer</p>
                 </div>
-                <div class="w-full h-full mt-5 relative overflow-hidden rounded-t-lg">
-                    <img src="{{ asset('images/riovaldo.png') }}" alt="Sabrina Uliyana" class="object-cover w-full h-full" />
+                <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
+                    <img src="{{ asset('images/riovaldo.png') }}" alt="Sabrina Uliyana" class="object-contain w-full" />
                 </div>
-            </div>
-            <div class="bg-[#024751] text-white rounded-xl pt-4 pr-4 pl-4 flex flex-col items-center transform hover:scale-105 transition-transform">
-                <div class="title">
-                    <h3 class="font-medium mt-2">Sabrina Uliyana</h3>
-                    <p class="text-sm text-gray-300">UI/UX Designer</p>
-                </div>
-                <div class="w-full h-full mt-5 relative overflow-hidden rounded-t-lg">
-                    <img src="{{ asset('images/riovaldo.png') }}" alt="Sabrina Uliyana" class="object-cover w-full h-full" />
-                </div>
-            </div>
-            <div class="bg-[#024751] text-white rounded-xl pt-4 pr-4 pl-4 flex flex-col items-center transform hover:scale-105 transition-transform">
-                <div class="title">
-                    <h3 class="font-medium mt-2">Sabrina Uliyana</h3>
-                    <p class="text-sm text-gray-300">UI/UX Designer</p>
-                </div>
-                <div class="w-full h-full mt-5 relative overflow-hidden rounded-t-lg">
-                    <img src="{{ asset('images/riovaldo.png') }}" alt="Sabrina Uliyana" class="object-cover w-full h-full" />
-                </div>
-            </div>
-            <div class="bg-[#024751] text-white rounded-xl pt-4 pr-4 pl-4 flex flex-col items-center transform hover:scale-105 transition-transform">
-                <div class="title">
-                    <h3 class="font-medium mt-2">Sabrina Uliyana</h3>
-                    <p class="text-sm text-gray-300">UI/UX Designer</p>
-                </div>
-                <div class="w-full h-full mt-5 relative overflow-hidden rounded-t-lg">
-                    <img src="{{ asset('images/riovaldo.png') }}" alt="Sabrina Uliyana" class="object-cover w-full h-full" />
-                </div>
-            </div>
-        </div>
+            </div>          
+        </div>          
     </div>
 </section>  
