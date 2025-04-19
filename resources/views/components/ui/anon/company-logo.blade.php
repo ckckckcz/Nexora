@@ -1,4 +1,4 @@
-<section class="py-8 md:py-12 bg-gray-50 mt-20">
+<section class="py-8 md:py-12 bg-gray-50 lg:mt-20 mt-2">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
             <img
