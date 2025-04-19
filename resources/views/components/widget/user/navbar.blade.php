@@ -4,7 +4,7 @@
         <div class="flex items-center">
             <a href="/" class="flex items-center">
                 <div class="text-[#1A3C34] font-bold flex items-center">
-                    <svg class="w-6 h-6 text-[#F7D154] mr-1" viewBox="0 0 24 24" fill="currentColor">
+                    <svg class="w-6 h-6 text-[#DEFC79] mr-1" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" />
                     </svg>
                     <span>Hirings</span>
@@ -32,7 +32,7 @@
             <a href="/" class="text-[#1A3C34] font-medium px-3 py-2 hover:text-opacity-80 transition-colors">
                 Login
             </a>
-            <a href="/" class="bg-[#F7D154] text-[#1A3C34] font-medium px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors">
+            <a href="/" class="bg-[#DEFC79] text-[#1A3C34] font-medium px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors">
                 Sign up
             </a>
         </div>
@@ -67,7 +67,7 @@
                 <a href="/" class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-md text-center w-1/2">
                     Login
                 </a>
-                <a href="/" class="bg-[#F7D154] text-[#1A3C34] font-medium px-4 py-2 rounded-md text-center w-1/2">
+                <a href="/" class="bg-[#DEFC79] text-[#1A3C34] font-medium px-4 py-2 rounded-md text-center w-1/2">
                     Sign up
                 </a>
             </div>

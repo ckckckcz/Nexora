@@ -4,7 +4,7 @@
             <div class="md:col-span-2">
                 <a href="{{ url('/') }}" class="flex items-center mb-4">
                     <div class="text-[#1A3C34] font-bold flex items-center">
-                        <svg class="w-6 h-6 text-[#F7D154] mr-1" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="w-6 h-6 text-[#DEFC79] mr-1" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" />
                         </svg>
                         <span>Hirings</span>
