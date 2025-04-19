@@ -77,6 +77,17 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('header');
+
+        // Animasikan header dari atas ke posisi normal
+        gsap.from(header, {
+            y: -100,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Toggle Mobile Menu
         const toggleButton = document.querySelector('.toggle-menu');
         const mobileMenu = document.querySelector('.mobile-menu');
         const menuIcon = document.querySelector('.menu-icon');
