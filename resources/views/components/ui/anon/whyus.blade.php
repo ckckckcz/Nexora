@@ -11,7 +11,7 @@
                     Discover the optimal match for your startup and get the best results faster.
                 </p>
                 <a href="/learn-more"
-                   class="inline-block bg-[#DEFC79] text- font-semibold px-6 py-3 rounded-lg mb-8 hover:bg-[#e8c34b] transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#F7D154] focus:ring-opacity-50"
+                   class="inline-block bg-[#DEFC79] text- font-medium px-6 py-3 rounded-xl mb-8 hover:bg-[#e8c34b] transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#F7D154] focus:ring-opacity-50"
                    aria-label="Learn more about our services">
                     Learn More
                 </a>
@@ -72,26 +72,55 @@
                         <div class="flex justify-between items-center mb-4">
                             <h4 class="font-semibold text-lg">Profil Kandidat</h4>
                             <div class="flex gap-2">
-                                <button @click="activeIndex = activeIndex > 0 ? activeIndex - 1 : candidates.length - 1"
-                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200">
-                                        <svg class="w-5 h-5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                        </svg>                                          
+                                <!-- Tombol navigasi kiri -->
+                                <button 
+                                    @click="activeIndex = activeIndex > 0 ? activeIndex - 1 : candidates.length - 1"
+                                    class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all duration-300 ease-in-out transform hover:scale-110"
+                                    aria-label="Previous candidate">
+                                    <svg class="w-5 h-5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                    </svg>
                                 </button>
-                                <button @click="activeIndex = activeIndex < candidates.length - 1 ? activeIndex + 1 : 0"
-                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center bg-[#DEFC79]er text-gray-600 hover:bg-gray-200">
-                                        <svg class="w-5 h-5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                                        </svg>
+                                
+                                <!-- Tombol navigasi kanan -->
+                                <button 
+                                    @click="activeIndex = activeIndex < candidates.length - 1 ? activeIndex + 1 : 0"
+                                    class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all duration-300 ease-in-out transform hover:scale-110"
+                                    aria-label="Next candidate">
+                                    <svg class="w-5 h-5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
-            
-                        <!-- Isi profil -->
-                        <template x-if="candidates.length">
+                    
+                        <!-- Skeleton Loading -->
+                        <template x-if="!candidates[activeIndex]">
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4 animate-pulse">
+                                    <!-- Skeleton untuk gambar avatar -->
+                                    <div class="w-16 h-16 bg-gray-300 rounded-full"></div>
+                                    <div class="space-y-2 w-1/2">
+                                        <!-- Skeleton untuk nama dan role -->
+                                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                                        <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+                                        <!-- Skeleton untuk waktu -->
+                                        <div class="h-3 bg-gray-300 rounded w-1/4"></div>
+                                    </div>
+                                </div>
+                                <!-- Skeleton untuk deskripsi -->
+                                <div class="h-4 bg-gray-300 rounded w-full"></div>
+                                <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                            </div>
+                        </template>
+                    
+                        <!-- Isi Profil Kandidat -->
+                        <template x-if="candidates.length && candidates[activeIndex]">
                             <div class="text-gray-700 space-y-4">
                                 <div class="flex items-center gap-4">
-                                    <img :src="candidates[activeIndex].avatar" alt="avatar" class="w-16 h-16 rounded-full object-cover">
+                                    <img :src="candidates[activeIndex].avatar" alt="avatar" class="w-16 h-16 rounded-full object-cover transition-all duration-500 ease-in-out transform hover:scale-110"
+                                            x-transition:enter="transition transform duration-500" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                                            x-transition:leave="transition transform duration-500" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
                                     <div>
                                         <h4 class="font-semibold text-xl" x-text="candidates[activeIndex].name"></h4>
                                         <p class="text-sm text-gray-500" x-text="candidates[activeIndex].role"></p>
@@ -104,39 +133,20 @@
                                 <p class="text-sm" x-text="candidates[activeIndex].description"></p>
                             </div>
                         </template>
-            
+                    
                         <!-- Pagination Indicator -->
                         <div class="flex justify-center mt-6 gap-1">
                             <template x-for="(c, idx) in candidates" :key="idx">
-                                <button @click="activeIndex = idx"
-                                        :class="[activeIndex === idx ? 'bg-blue-900 w-4' : 'bg-gray-200 w-2', 'h-2 rounded-full transition-all']">
+                                <button 
+                                    @click="activeIndex = idx"
+                                    :class="[activeIndex === idx ? 'bg-blue-900 w-4' : 'bg-gray-200 w-2', 'h-2 rounded-full transition-all duration-300 ease-in-out']">
                                 </button>
                             </template>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
             
         </div>
     </div>
 </section>
-
-<style>
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fade-in-up {
-        animation: fadeInUp 0.6s ease-out forwards;
-        will-change: transform, opacity;
-    }
-</style>
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
