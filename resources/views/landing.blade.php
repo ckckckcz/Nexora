@@ -6,4 +6,6 @@
     @include('components.ui.anon.company-logo')
     <!-- Why Us Section -->
     @include('components.ui.anon.whyus')
+    <!-- Talented Section -->
+    @include('components.ui.anon.talented')
 @endsection
