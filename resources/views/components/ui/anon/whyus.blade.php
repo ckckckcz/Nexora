@@ -15,6 +15,7 @@
                     aria-label="Learn more about our services">
                     Ajukan Lamaran Magang ! 📄
                 </a>
+                <div class="border-dashed border-t-3 border-gray-200 p-2"></div>
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-4">
                     <div class="flex items-center gap-2 animate-fade-in-up">
                         <div class="w-4 h-4 rounded-full bg-blue-900"></div>
