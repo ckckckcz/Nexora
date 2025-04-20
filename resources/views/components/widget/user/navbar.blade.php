@@ -65,7 +65,7 @@
                 <a href="/" class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-lg text-center w-1/2">
                     Login
                 </a>
-                <a href="/" class="bg-[#DEFC79] text-[#1A3C34] font-medium px-4 py-2 rounded-lg text-center w-1/2">
+                <a href="/" class="bg-[#DEFC79] hover:bg-[#c9eb5b] text-[#1A3C34] font-medium px-4 py-2 rounded-lg text-center w-1/2">
                     Sign up
                 </a>
             </div>

@@ -11,9 +11,9 @@
                     Discover the optimal match for your startup and get the best results faster.
                 </p>
                 <a href="/learn-more"
-                   class="inline-block bg-[#DEFC79] text- font-medium px-6 py-3 rounded-xl mb-8 hover:bg-[#e8c34b] transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#F7D154] focus:ring-opacity-50"
-                   aria-label="Learn more about our services">
-                    Learn More
+                    class="inline-block bg-[#DEFC79] text- font-medium px-6 py-3 rounded-xl mb-8 hover:bg-[#c9eb5b]transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#F7D154] focus:ring-opacity-50"
+                    aria-label="Learn more about our services">
+                    Ajukan Lamaran Magang ! 📄
                 </a>
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-4">
                     <div class="flex items-center gap-2 animate-fade-in-up">
@@ -31,7 +31,7 @@
             <div x-data="{
                 candidates: [
                     {
-                        name: 'Beniamin Rezalan',
+                        name: 'Beniamin',
                         role: 'Front Developer',
                         hourly: '$20/hr',
                         time: '2 mins ago',
@@ -125,7 +125,6 @@
                                         <h4 class="font-semibold text-xl" x-text="candidates[activeIndex].name"></h4>
                                         <p class="text-sm text-gray-500" x-text="candidates[activeIndex].role"></p>
                                         <div class="flex items-center text-xs text-gray-400 mt-1">
-                                            <i class="fas fa-clock mr-1"></i>
                                             <span x-text="candidates[activeIndex].time"></span>
                                         </div>
                                     </div>
