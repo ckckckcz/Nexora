@@ -58,7 +58,7 @@
                 ],
                 activeIndex: 0
             }" class="lg:w-1/2" x-intersect="$el.classList.add('animate-fade-in-up')">
-                <div class="bg-white rounded-xl shadow-md p-4">
+                <div class="bg-white rounded-xl p-4">
                     <div class="bg-blue-900 text-white rounded-lg p-4 mb-6">
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
                             <div class="flex items-center gap-2">

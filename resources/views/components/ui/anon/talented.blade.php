@@ -1,4 +1,4 @@
-<section class="py-16 md:py-24">
+<section class="py-16 md:py-24 lg:px-0 px-3">
     <div class="container mx-auto lg:bg-blue-900/20 bg-white rounded-2xl py-16 text-center">
       <div class="opacity-0 translate-y-5 animate-fade-in-up duration-500">
         <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
@@ -29,7 +29,7 @@
             ],
           ];
         @endphp
-        <div class="p-6 rounded-xl bg-white transition-all duration-300 border border-gray-200">
+        <div class="p-7 rounded-xl bg-white transition-all duration-300 border border-gray-200">
           <div class="flex justify-left mb-4">
             <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gray-100 text-blue-900">
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@
           <h3 class="text-xl font-bold mb-2 text-blue-900 text-left">80% Faster Hiring</h3>
           <p class="text-sm text-gray-600 text-left">Reduce the time from to find the right qualified candidates</p>
         </div>
-        <div class="p-6 rounded-xl bg-blue-900 transition-all duration-300 border border-gray-200">
+        <div class="p-7 rounded-xl bg-blue-900 transition-all duration-300 border border-gray-200">
           <div class="flex justify-left mb-4">
             <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-[#DEFC79] text-blue-900">
                 <svg class="w-6 h-6" fill="#1e3a8a" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@
           <h3 class="text-xl font-bold mb-2 text-white text-left">Decrease spendings</h3>
           <p class="text-sm text-white opacity-50 text-left">Find the right candidates for only cheaper than market price</p>
         </div>
-        <div class="p-6 rounded-xl bg-white transition-all duration-300 border border-gray-200">
+        <div class="p-7 rounded-xl bg-white transition-all duration-300 border border-gray-200">
           <div class="flex justify-left mb-4">
             <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gray-100 text-blue-900">
                 <svg fill="#000000" class="w-6 h-6"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
