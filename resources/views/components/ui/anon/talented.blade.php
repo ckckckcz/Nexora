@@ -1,5 +1,5 @@
-<section class="py-16 md:py-24 lg:px-0 px-3">
-    <div class="container mx-auto lg:bg-blue-900/20 bg-white rounded-2xl py-16 text-center">
+<section class="lg:py-16 py-2 lg:px-0 px-3">
+    <div class="container mx-auto lg:bg-blue-900/20 bg-white rounded-2xl lg:py-16 py-2 text-center">
       <div class="opacity-0 translate-y-5 animate-fade-in-up duration-500">
         <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
           Leverage global world-class talented people
