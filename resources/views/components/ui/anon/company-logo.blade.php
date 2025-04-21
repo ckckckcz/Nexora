@@ -1,34 +1,58 @@
-<section class="py-8 md:py-12 bg-gray-50 lg:mt-20 mt-2">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            <img
-                src="{{ asset('images/placeholder.svg') }}"
-                alt="Google"
-                class="opacity-50 hover:opacity-75 transition-opacity"
-                width="120"
-                height="40"
-            />
-            <img
-                src="{{ asset('images/placeholder.svg') }}"
-                alt="Facebook"
-                class="opacity-50 hover:opacity-75 transition-opacity"
-                width="120"
-                height="40"
-            />
-            <img
-                src="{{ asset('images/placeholder.svg') }}"
-                alt="Airbnb"
-                class="opacity-50 hover:opacity-75 transition-opacity"
-                width="120"
-                height="40"
-            />
-            <img
-                src="{{ asset('images/placeholder.svg') }}"
-                alt="Slack"
-                class="opacity-50 hover:opacity-75 transition-opacity"
-                width="120"
-                height="40"
-            />
-        </div>
-    </div>
+<section class="relative lg:mt-24 mt-0">
+    <div class="absolute -inset-x-2 -inset-y-2 right-1 bg-[#ddfc7994] rotate-2 -z-30"></div>
+    <div class="absolute inset-0 bg-wine -z-20"></div>
+    <section class="relative py-4 text-center lg:py-8 bg-blue-900 overflow-hidden">
+        <div id="scroll-container-1" class="flex lg:gap-12 gap-8 whitespace-nowrap"></div>
+    </section>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollContainer = document.getElementById("scroll-container-1");
+        if (!scrollContainer) return;
+
+        let scrollPosition = 0;
+
+        const animateScroll = () => {
+            scrollPosition -= 1;
+            scrollContainer.style.transform = `translateX(${scrollPosition}px)`;
+
+            const firstChild = scrollContainer.firstElementChild;
+            if (firstChild && firstChild.getBoundingClientRect().right < 0) {
+                scrollContainer.appendChild(firstChild);
+                scrollPosition += firstChild.offsetWidth;
+            }
+
+            requestAnimationFrame(animateScroll);
+        };
+
+        const cloneContent = () => {
+            const children = Array.from(scrollContainer.children);
+            children.forEach((child) => {
+                const clone = child.cloneNode(true);
+                scrollContainer.appendChild(clone);
+            });
+        };
+
+        const items = [
+            `<span class="text-white lg:text-[30px] text-xl font-semibold">Temukan Magang Impianmu</span>`,
+            `<span class="text-white lg:text-[30px] text-xl font-semibold">✦</span>`,
+            `<span class="text-white lg:text-[30px] text-xl font-semibold">Bangun Karier dari Sekarang</span>`,
+            `<span class="text-white lg:text-[30px] text-xl font-semibold">✦</span>`,
+            `<span class="text-white lg:text-[30px] text-xl font-semibold">Magang Berkualitas untuk Masa Depan Cerah</span>`,
+            `<span class="text-white lg:text-[30px] text-xl font-semibold">✦</span>`,
+            `<span class="text-white lg:text-[30px] text-xl font-semibold">Koneksi Profesional, Pengalaman Nyata</span>`,
+            `<span class="text-white lg:text-[30px] text-xl font-semibold">✦</span>`
+        ];
+
+
+        for (let i = 0; i < 10; i++) {
+            items.forEach((item) => {
+                scrollContainer.innerHTML += item;
+            });
+        }
+
+        cloneContent();
+        animateScroll();
+    });
+</script>
