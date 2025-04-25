@@ -11,7 +11,7 @@
                     Discover the optimal match for your startup and get the best results faster.
                 </p>
                 <a href="/learn-more"
-                    class="inline-block bg-[#DEFC79] text- font-medium px-6 py-3 rounded-xl mb-8 hover:bg-[#c9eb5b]transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#F7D154] focus:ring-opacity-50"
+                    class="inline-block bg-[#DEFC79] text- font-medium px-6 py-3 rounded-xl mb-8 hover:bg-[#c9eb5b] transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#F7D154] focus:ring-opacity-50"
                     aria-label="Learn more about our services">
                     Ajukan Lamaran Magang ! 📄
                 </a>

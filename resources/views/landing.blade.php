@@ -8,4 +8,6 @@
     @include('components.ui.anon.whyus')
     <!-- Talented Section -->
     @include('components.ui.anon.talented')
+    <!-- Featured Job Section -->
+    @include('components.ui.anon.featured-job')
 @endsection
