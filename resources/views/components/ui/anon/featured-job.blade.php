@@ -142,64 +142,63 @@
             <div class="lg:max-w-sm w-full p-6 bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow">
                 <h5 class="text-xl font-semibold text-gray-800 mb-4">🏢 Featured Company</h5>
                 <div class="mt-6 gap-5 flex flex-col">
-              
-                  <!-- Google -->
-                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
-                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/512px-Google_2015_logo.svg.png" alt="Logo Google">
-                    <div>
-                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Google</h6>
-                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                    <!-- Google -->
+                    <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                        <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/512px-Google_2015_logo.svg.png" alt="Logo Google">
+                        <div>
+                            <h6 class="text-lg font-bold text-gray-900 leading-tight">Google</h6>
+                            <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                        </div>
                     </div>
-                  </div>
-              
-                  <!-- Microsoft -->
-                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
-                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Logo Microsoft">
-                    <div>
-                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Microsoft</h6>
-                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                
+                    <!-- Microsoft -->
+                    <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                        <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Logo Microsoft">
+                        <div>
+                            <h6 class="text-lg font-bold text-gray-900 leading-tight">Microsoft</h6>
+                            <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                        </div>
                     </div>
-                  </div>
-              
-                  <!-- Amazon Web Services -->
-                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
-                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="Logo AWS">
-                    <div>
-                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Amazon Web Services</h6>
-                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                
+                    <!-- Amazon Web Services -->
+                    <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                        <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="Logo AWS">
+                        <div>
+                            <h6 class="text-lg font-bold text-gray-900 leading-tight">Amazon Web Services</h6>
+                            <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                        </div>
                     </div>
-                  </div>
-              
-                  <!-- Samsung -->
-                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
-                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Logo Samsung">
-                    <div>
-                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Samsung</h6>
-                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                
+                    <!-- Samsung -->
+                    <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                        <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Logo Samsung">
+                        <div>
+                            <h6 class="text-lg font-bold text-gray-900 leading-tight">Samsung</h6>
+                            <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                        </div>
                     </div>
-                  </div>
-              
-                  <!-- Huawei -->
-                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
-                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Huawei_Standard_logo.svg" alt="Logo Huawei">
-                    <div>
-                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Huawei</h6>
-                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                
+                    <!-- Huawei -->
+                    <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                        <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Huawei_Standard_logo.svg" alt="Logo Huawei">
+                        <div>
+                            <h6 class="text-lg font-bold text-gray-900 leading-tight">Huawei</h6>
+                            <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                        </div>
                     </div>
-                  </div>
-              
-                  <!-- Unilever -->
-                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
-                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Unilever_Logo.svg" alt="Logo Unilever">
-                    <div>
-                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Unilever</h6>
-                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                
+                    <!-- Unilever -->
+                    <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                        <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Unilever_Logo.svg" alt="Logo Unilever">
+                        <div>
+                            <h6 class="text-lg font-bold text-gray-900 leading-tight">Unilever</h6>
+                            <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                        </div>
                     </div>
-                  </div>
-              
                 </div>
-              </div>              
+            </div>              
         </div>
+        <button type="button" class="px-5 py-2.5 text-md w-full mt-5 font-medium text-dark cursor-pointer bg-[#DEFC79] hover:bg-[#c9eb5b] rounded-xl text-center">Lihat Semua</button>
     </div>
 </section>
 <script>
