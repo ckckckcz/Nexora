@@ -213,7 +213,7 @@
         button.style.fontSize = '0.875rem';
         button.style.fontWeight = '500';
         button.style.cursor = 'pointer';
-        button.style.border = 'none';
+        button.style.border = 'none';j
         button.style.transition = 'background-color 0.3s ease, color 0.3s ease';
     }
 
