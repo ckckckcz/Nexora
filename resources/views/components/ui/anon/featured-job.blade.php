@@ -30,7 +30,7 @@
                 </div>
                 <div class="relative w-full">
                     <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-full border-s-gray-50 border-s-2 border border-gray-300 focus:ring-[#DEFC79] focus:border-[#DEFC79]" placeholder="Cari Perusahaan..." required />
-                    <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-black bg-[#DEFC79] rounded-e-full cursor-pointer border border-[#DEFC79] hover:bg-[#c9eb5b] focus:ring-4 focus:outline-none focus:ring-blue-300">
+                    <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-black bg-[#DEFC79] hover:bg-[#c9eb5b] rounded-e-full cursor-pointer border border-[#DEFC79] focus:ring-4 focus:outline-none focus:ring-blue-300">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
@@ -56,94 +56,150 @@
                 AI Engineer
             </button>
         </div>  
-        <div class="flex max-w-full mt-10 gap-10">
-            <div class="grid-cols-4 grid gap-4 max-w-full">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                        Read more
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                        Read more
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                        Read more
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                        Read more
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                        Read more
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                        Read more
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>     
-            <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                    Read more
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                    </svg>
-                </a>
+        @php
+            $magangs = [
+                [
+                    'posisi' => 'Frontend Developer',
+                    'lokasi' => 'Indonesia, Jakarta',
+                    'perusahaan' => 'Google',
+                    'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png',
+                    'benefit' => ['Uang Transport', 'Sertifikat', 'Makan Siang', 'WFO'],
+                ],
+                [
+                    'posisi' => 'Mobile Developer',
+                    'lokasi' => 'Indonesia, Jakarta',
+                    'perusahaan' => 'Microsoft',
+                    'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Microsoft_icon.svg/2048px-Microsoft_icon.svg.png',
+                    'benefit' => ['Mentoring', 'Sertifikat', 'Project Nyata', 'Uang Transport'],
+                ],
+                [
+                    'posisi' => 'Frontend Developer',
+                    'lokasi' => 'Indonesia, Jakarta',
+                    'perusahaan' => 'Google',
+                    'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png',
+                    'benefit' => ['Uang Transport', 'Sertifikat', 'Makan Siang', 'WFO'],
+                ],
+                [
+                    'posisi' => 'Mobile Developer',
+                    'lokasi' => 'Indonesia, Jakarta',
+                    'perusahaan' => 'Microsoft',
+                    'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Microsoft_icon.svg/2048px-Microsoft_icon.svg.png',
+                    'benefit' => ['Mentoring', 'Sertifikat', 'Project Nyata', 'Uang Transport'],
+                ],
+                [
+                    'posisi' => 'Frontend Developer',
+                    'lokasi' => 'Indonesia, Jakarta',
+                    'perusahaan' => 'Google',
+                    'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png',
+                    'benefit' => ['Uang Transport', 'Sertifikat', 'Makan Siang', 'WFO'],
+                ],
+                [
+                    'posisi' => 'Mobile Developer',
+                    'lokasi' => 'Indonesia, Jakarta',
+                    'perusahaan' => 'Microsoft',
+                    'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Microsoft_icon.svg/2048px-Microsoft_icon.svg.png',
+                    'benefit' => ['Mentoring', 'Sertifikat', 'Project Nyata', 'Uang Transport'],
+                ],
+            ];
+        @endphp
+
+        <div class="flex lg:flex-row flex-col mt-10 gap-5 h-full w-full">
+            <div class="grid lg:grid-cols-3 grid-cols-1 max-w-full gap-5">
+                @foreach ($magangs as $magang)
+                    <div class="lg:max-w-sm w-full p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                        <h5 class="mb-1 text-2xl font-bold tracking-tight text-gray-900">{{ $magang['posisi'] }}</h5>
+                        <div class="flex items-center space-x-1 mb-2">
+                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z" clip-rule="evenodd"/>
+                            </svg>
+                            <p class="text-sm text-gray-400">{{ $magang['lokasi'] }}</p>
+                        </div>
+    
+                        <div class="flex items-center gap-3 mb-5 mt-5">
+                            <div class="w-6 h-6 object-cover">
+                                <img src="{{ $magang['logo'] }}" alt="{{ $magang['perusahaan'] }}" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-md font-semibold text-gray-900">{{ $magang['perusahaan'] }}</span>
+                        </div>
+    
+                        <ul class="space-y-2 mb-6 grid grid-cols-2">
+                            @foreach ($magang['benefit'] as $benefit)
+                                <li class="flex items-center text-sm text-gray-700">
+                                    <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M16.707 5.293a1 1 0 0 0-1.414 0L8 12.586 4.707 9.293a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l8-8a1 1 0 0 0 0-1.414z"/>
+                                    </svg>
+                                    {{ $benefit }}
+                                </li>
+                            @endforeach
+                        </ul>
+    
+                        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-BLACK bg-[#DEFC79] hover:bg-[#c9eb5b] rounded-xl focus:ring-4 focus:outline-none focus:ring-[#DEFC79]/50">
+                            Lamar Magang 📄
+                        </a>
+                    </div>
+                @endforeach
             </div>
-        </div>     
+            <div class="lg:max-w-sm w-full p-6 bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow">
+                <h5 class="text-xl font-semibold text-gray-800 mb-4">🏢 Featured Company</h5>
+                <div class="mt-6 gap-5 flex flex-col">
+              
+                  <!-- Google -->
+                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/512px-Google_2015_logo.svg.png" alt="Logo Google">
+                    <div>
+                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Google</h6>
+                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                    </div>
+                  </div>
+              
+                  <!-- Microsoft -->
+                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Logo Microsoft">
+                    <div>
+                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Microsoft</h6>
+                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                    </div>
+                  </div>
+              
+                  <!-- Amazon Web Services -->
+                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="Logo AWS">
+                    <div>
+                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Amazon Web Services</h6>
+                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                    </div>
+                  </div>
+              
+                  <!-- Samsung -->
+                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Logo Samsung">
+                    <div>
+                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Samsung</h6>
+                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                    </div>
+                  </div>
+              
+                  <!-- Huawei -->
+                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Huawei_Standard_logo.svg" alt="Logo Huawei">
+                    <div>
+                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Huawei</h6>
+                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                    </div>
+                  </div>
+              
+                  <!-- Unilever -->
+                  <div class="flex items-center gap-3 hover:bg-[#DEFC79]/40 cursor-pointer px-4 py-3 rounded-xl">
+                    <img class="w-9 h-9 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Unilever_Logo.svg" alt="Logo Unilever">
+                    <div>
+                      <h6 class="text-lg font-bold text-gray-900 leading-tight">Unilever</h6>
+                      <p class="text-sm text-gray-500">Indonesia, Jakarta</p>
+                    </div>
+                  </div>
+              
+                </div>
+              </div>              
+        </div>
     </div>
 </section>
 <script>
