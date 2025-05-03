@@ -8,6 +8,3 @@ Route::get('/', function () {
 Route::get('/profile', function () {
     return view('user.profile');
 });
-Route::get('/dashboard', function () {
-    return view('user.dashboard');
-});

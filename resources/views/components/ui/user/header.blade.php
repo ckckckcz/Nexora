@@ -14,15 +14,15 @@
           </div>
         </div>
         <div class="mt-4 sm:mt-0 flex space-x-2">
-          <button class="px-4 py-2 text-sm font-medium text-white bg-black rounded-lg">Reports</button>
-          <button class="px-4 py-2 text-sm font-medium bg-gray-100 rounded-lg hover:bg-gray-200">+ Add</button>
+          <button class="px-4 py-2 text-sm font-medium text-white bg-black rounded-2xl">Reports</button>
+          <button class="px-4 py-2 text-sm font-medium bg-gray-100 rounded-2xl hover:bg-gray-200">+ Add</button>
         </div>
       </div>
   
       <!-- About -->
       <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2">
-          <div class="bg-gray-50 p-4 rounded-lg border">
+          <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 shadow-sm"> 
             <h3 class="text-sm font-semibold text-gray-900 mb-2">About Anna</h3>
             <p class="text-gray-600 text-sm">
               With a strong foundation in software development and a keen eye for user experience...
@@ -33,26 +33,26 @@
           <!-- Cards -->
           <div class="mt-6 space-y-4">
             <!-- Card 1 -->
-            <div class="flex items-start bg-white border rounded-lg p-4 shadow-sm">
-              <img src="https://via.placeholder.com/60" class="w-16 h-16 rounded-lg mr-4" alt="">
+            <div class="flex items-start bg-white border border-gray-200 rounded-2xl p-4 shadow-sm">
+              <img src="https://via.placeholder.com/60" class="w-16 h-16 rounded-2xl mr-4" alt="">
               <div class="flex-1">
                 <h4 class="font-semibold">How to share your files</h4>
                 <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet...</p>
                 <div class="mt-2 flex space-x-2">
-                  <button class="px-3 py-1 text-sm text-white bg-black rounded-lg">Play</button>
-                  <button class="px-3 py-1 text-sm text-gray-700 border rounded-lg">Save for later</button>
+                  <button class="px-3 py-1 text-sm text-white bg-black rounded-2xl">Play</button>
+                  <button class="px-3 py-1 text-sm text-gray-700 border rounded-2xl">Save for later</button>
                 </div>
               </div>
             </div>
             <!-- Card 2 -->
-            <div class="flex items-start bg-white border rounded-lg p-4 shadow-sm">
-              <img src="https://via.placeholder.com/60" class="w-16 h-16 rounded-lg mr-4" alt="">
+            <div class="flex items-start bg-white border border-gray-200 rounded-2xl p-4 shadow-sm">
+              <img src="https://via.placeholder.com/60" class="w-16 h-16 rounded-2xl mr-4" alt="">
               <div class="flex-1">
                 <h4 class="font-semibold">How to keep your files safe</h4>
                 <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet...</p>
                 <div class="mt-2 flex space-x-2">
-                  <button class="px-3 py-1 text-sm text-white bg-black rounded-lg">Play</button>
-                  <button class="px-3 py-1 text-sm text-gray-700 border rounded-lg">Save for later</button>
+                  <button class="px-3 py-1 text-sm text-white bg-black rounded-2xl">Play</button>
+                  <button class="px-3 py-1 text-sm text-gray-700 border rounded-2xl">Save for later</button>
                 </div>
               </div>
             </div>
@@ -62,13 +62,13 @@
         <!-- Sidebar -->
         <div class="space-y-6">
           <!-- Ranking -->
-          <div class="border rounded-lg p-4 bg-white shadow-sm">
+          <div class="border border-gray-200 rounded-2xl p-4 bg-white shadow-sm">
             <h3 class="text-sm text-gray-500">Ranking</h3>
             <p class="text-2xl font-bold text-gray-900">96/100</p>
             <p class="text-green-500 text-sm mt-1">▲ 4% vs. last month</p>
           </div>
           <!-- Skills -->
-          <div class="border rounded-lg p-4 bg-white shadow-sm">
+          <div class="border border-gray-200 rounded-2xl p-4 bg-white shadow-sm">
             <h3 class="text-sm font-semibold text-gray-500 mb-2">Skills</h3>
             <div class="flex flex-wrap gap-2">
               <span class="px-2 py-1 text-sm bg-gray-100 rounded">Managing</span>
@@ -78,7 +78,7 @@
             </div>
           </div>
           <!-- Locations -->
-          <div class="border rounded-lg p-4 bg-white shadow-sm">
+          <div class="border border-gray-200 rounded-2xl p-4 bg-white shadow-sm">
             <h3 class="text-sm font-semibold text-gray-500 mb-2">Locations</h3>
             <div class="flex space-x-2">
               <img src="https://flagcdn.com/w40/se.png" class="w-6 h-4 rounded-sm" alt="SE">
@@ -86,7 +86,7 @@
             </div>
           </div>
           <!-- Contact -->
-          <div class="border rounded-lg p-4 bg-white shadow-sm">
+          <div class="border border-gray-200 rounded-2xl p-4 bg-white shadow-sm">
             <h3 class="text-sm font-semibold text-gray-500 mb-1">Phone</h3>
             <p class="text-blue-600 text-sm cursor-pointer hover:underline">Click to view</p>
             <h3 class="text-sm font-semibold text-gray-500 mt-3 mb-1">Email</h3>
