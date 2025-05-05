@@ -28,7 +28,7 @@
         <!-- User Dropdown -->
         <div class="relative lg:inline-block text-left hidden">
             <button id="user-menu-button" type="button" class="flex items-center focus:outline-none cursor-pointer">
-                <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('images/riovaldo.png') }}"
+                <img class="w-10 h-10 rounded-full object-cover border-2 border-blue-900" src="{{ asset('images/riovaldo.png') }}"
                     alt="user photo">
             </button>
 
