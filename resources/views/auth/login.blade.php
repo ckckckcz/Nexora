@@ -6,14 +6,13 @@
         <div class="w-full max-w-2xl">
             <div class="mb-12 transform transition duration-500">
                 <h1 class="text-4xl font-bold mb-3 text-gray-800 relative inline-block">
-                    Let's Sign you in
-                    <div class="absolute -bottom-1 left-0 w-1/2 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                    Masuk 📃
+                    <div class="absolute -bottom-1 left-0 w-1/2 h-1 bg-[#DEFC79] rounded-full"></div>
                 </h1>
                 <p class="text-gray-600 text-lg">
-                    You don't have an account? 
-                    <a href="/daftar" class="text-blue-600 hover:text-blue-800 font-medium relative inline-block group">
-                        sign up
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
+                    Sudah Punya Akun? 
+                    <a href="/daftar" class="text-blue-900 hover:text-blue-950 font-medium relative inline-block group">
+                        Daftar
                     </a>
                 </p>
             </div>
@@ -23,10 +22,10 @@
                 <div class="form-floating-group">
                     <div class="relative">
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-[#DEFC79] transition-all duration-300"
                             placeholder="Email">
                         <label for="email" 
-                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-blue-600 peer-focus:text-sm">
+                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-black peer-focus:text-sm">
                             Email Address
                         </label>
                         <div class="absolute right-4 top-6 text-gray-400">
@@ -49,10 +48,10 @@
                 <div class="form-floating-group">
                     <div class="relative">
                         <input id="password" type="password" name="password" required
-                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-[#DEFC79] transition-all duration-300"
                             placeholder="Password">
                         <label for="password" 
-                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-blue-600 peer-focus:text-sm">
+                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-black peer-focus:text-sm">
                             Password
                         </label>
                         <button type="button" id="togglePassword" class="absolute right-4 top-6 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors duration-200">
@@ -76,20 +75,9 @@
                     @enderror
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <input id="remember_me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded transition duration-150 ease-in-out">
-                        <label for="remember_me" class="ml-2 block text-sm text-gray-700">Remember me</label>
-                    </div>
-                    <a href="/forgot" class="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 relative inline-block group">
-                        Forgot password?
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
-                    </a>
-                </div>
-
-                <div class="pt-4">
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-4 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center group">
-                        <span class="mr-2">SIGN IN</span>
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-[#DEFC79] text-black cursor-pointer font-medium py-4 px-6 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center group">
+                        <span class="mr-2">Masuk</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -102,7 +90,7 @@
                     <div class="w-full border-t border-gray-300"></div>
                 </div>
                 <div class="relative flex justify-center text-sm">
-                    <span class="px-4 py-1 bg-white text-gray-500 rounded-full shadow-sm">Or continue with</span>
+                    <span class="px-4 py-1 bg-white text-gray-500 rounded-full">Atau Login Dengan</span>
                 </div>
             </div>
             
@@ -126,8 +114,8 @@
             
             <p class="text-center text-gray-600 text-sm mt-10 transition-opacity duration-300 hover:opacity-80">
                 By joining you agree to the System logo LMS<br>
-                <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline-offset-2 hover:underline">Terms of service</a> and 
-                <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline-offset-2 hover:underline">Privacy Policy</a>
+                <a href="#" class="text-blue-900 hover:text-blue-950 underline transition-colors duration-200 underline-offset-2 hover:underline">Terms of service</a> and 
+                <a href="#" class="text-blue-900 hover:text-blue-950 underline transition-colors duration-200 underline-offset-2 hover:underline">Privacy Policy</a>
             </p>
         </div>
     </div>

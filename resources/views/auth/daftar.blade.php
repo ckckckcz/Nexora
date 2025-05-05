@@ -6,14 +6,13 @@
         <div class="w-full">
             <div class="mb-12 transform transition duration-500">
                 <h1 class="text-4xl font-bold mb-3 text-gray-800 relative inline-block">
-                    Create Account
-                    <div class="absolute -bottom-1 left-0 w-1/2 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                    Buat Akun 📃
+                    <div class="absolute -bottom-1 left-0 w-1/2 h-1 bg-[#DEFC79] rounded-full"></div>
                 </h1>
                 <p class="text-gray-600 text-lg">
-                    Already have an account? 
-                    <a href="/login" class="text-blue-600 hover:text-blue-800 font-medium relative inline-block group">
-                        sign in
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
+                    Sudah Punya Akun? 
+                    <a href="/login" class="text-blue-900 hover:text-blue-950 font-medium relative inline-block group">
+                        Login
                     </a>
                 </p>
             </div>
@@ -24,10 +23,10 @@
                     <div class="form-floating-group">
                         <div class="relative">
                             <input id="first_name" type="text" name="first_name" value="{{ old('first_name') }}" required autofocus
-                                class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                                class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-[#DEFC79] transition-all duration-300"
                                 placeholder="First Name">
                             <label for="first_name" 
-                                class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-blue-600 peer-focus:text-sm">
+                                class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-black peer-focus:text-sm">
                                 First Name
                             </label>
                         </div>
@@ -44,10 +43,10 @@
                     <div class="form-floating-group">
                         <div class="relative">
                             <input id="last_name" type="text" name="last_name" value="{{ old('last_name') }}" required
-                                class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                                class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-[#DEFC79] transition-all duration-300"
                                 placeholder="Last Name">
                             <label for="last_name" 
-                                class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-blue-600 peer-focus:text-sm">
+                                class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-black peer-focus:text-sm">
                                 Last Name
                             </label>
                         </div>
@@ -65,10 +64,10 @@
                 <div class="form-floating-group">
                     <div class="relative">
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required
-                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-[#DEFC79] transition-all duration-300"
                             placeholder="Email">
                         <label for="email" 
-                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-blue-600 peer-focus:text-sm">
+                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-black peer-focus:text-sm">
                             Email Address
                         </label>
                         <div class="absolute right-4 top-6 text-gray-400">
@@ -91,10 +90,10 @@
                 <div class="form-floating-group">
                     <div class="relative">
                         <input id="password" type="password" name="password" required
-                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-[#DEFC79] transition-all duration-300"
                             placeholder="Password">
                         <label for="password" 
-                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-blue-600 peer-focus:text-sm">
+                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-black peer-focus:text-sm">
                             Password
                         </label>
                         <button type="button" id="togglePassword" class="absolute right-4 top-6 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors duration-200">
@@ -121,46 +120,18 @@
                 <div class="form-floating-group">
                     <div class="relative">
                         <input id="password_confirmation" type="password" name="password_confirmation" required
-                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
+                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 placeholder-transparent focus:outline-none focus:border-[#DEFC79] transition-all duration-300"
                             placeholder="Confirm Password">
                         <label for="password_confirmation" 
-                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-blue-600 peer-focus:text-sm">
+                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-4 peer-focus:text-black peer-focus:text-sm">
                             Confirm Password
                         </label>
                     </div>
                 </div>
 
-                <div class="form-floating-group">
-                    <div class="relative">
-                        <select id="role" name="role" 
-                            class="peer w-full px-4 pt-8 pb-3 bg-gray-50/30 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-800 appearance-none focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300">
-                            <option value="teacher">Teacher</option>
-                            <option value="student">Student</option>
-                            <option value="admin">Administrator</option>
-                        </select>
-                        <label for="role" 
-                            class="absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300">
-                            Role
-                        </label>
-                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    </div>
-                    @error('role')
-                        <p class="text-red-500 text-sm mt-1 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                            </svg>
-                            {{ $message }}
-                        </p>
-                    @enderror
-                </div>
-
                 <div class="pt-4">
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-4 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center group">
-                        <span class="mr-2">CREATE ACCOUNT</span>
+                    <button type="submit" class="w-full bg-[#DEFC79] hover:bg-[#c9eb5b] text-black cursor-pointer font-medium py-4 px-6 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center group">
+                        <span class="mr-2">Buat Akun</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -173,7 +144,7 @@
                     <div class="w-full border-t border-gray-300"></div>
                 </div>
                 <div class="relative flex justify-center text-sm">
-                    <span class="px-4 py-1 bg-white text-gray-500 rounded-full shadow-sm">Or sign up with</span>
+                    <span class="px-4 py-1 bg-white text-gray-500 rounded-full">Atau Daftar Dengan</span>
                 </div>
             </div>
             
@@ -197,8 +168,8 @@
             
             <p class="text-center text-gray-600 text-sm mt-10 transition-opacity duration-300 hover:opacity-80">
                 By joining you agree to the System logo LMS<br>
-                <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline-offset-2 hover:underline">Terms of service</a> and 
-                <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline-offset-2 hover:underline">Privacy Policy</a>
+                <a href="#" class="text-blue-900 hover:text-blue-950 underline transition-colors duration-200 underline-offset-2 hover:underline">Terms of service</a> and 
+                <a href="#" class="text-blue-900 hover:text-blue-950 underline transition-colors duration-200 underline-offset-2 hover:underline">Privacy Policy</a>
             </p>
         </div>
     </div>

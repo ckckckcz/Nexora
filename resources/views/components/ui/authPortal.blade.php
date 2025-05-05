@@ -6,14 +6,14 @@
     <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
     
     <div class="p-8 md:p-12 lg:p-16 h-full flex flex-col relative z-10">
-        <div class="mb-8 transform transition duration-500 hover:scale-105">
-            <h2 class="text-3xl font-bold inline-block bg-blue-200 bg-opacity-70 px-3 py-1 rounded-lg shadow-sm">Welcome to</h2>
+        <div class="mb-8 transform transition duration-500">
+            <h2 class="text-3xl font-bold inline-block bg-[#c9eb5b] bg-opacity-70 px-3 py-1 rounded-lg shadow-sm">Selamat Datang di</h2>
             <h2 class="text-3xl font-bold inline-block ml-2">Pemuda Kerja</h2>
             <p class="text-gray-700 mt-3 max-w-md">Welcome to the Pemuda Kerja: Your Comprehensive Resource for Educational Excellence</p>
         </div>
         
         <div class="flex justify-start mb-8">
-            <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2.5 px-6 rounded-full flex items-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg group">
+            <button class="bg-[#DEFC79] hover:bg-[#c9eb5b] text-black font-medium py-2.5 px-6 rounded-full flex items-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg group">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform duration-300   " viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>
@@ -71,16 +71,12 @@
         <div class="mt-auto">
             <div class="flex justify-between items-center mb-4">
                 <button class="bg-white hover:bg-gray-50 text-gray-800 font-medium py-2.5 px-5 rounded-lg shadow-sm transition-all duration-300 transform hover:scale-105 hover:shadow-md flex items-center group">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500 group-hover:text-blue-600 transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
-                        <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
-                    </svg>
-                    Create Group chat
+                    Lamar Magang 📄
                 </button>
                 <div class="flex -space-x-3 transition-all duration-300 hover:-space-x-1">
                     <img src="https://satvision.in/wp-content/uploads/2019/06/user.jpg" alt="User" class="w-9 h-9 rounded-full border-2 border-white shadow-sm transition-transform duration-300 hover:scale-110 hover:z-10">
                     <img src="https://iconnect.teamlease.com/GUI/images/4.jpg" alt="User" class="w-9 h-9 rounded-full border-2 border-white shadow-sm transition-transform duration-300 hover:scale-110 hover:z-10">
-                    <div class="w-9 h-9 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center border-2 border-white shadow-sm transition-transform duration-300 hover:scale-110 hover:z-10 hover:bg-blue-600">
+                    <div class="w-9 h-9 rounded-full bg-green-500 text-white text-xs flex items-center justify-center border-2 border-white shadow-sm transition-transform duration-300 hover:scale-110 hover:z-10 hover:bg-green-600">
                         2+
                     </div>
                 </div>
@@ -100,8 +96,8 @@
                         <div class="flex items-center">
                             <p class="text-gray-600">Hi, how you</p>
                             <span class="ml-2 flex h-3 w-3">
-                                <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                                <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-600"></span>
                             </span>
                         </div>
                     </div>
