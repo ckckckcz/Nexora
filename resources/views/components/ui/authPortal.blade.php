@@ -8,8 +8,8 @@
     <div class="p-8 md:p-12 lg:p-16 h-full flex flex-col relative z-10">
         <div class="mb-8 transform transition duration-500 hover:scale-105">
             <h2 class="text-3xl font-bold inline-block bg-blue-200 bg-opacity-70 px-3 py-1 rounded-lg shadow-sm">Welcome to</h2>
-            <h2 class="text-3xl font-bold inline-block ml-2">Teacher Portal</h2>
-            <p class="text-gray-700 mt-3 max-w-md">Welcome to the Teacher Portal: Your Comprehensive Resource for Educational Excellence</p>
+            <h2 class="text-3xl font-bold inline-block ml-2">Pemuda Kerja</h2>
+            <p class="text-gray-700 mt-3 max-w-md">Welcome to the Pemuda Kerja: Your Comprehensive Resource for Educational Excellence</p>
         </div>
         
         <div class="flex justify-start mb-8">
@@ -30,7 +30,7 @@
                 <div class="flex-1">
                     <div class="flex justify-between items-center mb-2">
                         <h3 class="text-xl font-bold">Shahzaib Ahmad</h3>
-                        <span class="bg-blue-500 text-white text-xs px-3 py-1 rounded-full shadow-sm transition-all duration-300 hover:bg-blue-600">Teacher</span>
+                        <span class="bg-blue-500 text-white text-xs px-3 py-1 rounded-full shadow-sm transition-all duration-300 hover:bg-blue-600">HR</span>
                     </div>
                     <div class="flex items-center text-gray-500 text-sm mb-3">
                         <span class="mr-4 flex items-center">
