@@ -28,9 +28,21 @@
         <!-- User Dropdown -->
         <div class="relative lg:inline-block text-left hidden">
             <button id="user-menu-button" type="button" class="flex items-center focus:outline-none cursor-pointer">
-                <img class="w-10 h-10 rounded-full object-cover border-2 border-blue-900" src="{{ asset('images/riovaldo.png') }}"
-                    alt="user photo">
+                {{-- <img class="w-10 h-10 rounded-full object-cover border-2 border-blue-900" src="{{ asset('images/riovaldo.png') }}"
+                    alt="user photo"> --}}
             </button>
+            <div class="flex space-x-2">
+                <a href="/login" class="text-[#1A3C34] hover:bg-gray-100 font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
+                    <button>
+                        Login
+                    </button>
+                </a>
+                <a href="/daftar" class="bg-[#DEFC79] hover:bg-[#c9eb5b] text-[#1A3C34] font-medium px-4 py-2 rounded-lg w-1/2 text-center">
+                    <button>
+                        Daftar
+                    </button>
+                </a>
+            </div>
 
             <div id="user-dropdown"
                 class="absolute right-0 z-50 mt-2 w-64 origin-top-right bg-white rounded-lg shadow-lg hidden opacity-0 scale-95 transition-all duration-200">
