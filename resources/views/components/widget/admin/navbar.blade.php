@@ -1,5 +1,5 @@
 <header class="w-full bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 sm:px-6 flex-wrap">
-    <div class="w-full sm:w-auto flex-1 sm:flex-none mb-2 sm:mb-0">
+    <div class="max-w-full sm:w-auto flex-1 sm:flex-none mb-2 sm:mb-0">
         <div class="relative">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
@@ -8,7 +8,7 @@
                 </svg>
             </div>
             <input type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5"
                 placeholder="Search something here..." />
         </div>
     </div>
