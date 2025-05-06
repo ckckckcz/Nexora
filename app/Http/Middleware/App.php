@@ -9,10 +9,17 @@ class App
 {
     public function handle(Request $request, Closure $next)
     {
-        $licensePath = storage_path('app.key');
-        if (!file_exists($licensePath)) {
-            abort(403, 'Aplikasi tidak dapat dijalankan tanpa lisensi yang valid. 
-            Hubungi pengembang untuk mendapatkan lisensi.');
+        $systemKey = env('apps', null);
+        if (!$systemKey) {
+            abort(403, 'Konfigurasi sistem tidak ditemukan. Hubungi pengembang.');
+        }
+        $configPath = storage_path('app.key');
+        if (!file_exists($configPath)) {
+            abort(403, 'File konfigurasi tidak ditemukan. Hubungi pengembang.');
+        }
+        $licenseKey = file_get_contents($configPath);
+        if ($licenseKey !== $systemKey) {
+            abort(403, 'Konfigurasi sistem tidak valid. Hubungi pengembang.');
         }
         return $next($request);
     }
