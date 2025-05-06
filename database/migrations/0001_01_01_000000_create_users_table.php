@@ -12,31 +12,32 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('id_user'); // AUTO_INCREMENT primary key
-            $table->string('nama', 100);
+            $table->integer('id_user')->autoIncrement();
+            $table->unsignedBigInteger('username')->unique();
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 255);
             $table->rememberToken();
             $table->enum('role', ['admin', 'mahasiswa', 'dosen']);
+            $table->string('profile_url', 255)->nullable();
             $table->timestamps(); // created_at & updated_at
         });
-
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
-
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
-        });
     }
+    //     Schema::create('password_reset_tokens', function (Blueprint $table) {
+    //         $table->string('email')->primary();
+    //         $table->string('token');
+    //         $table->timestamp('created_at')->nullable();
+    //     });
+
+    //     Schema::create('sessions', function (Blueprint $table) {
+    //         $table->string('id')->primary();
+    //         $table->foreignId('user_id')->nullable()->index();
+    //         $table->string('ip_address', 45)->nullable();
+    //         $table->text('user_agent')->nullable();
+    //         $table->longText('payload');
+    //         $table->integer('last_activity')->index();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.

@@ -12,17 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
-            $table->string('nim', 20)->primary();
-            $table->unsignedBigInteger('id_program_studi')->nullable(); // kalau nanti ada relasi ke tabel program_studi
-            $table->text('kompetensi')->nullable();
-            $table->text('keahlian')->nullable();
-            $table->enum('jenis_kelamin', ['laki-laki', 'perempuan'])->nullable();
-            $table->string('preferensi_lokasi', 100)->nullable();
-            $table->string('dokumen_cv', 255)->nullable();
-            $table->string('dokumen_portofolio', 255)->nullable();
+            $table->integer('id_mahasiswa')->autoIncrement();
+            $table->string('nim', 20)->unique();
+            $table->string('nama_mahasiswa', 100);
+            $table->integer('id_program_studi');
+            $table->string('jurusan', 100);
+            $table->enum('jenis_kelamin', ['L', 'P']);
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('id_program_studi')
+                ->references('id_program_studi')
+                ->on('program_studi')
+                ->onDelete('cascade');
         });
     }
+
     /**
      * Reverse the migrations.
      */
