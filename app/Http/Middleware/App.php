@@ -19,7 +19,7 @@ class App
         }
         $licenseKey = file_get_contents($configPath);
         if ($licenseKey !== $systemKey) {
-            abort(403, 'Konfigurasi sistem tidak valid. Hubungi pengembang.');
+            abort(403, 'Jangan Ngeclone Bang, Kalo Mau Ngeclone Tunggu PBL Selesai Ya --- Pengembang');
         }
         return $next($request);
     }
