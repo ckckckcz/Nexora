@@ -65,6 +65,7 @@
         "escalade": "^3.2.0",
         "fast-glob": "^3.3.3",
         "fastq": "^1.19.1",
+        "feather-icons": "^4.29.2",
         "fill-range": "^7.1.1",
         "follow-redirects": "^1.15.9",
         "foreground-child": "^3.3.1",
