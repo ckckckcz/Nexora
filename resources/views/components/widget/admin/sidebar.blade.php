@@ -25,7 +25,7 @@
         <div class="p-5 border-b border-gray-200 flex items-center justify-between">
             <a href="#" class="flex items-center">
                 <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-9 w-9 mr-3">
-                <span class="text-xl font-semibold text-green-600 transition-opacity duration-200" id="brand-text">FarmVista</span>
+                <span class="text-xl font-semibold text-green-600 transition-opacity duration-200" id="brand-text">Nexora</span>
             </a>
         </div>
 
