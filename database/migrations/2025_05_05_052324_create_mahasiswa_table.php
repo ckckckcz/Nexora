@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('mahasiswa', function (Blueprint $table) {
+            $table->integer('id_mahasiswa')->autoIncrement();
+            $table->string('nim', 20)->unique();
+            $table->string('nama_mahasiswa', 100);
+            $table->integer('id_program_studi');
+            $table->string('jurusan', 100);
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('id_program_studi')
+                ->references('id_program_studi')
+                ->on('program_studi')
+                ->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('mahasiswa');
+    }
+};
