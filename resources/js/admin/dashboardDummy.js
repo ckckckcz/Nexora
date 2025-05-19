@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (chartRef.chart) chartRef.chart.destroy();
 
         const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
-        gradientFill.addColorStop(0, "rgba(30, 58, 138, 0.8)");
-        gradientFill.addColorStop(1, "rgba(30, 58, 138, 0.2)");
+        gradientFill.addColorStop(0, "rgba(30, 58, 138");
+        gradientFill.addColorStop(1, "rgba(30, 58, 138");
 
         const chartData = {
             labels: [
@@ -71,9 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     label: "Aplikasi Magang",
                     data: [65, 78, 52, 91, 43, 56, 61, 87, 91, 94, 82, 73],
                     backgroundColor: gradientFill,
-                    borderColor: "#1e3a8a",
+                    borderColor: "white",
                     borderWidth: 2,
-                    borderRadius: 6,
+                    borderRadius: 12,
                     tension: 0.3,
                 },
             ],
@@ -85,9 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: "#1e3a8a",
-                    titleColor: "#DEFC79",
-                    bodyColor: "#fff",
+                    backgroundColor: "#DEFC79",
+                    titleColor: "#1e3a8a",
+                    bodyColor: "#1e3a8a",
                     padding: 12,
                     cornerRadius: 8,
                 },
