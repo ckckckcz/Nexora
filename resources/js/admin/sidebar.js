@@ -1,120 +1,216 @@
-import feather from 'feather-icons'
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("sidebar");
+    const toggleButton = document.getElementById("toggle-sidebar");
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileBackdrop = document.getElementById("mobile-backdrop");
+    const chevronIcon = document.getElementById("chevron-icon");
+    const sidebarTexts = document.querySelectorAll(".sidebar-text");
+    const sidebarTooltips = document.querySelectorAll(".sidebar-tooltip");
+    const sidebarSubmenus = document.querySelectorAll(".sidebar-submenu");
+    const sidebarArrows = document.querySelectorAll(".sidebar-arrow");
 
-document.addEventListener('DOMContentLoaded', () => {
-  feather.replace()
-
-  const navItems = {
-    'Farm Management': [
-      { icon: 'layout', label: 'Dashboard', href: '/', active: true },
-      {
-        icon: 'leaf', label: 'Crop Management', href: '/crops', subItems: [
-          { label: 'Crop Planning', href: '/crops/planning' },
-          { label: 'Crop Monitoring', href: '/crops/monitoring' },
-          { label: 'Harvest Management', href: '/crops/harvest' },
-        ]
-      },
-      {
-        icon: 'droplet', label: 'Soil & Water', href: '/soil-water', subItems: [
-          { label: 'Soil Analysis', href: '/soil-water/soil' },
-          { label: 'Irrigation', href: '/soil-water/irrigation' },
-          { label: 'Water Quality', href: '/soil-water/water-quality' },
-        ]
-      },
-      { icon: 'cloud', label: 'Weather', href: '/weather' },
-      {
-        icon: 'tool', label: 'Equipment', href: '/equipment', subItems: [
-          { label: 'Inventory', href: '/equipment/inventory' },
-          { label: 'Maintenance', href: '/equipment/maintenance' },
-          { label: 'Usage Logs', href: '/equipment/logs' },
-        ]
-      },
-      { icon: 'clipboard', label: 'Task Management', href: '/tasks' },
-      {
-        icon: 'users', label: 'Labor Management', href: '/labor', subItems: [
-          { label: 'Staff Directory', href: '/labor/staff' },
-          { label: 'Scheduling', href: '/labor/scheduling' },
-          { label: 'Performance', href: '/labor/performance' },
-        ]
-      },
-      { icon: 'bar-chart-2', label: 'Reports & Analytics', href: '/reports' },
-    ],
-    'System': [
-      { icon: 'settings', label: 'Settings', href: '/settings' },
-      { icon: 'user', label: 'My Account', href: '/account' },
-      { icon: 'help-circle', label: 'Help & Support', href: '/help' },
-    ]
-  }
-
-  const navContainer = document.getElementById('nav-container')
-
-  const renderNav = () => {
-    navContainer.innerHTML = ''
-    for (const [category, items] of Object.entries(navItems)) {
-      const categoryWrapper = document.createElement('div')
-      categoryWrapper.className = 'mb-4'
-
-      const button = document.createElement('button')
-      button.className = 'flex items-center justify-between w-full px-5 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors'
-      button.innerHTML = `<span>${category}</span><i data-feather="chevron-down" class="w-4 h-4"></i>`
-
-      const ul = document.createElement('ul')
-      ul.className = 'mt-1 space-y-1'
-
-      items.forEach(item => {
-        const li = document.createElement('li')
-
-        const link = document.createElement('a')
-        link.href = item.href
-        link.className = `flex items-center px-5 py-2.5 text-sm ${item.active ? 'bg-green-50 text-green-600 border-l-4 border-green-500' : 'text-gray-700 hover:bg-gray-100 border-l-4 border-transparent'} transition-all duration-200`
-        link.innerHTML = `<i data-feather="${item.icon}" class="w-4 h-4 ${item.active ? 'text-green-500' : 'text-gray-500'}"></i><span class="ml-3">${item.label}</span>`
-
-        li.appendChild(link)
-
-        if (item.subItems) {
-          const subUl = document.createElement('ul')
-          subUl.className = 'ml-9 mt-1 space-y-1 border-l border-gray-200 pl-3'
-
-          item.subItems.forEach(sub => {
-            const subLi = document.createElement('li')
-            const subLink = document.createElement('a')
-            subLink.href = sub.href
-            subLink.textContent = sub.label
-            subLink.className = 'block py-1.5 px-3 text-sm rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors'
-            subLi.appendChild(subLink)
-            subUl.appendChild(subLi)
-          })
-
-          li.appendChild(subUl)
+    // Initialize sidebar state from localStorage (for desktop)
+    const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+    
+    // Set initial state based on screen size and saved preference
+    if (window.innerWidth >= 768) {
+        if (sidebarCollapsed) {
+            collapseSidebar(false); // Don't animate on initial load
+        } else {
+            expandSidebar(false); // Don't animate on initial load
         }
-
-        ul.appendChild(li)
-      })
-
-      categoryWrapper.appendChild(button)
-      categoryWrapper.appendChild(ul)
-      navContainer.appendChild(categoryWrapper)
+    } else {
+        // On mobile, always start with sidebar closed
+        sidebar.classList.add("-translate-x-full");
+        sidebar.classList.add("w-full");
+        sidebar.classList.remove("w-16", "w-64");
+        toggleButton.classList.add("hidden");
     }
 
-    feather.replace()
-  }
+    // Toggle sidebar on button click (desktop)
+    toggleButton.addEventListener("click", function () {
+        if (sidebar.getAttribute("data-expanded") === "true") {
+            collapseSidebar(true);
+            localStorage.setItem("sidebarCollapsed", "true");
+            toggleButton.setAttribute("aria-expanded", "false");
+        } else {
+            expandSidebar(true);
+            localStorage.setItem("sidebarCollapsed", "false");
+            toggleButton.setAttribute("aria-expanded", "true");
+        }
+    });
 
-  renderNav()
+    // Mobile menu toggle
+    mobileMenuButton.addEventListener("click", function () {
+        const isOpen = !sidebar.classList.contains("-translate-x-full");
+        if (isOpen) {
+            closeMobileSidebar();
+            mobileMenuButton.setAttribute("aria-expanded", "false");
+        } else {
+            openMobileSidebar();
+            mobileMenuButton.setAttribute("aria-expanded", "true");
+        }
+    });
 
-  // Sidebar toggle logic
-  const sidebar = document.getElementById('sidebar')
-  const toggleBtn = document.getElementById('toggle-sidebar')
-  const chevronIcon = document.getElementById('chevron-icon')
-  const brandText = document.getElementById('brand-text')
+    // Close sidebar when clicking backdrop
+    mobileBackdrop.addEventListener("click", function () {
+        closeMobileSidebar();
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+    });
 
-  toggleBtn.addEventListener('click', () => {
-    const collapsed = sidebar.classList.toggle('w-20')
-    brandText.classList.toggle('hidden')
-    chevronIcon.classList.toggle('rotate-180')
-  })
+    // Handle window resize with debouncing
+    let resizeTimeout;
+    window.addEventListener("resize", function () {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function () {
+            if (window.innerWidth >= 768) {
+                // Desktop view
+                sidebar.classList.remove("-translate-x-full", "w-full");
+                mobileBackdrop.classList.add("hidden");
+                toggleButton.classList.remove("hidden");
+                
+                // Restore collapsed state from localStorage
+                const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+                if (sidebarCollapsed) {
+                    collapseSidebar(false);
+                } else {
+                    expandSidebar(false);
+                }
+            } else {
+                // Mobile view
+                sidebar.classList.add("-translate-x-full", "w-full");
+                sidebar.classList.remove("w-16", "w-64");
+                toggleButton.classList.add("hidden");
+                mobileBackdrop.classList.add("hidden");
+                
+                // Always show text on mobile
+                sidebarTexts.forEach(text => {
+                    text.classList.remove("opacity-0", "invisible", "w-0");
+                });
+                
+                // Hide tooltips on mobile
+                sidebarTooltips.forEach(tooltip => {
+                    tooltip.classList.add("hidden");
+                });
+            }
+        }, 100);
+    });
 
-  // Mobile menu toggle
-  const mobileMenuButton = document.getElementById('mobile-menu-button')
-  mobileMenuButton.addEventListener('click', () => {
-    sidebar.classList.toggle('hidden')
-  })
-})
+    /**
+     * Collapse the sidebar to icon-only mode
+     * @param {boolean} animate - Whether to animate the transition
+     */
+    function collapseSidebar(animate = true) {
+        // Set data attribute for CSS targeting
+        sidebar.setAttribute("data-expanded", "false");
+        
+        // Update classes for width
+        sidebar.classList.remove("w-64");
+        
+        // If animate is false, temporarily disable transitions
+        if (!animate) {
+            sidebar.classList.add("transition-none");
+            setTimeout(() => sidebar.classList.remove("transition-none"), 10);
+        }
+        
+        sidebar.classList.add("w-16");
+        
+        // Rotate chevron icon
+        chevronIcon.classList.add("rotate-180");
+        
+        // Hide text elements
+        sidebarTexts.forEach(text => {
+            text.classList.add("opacity-0", "invisible", "w-0");
+        });
+        
+        // Show tooltips
+        sidebarTooltips.forEach(tooltip => {
+            tooltip.classList.remove("hidden");
+        });
+        
+        // Hide submenus
+        sidebarSubmenus.forEach(submenu => {
+            submenu.classList.add("hidden");
+        });
+        
+        // Hide dropdown arrows
+        sidebarArrows.forEach(arrow => {
+            arrow.classList.add("opacity-0", "invisible", "w-0");
+        });
+    }
+
+    /**
+     * Expand the sidebar to full width
+     * @param {boolean} animate - Whether to animate the transition
+     */
+    function expandSidebar(animate = true) {
+        // Set data attribute for CSS targeting
+        sidebar.setAttribute("data-expanded", "true");
+        
+        // Update classes for width
+        sidebar.classList.remove("w-16");
+        
+        // If animate is false, temporarily disable transitions
+        if (!animate) {
+            sidebar.classList.add("transition-none");
+            setTimeout(() => sidebar.classList.remove("transition-none"), 10);
+        }
+        
+        sidebar.classList.add("w-64");
+        
+        // Rotate chevron icon back
+        chevronIcon.classList.remove("rotate-180");
+        
+        // Show text elements
+        sidebarTexts.forEach(text => {
+            text.classList.remove("opacity-0", "invisible", "w-0");
+        });
+        
+        // Hide tooltips
+        sidebarTooltips.forEach(tooltip => {
+            tooltip.classList.add("hidden");
+        });
+        
+        // Show dropdown arrows
+        sidebarArrows.forEach(arrow => {
+            arrow.classList.remove("opacity-0", "invisible", "w-0");
+        });
+        
+        // Note: We don't automatically show submenus when expanding
+        // as they should remain in their previous open/closed state
+    }
+
+    /**
+     * Open the sidebar on mobile
+     */
+    function openMobileSidebar() {
+        sidebar.classList.remove("-translate-x-full");
+        mobileBackdrop.classList.remove("hidden");
+        setTimeout(() => {
+            mobileBackdrop.classList.add("opacity-100");
+        }, 10);
+        document.body.classList.add("overflow-hidden");
+        
+        // Always show text on mobile
+        sidebarTexts.forEach(text => {
+            text.classList.remove("opacity-0", "invisible", "w-0");
+        });
+        
+        // Hide tooltips on mobile
+        sidebarTooltips.forEach(tooltip => {
+            tooltip.classList.add("hidden");
+        });
+    }
+
+    /**
+     * Close the sidebar on mobile
+     */
+    function closeMobileSidebar() {
+        sidebar.classList.add("-translate-x-full");
+        mobileBackdrop.classList.remove("opacity-100");
+        setTimeout(() => {
+            mobileBackdrop.classList.add("hidden");
+        }, 300);
+        document.body.classList.remove("overflow-hidden");
+    }
+});
