@@ -30,7 +30,7 @@
         <!-- Navigation -->
         <nav class="flex-1 overflow-y-auto py-2 px-3 space-y-1" id="nav-container">
             <!-- Dashboard -->
-            <a href="#"
+            <a href="/admin/dashboard"
                 class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('dashboard') ? 'bg-[#DEFC79] text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('dashboard') ? : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"

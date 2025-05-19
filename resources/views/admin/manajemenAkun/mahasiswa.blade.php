@@ -2,8 +2,8 @@
 @section('admin')
     <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Manajemen Akun Mahasiswa</h1>
-            <p class="mt-2 text-gray-600">Kelola data dan akun mahasiswa</p>
+            <h1 class="text-3xl font-bold text-blue-900">Manajemen Akun Mahasiswa 🧑🏽‍🎓</h1>
+            <p class="mt-2 text-gray-600 font-medium">Kelola data dan akun mahasiswa</p>
         </header>
 
         <!-- Top Internship Placements Podium -->

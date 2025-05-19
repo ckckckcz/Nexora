@@ -20,7 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin/navbar.js', 'resources/js/admin/layout.js', 'resources/js/admin/dashboardDummy.js', 'resources/js/admin/mahasiswaDummy.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin/navbar.js', 'resources/js/admin/layout.js', 'resources/js/admin/dashboardDummy.js',])
     @else
     @endif
 </head>
