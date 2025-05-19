@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
-            $table->integer('id_mahasiswa')->autoIncrement();
+            $table->id('id_mahasiswa')->autoIncrement();
             $table->string('nim', 20)->unique();
             $table->string('nama_mahasiswa', 100);
             $table->unsignedBigInteger('id_program_studi');
             $table->string('jurusan', 100);
             $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->unsignedInteger('id_user')->nullable()->index();
+            $table->unsignedBigInteger('id_user')->nullable();
             $table->timestamps();
 
             // Relasi Mahasiswa > Prodi

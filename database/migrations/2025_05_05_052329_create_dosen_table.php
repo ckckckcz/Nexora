@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dosen', function (Blueprint $table) {
-            $table->integer('id_dosen')->autoIncrement();
+            $table->id('id_dosen')->autoIncrement();
             $table->string('nidn', 10)->unique();
             $table->string('nama_dosen', 100);
             $table->unsignedBigInteger('id_program_studi');
             $table->string('tanda_tangan', 100)->nullable();
             $table->string('jurusan', 100);
-            $table->unsignedInteger('id_user')->nullable()->index(); 
+            $table->unsignedBigInteger('id_user')->nullable(); 
             $table->timestamps();
 
             // Relasi Dosen > Prodi
