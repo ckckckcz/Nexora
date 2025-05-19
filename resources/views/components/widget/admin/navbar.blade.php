@@ -2,7 +2,7 @@
     class="w-full bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8 shadow-sm">
     <!-- Left side: Search -->
     <div class="w-full max-w-xs lg:max-w-md">
-        <div class="relative">
+        {{-- <div class="relative">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -13,7 +13,7 @@
             <input type="text"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5 transition-colors"
                 placeholder="Search..." />
-        </div>
+        </div> --}}
     </div>
 
     <!-- Right side: Actions -->
