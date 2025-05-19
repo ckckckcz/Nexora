@@ -137,8 +137,8 @@ document.addEventListener("DOMContentLoaded", function () {
             arrow.classList.add("opacity-0", "invisible", "w-0");
         });
         // Adjust main content padding
-        mainContent.classList.remove("pl-80");
-        mainContent.classList.add("pl-20");
+        mainContent.classList.remove("pl-72");
+        mainContent.classList.add("pl-28");
     }
 
     /**
@@ -165,8 +165,8 @@ document.addEventListener("DOMContentLoaded", function () {
             arrow.classList.remove("opacity-0", "invisible", "w-0");
         });
         // Adjust main content padding
-        mainContent.classList.remove("pl-20");
-        mainContent.classList.add("pl-80");
+        mainContent.classList.remove("pl-28");
+        mainContent.classList.add("pl-72");
     }
 
     /**

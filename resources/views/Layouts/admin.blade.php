@@ -30,7 +30,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             @include('components.widget.admin.navbar')
 
-            <main id="main-content" class="flex-1 overflow-y-auto pl-80 pt-10 pr-10 transition-all duration-300">
+            <main id="main-content" class="flex-1 overflow-y-auto pt-10 pr-10 transition-all duration-300">
                 <div class="mb-6">
                     <h1 class="text-2xl font-semibold text-gray-800">Dashboard</h1>
                     <p class="text-sm text-gray-500">Welcome to the Admin Dashboard</p>
