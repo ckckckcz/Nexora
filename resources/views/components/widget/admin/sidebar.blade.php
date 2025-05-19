@@ -23,7 +23,7 @@
             <a href="#" class="flex items-center">
                 <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-8 w-8 flex-shrink-0">
                 <span
-                    class="text-lg font-semibold text-green-600 ml-3 transition-opacity duration-200 whitespace-nowrap sidebar-text">Nexora</span>
+                    class="text-lg font-semibold text-blue-900 ml-3 transition-opacity duration-200 whitespace-nowrap sidebar-text">Nexora</span>
             </a>
         </div>
 
@@ -196,15 +196,14 @@
             <form method="POST" action="#">
                 @csrf
                 <button type="submit"
-                    class="flex items-center text-gray-700 hover:text-red-600 w-full py-2.5 px-3 rounded-md hover:bg-red-50 transition-colors group relative">
+                    class="flex items-center text-gray-700 hover:text-red-600 w-full py-2.5 px-3 text-sm rounded-md hover:bg-red-50 transition-colors group relative">
                     <svg xmlns="http://www.w3.org/3000/svg"
                         class="h-5 w-5 flex-shrink-0 text-gray-500 group-hover:text-red-500 transition-colors duration-200"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
-                    <span class="ml-3 font-medium transition-all duration-200 whitespace-nowrap sidebar-text">Log
-                        Out</span>
+                    <span class="ml-3 font-medium transition-all duration-200 whitespace-nowrap sidebar-text">Keluar</span>
                     <span
                         class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Log
                         Out</span>
