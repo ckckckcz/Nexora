@@ -8,10 +8,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const sidebarTooltips = document.querySelectorAll(".sidebar-tooltip");
     const sidebarSubmenus = document.querySelectorAll(".sidebar-submenu");
     const sidebarArrows = document.querySelectorAll(".sidebar-arrow");
+    const mainContent = document.getElementById("main-content");
+
+    // Check if elements exist before proceeding
+    if (
+        !sidebar ||
+        !toggleButton ||
+        !mobileMenuButton ||
+        !mobileBackdrop ||
+        !chevronIcon
+    ) {
+        console.error("One or more sidebar elements not found in the DOM.");
+        return;
+    }
 
     // Initialize sidebar state from localStorage (for desktop)
-    const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
-    
+    const sidebarCollapsed =
+        localStorage.getItem("sidebarCollapsed") === "true";
+
     // Set initial state based on screen size and saved preference
     if (window.innerWidth >= 768) {
         if (sidebarCollapsed) {
@@ -24,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
         sidebar.classList.add("-translate-x-full");
         sidebar.classList.add("w-full");
         sidebar.classList.remove("w-16", "w-64");
-        toggleButton.classList.add("hidden");
     }
 
     // Toggle sidebar on button click (desktop)
@@ -68,9 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 sidebar.classList.remove("-translate-x-full", "w-full");
                 mobileBackdrop.classList.add("hidden");
                 toggleButton.classList.remove("hidden");
-                
+
                 // Restore collapsed state from localStorage
-                const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+                const sidebarCollapsed =
+                    localStorage.getItem("sidebarCollapsed") === "true";
                 if (sidebarCollapsed) {
                     collapseSidebar(false);
                 } else {
@@ -82,14 +96,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 sidebar.classList.remove("w-16", "w-64");
                 toggleButton.classList.add("hidden");
                 mobileBackdrop.classList.add("hidden");
-                
+
                 // Always show text on mobile
-                sidebarTexts.forEach(text => {
+                sidebarTexts.forEach((text) => {
                     text.classList.remove("opacity-0", "invisible", "w-0");
                 });
-                
+
                 // Hide tooltips on mobile
-                sidebarTooltips.forEach(tooltip => {
+                sidebarTooltips.forEach((tooltip) => {
                     tooltip.classList.add("hidden");
                 });
             }
@@ -101,42 +115,30 @@ document.addEventListener("DOMContentLoaded", function () {
      * @param {boolean} animate - Whether to animate the transition
      */
     function collapseSidebar(animate = true) {
-        // Set data attribute for CSS targeting
         sidebar.setAttribute("data-expanded", "false");
-        
-        // Update classes for width
         sidebar.classList.remove("w-64");
-        
-        // If animate is false, temporarily disable transitions
         if (!animate) {
             sidebar.classList.add("transition-none");
             setTimeout(() => sidebar.classList.remove("transition-none"), 10);
         }
-        
         sidebar.classList.add("w-16");
-        
-        // Rotate chevron icon
+        toggleButton.style.left = "64px"; // Match collapsed width (w-16 = 64px)
         chevronIcon.classList.add("rotate-180");
-        
-        // Hide text elements
-        sidebarTexts.forEach(text => {
+        sidebarTexts.forEach((text) => {
             text.classList.add("opacity-0", "invisible", "w-0");
         });
-        
-        // Show tooltips
-        sidebarTooltips.forEach(tooltip => {
+        sidebarTooltips.forEach((tooltip) => {
             tooltip.classList.remove("hidden");
         });
-        
-        // Hide submenus
-        sidebarSubmenus.forEach(submenu => {
+        sidebarSubmenus.forEach((submenu) => {
             submenu.classList.add("hidden");
         });
-        
-        // Hide dropdown arrows
-        sidebarArrows.forEach(arrow => {
+        sidebarArrows.forEach((arrow) => {
             arrow.classList.add("opacity-0", "invisible", "w-0");
         });
+        // Adjust main content padding
+        mainContent.classList.remove("pl-80");
+        mainContent.classList.add("pl-20");
     }
 
     /**
@@ -144,40 +146,27 @@ document.addEventListener("DOMContentLoaded", function () {
      * @param {boolean} animate - Whether to animate the transition
      */
     function expandSidebar(animate = true) {
-        // Set data attribute for CSS targeting
         sidebar.setAttribute("data-expanded", "true");
-        
-        // Update classes for width
         sidebar.classList.remove("w-16");
-        
-        // If animate is false, temporarily disable transitions
         if (!animate) {
             sidebar.classList.add("transition-none");
             setTimeout(() => sidebar.classList.remove("transition-none"), 10);
         }
-        
         sidebar.classList.add("w-64");
-        
-        // Rotate chevron icon back
+        toggleButton.style.left = "256px"; // Match expanded width (w-64 = 256px)
         chevronIcon.classList.remove("rotate-180");
-        
-        // Show text elements
-        sidebarTexts.forEach(text => {
+        sidebarTexts.forEach((text) => {
             text.classList.remove("opacity-0", "invisible", "w-0");
         });
-        
-        // Hide tooltips
-        sidebarTooltips.forEach(tooltip => {
+        sidebarTooltips.forEach((tooltip) => {
             tooltip.classList.add("hidden");
         });
-        
-        // Show dropdown arrows
-        sidebarArrows.forEach(arrow => {
+        sidebarArrows.forEach((arrow) => {
             arrow.classList.remove("opacity-0", "invisible", "w-0");
         });
-        
-        // Note: We don't automatically show submenus when expanding
-        // as they should remain in their previous open/closed state
+        // Adjust main content padding
+        mainContent.classList.remove("pl-20");
+        mainContent.classList.add("pl-80");
     }
 
     /**
@@ -190,14 +179,10 @@ document.addEventListener("DOMContentLoaded", function () {
             mobileBackdrop.classList.add("opacity-100");
         }, 10);
         document.body.classList.add("overflow-hidden");
-        
-        // Always show text on mobile
-        sidebarTexts.forEach(text => {
+        sidebarTexts.forEach((text) => {
             text.classList.remove("opacity-0", "invisible", "w-0");
         });
-        
-        // Hide tooltips on mobile
-        sidebarTooltips.forEach(tooltip => {
+        sidebarTooltips.forEach((tooltip) => {
             tooltip.classList.add("hidden");
         });
     }
@@ -213,4 +198,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 300);
         document.body.classList.remove("overflow-hidden");
     }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+    initAnimations();
 });
