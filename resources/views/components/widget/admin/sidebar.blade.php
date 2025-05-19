@@ -31,9 +31,9 @@
         <nav class="flex-1 overflow-y-auto py-2 px-3 space-y-1" id="nav-container">
             <!-- Dashboard -->
             <a href="#"
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('dashboard') ? 'bg-green-50 text-green-700' : '' }}">
+                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('dashboard') ? 'bg-[#DEFC79] text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('dashboard') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('dashboard') ? : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -46,10 +46,10 @@
             <!-- User Management Section -->
             <div x-data="{ open: false }" class="space-y-1">
                 <button @click="open = !open" type="button"
-                    class="flex items-center justify-between w-full text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('users.*') ? 'bg-green-50 text-green-700' : '' }}">
+                    class="flex items-center justify-between w-full text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('users.*') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                     <div class="flex items-center min-w-0">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('users.*') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                            class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('users.*') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -58,7 +58,7 @@
                             Akun</span>
                     </div>
                     <svg x-bind:class="open ? 'transform rotate-90' : ''"
-                        class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-transform duration-200 flex-shrink-0 sidebar-arrow"
+                        class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-transform duration-200 flex-shrink-0 sidebar-arrow"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
@@ -70,11 +70,11 @@
                     x-transition:enter-start="transform opacity-0 scale-95"
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
                     <a href="#"
-                        class="flex items-center text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 {{ request()->routeIs('users.students') ? 'bg-green-50 text-green-700 font-medium' : '' }}">
+                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Mahasiswa</span>
                     </a>
                     <a href="#"
-                        class="flex items-center text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-green-700 font-medium' : '' }}">
+                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Dosen Pembimbing</span>
                     </a>
                 </div>
@@ -82,9 +82,9 @@
 
             <!-- Skema Magang -->
             <a href="#"
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.schemes') ? 'bg-green-50 text-green-700' : '' }}">
+                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.schemes') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.schemes') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.schemes') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -97,9 +97,9 @@
 
             <!-- Program Studi -->
             <a href="#"
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('study.programs') ? 'bg-green-50 text-green-700' : '' }}">
+                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('study.programs') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('study.programs') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('study.programs') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M12 14l9-5-9-5-9 5 9 5z" />
                     <path
@@ -115,9 +115,9 @@
 
             <!-- Lowongan Magang -->
             <a href="#"
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.vacancies') ? 'bg-green-50 text-green-700' : '' }}">
+                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.vacancies') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.vacancies') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.vacancies') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -130,9 +130,9 @@
 
             <!-- Bimbingan Magang -->
             <a href="#"
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.guidance') ? 'bg-green-50 text-green-700' : '' }}">
+                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.guidance') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.guidance') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.guidance') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -145,9 +145,9 @@
 
             <!-- Upload Surat Tugas -->
             <a href="#"
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('assignment.letters') ? 'bg-green-50 text-green-700' : '' }}">
+                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('assignment.letters') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('assignment.letters') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('assignment.letters') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -160,9 +160,9 @@
 
             <!-- Sistem Rekomendasi -->
             <a href="#"
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('recommendation.settings') ? 'bg-green-50 text-green-700' : '' }}">
+                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('recommendation.settings') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -177,9 +177,9 @@
 
             <!-- Statistik dan Laporan -->
             <a href="#"
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('statistics.reports') ? 'bg-green-50 text-green-700' : '' }}">
+                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('statistics.reports') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('statistics.reports') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200"
+                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('statistics.reports') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />

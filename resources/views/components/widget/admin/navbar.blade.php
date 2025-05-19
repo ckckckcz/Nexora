@@ -17,7 +17,7 @@
     </div>
 
     <!-- Right side: Actions -->
-    <div class="flex items-center space-x-1 sm:space-x-4">
+    <div class="flex items-center space-x-1">
         <!-- Notifications Dropdown -->
         <div x-data="{ open: false, notificationCount: 3 }" class="relative">
             <button @click="open = !open"
