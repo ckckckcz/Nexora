@@ -31,59 +31,7 @@
             @include('components.widget.admin.navbar')
 
             <main id="main-content" class="flex-1 overflow-y-auto pt-10 pr-10 transition-all duration-300">
-                <div class="mb-6">
-                    <h1 class="text-2xl font-semibold text-gray-800">Dashboard</h1>
-                    <p class="text-sm text-gray-500">Welcome to the Admin Dashboard</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Card 1: Statistik Pengguna -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-lg font-medium text-gray-700">Total Users</h3>
-                        <p class="text-3xl font-bold text-gray-900 mt-2">1,245</p>
-                        <p class="text-sm text-green-500 mt-1">+5% from last month</p>
-                    </div>
-
-                    <!-- Card 2: Statistik Penjualan -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-lg font-medium text-gray-700">Total Sales</h3>
-                        <p class="text-3xl font-bold text-gray-900 mt-2">$12,340</p>
-                        <p class="text-sm text-red-500 mt-1">-2% from last month</p>
-                    </div>
-
-                    <!-- Card 3: Statistik Aktivitas -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-lg font-medium text-gray-700">Activity</h3>
-                        <p class="text-3xl font-bold text-gray-900 mt-2">342</p>
-                        <p class="text-sm text-green-500 mt-1">+10% from last month</p>
-                    </div>
-                </div>
-
-                <!-- Tabel atau Konten Tambahan -->
-                <div class="mt-6 bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-medium text-gray-700 mb-4">Recent Activity</h3>
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b">
-                                <th class="py-2 text-gray-600">User</th>
-                                <th class="py-2 text-gray-600">Action</th>
-                                <th class="py-2 text-gray-600">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b">
-                                <td class="py-2 text-gray-800">John Doe</td>
-                                <td class="py-2 text-gray-800">Updated profile</td>
-                                <td class="py-2 text-gray-600">May 20, 2025</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 text-gray-800">Jane Smith</td>
-                                <td class="py-2 text-gray-800">Logged in</td>
-                                <td class="py-2 text-gray-600">May 19, 2025</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                @yield('admin')
             </main>
         </div>
     </div>
