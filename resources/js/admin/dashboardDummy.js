@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialize GSAP animations
     if (typeof gsap !== "undefined") {
-        gsap.from(statCardsRef.children, {
+        gsap.from(none.children, {
             y: 50,
             opacity: 0,
             duration: 0.8,
