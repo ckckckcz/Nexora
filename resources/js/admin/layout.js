@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         sidebar.classList.add("-translate-x-full");
         sidebar.classList.add("w-full");
         sidebar.classList.remove("w-16", "w-64");
+        // Apply mobile padding to main content
+        mainContent.classList.remove("pl-22", "pl-72");
+        mainContent.classList.add("pl-2", "pr-2", "pt-2");
     }
 
     // Toggle sidebar on button click (desktop)
@@ -90,6 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     expandSidebar(false);
                 }
+                // Remove mobile padding, apply desktop padding
+                mainContent.classList.remove("pl-2", "pr-2", "pt-2");
             } else {
                 // Mobile view
                 sidebar.classList.add("-translate-x-full", "w-full");
@@ -106,6 +111,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 sidebarTooltips.forEach((tooltip) => {
                     tooltip.classList.add("hidden");
                 });
+
+                // Apply mobile padding to main content
+                mainContent.classList.remove("pl-22", "pl-72");
+                mainContent.classList.add("pl-2", "pr-2", "pt-2");
             }
         }, 100);
     });
@@ -138,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         // Adjust main content padding
         mainContent.classList.remove("pl-72");
-        mainContent.classList.add("pl-28");
+        mainContent.classList.add("pl-22");
     }
 
     /**
@@ -165,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
             arrow.classList.remove("opacity-0", "invisible", "w-0");
         });
         // Adjust main content padding
-        mainContent.classList.remove("pl-28");
+        mainContent.classList.remove("pl-22");
         mainContent.classList.add("pl-72");
     }
 

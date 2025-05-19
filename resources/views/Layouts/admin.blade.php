@@ -32,7 +32,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             @include('components.widget.admin.navbar')
 
-            <main id="main-content" class="flex-1 overflow-y-auto pt-10 pr-10 transition-all duration-300">
+            <main id="main-content" class="flex-1 overflow-y-auto transition-all duration-300">
                 @yield('admin')
             </main>
         </div>
