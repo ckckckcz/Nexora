@@ -12,21 +12,21 @@
     <!-- Mobile Backdrop -->
     <div id="mobile-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden transition-opacity duration-300"></div>
 
+    <!-- Toggle Button (Moved outside sidebar) -->
+    <button id="toggle-sidebar"
+        class="fixed top-20 right-4 bg-white border border-gray-200 rounded-full p-1.5 shadow-md z-50 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 md:block hidden"
+        aria-label="Toggle sidebar"
+        aria-expanded="true">
+        <svg xmlns="http://www.w3.org/2000/svg" id="chevron-icon" class="h-4 w-4 text-gray-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+    </button>
+
     <!-- Sidebar -->
     <div id="sidebar"
         class="fixed top-0 left-0 h-full bg-white border-r border-gray-200 transition-all duration-300 ease-in-out shadow-sm z-40 md:flex flex-col w-64 -translate-x-full md:translate-x-0 overflow-hidden"
         data-expanded="true">
         
-        <!-- Toggle Button -->
-        <button id="toggle-sidebar"
-            class="absolute -right-3 top-20 bg-white border border-gray-200 rounded-full p-1.5 shadow-md z-10 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 hidden md:block"
-            aria-label="Toggle sidebar"
-            aria-expanded="true">
-            <svg xmlns="http://www.w3.org/2000/svg" id="chevron-icon" class="h-4 w-4 text-gray-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
-
         <!-- Logo Section -->
         <div class="p-4 border-b border-gray-200 flex items-center justify-between h-16">
             <a href="#" class="flex items-center">
@@ -112,7 +112,7 @@
             <a href="#" 
                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.guidance') ? 'bg-green-50 text-green-700' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.guidance') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Bimbingan Magang</span>
                 <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Bimbingan Magang</span>
@@ -169,3 +169,184 @@
 
 <!-- Add Alpine.js for dropdown functionality -->
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("sidebar");
+    const toggleButton = document.getElementById("toggle-sidebar");
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileBackdrop = document.getElementById("mobile-backdrop");
+    const chevronIcon = document.getElementById("chevron-icon");
+    const sidebarTexts = document.querySelectorAll(".sidebar-text");
+    const sidebarTooltips = document.querySelectorAll(".sidebar-tooltip");
+    const sidebarSubmenus = document.querySelectorAll(".sidebar-submenu");
+    const sidebarArrows = document.querySelectorAll(".sidebar-arrow");
+
+    // Initialize sidebar state from localStorage (for desktop)
+    const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+    
+    // Set initial state based on screen size and saved preference
+    if (window.innerWidth >= 768) {
+        if (sidebarCollapsed) {
+            collapseSidebar(false); // Don't animate on initial load
+        } else {
+            expandSidebar(false); // Don't animate on initial load
+        }
+    } else {
+        // On mobile, always start with sidebar closed
+        sidebar.classList.add("-translate-x-full");
+        sidebar.classList.add("w-full");
+        sidebar.classList.remove("w-16", "w-64");
+    }
+
+    // Toggle sidebar on button click (desktop)
+    toggleButton.addEventListener("click", function () {
+        if (sidebar.getAttribute("data-expanded") === "true") {
+            collapseSidebar(true);
+            localStorage.setItem("sidebarCollapsed", "true");
+            toggleButton.setAttribute("aria-expanded", "false");
+        } else {
+            expandSidebar(true);
+            localStorage.setItem("sidebarCollapsed", "false");
+            toggleButton.setAttribute("aria-expanded", "true");
+        }
+    });
+
+    // Mobile menu toggle
+    mobileMenuButton.addEventListener("click", function () {
+        const isOpen = !sidebar.classList.contains("-translate-x-full");
+        if (isOpen) {
+            closeMobileSidebar();
+            mobileMenuButton.setAttribute("aria-expanded", "false");
+        } else {
+            openMobileSidebar();
+            mobileMenuButton.setAttribute("aria-expanded", "true");
+        }
+    });
+
+    // Close sidebar when clicking backdrop
+    mobileBackdrop.addEventListener("click", function () {
+        closeMobileSidebar();
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+    });
+
+    // Handle window resize with debouncing
+    let resizeTimeout;
+    window.addEventListener("resize", function () {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function () {
+            if (window.innerWidth >= 768) {
+                // Desktop view
+                sidebar.classList.remove("-translate-x-full", "w-full");
+                mobileBackdrop.classList.add("hidden");
+                toggleButton.classList.remove("hidden");
+                
+                // Restore collapsed state from localStorage
+                const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+                if (sidebarCollapsed) {
+                    collapseSidebar(false);
+                } else {
+                    expandSidebar(false);
+                }
+            } else {
+                // Mobile view
+                sidebar.classList.add("-translate-x-full", "w-full");
+                sidebar.classList.remove("w-16", "w-64");
+                toggleButton.classList.add("hidden");
+                mobileBackdrop.classList.add("hidden");
+                
+                // Always show text on mobile
+                sidebarTexts.forEach(text => {
+                    text.classList.remove("opacity-0", "invisible", "w-0");
+                });
+                
+                // Hide tooltips on mobile
+                sidebarTooltips.forEach(tooltip => {
+                    tooltip.classList.add("hidden");
+                });
+            }
+        }, 100);
+    });
+
+    /**
+     * Collapse the sidebar to icon-only mode
+     * @param {boolean} animate - Whether to animate the transition
+     */
+    function collapseSidebar(animate = true) {
+        sidebar.setAttribute("data-expanded", "false");
+        sidebar.classList.remove("w-64");
+        if (!animate) {
+            sidebar.classList.add("transition-none");
+            setTimeout(() => sidebar.classList.remove("transition-none"), 10);
+        }
+        sidebar.classList.add("w-16");
+        chevronIcon.classList.add("rotate-180");
+        sidebarTexts.forEach(text => {
+            text.classList.add("opacity-0", "invisible", "w-0");
+        });
+        sidebarTooltips.forEach(tooltip => {
+            tooltip.classList.remove("hidden");
+        });
+        sidebarSubmenus.forEach(submenu => {
+            submenu.classList.add("hidden");
+        });
+        sidebarArrows.forEach(arrow => {
+            arrow.classList.add("opacity-0", "invisible", "w-0");
+        });
+    }
+
+    /**
+     * Expand the sidebar to full width
+     * @param {boolean} animate - Whether to animate the transition
+     */
+    function expandSidebar(animate = true) {
+        sidebar.setAttribute("data-expanded", "true");
+        sidebar.classList.remove("w-16");
+        if (!animate) {
+            sidebar.classList.add("transition-none");
+            setTimeout(() => sidebar.classList.remove("transition-none"), 10);
+        }
+        sidebar.classList.add("w-64");
+        chevronIcon.classList.remove("rotate-180");
+        sidebarTexts.forEach(text => {
+            text.classList.remove("opacity-0", "invisible", "w-0");
+        });
+        sidebarTooltips.forEach(tooltip => {
+            tooltip.classList.add("hidden");
+        });
+        sidebarArrows.forEach(arrow => {
+            arrow.classList.remove("opacity-0", "invisible", "w-0");
+        });
+    }
+
+    /**
+     * Open the sidebar on mobile
+     */
+    function openMobileSidebar() {
+        sidebar.classList.remove("-translate-x-full");
+        mobileBackdrop.classList.remove("hidden");
+        setTimeout(() => {
+            mobileBackdrop.classList.add("opacity-100");
+        }, 10);
+        document.body.classList.add("overflow-hidden");
+        sidebarTexts.forEach(text => {
+            text.classList.remove("opacity-0", "invisible", "w-0");
+        });
+        sidebarTooltips.forEach(tooltip => {
+            tooltip.classList.add("hidden");
+        });
+    }
+
+    /**
+     * Close the sidebar on mobile
+     */
+    function closeMobileSidebar() {
+        sidebar.classList.add("-translate-x-full");
+        mobileBackdrop.classList.remove("opacity-100");
+        setTimeout(() => {
+            mobileBackdrop.classList.add("hidden");
+        }, 300);
+        document.body.classList.remove("overflow-hidden");
+    }
+});
+</script>
