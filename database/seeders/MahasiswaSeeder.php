@@ -14,33 +14,35 @@ class MahasiswaSeeder extends Seeder
     {
         $mahasiswa = [
             [
-                'nim' => '2020001',
+                'nim' => '2341720032',
                 'nama_mahasiswa' => 'Cakra Wangsa',
                 'id_program_studi' => 1, // Teknik Informatika
                 'jurusan' => 'Teknik Informatika',
                 'jenis_kelamin' => 'L',
-                'id_user' => 3, 
+                'id_user' => 3,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // [
-            //     'nim' => '2020002',
-            //     'nama_mahasiswa' => 'Tri Sukma Sarah',
-            //     'id_program_studi' => 2, // Sistem Informasi
-            //     'jurusan' => 'Sistem Informasi',
-            //     'jenis_kelamin' => 'P',
-            //     'created_at' => now(),
-            //     'updated_at' => now(),
-            // ],
-            // [
-            //     'nim' => '2020003',
-            //     'nama_mahasiswa' => 'Galung Erlyan Tama',
-            //     'id_program_studi' => 3, //PPLS
-            //     'jurusan' => 'Perangkat Lunak Sistem',
-            //     'jenis_kelamin' => 'L',
-            //     'created_at' => now(),
-            //     'updated_at' => now(),
-            // ],
+            [
+                'nim' => '2341720051',
+                'nama_mahasiswa' => 'Tri Sukma Sarah',
+                'id_program_studi' => 2, // Sistem Informasi
+                'jurusan' => 'Sistem Informasi',
+                'jenis_kelamin' => 'P',
+                'id_user' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nim' => '2341720054',
+                'nama_mahasiswa' => 'Galung Erlyan Tama',
+                'id_program_studi' => 3, //PPLS
+                'jurusan' => 'Perangkat Lunak Sistem',
+                'jenis_kelamin' => 'L',
+                'id_user' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         Mahasiswa::insert($mahasiswa);
