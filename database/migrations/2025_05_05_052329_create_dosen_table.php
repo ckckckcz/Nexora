@@ -12,18 +12,25 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dosen', function (Blueprint $table) {
-            $table->integer('id_dosen')->autoIncrement();
+            $table->id('id_dosen')->autoIncrement();
             $table->string('nidn', 10)->unique();
             $table->string('nama_dosen', 100);
             $table->unsignedBigInteger('id_program_studi');
+            $table->string('tanda_tangan', 100)->nullable();
             $table->string('jurusan', 100);
+            $table->unsignedBigInteger('id_user')->nullable(); 
             $table->timestamps();
 
-            // Foreign key constraint
+            // Relasi Dosen > Prodi
             $table->foreign('id_program_studi')
                 ->references('id_program_studi')
-                ->on('program_studi')
-                ->onDelete('cascade');
+                ->on('program_studi');
+
+            // Relasi Dosen > User
+            $table->foreign('id_user')
+                ->references('id_user')
+                ->on('users')
+                ->onDelete('set null');
         });
     }
 
