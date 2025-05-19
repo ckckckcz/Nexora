@@ -22,22 +22,22 @@ class DosenSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'nidn' => '0001020305',
-                'nama_dosen' => 'Prof. Sri Mulyani',
-                'id_program_studi' => 2,
-                'jurusan' => 'Sistem Informasi',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nidn' => '0001020306',
-                'nama_dosen' => 'Dr. Bambang Sutrisno',
-                'id_program_studi' => 3,
-                'jurusan' => 'Perangkat Lunak Sistem',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            // [
+            //     'nidn' => '0001020305',
+            //     'nama_dosen' => 'Prof. Sri Mulyani',
+            //     'id_program_studi' => 2,
+            //     'jurusan' => 'Sistem Informasi',
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'nidn' => '0001020306',
+            //     'nama_dosen' => 'Dr. Bambang Sutrisno',
+            //     'id_program_studi' => 3,
+            //     'jurusan' => 'Perangkat Lunak Sistem',
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
         ];
 
         Dosen::insert($dosen);
