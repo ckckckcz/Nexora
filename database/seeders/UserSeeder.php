@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'username' => 'dosen1',
+                'username' => '0001020304',
                 'email' => 'dosen1@ujicoba.com',
                 'password' => Hash::make('password'),
                 'role' => 'dosen',
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'username' => 'mahasiswa1',
+                'username' => '2020001',
                 'email' => 'mahasiswa1@ujicoba.com',
                 'password' => Hash::make('password'),
                 'role' => 'mahasiswa',
