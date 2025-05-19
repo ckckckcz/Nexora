@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+#dashboard-sidebar{
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* @layer base {
   :root {
     --background: 0 0% 100%;
