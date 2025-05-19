@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Users extends Authenticatable
 {
     protected $primaryKey = 'id_user';
 
     protected $fillable = [
         'username',
         'email',
+        'email_verified_at',
         'password',
         'role',
         'profile_url',
@@ -24,8 +25,14 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class, 'id_user', 'id_user');
+    }
+
+    public function dosen()
+    {
+        return $this->hasOne(Dosen::class, 'id_user', 'id_user');
+    }
+
 }
