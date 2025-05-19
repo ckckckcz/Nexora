@@ -18,6 +18,7 @@ class DosenSeeder extends Seeder
                 'nama_dosen' => 'Dr. Ahmad Wijaya',
                 'id_program_studi' => 1,
                 'jurusan' => 'Teknik Informatika',
+                'id_user' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

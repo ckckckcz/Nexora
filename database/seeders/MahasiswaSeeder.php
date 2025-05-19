@@ -19,6 +19,7 @@ class MahasiswaSeeder extends Seeder
                 'id_program_studi' => 1, // Teknik Informatika
                 'jurusan' => 'Teknik Informatika',
                 'jenis_kelamin' => 'L',
+                'id_user' => 3, 
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
