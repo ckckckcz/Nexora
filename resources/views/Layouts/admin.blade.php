@@ -19,7 +19,7 @@
         
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin/sidebar.js', 'resources/js/admin/navbar.js'])
+            @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin/sidebar.js', 'resources/js/admin/navbar.js', 'resources/js/admin/sidebar-toggle.js'])
         @else
         @endif
     </head>

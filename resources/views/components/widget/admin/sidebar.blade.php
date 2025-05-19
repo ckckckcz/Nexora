@@ -14,7 +14,8 @@
 
     <!-- Sidebar -->
     <div id="sidebar"
-        class="fixed top-0 left-0 h-full bg-white border-r border-gray-200 transition-all duration-300 ease-in-out shadow-sm z-40 md:flex flex-col w-56 sm:w-64 lg:w-64 -translate-x-full md:translate-x-0 overflow-hidden">
+        class="fixed top-0 left-0 h-full bg-white border-r border-gray-200 transition-all duration-300 ease-in-out shadow-sm z-40 md:flex flex-col w-64 -translate-x-full md:translate-x-0 overflow-hidden"
+        data-expanded="true">
         
         <!-- Toggle Button -->
         <button id="toggle-sidebar"
@@ -27,137 +28,144 @@
         </button>
 
         <!-- Logo Section -->
-        <div class="p-4 sm:p-5 border-b border-gray-200 flex items-center justify-between">
+        <div class="p-4 border-b border-gray-200 flex items-center justify-between h-16">
             <a href="#" class="flex items-center">
-                <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-8 w-8 sm:h-9 sm:w-9 mr-3">
-                <span class="text-lg sm:text-xl font-semibold text-green-600 transition-opacity duration-200" id="brand-text">Nexora</span>
+                <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-8 w-8 flex-shrink-0">
+                <span class="text-lg font-semibold text-green-600 ml-3 transition-opacity duration-200 whitespace-nowrap sidebar-text">Nexora</span>
             </a>
         </div>
 
         <!-- Navigation -->
-        <nav class="flex-1 overflow-y-auto py-2 px-2 sm:px-3 space-y-2" id="nav-contain">
+        <nav class="flex-1 overflow-y-auto py-2 px-3 space-y-1" id="nav-container">
             <!-- Dashboard -->
             <a href="#" 
-                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('dashboard') ? 'bg-green-50 text-green-700' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('dashboard') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('dashboard') ? 'bg-green-50 text-green-700' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('dashboard') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
-                <span class="transition-opacity duration-200" id="dashboard-text">Dashboard</span>
-                <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Dashboard</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Dashboard</span>
+                <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Dashboard</span>
             </a>
 
             <!-- User Management Section -->
             <div x-data="{ open: false }" class="space-y-1">
                 <button @click="open = !open" type="button" 
-                    class="flex items-center justify-between w-full text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('users.*') ? 'bg-green-50 text-green-700' : '' }}">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('users.*') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    class="flex items-center justify-between w-full text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('users.*') ? 'bg-green-50 text-green-700' : '' }}">
+                    <div class="flex items-center min-w-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('users.*') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
-                        <span class="transition-opacity duration-200" id="manajemen-akun-text">Manajemen Akun</span>
-                        <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Manajemen Akun</span>
+                        <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Manajemen Akun</span>
                     </div>
-                    <svg x-bind:class="open ? 'transform rotate-90' : ''" class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg x-bind:class="open ? 'transform rotate-90' : ''" class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-transform duration-200 flex-shrink-0 sidebar-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
+                    <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Manajemen Akun</span>
                 </button>
-                <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" class="pl-8 sm:pl-10 space-y-1">
+                <div x-show="open" 
+                     x-transition:enter="transition ease-out duration-100" 
+                     x-transition:enter-start="transform opacity-0 scale-95" 
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     class="pl-10 space-y-1 sidebar-submenu">
                     <a href="#" class="flex items-center text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 {{ request()->routeIs('users.students') ? 'bg-green-50 text-green-700 font-medium' : '' }}">
-                        <span class="transition-opacity duration-200">Mahasiswa</span>
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Mahasiswa</span>
                     </a>
                     <a href="#" class="flex items-center text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-green-700 font-medium' : '' }}">
-                        <span class="transition-opacity duration-200">Dosen Pembimbing</span>
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Dosen Pembimbing</span>
                     </a>
                 </div>
             </div>
 
             <!-- Skema Magang -->
             <a href="#" 
-               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('internship.schemes') ? 'bg-green-50 text-green-700' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('internship.schemes') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.schemes') ? 'bg-green-50 text-green-700' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.schemes') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                <span class="transition-opacity duration-200" id="skema-magang-text">Skema Magang</span>
-                <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Skema Magang</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Skema Magang</span>
+                <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Skema Magang</span>
             </a>
 
             <!-- Program Studi -->
             <a href="#" 
-               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('study.programs') ? 'bg-green-50 text-green-700' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('study.programs') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('study.programs') ? 'bg-green-50 text-green-700' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('study.programs') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M12 14l9-5-9-5-9 5 9 5z" />
                     <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                 </svg>
-                <span class="transition-opacity duration-200" id="program-studi-text">Program Studi</span>
-                <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Program Studi</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Program Studi</span>
+                <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Program Studi</span>
             </a>
 
             <!-- Lowongan Magang -->
             <a href="#" 
-               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('internship.vacancies') ? 'bg-green-50 text-green-700' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('internship.vacancies') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.vacancies') ? 'bg-green-50 text-green-700' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.vacancies') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span class="transition-opacity duration-200" id="lowongan-magang-text">Lowongan Magang</span>
-                <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Lowongan Magang</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Lowongan Magang</span>
+                <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Lowongan Magang</span>
             </a>
 
             <!-- Bimbingan Magang -->
             <a href="#" 
-               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('internship.guidance') ? 'bg-green-50 text-green-700' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('internship.guidance') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('internship.guidance') ? 'bg-green-50 text-green-700' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.guidance') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span class="transition-opacity duration-200" id="bimbingan-magang-text">Bimbingan Magang</span>
-                <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Bimbingan Magang</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Bimbingan Magang</span>
+                <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Bimbingan Magang</span>
             </a>
 
             <!-- Upload Surat Tugas -->
             <a href="#" 
-               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('assignment.letters') ? 'bg-green-50 text-green-700' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('assignment.letters') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('assignment.letters') ? 'bg-green-50 text-green-700' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('assignment.letters') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                 </svg>
-                <span class="transition-opacity duration-200" id="upload-surat-text">Upload Surat Tugas</span>
-                <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Upload Surat Tugas</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Upload Surat Tugas</span>
+                <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Upload Surat Tugas</span>
             </a>
 
             <!-- Sistem Rekomendasi -->
             <a href="#" 
-               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('recommendation.settings') ? 'bg-green-50 text-green-700' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('recommendation.settings') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('recommendation.settings') ? 'bg-green-50 text-green-700' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span class="transition-opacity duration-200" id="sistem-rekomendasi-text">Sistem Rekomendasi</span>
-                <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Sistem Rekomendasi</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Sistem Rekomendasi</span>
+                <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Sistem Rekomendasi</span>
             </a>
 
             <!-- Statistik dan Laporan -->
             <a href="#" 
-               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2 font-medium text-sm group relative {{ request()->routeIs('statistics.reports') ? 'bg-green-50 text-green-700' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('statistics.reports') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="flex items-center text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('statistics.reports') ? 'bg-green-50 text-green-700' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('statistics.reports') ? 'text-green-700' : 'text-gray-500' }} group-hover:text-green-700 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
-                <span class="transition-opacity duration-200" id="statistik-laporan-text">Statistik & Laporan</span>
-                <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Statistik & Laporan</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Statistik & Laporan</span>
+                <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Statistik & Laporan</span>
             </a>
         </nav>
 
         <!-- Logout Section -->
-        <div class="p-3 sm:p-4 border-t border-gray-200">
+        <div class="p-4 border-t border-gray-200">
             <form method="POST" action="#">
                 @csrf
                 <button type="submit"
-                    class="flex items-center text-gray-700 hover:text-red-600 w-full py-2 px-3 rounded-md hover:bg-red-50 transition-colors group relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 group-hover:text-red-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    class="flex items-center text-gray-700 hover:text-red-600 w-full py-2.5 px-3 rounded-md hover:bg-red-50 transition-colors group relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-gray-500 group-hover:text-red-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
-                    <span class="ml-3 font-medium transition-opacity duration-200" id="logout-text">Log Out</span>
-                    <span class="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sidebar-tooltip">Log Out</span>
+                    <span class="ml-3 font-medium transition-all duration-200 whitespace-nowrap sidebar-text">Log Out</span>
+                    <span class="absolute left-12 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 whitespace-nowrap sidebar-tooltip">Log Out</span>
                 </button>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Add Alpine.js for dropdown functionality -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
