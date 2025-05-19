@@ -19,6 +19,9 @@ Route::middleware([\App\Http\Middleware\App::class])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     });
+    Route::get('/admin/manajemen-akun/mahasiswa', function () {
+        return view('admin.manajemenAkun.mahasiswa');
+    });
 });
 
 

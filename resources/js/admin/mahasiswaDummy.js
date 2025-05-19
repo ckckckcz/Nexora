@@ -4,33 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initial data
     const initialStudents = [
-        {
-            id: 1,
-            nim: "2019103001",
-            name: "Ahmad Rizky",
-            program: "S1",
-            department: "Teknik Informatika",
-            gender: "L",
-            registrationDate: "2019-08-15",
-        },
-        {
-            id: 2,
-            nim: "2020104052",
-            name: "Siti Nurhaliza",
-            program: "S1",
-            department: "Sistem Informasi",
-            gender: "P",
-            registrationDate: "2020-08-20",
-        },
-        {
-            id: 3,
-            nim: "2018102023",
-            name: "Budi Santoso",
-            program: "S1",
-            department: "Teknik Elektro",
-            gender: "L",
-            registrationDate: "2018-08-10",
-        },
+        { id: 1, nim: "2019103001", name: "Ahmad Rizky", program: "S1", department: "Teknik Informatika", gender: "L", registrationDate: "2019-08-15" },
+        { id: 2, nim: "2020104052", name: "Siti Nurhaliza", program: "S1", department: "Sistem Informasi", gender: "P", registrationDate: "2020-08-20" },
+        { id: 3, nim: "2018102023", name: "Budi Santoso", program: "S1", department: "Teknik Elektro", gender: "L", registrationDate: "2018-08-10" },
     ];
 
     let students = [...initialStudents];
@@ -40,12 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // DOM Elements
     const searchInput = document.getElementById("search-input");
-    const departmentFilterBtn = document.getElementById(
-        "department-filter-btn"
-    );
-    const departmentFilterText = document.getElementById(
-        "department-filter-text"
-    );
+    const departmentFilterBtn = document.getElementById("department-filter-btn");
+    const departmentFilterText = document.getElementById("department-filter-text");
     const departmentDropdown = document.getElementById("department-dropdown");
     const genderFilterBtn = document.getElementById("gender-filter-btn");
     const genderFilterText = document.getElementById("gender-filter-text");
@@ -54,6 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const startIndex = document.getElementById("start-index");
     const endIndex = document.getElementById("end-index");
     const totalStudents = document.getElementById("total-students");
+
+    // Check if all DOM elements exist
+    if (!searchInput || !departmentFilterBtn || !departmentFilterText || !departmentDropdown || 
+        !genderFilterBtn || !genderFilterText || !genderDropdown || !studentTableBody || 
+        !startIndex || !endIndex || !totalStudents) {
+        console.error("One or more DOM elements not found.");
+        return;
+    }
 
     // Format date function
     const formatDate = (dateString) => {
@@ -64,14 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Filter students
     const filterStudents = () => {
         const filtered = students.filter((student) => {
-            const matchesSearch =
+            const matchesSearch = 
                 student.nim.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 student.name.toLowerCase().includes(searchTerm.toLowerCase());
-            const matchesDepartment =
-                departmentFilter === "Semua Jurusan" ||
-                student.department === departmentFilter;
-            const matchesGender =
-                genderFilter === "Semua" || student.gender === genderFilter;
+            const matchesDepartment = departmentFilter === "Semua Jurusan" || student.department === departmentFilter;
+            const matchesGender = genderFilter === "Semua" || student.gender === genderFilter;
             return matchesSearch && matchesDepartment && matchesGender;
         });
         renderTable(filtered);
@@ -85,57 +62,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 const row = document.createElement("tr");
                 row.className = "hover:bg-gray-50 transition-colors";
                 row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${
-                        student.nim
-                    }</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${
-                        student.name
-                    }</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${
-                        student.program
-                    }</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${
-                        student.department
-                    }</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${student.nim}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${student.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${student.program}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${student.department}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            student.gender === "L"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-blue-100 text-blue-800"
+                            student.gender === "L" ? "bg-green-100 text-green-800" : "bg-blue-100 text-blue-800"
                         }">
-                            ${
-                                student.gender === "L"
-                                    ? "Laki-laki"
-                                    : "Perempuan"
-                            }
+                            ${student.gender === "L" ? "Laki-laki" : "Perempuan"}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatDate(
-                        student.registrationDate
-                    )}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatDate(student.registrationDate)}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                        <button class="text-blue-600 hover:text-blue-900 inline-flex items-center view-btn" data-id="${
-                            student.id
-                        }">
-                            <svg class="h-4 w-4 mr-1" id="eye-icon-${
-                                student.id
-                            }"></svg>
+                        <button class="text-blue-600 hover:text-blue-900 inline-flex items-center view-btn" data-id="${student.id}">
+                            <svg class="h-4 w-4 mr-1" id="eye-icon-${student.id}"></svg>
                             <span class="hidden sm:inline">Lihat</span>
                         </button>
-                        <button class="text-yellow-600 hover:text-yellow-900 inline-flex items-center edit-btn" data-id="${
-                            student.id
-                        }">
-                            <svg class="h-4 w-4 mr-1" id="edit-icon-${
-                                student.id
-                            }"></svg>
+                        <button class="text-yellow-600 hover:text-yellow-900 inline-flex items-center edit-btn" data-id="${student.id}">
+                            <svg class="h-4 w-4 mr-1" id="edit-icon-${student.id}"></svg>
                             <span class="hidden sm:inline">Edit</span>
                         </button>
-                        <button class="text-red-600 hover:text-red-900 inline-flex items-center delete-btn" data-id="${
-                            student.id
-                        }">
-                            <svg class="h-4 w-4 mr-1" id="trash-icon-${
-                                student.id
-                            }"></svg>
+                        <button class="text-red-600 hover:text-red-900 inline-flex items-center delete-btn" data-id="${student.id}">
+                            <svg class="h-4 w-4 mr-1" id="trash-icon-${student.id}"></svg>
                             <span class="hidden sm:inline">Hapus</span>
                         </button>
                     </td>
@@ -189,12 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("#gender-dropdown button").forEach((btn) => {
         btn.addEventListener("click", (e) => {
             genderFilter = e.target.getAttribute("data-gender");
-            genderFilterText.textContent =
-                genderFilter === "Semua"
-                    ? "Semua Jenis Kelamin"
-                    : genderFilter === "L"
-                    ? "Laki-laki"
-                    : "Perempuan";
+            genderFilterText.textContent = genderFilter === "Semua" ? "Semua Jenis Kelamin" : genderFilter === "L" ? "Laki-laki" : "Perempuan";
             genderDropdown.classList.add("hidden");
             filterStudents();
         });
@@ -203,17 +147,13 @@ document.addEventListener("DOMContentLoaded", () => {
     studentTableBody.addEventListener("click", (e) => {
         if (e.target.closest(".delete-btn")) {
             const id = e.target.closest(".delete-btn").getAttribute("data-id");
-            if (
-                confirm("Apakah Anda yakin ingin menghapus data mahasiswa ini?")
-            ) {
-                students = students.filter(
-                    (student) => student.id !== parseInt(id)
-                );
+            if (confirm("Apakah Anda yakin ingin menghapus data mahasiswa ini?")) {
+                students = students.filter((student) => student.id !== parseInt(id));
                 filterStudents();
             }
         }
     });
 
-    // Initial render
+    // Initial render to ensure data appears on load
     filterStudents();
 });
