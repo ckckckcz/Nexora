@@ -37,7 +37,7 @@ class AuthController extends Controller
             // Berhasil login
             $user = Auth::user();
             
-            return redirect()->intended('/');
+            return redirect()->intended('/admin/dashboard');
         }
         
         // Coba cek apakah username adalah NIM mahasiswa
@@ -56,7 +56,7 @@ class AuthController extends Controller
             $user = User::find($dosen->id_user);
             if ($user && Hash::check($request->password, $user->password)) {
                 Auth::login($user);
-                return redirect()->intended('/');
+                return redirect()->intended('/dosen/dashboard');
             }
         }
         
