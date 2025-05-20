@@ -19,9 +19,16 @@ Route::middleware([\App\Http\Middleware\App::class])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     });
+
+    // MAHASISWA
     Route::get('/admin/manajemen-akun/mahasiswa', function () {
         return view('admin.manajemenAkun.mahasiswa');
     });
+    Route::get('/admin/manajemen-akun/mahasiswa/tambah', function () {
+        return view('admin.function.mahasiswa.tambah');
+    });
+
+    // DOSEN
     Route::get('/admin/manajemen-akun/dosen-pembimbing', function () {
         return view('admin.manajemenAkun.dosen');
     });
