@@ -34,7 +34,7 @@
                                 class="absolute z-10 mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
                                 <ul class="py-1 max-h-60 overflow-auto">
                                     <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 tewwxt-gray-700"
                                             data-dept="Semua Jurusan">Semua Jurusan</button></li>
                                     <li><button
                                             class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
