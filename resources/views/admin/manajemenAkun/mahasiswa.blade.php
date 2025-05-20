@@ -9,56 +9,14 @@
         <!-- Top Internship Placements Podium -->
         <div class="w-full mx-auto">
             <section class="mb-10 bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-gray-100 relative overflow-hidden">
-                <!-- Custom CSS for Gradients -->
-                <style>
-                    .gradient-second-place {
-                        background: linear-gradient(to bottom, #B0BEC5, #78909C);
-                    }
-
-                    .gradient-second-place-number {
-                        background: linear-gradient(to bottom right, #78909C, #455A64);
-                    }
-
-                    .gradient-first-place {
-                        background: linear-gradient(to bottom, #FFD54F, #FFB300);
-                    }
-
-                    .gradient-first-place-number {
-                        background: linear-gradient(to bottom right, #FFB300, #FF8F00);
-                    }
-
-                    .gradient-third-place {
-                        background: linear-gradient(to bottom, #FF8A65, #FF5722);
-                    }
-
-                    .gradient-third-place-number {
-                        background: linear-gradient(to bottom right, #FF5722, #D84315);
-                    }
-
-                    .gradient-podium-base {
-                        background: linear-gradient(to right, #E0E0E0, #B0BEC5, #E0E0E0);
-                    }
-
-                    .gradient-image-second {
-                        background: linear-gradient(to bottom right, #E0E0E0, #B0BEC5);
-                    }
-
-                    .gradient-image-first {
-                        background: linear-gradient(to bottom right, #FFECB3, #FFB300);
-                    }
-
-                    .gradient-image-third {
-                        background: linear-gradient(to bottom right, #FFAB91, #FF5722);
-                    }
-                </style>
-
                 <!-- Background decoration -->
                 <div class="absolute -top-10 -right-10 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-100 rounded-full opacity-50">
                 </div>
                 <div class="absolute -bottom-10 -left-10 w-32 h-32 sm:w-40 sm:h-40 bg-blue-100 rounded-full opacity-50">
                 </div>
 
-                <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 flex items-center relative z-10">
+                <h2
+                    class="text-xl sm:text-2xl font-bold text-gray-900 lg:flex-row flex-col mb-4 sm:mb-6 flex sm:items-center relative z-10">
                     <span class="mr-2 sm:mr-3 text-yellow-500">
                         <i class="fas fa-trophy"></i>
                     </span>
@@ -67,7 +25,7 @@
 
                 <div class="flex flex-col w-full items-center justify-center gap-4 sm:gap-6 mt-16 relative z-10">
                     <!-- Podium Container -->
-                    <div class="w-full flex flex-col sm:flex-row sm:items-end justify-center gap-4 sm:gap-6">
+                    <div class="w-full flex flex-row items-end justify-center gap-4 sm:gap-6">
                         <!-- Second Place -->
                         <div
                             class="order-2 md:order-1 flex flex-col items-center w-full sm:w-1/3 transition-all duration-300 podium-hover">
@@ -86,7 +44,7 @@
                                 </div>
                             </div>
                             <div
-                                class="w-full h-24 sm:h-32 gradient-second-place rounded-t-lg mt-2 sm:mt-4 flex items-center justify-center shadow-lg relative overflow-hidden">
+                                class="w-full h-24 sm:h-32 gradient-second-place rounded-t-xl mt-2 sm:mt-4 flex items-center justify-center shadow-lg relative overflow-hidden">
                                 <div class="absolute top-0 left-0 w-full h-1 sm:h-2 bg-gray-300 opacity-30"></div>
                                 <div class="text-center px-4 sm:px-6">
                                     <p class="font-bold text-white text-xs sm:text-sm truncate">Reza Mahendra</p>
@@ -111,13 +69,13 @@
                                     class="absolute -bottom-2 sm:-bottom-3 -right-2 sm:-right-3 gradient-first-place-number text-white rounded-full w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center font-bold shadow-lg">
                                     1
                                 </div>
-                                <div
-                                    class="absolute top-[-10px] sm:top-[-15px] left-1/2 transform -translate-x-1/2 text-center text-yellow-500 text-lg sm:text-2xl">
+                                <div class="absolute top-[-2px] sm:top-[-15px] text-yellow-500 text-lg sm:text-2xl"
+                                    style="left: 50%; transform: translateX(-50%); display: inline-block;">
                                     <i class="fas fa-crown"></i>
                                 </div>
                             </div>
                             <div
-                                class="w-full h-32 sm:h-44 gradient-first-place rounded-t-lg mt-2 sm:mt-4 flex items-center justify-center shadow-xl relative overflow-hidden">
+                                class="w-full h-32 sm:h-44 gradient-first-place rounded-t-xl mt-2 sm:mt-4 flex items-center justify-center shadow-xl relative overflow-hidden">
                                 <div class="absolute top-0 left-0 w-full h-2 sm:h-3 bg-white opacity-30"></div>
                                 <div
                                     class="absolute -right-4 sm:-right-6 -bottom-4 sm:-bottom-6 w-8 sm:w-12 h-8 sm:h-12 bg-yellow-300 rounded-full opacity-30">
@@ -154,7 +112,7 @@
                                 </div>
                             </div>
                             <div
-                                class="w-full h-20 sm:h-24 gradient-third-place rounded-t-lg mt-2 sm:mt-4 flex items-center justify-center shadow-lg relative overflow-hidden">
+                                class="w-full h-20 sm:h-24 gradient-third-place rounded-t-xl mt-2 sm:mt-4 flex items-center justify-center shadow-lg relative overflow-hidden">
                                 <div class="absolute top-0 left-0 w-full h-1 sm:h-2 bg-amber-500 opacity-30"></div>
                                 <div class="text-center px-4 sm:px-6">
                                     <p class="font-bold text-white text-xs sm:text-sm truncate">Anisa Putri</p>
@@ -169,7 +127,7 @@
                     </div>
 
                     <!-- Podium base -->
-                    <div class="w-full h-4 sm:h-6 gradient-podium-base rounded-t-lg shadow-inner relative">
+                    <div class="w-full h-4 sm:h-6 gradient-podium-base rounded-t-xl shadow-inner relative">
                         <div class="absolute top-0 left-0 w-full h-0.5 sm:h-1 bg-white opacity-50"></div>
                         <!-- Decorative elements -->
                         <div class="absolute -top-2 sm:-top-3 left-1/4 text-yellow-500 text-xs sm:text-sm">

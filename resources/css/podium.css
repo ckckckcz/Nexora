@@ -42,3 +42,42 @@
         transform: translateX(100%) rotate(30deg);
     }
 }
+.gradient-second-place {
+    background: linear-gradient(to bottom, #b0bec5, #78909c);
+}
+
+.gradient-second-place-number {
+    background: linear-gradient(to bottom right, #78909c, #455a64);
+}
+
+.gradient-first-place {
+    background: linear-gradient(to bottom, #ffd54f, #ffb300);
+}
+
+.gradient-first-place-number {
+    background: linear-gradient(to bottom right, #ffb300, #ff8f00);
+}
+
+.gradient-third-place {
+    background: linear-gradient(to bottom, #ff8a65, #ff5722);
+}
+
+.gradient-third-place-number {
+    background: linear-gradient(to bottom right, #ff5722, #d84315);
+}
+
+.gradient-podium-base {
+    background: linear-gradient(to right, #e0e0e0, #b0bec5, #e0e0e0);
+}
+
+.gradient-image-second {
+    background: linear-gradient(to bottom right, #e0e0e0, #b0bec5);
+}
+
+.gradient-image-first {
+    background: linear-gradient(to bottom right, #ffecb3, #ffb300);
+}
+
+.gradient-image-third {
+    background: linear-gradient(to bottom right, #ffab91, #ff5722);
+}
