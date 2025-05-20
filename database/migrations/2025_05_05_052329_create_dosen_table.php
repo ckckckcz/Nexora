@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_program_studi');
             $table->string('tanda_tangan', 100)->nullable();
             $table->string('jurusan', 100);
-            $table->unsignedBigInteger('id_user')->nullable(); 
+            $table->unsignedBigInteger('id_user')->nullable();
             $table->timestamps();
 
             // Relasi Dosen > Prodi
