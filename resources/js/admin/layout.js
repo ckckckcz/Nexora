@@ -16,15 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
         !toggleButton ||
         !mobileMenuButton ||
         !mobileBackdrop ||
-        !chevronIcon
+        !chevronIcon ||
+        !mainContent
     ) {
         console.error("One or more sidebar elements not found in the DOM.");
         return;
     }
 
     // Initialize sidebar state from localStorage (for desktop)
-    const sidebarCollapsed =
-        localStorage.getItem("sidebarCollapsed") === "true";
+    const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
 
     // Set initial state based on screen size and saved preference
     if (window.innerWidth >= 768) {
@@ -86,8 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 toggleButton.classList.remove("hidden");
 
                 // Restore collapsed state from localStorage
-                const sidebarCollapsed =
-                    localStorage.getItem("sidebarCollapsed") === "true";
+                const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
                 if (sidebarCollapsed) {
                     collapseSidebar(false);
                 } else {
@@ -102,14 +101,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 toggleButton.classList.add("hidden");
                 mobileBackdrop.classList.add("hidden");
 
-                // Always show text on mobile
+                // Always show text and submenus on mobile
                 sidebarTexts.forEach((text) => {
                     text.classList.remove("opacity-0", "invisible", "w-0");
                 });
-
-                // Hide tooltips on mobile
                 sidebarTooltips.forEach((tooltip) => {
                     tooltip.classList.add("hidden");
+                });
+                sidebarSubmenus.forEach((submenu) => {
+                    submenu.classList.remove("hidden"); // Ensure submenus are accessible on mobile
+                });
+                sidebarArrows.forEach((arrow) => {
+                    arrow.classList.remove("opacity-0", "invisible", "w-0");
                 });
 
                 // Apply mobile padding to main content
@@ -140,10 +143,16 @@ document.addEventListener("DOMContentLoaded", function () {
             tooltip.classList.remove("hidden");
         });
         sidebarSubmenus.forEach((submenu) => {
-            submenu.classList.add("hidden");
+            submenu.classList.add("hidden"); // Hide submenus
         });
         sidebarArrows.forEach((arrow) => {
             arrow.classList.add("opacity-0", "invisible", "w-0");
+        });
+        // Reset Alpine.js submenu state
+        document.querySelectorAll('[x-data]').forEach((el) => {
+            if (el.__x) {
+                el.__x.$data.open = false; // Reset Alpine.js 'open' state
+            }
         });
         // Adjust main content padding
         mainContent.classList.remove("pl-72");
@@ -173,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sidebarArrows.forEach((arrow) => {
             arrow.classList.remove("opacity-0", "invisible", "w-0");
         });
+        // Allow Alpine.js to control submenu visibility
         // Adjust main content padding
         mainContent.classList.remove("pl-22");
         mainContent.classList.add("pl-72");
@@ -194,6 +204,12 @@ document.addEventListener("DOMContentLoaded", function () {
         sidebarTooltips.forEach((tooltip) => {
             tooltip.classList.add("hidden");
         });
+        sidebarSubmenus.forEach((submenu) => {
+            submenu.classList.remove("hidden"); // Ensure submenus are accessible on mobile
+        });
+        sidebarArrows.forEach((arrow) => {
+            arrow.classList.remove("opacity-0", "invisible", "w-0");
+        });
     }
 
     /**
@@ -206,9 +222,22 @@ document.addEventListener("DOMContentLoaded", function () {
             mobileBackdrop.classList.add("hidden");
         }, 300);
         document.body.classList.remove("overflow-hidden");
+        sidebarSubmenus.forEach((submenu) => {
+            submenu.classList.add("hidden"); // Reset submenu state on close
+        });
+        sidebarArrows.forEach((arrow) => {
+            arrow.classList.remove("rotate-180"); // Reset arrow rotation
+        });
+        // Reset Alpine.js submenu state
+        document.querySelectorAll('[x-data]').forEach((el) => {
+            if (el.__x) {
+                el.__x.$data.open = false; // Reset Alpine.js 'open' state
+            }
+        });
     }
 });
 
+// Keep GSAP initialization separate
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
     initAnimations();
