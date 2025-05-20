@@ -3,8 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware([\App\Http\Middleware\App::class])->group(function () {
-    Route::get('/', function () {
+Route::get('/', function () {
         return view('landing');
     });
     Route::get('/profile', function () {
@@ -19,7 +18,6 @@ Route::middleware([\App\Http\Middleware\App::class])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     });
-});
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
