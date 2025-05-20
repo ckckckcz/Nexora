@@ -15,7 +15,7 @@
                             <label for="nim" class="text-sm font-medium text-gray-700 transition-colors duration-200">NIM</label>
                             <input type="text" id="nim" name="nim"
                                 class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                                placeholder="Masukkan NIM (contoh: 123456789)" required maxlength="20">
+                                placeholder="Masukkan NIM (contoh: 2341720xxx)" required maxlength="20">
                             @error('nim')
                                 <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
@@ -40,11 +40,8 @@
                                 class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
                                 required>
                                 <option value="" disabled selected>Pilih Program Studi</option>
-                                <option value="1">S1 Teknik Informatika</option>
-                                <option value="2">S1 Sistem Informasi</option>
-                                <option value="3">S1 Teknik Elektro</option>
-                                <option value="4">S1 Teknik Sipil</option>
-                                <option value="5">S1 Manajemen Bisnis</option>
+                                <option value="1">D-IV Teknik Informatika</option>
+                                <option value="2">D-IV Sistem Informasi Bisnis</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg class="fill-current h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -65,11 +62,7 @@
                                 class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
                                 required>
                                 <option value="" disabled selected>Pilih Jurusan</option>
-                                <option value="Teknik Informatika">Teknik Informatika</option>
-                                <option value="Sistem Informasi">Sistem Informasi</option>
-                                <option value="Teknik Elektro">Teknik Elektro</option>
-                                <option value="Teknik Sipil">Teknik Sipil</option>
-                                <option value="Manajemen Bisnis">Manajemen Bisnis</option>
+                                <option value="Teknologi Informasi">Teknologi Informasi</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg class="fill-current h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -108,7 +101,7 @@
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 text-sm">
                             Simpan
                         </button>
-                        <a href="/admin/manajemen-akun/mahasiswa"
+                        <a href="/admin/manajemen-akun/dosen-pembimbing"
                             class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200 text-center">
                             Batal
                         </a>
