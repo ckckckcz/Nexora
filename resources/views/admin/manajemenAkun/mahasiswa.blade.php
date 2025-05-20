@@ -7,134 +7,147 @@
         </header>
 
         <!-- Top Internship Placements Podium -->
-        <div class="max-w-4xl mx-auto">
-            <section class="mb-10 bg-white rounded-xl shadow-lg p-6 border border-gray-100 relative overflow-hidden">
+        <div class="w-full mx-auto">
+            <section class="mb-10 bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-gray-100 relative overflow-hidden">
                 <!-- Background decoration -->
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-100 rounded-full opacity-50"></div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-100 rounded-full opacity-50"></div>
+                <div class="absolute -top-10 -right-10 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-100 rounded-full opacity-50">
+                </div>
+                <div class="absolute -bottom-10 -left-10 w-32 h-32 sm:w-40 sm:h-40 bg-blue-100 rounded-full opacity-50">
+                </div>
 
-                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center relative z-10">
-                    <span class="mr-3 text-yellow-500">
+                <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 flex items-center relative z-10">
+                    <span class="mr-2 sm:mr-3 text-yellow-500">
                         <i class="fas fa-trophy"></i>
                     </span>
                     Mahasiswa dengan Penempatan Magang Terbaik
                 </h2>
 
-                <div class="flex flex-col md:flex-row items-end justify-center gap-4 md:gap-8 mt-8 mb-4 relative z-10">
-                    <!-- Second Place -->
-                    <div class="order-2 md:order-1 flex flex-col items-center transition-all duration-300 podium-hover">
-                        <div class="relative">
-                            <div
-                                class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden border-2 border-gray-400 shadow-lg">
-                                <img src="/placeholder.svg?height=80&width=80" alt="Reza Mahendra"
-                                    class="w-full h-full object-cover" />
-                            </div>
-                            <div
-                                class="absolute -bottom-2 -right-2 bg-gradient-to-br from-gray-500 to-gray-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-md">
-                                2
-                            </div>
-                            <div class="absolute -top-1 -right-1 text-gray-400">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                        </div>
-                        <div
-                            class="h-32 md:h-40 w-24 bg-gradient-to-b from-gray-400 to-gray-500 rounded-t-lg mt-4 flex items-center justify-center shadow-lg relative overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-2 bg-gray-300 opacity-30"></div>
-                            <div class="text-center px-2">
-                                <p class="font-bold text-white text-sm truncate">Reza Mahendra</p>
-                                <p class="text-white text-xs truncate">Tokopedia</p>
-                                <div class="flex items-center justify-center mt-1">
-                                    <i class="fas fa-star text-yellow-300 text-xs mr-1"></i>
-                                    <p class="text-white text-xs">9.5</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- First Place -->
-                    <div class="order-1 md:order-2 flex flex-col items-center animate-bounce-slow">
-                        <div class="relative">
-                            <div
-                                class="w-28 h-28 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 overflow-hidden border-3 border-yellow-500 shadow-xl shine-effect">
-                                <img src="/placeholder.svg?height=112&width=112" alt="Dian Permata"
-                                    class="w-full h-full object-cover" />
-                            </div>
-                            <div
-                                class="absolute -bottom-3 -right-3 bg-gradient-to-br from-yellow-400 to-yellow-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg">
-                                1
-                            </div>
-                            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 text-yellow-500 text-2xl">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                        </div>
-                        <div
-                            class="h-44 md:h-56 w-32 bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-600 rounded-t-lg mt-4 flex items-center justify-center shadow-xl relative overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-3 bg-white opacity-30"></div>
-                            <div class="absolute -right-6 -bottom-6 w-12 h-12 bg-yellow-300 rounded-full opacity-30"></div>
-                            <div class="absolute -left-6 -bottom-6 w-12 h-12 bg-yellow-300 rounded-full opacity-30"></div>
-                            <div class="text-center px-3">
-                                <p class="font-bold text-white text-base truncate">Dian Permata</p>
-                                <p class="text-white text-sm truncate">Google Indonesia</p>
-                                <div class="flex items-center justify-center mt-2">
-                                    <i class="fas fa-star text-white text-sm mr-1"></i>
-                                    <p class="text-white text-sm font-bold">9.8</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Third Place -->
-                    <div class="order-3 flex flex-col items-center transition-all duration-300 podium-hover">
-                        <div class="relative">
-                            <div
-                                class="w-20 h-20 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 overflow-hidden border-2 border-amber-700 shadow-lg">
-                                <img src="/placeholder.svg?height=80&width=80" alt="Anisa Putri"
-                                    class="w-full h-full object-cover" />
-                            </div>
-                            <div
-                                class="absolute -bottom-2 -right-2 bg-gradient-to-br from-amber-600 to-amber-800 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shadow-md">
-                                3
-                            </div>
-                            <div class="absolute -top-1 -right-1 text-amber-600">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                        </div>
-                        <div
-                            class="h-24 md:h-32 w-24 bg-gradient-to-b from-amber-600 to-amber-800 rounded-t-lg mt-4 flex items-center justify-center shadow-lg relative overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-2 bg-amber-500 opacity-30"></div>
-                            <div class="text-center px-2">
-                                <p class="font-bold text-white text-sm truncate">Anisa Putri</p>
-                                <p class="text-white text-xs truncate">Gojek</p>
-                                <div class="flex items-center justify-center mt-1">
-                                    <i class="fas fa-star text-yellow-300 text-xs mr-1"></i>
-                                    <p class="text-white text-xs">9.3</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Podium base -->
                 <div
-                    class="h-6 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 rounded-t-lg w-full mt-0 shadow-inner relative">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-white opacity-50"></div>
-                    <!-- Decorative elements -->
-                    <div class="absolute -top-3 left-1/4 text-yellow-500 text-xs">
-                        <i class="fas fa-star"></i>
+                    class="flex flex-col w-full items-center justify-center gap-4 sm:gap-6 mt-4 sm:mt-6 mb-4 relative z-10">
+                    <!-- Podium Container -->
+                    <div class="w-full flex flex-col sm:flex-row sm:items-end justify-center gap-4 sm:gap-6">
+                        <!-- Second Place -->
+                        <div
+                            class="order-2 md:order-1 flex flex-col items-center w-full sm:w-1/3 transition-all duration-300 podium-hover">
+                            <div class="relative">
+                                <div
+                                    class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden border-2 border-gray-400 shadow-lg">
+                                    <img src="https://i.pinimg.com/564x/de/59/64/de5964357fbe534e11c7bf60cc2e1b8d.jpg"
+                                        alt="Reza Mahendra" class="w-full h-full object-cover" />
+                                </div>
+                                <div
+                                    class="absolute -bottom-2 -right-2 bg-gray-500 text-white rounded-full w-6 h-6 sm:w-8 text-sm sm:h-8 flex items-center justify-center font-bold shadow-md">
+                                    2
+                                </div>
+                                <div class="absolute top-1 right-1 text-gray-600 text-sm sm:text-base">
+                                    <i class="fas fa-medal"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="w-full h-24 sm:h-32 bg-gradient-to-b from-gray-400 to-gray-500 rounded-t-lg mt-2 sm:mt-4 flex items-center justify-center shadow-lg relative overflow-hidden">
+                                <div class="absolute top-0 left-0 w-full h-1 sm:h-2 bg-gray-300 opacity-30"></div>
+                                <div class="text-center px-4 sm:px-6">
+                                    <p class="font-bold text-white text-xs sm:text-sm truncate">Reza Mahendra</p>
+                                    <p class="text-white text-xs truncate">Tokopedia</p>
+                                    <div class="flex items-center justify-center mt-1">
+                                        <i class="fas fa-star text-yellow-300 text-xs mr-1"></i>
+                                        <p class="text-white text-xs">9.5</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- First Place -->
+                        <div class="order-1 md:order-2 flex flex-col items-center w-full sm:w-1/3 animate-bounce-slow">
+                            <div class="relative">
+                                <div
+                                    class="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 overflow-hidden border-2 sm:border-3 border-yellow-500 shadow-xl shine-effect">
+                                    <img src="https://i.pinimg.com/originals/66/8c/11/668c116f1b0032a7ff2e423955d9ac5a.jpg"
+                                        alt="Dian Permata" class="w-full h-full object-cover" />
+                                </div>
+                                <div
+                                    class="absolute -bottom-2 sm:-bottom-3 -right-2 sm:-right-3 bg-gradient-to-br from-yellow-400 to-yellow-600 text-white rounded-full w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center font-bold shadow-lg">
+                                    1
+                                </div>
+                                <div
+                                    class="absolute -top-2 sm:-top-4 left-1/2 transform -translate-x-1/2 text-yellow-500 text-lg sm:text-2xl">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="w-full h-32 sm:h-44 bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-600 rounded-t-lg mt-2 sm:mt-4 flex items-center justify-center shadow-xl relative overflow-hidden">
+                                <div class="absolute top-0 left-0 w-full h-2 sm:h-3 bg-white opacity-30"></div>
+                                <div
+                                    class="absolute -right-4 sm:-right-6 -bottom-4 sm:-bottom-6 w-8 sm:w-12 h-8 sm:h-12 bg-yellow-300 rounded-full opacity-30">
+                                </div>
+                                <div
+                                    class="absolute -left-4 sm:-left-6 -bottom-4 sm:-bottom-6 w-8 sm:w-12 h-8 sm:h-12 bg-yellow-300 rounded-full opacity-30">
+                                </div>
+                                <div class="text-center px-4 sm:px-6">
+                                    <p class="font-bold text-white text-sm sm:text-base truncate">Dian Permata</p>
+                                    <p class="text-white text-xs sm:text-sm truncate">Google Indonesia</p>
+                                    <div class="flex items-center justify-center mt-1 sm:mt-2">
+                                        <i class="fas fa-star text-white text-xs sm:text-sm mr-1"></i>
+                                        <p class="text-white text-xs sm:text-sm font-bold">9.8</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Third Place -->
+                        <div
+                            class="order-3 flex flex-col items-center w-full sm:w-1/3 transition-all duration-300 podium-hover">
+                            <div class="relative">
+                                <div
+                                    class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 overflow-hidden border-2 border-amber-700 shadow-lg">
+                                    <img src="https://i.pinimg.com/736x/4e/11/da/4e11da0c5c9ff3e8e17e4980b2526212.jpg"
+                                        alt="Anisa Putri" class="w-full h-full object-cover" />
+                                </div>
+                                <div
+                                    class="absolute -bottom-2 -right-2 bg-gradient-to-br from-amber-600 to-amber-800 text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold shadow-md">
+                                    3
+                                </div>
+                                <div class="absolute top-1 right-1 text-amber-600 text-sm sm:text-base">
+                                    <i class="fas fa-medal"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="w-full h-20 sm:h-24 bg-gradient-to-b from-amber-600 to-amber-800 rounded-t-lg mt-2 sm:mt-4 flex items-center justify-center shadow-lg relative overflow-hidden">
+                                <div class="absolute top-0 left-0 w-full h-1 sm:h-2 bg-amber-500 opacity-30"></div>
+                                <div class="text-center px-4 sm:px-6">
+                                    <p class="font-bold text-white text-xs sm:text-sm truncate">Anisa Putri</p>
+                                    <p class="text-white text-xs truncate">Gojek</p>
+                                    <div class="flex items-center justify-center mt-1">
+                                        <i class="fas fa-star text-yellow-300 text-xs mr-1"></i>
+                                        <p class="text-white text-xs">9.3</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="absolute -top-3 right-1/4 text-yellow-500 text-xs">
-                        <i class="fas fa-star"></i>
+
+                    <!-- Podium base -->
+                    <div
+                        class="w-full h-4 sm:h-6 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 rounded-t-lg mt-2 sm:mt-0 shadow-inner relative">
+                        <div class="absolute top-0 left-0 w-full h-0.5 sm:h-1 bg-white opacity-50"></div>
+                        <!-- Decorative elements -->
+                        <div class="absolute -top-2 sm:-top-3 left-1/4 text-yellow-500 text-xs sm:text-sm">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="absolute -top-2 sm:-top-3 right-1/4 text-yellow-500 text-xs sm:text-sm">
+                            <i class="fas fa-star"></i>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Confetti decoration -->
-                <div class="absolute top-10 left-10 text-yellow-500 opacity-20 text-xs">
+                <div class="absolute top-4 sm:top-10 left-4 sm:left-10 text-yellow-500 opacity-20 text-xs sm:text-sm">
                     <i class="fas fa-certificate"></i>
                 </div>
-                <div class="absolute bottom-20 right-10 text-blue-500 opacity-20 text-xs">
+                <div class="absolute bottom-8 sm:bottom-20 right-4 sm:right-10 text-blue-500 opacity-20 text-xs sm:text-sm">
                     <i class="fas fa-certificate"></i>
                 </div>
-                <div class="absolute top-20 right-20 text-red-500 opacity-20 text-xs">
+                <div class="absolute top-8 sm:top-20 right-4 sm:right-20 text-red-500 opacity-20 text-xs sm:text-sm">
                     <i class="fas fa-certificate"></i>
                 </div>
             </section>
