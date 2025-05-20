@@ -55,7 +55,7 @@
                         <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Manajemen
                             Akun</span>
                     </div>
-                    <svg x-bind:class="open ? 'transform rotate-90' : ''"
+                    <svg x-bind:class="open ? 'transform rotate-89' : ''"
                         class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-transform duration-200 flex-shrink-0 sidebar-arrow"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -86,13 +86,13 @@
                         </svg>
                         <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Magang</span>
                     </div>
-                    <svg x-bind:class="open ? 'transform rotate-90' : ''"
+                    <svg x-bind:class="open ? 'transform rotate-89' : ''"
                         class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-transform duration-200 flex-shrink-0 sidebar-arrow"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>
-                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                <div x-show="open" x-transition:enter="transition ease-out duration-100 border"
                     x-transition:enter-start="transform opacity-0 scale-95"
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
                     <a href="#"

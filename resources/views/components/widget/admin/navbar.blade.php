@@ -127,11 +127,11 @@
             <button @click="open = !open"
                 class="flex items-center space-x-2 rounded-full hover:bg-gray-100 p-1.5 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
                 aria-label="User menu">
-                <div class="h-8 w-8 rounded-full overflow-hidden border-2 border-gray-200">
-                    <img src="{{ asset('images/user.jpg') }}" alt="User Avatar" class="h-full w-full object-cover" />
+                <div class="h-9 w-9 rounded-full overflow-hidden border-2 border-gray-200">
+                    <img src="https://i.pinimg.com/474x/f9/45/b6/f945b69a2a9a33ef4edbdb32de616ddd.jpg" alt="User Avatar" class="h-full w-full object-cover" />
                 </div>
                 <div class="hidden md:block text-left">
-                    <div class="text-sm font-medium text-gray-700">{{ auth()->user()->name ?? 'Albert Flores' }}</div>
+                    <div class="text-sm font-medium text-gray-700">{{ auth()->user()->name ?? 'Masyaaa' }}</div>
                     <div class="text-xs text-gray-500 truncate max-w-[120px]">{{ auth()->user()->email ??
                         'admin@nexora.com' }}</div>
                 </div>
@@ -150,7 +150,7 @@
                 class="absolute right-0 mt-2 w-64 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
 
                 <div class="px-4 py-3 border-b border-gray-100 bg-gray-50">
-                    <p class="text-sm font-medium text-gray-800">{{ auth()->user()->name ?? 'Albert Flores' }}</p>
+                    <p class="text-sm font-medium text-gray-800">{{ auth()->user()->name ?? 'Masyaaa' }}</p>
                     <p class="text-xs text-gray-500">{{ auth()->user()->role ?? 'Administrator' }}</p>
                 </div>
 
