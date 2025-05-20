@@ -159,7 +159,7 @@
                     <!-- Search Input -->
                     <div class="relative flex-grow max-w-md">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span class="text-gray-400" id="search-icon"></span>
+                            <i class="fas fa-search text-gray-400" id="search-icon"></i>
                         </div>
                         <input type="text" id="search-input"
                             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
@@ -172,9 +172,9 @@
                         <div class="relative">
                             <button id="department-filter-btn"
                                 class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none">
-                                <span class="text-gray-500" id="filter-icon"></span>
+                                <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
                                 <span id="department-filter-text">Semua Jurusan</span>
-                                <span class="text-gray-500" id="department-chevron"></span>
+                                <i class="fas fa-chevron-down text-gray-300" id="department-chevron"></i>
                             </button>
                             <div id="department-dropdown"
                                 class="absolute z-10 mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
@@ -205,9 +205,9 @@
                         <div class="relative">
                             <button id="gender-filter-btn"
                                 class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none">
-                                <span class="text-gray-500" id="gender-filter-icon"></span>
+                                <i class="fas fa-venus-mars text-gray-500" id="gender-filter-icon"></i>
                                 <span id="gender-filter-text">Semua Jenis Kelamin</span>
-                                <span class="text-gray-500" id="gender-chevron"></span>
+                                <i class="fas fa-chevron-down text-gray-300" id="gender-chevron"></i>
                             </button>
                             <div id="gender-dropdown"
                                 class="absolute z-10 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
@@ -229,7 +229,7 @@
 
                 <!-- Add Student Button -->
                 <button id="add-student-btn"
-                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                    class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
                     <span id="plus-icon"></span>
                     <span>Tambah Mahasiswa</span>
                 </button>
