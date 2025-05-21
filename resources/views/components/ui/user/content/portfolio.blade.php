@@ -20,8 +20,8 @@
                     user experience and conversion rates.</p>
                 <div class="mt-3 flex items-center justify-between">
                     <a href="#" class="font-medium text-sm text-blue-600 hover:text-blue-800 flex items-center">
-                        View Project
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                        Lihat Project
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 -rotate-45" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -48,8 +48,8 @@
                     their learning progress and goals.</p>
                 <div class="mt-3 flex items-center justify-between">
                     <a href="#" class="font-medium text-sm text-blue-600 hover:text-blue-800 flex items-center">
-                        View Project
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                        Lihat Project
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 -rotate-45" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14 5l7 7m0 0l-7 7m7-7H3" />
