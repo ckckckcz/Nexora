@@ -25,6 +25,9 @@ Route::middleware([\App\Http\Middleware\App::class])->group(function () {
     Route::get('/admin/program-studi', function () {
         return view('admin.program_studi');
     });
+    Route::get('/admin/lowongan-magang', function () {
+        return view('admin.lowongan_magang');
+    });
 
     // MAHASISWA
     Route::get('/admin/manajemen-akun/mahasiswa', function () {
