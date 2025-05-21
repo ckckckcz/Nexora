@@ -91,8 +91,7 @@
         </div>
         <div
             class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90"
-            style="background: linear-gradient(to bottom right, #ff5722, #d84315);"
->
+            style="background: linear-gradient(to bottom right, #ff5722, #d84315);">
             5
         </div>
       </div>
