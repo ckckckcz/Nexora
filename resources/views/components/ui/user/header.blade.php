@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="flex flex-wrap gap-3 mt-4 sm:mt-0">
-        <a href="#" class="inline-flex items-center bg-[#DEFC79] hover:bg-[#c9eb5b] text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
+        <a href="/profile/edit" class="inline-flex items-center bg-[#DEFC79] hover:bg-[#c9eb5b] text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
           </svg>

@@ -13,6 +13,9 @@ Route::middleware([\App\Http\Middleware\App::class])->group(function () {
     Route::get('/profile', function () {
         return view('user.profile');
     });
+    Route::get('/profile/edit', function () {
+        return view('user.function.edit_profile');
+    });
     // Route::get('/login', function () {
     //     return view('auth.login');
     // });
