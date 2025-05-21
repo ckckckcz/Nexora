@@ -34,7 +34,6 @@
                                     <li><button
                                             class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
                                             data-program-studi="Semua Program Studi">Semua Program Studi</button></li>
-                                    <!-- Opsi dinamis dapat diisi melalui backend -->
                                     <li><button
                                             class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
                                             data-program-studi="Teknik Informatika">Teknik Informatika</button></li>
@@ -59,7 +58,7 @@
                     <a href="/admin/manajemen-program-studi/tambah">
                         <button id="add-program-studi-btn"
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
-                            <span id="plus-icon"></span>
+                            <i class="fas fa-plus mr-2"></i>
                             <span>Tambah Program Studi</span>
                         </button>
                     </a>
@@ -83,20 +82,58 @@
                                     Nama Program Studi
                                 </th>
                                 <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
-                                    Dibuat Pada
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
-                                    Diperbarui Pada
-                                </th>
-                                <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Aksi
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="program-studi-table-body" class="bg-white divide-y divide-gray-200"></tbody>
+                        <tbody id="program-studi-table-body" class="bg-white divide-y divide-gray-200">
+                            <?php
+                            // Data dummy untuk program studi
+                            $programStudis = [
+                                (object) [
+                                    'id_program_studi' => 1,
+                                    'kode_program_studi' => 'TI01',
+                                    'nama_program_studi' => 'Teknik Informatika',
+                                ],
+                                (object) [
+                                    'id_program_studi' => 2,
+                                    'kode_program_studi' => 'SI02',
+                                    'nama_program_studi' => 'Sistem Informasi',
+                                ],
+                                (object) [
+                                    'id_program_studi' => 3,
+                                    'kode_program_studi' => 'TE03',
+                                    'nama_program_studi' => 'Teknik Elektro',
+                                ],
+                                (object) [
+                                    'id_program_studi' => 4,
+                                    'kode_program_studi' => 'TS04',
+                                    'nama_program_studi' => 'Teknik Sipil',
+                                ],
+                                (object) [
+                                    'id_program_studi' => 5,
+                                    'kode_program_studi' => 'MB05',
+                                    'nama_program_studi' => 'Manajemen Bisnis',
+                                ],
+                            ];
+                            ?>
+                            @foreach ($programStudis as $programStudi)
+                                <tr>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $programStudi->id_program_studi }}</td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $programStudi->kode_program_studi }}</td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">{{ $programStudi->nama_program_studi }}</td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="/admin/manajemen-program-studi/edit/{{ $programStudi->id_program_studi }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <form action="/admin/manajemen-program-studi/hapus/{{ $programStudi->id_program_studi }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
 
@@ -113,7 +150,7 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Menampilkan <span id="start-index" class="font-medium">1</span> sampai <span id="end-index"
-                                    class="font-medium"></span> dari <span id="total-program-studi" class="font-medium"></span>
+                                    class="font-medium">{{ count($programStudis) }}</span> dari <span id="total-program-studi" class="font-medium">{{ count($programStudis) }}</span>
                                 data
                             </p>
                         </div>

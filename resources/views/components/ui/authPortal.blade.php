@@ -8,8 +8,8 @@
     <div class="p-8 md:p-12 lg:p-16 h-full flex flex-col relative z-10">
         <div class="mb-8 transform transition duration-500">
             <h2 class="text-3xl font-bold inline-block bg-[#c9eb5b] bg-opacity-70 px-3 py-1 rounded-lg shadow-sm">Selamat Datang di</h2>
-            <h2 class="text-3xl font-bold inline-block ml-2">Pemuda Kerja</h2>
-            <p class="text-gray-700 mt-3 max-w-md">Welcome to the Pemuda Kerja: Your Comprehensive Resource for Educational Excellence</p>
+            <h2 class="text-3xl font-bold inline-block ml-2">Nexora</h2>
+            <p class="text-gray-700 mt-3 max-w-md">Welcome to the Nexora: Your Comprehensive Resource for Educational Excellence</p>
         </div>
         
         <div class="flex justify-start mb-8">
