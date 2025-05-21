@@ -53,13 +53,6 @@
 
                     <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <a href="/admin/manajemen-laporan-magang/tambah">
-                            <button id="add-report-btn"
-                                class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
-                                <i class="fas fa-plus mr-2"></i>
-                                <span>Tambah Laporan Magang</span>
-                            </button>
-                        </a>
                         <button onclick="exportToPDF()"
                             class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors text-sm w-full sm:w-auto">
                             <i class="fas fa-file-pdf mr-2"></i>
