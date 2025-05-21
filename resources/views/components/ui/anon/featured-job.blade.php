@@ -39,23 +39,6 @@
                 </div>
             </div>
         </form>
-        <div class="flex mt-5 space-x-2">
-            <button type="button" class="category-button">
-                UI/UX
-            </button>
-            <button type="button" class="category-button">
-                Front-End
-            </button>
-            <button type="button" class="category-button">
-                Back-End
-            </button>
-            <button type="button" class="category-button">
-                Project Manager
-            </button>
-            <button type="button" class="category-button">
-                AI Engineer
-            </button>
-        </div>  
         @php
             $magangs = [
                 [
