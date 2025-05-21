@@ -56,6 +56,10 @@ Route::get('/admin/manajemen-akun/dosen-pembimbing/tambah', function () {
     return view('admin.function.dosen.tambah');
 });
 
+Route::get('/admin/laporan', function() {
+    return view('admin.laporan');
+});
+
 // POV DOSEN
 Route::get('/dosen/dashboard', function () {
     return view('dosen.dashboard');
