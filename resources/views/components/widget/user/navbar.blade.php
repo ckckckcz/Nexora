@@ -197,7 +197,7 @@
         <div class="flex flex-col mb-2 space-y-2">
             <!-- Profile Header -->
             <div class="flex items-center space-x-4">
-                <img class="object-cover w-12 h-12 rounded-full" src="{{ asset('images/riovaldo.png') }}"
+                <img class="object-cover border border-gray-200 w-12 h-12 rounded-full" src="{{ asset('images/riovaldo.png') }}"
                     alt="User Photo">
                 <div>
                     <p class="text-sm font-semibold text-gray-900">Riovaldo Alfiyan Fahmi Rahman</p>
@@ -205,38 +205,25 @@
                 </div>
             </div>
             <!-- Profile Dropdown Toggle -->
-            <button id="profile-toggle"
-                class="flex items-center justify-between w-full px-2 py-2 mt-4 text-sm font-medium text-gray-700 transition rounded-lg hover:bg-gray-100 focus:outline-none">
-                <span>Profile Menu</span>
-                <svg id="profile-toggle-icon" class="w-4 h-4 transition-transform transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-
-            <!-- Profile Dropdown Items -->
-            <div id="profile-menu" class="flex flex-col hidden pl-4 mt-2 space-y-2">
-                <a href="#" class="text-sm text-gray-600 hover:text-gray-900">Your Profile</a>
-                <a href="#" class="text-sm text-gray-600 hover:text-gray-900">Stats and Trends</a>
-                <a href="#" class="text-sm text-gray-600 hover:text-gray-900">Membership Plan</a>
-                <a href="#" class="text-sm text-gray-600 hover:text-gray-900">Connects</a>
-                <a href="#" class="text-sm text-gray-600 hover:text-gray-900">Apps and Offers</a>
-                <a href="#" class="text-sm text-gray-600 hover:text-gray-900">Account Settings</a>
-            </div>
+            <a href="/profile" id="profile-toggle"
+                class="flex items-center justify-between w-full px-2 py-2 text-sm font-medium text-gray-700 transition rounded-lg hover:bg-gray-100 focus:outline-none">
+                <span>Profile</span>
+            </a>
         </div>
-        <hr class="mb-6 border-gray-200">
+        <hr class="mb-2 border-gray-200">
         <!-- Navigasi Umum -->
         <nav class="flex flex-col space-y-4">
-            <a href="/" class="text-[#1A3C34] font-medium">Home</a>
-            <a href="/" class="text-gray-500 hover:text-[#1A3C34]">Advice</a>
-            <a href="/" class="text-gray-500 hover:text-[#1A3C34]">Jobseeker</a>
-            <a href="/" class="text-gray-500 hover:text-[#1A3C34]">Pricing</a>
+            <a href="/" id="profile-toggle"
+                class="flex items-center justify-between w-full px-2 py-2 text-sm font-medium text-gray-700 transition rounded-lg hover:bg-gray-100 focus:outline-none">
+                <span>Home</span>
+            </a>
             <div class="flex pt-2 space-x-2">
-                <a href="/"
-                    class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">Login</a>
-                <a href="/"
-                    class="bg-[#DEFC79] hover:bg-[#c9eb5b] text-[#1A3C34] font-medium px-4 py-2 rounded-lg w-1/2 text-center">Sign
-                    up</a>
+                <a href="/login" class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
+                    Login
+                </a>
+                <a href="/login" class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
+                    Logout
+                </a>
             </div>
         </nav>
 
