@@ -6,7 +6,7 @@
             <!-- Chat Header -->
             <div class="p-4 flex justify-between items-center border-b">
                 <h1 class="text-xl font-semibold">Chat</h1>
-                <button class="text-blue-500 p-1">
+                <button class="text-blue-900 bg-blue-900/10 rounded-lg p-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 5v14M5 12h14"></path>
@@ -46,7 +46,7 @@
             <!-- Chat List -->
             <div class="flex-1 overflow-y-auto">
                 <!-- Ronald Chat -->
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer border-l-4 border-blue-500">
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer border-l-4 border-blue-900">
                     <div class="flex-shrink-0 mr-3">
                         <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
                             <span>R</span>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="ml-2 flex items-center">
                         <span
-                            class="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
                     </div>
                 </div>
 
@@ -126,7 +126,7 @@
                     </div>
                     <div class="ml-2 flex items-center">
                         <span
-                            class="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
                     </div>
                 </div>
 
@@ -145,7 +145,7 @@
                     </div>
                     <div class="ml-2 flex items-center">
                         <span
-                            class="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
                     </div>
                 </div>
 
@@ -164,11 +164,98 @@
                     </div>
                     <div class="ml-2 flex items-center">
                         <span
-                            class="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
                     </div>
                 </div>
 
                 <!-- Albert Chats -->
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
+                    </div>
+                </div>
+
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
+                    </div>
+                </div>
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
+                    </div>
+                </div>
+
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
+                    </div>
+                </div>
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
+                    </div>
+                </div>
+
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
+                    </div>
+                </div>
                 <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
                     <div class="flex-shrink-0 mr-3">
                         <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
@@ -204,7 +291,7 @@
         <!-- Main Chat Area -->
         <div class="flex-1 flex flex-col h-[920px]">
             <!-- Chat Header -->
-            <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
+            <div class="p-4 border-b bg-white flex justify-between items-center">
                 <div class="flex items-center">
                     <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 mr-3">
                         <span>R</span>
@@ -242,10 +329,10 @@
             </div>
 
             <!-- Chat Messages -->
-            <div class="flex-1 overflow-y-auto p-4 bg-gray-50">
+            <div class="flex-1 overflow-y-auto p-4 bg-white">
                 <!-- Date Separator -->
                 <div class="flex justify-center mb-4">
-                    <div class="bg-blue-100 text-blue-800 text-xs px-4 py-1 rounded-full">Today</div>
+                    <div class="bg-blue-900/20 text-blue-900 font-bold text-xs px-4 py-1 rounded-full">Hari ini</div>
                 </div>
 
                 <!-- Received Message with Avatar -->
@@ -288,49 +375,18 @@
                     <div class="max-w-md">
                         <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
                             <div class="mb-2">
-                                <img src="{{ asset('images/chat-screenshot.png') }}" alt="Design Screenshot"
+                                <img src="https://www.learnworlds.com/app/uploads/2025/02/user-preferences.webp" alt="Design Screenshot"
                                     class="rounded-lg w-full h-auto">
-                            </div>
-                            <div class="flex justify-end">
-                                <span class="text-yellow-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
-                                        fill="currentColor">
-                                        <path
-                                            d="M12 2c.2 0 .5.08.65.22l9.5 9.5c.4.4.4 1.03 0 1.42l-9.5 9.5c-.4.4-1.02.4-1.41 0l-9.5-9.5c-.4-.4-.4-1.03 0-1.42l9.5-9.5c.16-.14.36-.22.56-.22z" />
-                                    </svg>
-                                </span>
                             </div>
                         </div>
                         <div class="text-xs text-gray-500 mt-1">9:12 am</div>
                     </div>
                 </div>
 
-                <!-- Audio Message -->
-                <div class="flex justify-end mb-4">
-                    <div class="max-w-md">
-                        <div class="bg-blue-500 rounded-lg p-3 text-white">
-                            <div class="flex items-center">
-                                <button class="mr-2 bg-gray-50 rounded-full p-1 text-blue-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                                    </svg>
-                                </button>
-                                <div class="flex-1">
-                                    <div class="w-full bg-blue-400 rounded-full h-1.5">
-                                        <div class="bg-gray-50 h-1.5 rounded-full w-3/4"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Sent Message -->
                 <div class="flex justify-end mb-4">
                     <div class="max-w-md">
-                        <div class="bg-blue-500 rounded-lg p-3 text-white">
+                        <div class="bg-blue-900 rounded-lg p-3 text-white">
                             <p class="text-sm">Great work Ronald, keep going 👍</p>
                         </div>
                     </div>
@@ -338,7 +394,7 @@
             </div>
 
             <!-- Message Input -->
-            <div class="p-3 bg-gray-50 border-t">
+            <div class="p-3 bg-white border-t">
                 <div class="flex items-center">
                     <button class="text-gray-500 hover:text-gray-700 mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
@@ -357,7 +413,7 @@
                             <line x1="15" y1="9" x2="15.01" y2="9"></line>
                         </svg>
                     </button>
-                    <input type="text" placeholder="Write a message..."
+                    <input type="text" placeholder="Tulis Pesan...."
                         class="flex-1 border-0 focus:ring-0 focus:outline-none text-sm px-4 py-2">
                     <button class="text-gray-500 hover:text-gray-700 mx-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
@@ -368,7 +424,7 @@
                             <line x1="8" y1="23" x2="16" y2="23"></line>
                         </svg>
                     </button>
-                    <button class="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2">
+                    <button class="bg-blue-900 hover:bg-blue-600 text-white rounded-full p-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="22" y1="2" x2="11" y2="13"></line>
