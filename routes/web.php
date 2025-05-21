@@ -60,6 +60,9 @@ Route::get('/admin/manajemen-akun/dosen-pembimbing/tambah', function () {
 Route::get('/dosen/dashboard', function () {
     return view('dosen.dashboard');
 });
+Route::get('/dosen/bimbingan-magang', function () {
+    return view('dosen.bimbingan_magang');
+});
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
