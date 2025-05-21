@@ -1,8 +1,8 @@
 <div class="bg-white p-6 rounded-2xl border border-gray-200">
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-lg font-bold text-gray-900">Experience</h2>
-        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-            Add
+        <h2 class="text-lg font-bold text-gray-900">Pengalaman</h2>
+        <button class="text-white bg-blue-900 px-5 cursor-pointer rounded-lg py-2 hover:bg-blue-950 text-sm font-medium">
+            Edit Pengalaman
         </button>
     </div>
 
