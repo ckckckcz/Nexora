@@ -72,7 +72,7 @@
             </a>
         </div>
         <div
-            class="absolute -bottom-2 sm:-bottom-3 -right-2 sm:-right-3 gradient-first-place-number text-white rounded-full w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center font-bold shadow-lg z-20">
+            class="absolute -bottom-2 sm:-bottom-3 -right-2 sm:-right-3 gradient-first-place-number text-white rounded-full w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center font-bold shadow-lg">
             1
         </div>
         <div class="absolute top-[-1px] sm:top-[-33px] text-yellow-500 text-4xl w-16 h-16 flex items-center justify-center z-20"

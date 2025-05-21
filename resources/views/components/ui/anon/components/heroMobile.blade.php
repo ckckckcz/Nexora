@@ -1,5 +1,5 @@
 <div class="overflow-x-auto scrollbar-none snap-x snap-mandatory">
-    <div class="min-w-[768px] grid grid-cols-5 gap-4 sm:gap-10 w-full items-end">
+    <div class="min-w-[768px] grid grid-cols-5 gap-20 w-full items-end">
       <!-- Card 1 -->
       <div class="bg-gray-50 border border-gray-200 shadow-sm w-[155px] text-black rounded-2xl pl-4 pr-4 pt-4 flex flex-col justify-between items-center h-full relative">
         <div class="text-center text-xs sm:text-sm leading-tight">
@@ -12,10 +12,12 @@
                class="object-contain w-full h-full" />
         </div>
         <div
-            class="absolute bottom-1 right-1 sm:-bottom-3 sm:-right-3 gradient-first-place-number text-white rounded-full w-6 h-6 sm:w-12 sm:h-12 flex items-center justify-center font-semibold text-xs sm:text-base shadow-lg z-20 bg-opacity-90">
+            class="absolute bottom-1 right-1 sm:-bottom-3 sm:-right-3 gradient-first-place-number text-white rounded-full w-6 h-6 sm:w-12 sm:h-12 flex items-center justify-center font-semibold text-xs sm:text-base shadow-lg z-20 bg-opacity-90"
+            style="background: linear-gradient(to bottom right, #ffb300, #ff8f00)"
+            >
             1
         </div>
-        <div class="absolute top-[-8px] sm:top-[-33px] text-yellow-500 text-3xl sm:text-4xl w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center z-20"
+        <div class="absolute top-[-1px] text-yellow-500 text-sm z-50 flex items-center justify-center "
             style="left: 50%; transform: translateX(-50%); display: inline-block;">
             <i class="fas fa-crown"></i>
         </div>
@@ -33,7 +35,8 @@
                class="object-contain w-full h-full" />
         </div>
         <div
-            class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-second-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90">
+            class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-second-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90"
+            style="background: linear-gradient(to bottom right, #78909c, #455a64);">
             2
         </div>
       </div>
@@ -50,7 +53,8 @@
                class="object-contain w-full" />
         </div>
         <div
-            class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90">
+            class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90"
+            style="background: linear-gradient(to bottom right, #78909c, #455a64);">
             3
         </div>
       </div>
@@ -67,7 +71,9 @@
                class="object-contain w-full h-full" />
         </div>
         <div
-            class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90">
+            class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90"
+            style="background: linear-gradient(to bottom right, #ff5722, #d84315);"
+            >
             4
         </div>
       </div>
@@ -84,7 +90,9 @@
                class="object-contain w-full h-full" />
         </div>
         <div
-            class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90">
+            class="absolute bottom-1 right-1 sm:-bottom-2 sm:-right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-semibold text-xs sm:text-sm shadow-md z-20 bg-opacity-90"
+            style="background: linear-gradient(to bottom right, #ff5722, #d84315);"
+>
             5
         </div>
       </div>
