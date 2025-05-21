@@ -95,19 +95,19 @@
                 <div x-show="open" x-transition:enter="transition ease-out duration-100 border"
                     x-transition:enter-start="transform opacity-0 scale-95"
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
-                    <a href="#"
+                    <a href="/admin/skema-magang"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Skema Magang</span>
                     </a>
-                    <a href="#"
+                    <a href="/admin/program-studi"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Program Studi</span>
                     </a>
-                    <a href="#"
+                    <a href="/admin/lowongan-magang"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Lowongan Magang</span>
                     </a>
-                    <a href="#"
+                    <a href="/admin/bimbingan-magang"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Bimbingan Magang</span>
                     </a>
