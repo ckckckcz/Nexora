@@ -8,7 +8,7 @@
 
 <div class="grid grid-cols-5 gap-4 w-full items-end team-grid mt-20">
     <div
-        class="bg-gray-50 team-card text-black border shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[350px] group relative">
+        class="bg-gray-50 team-card text-black border border-gray-100 shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[350px] group relative">
         <div class="text-center">
             <h3 class="font-medium mt-2">Tri Sukma Sarah</h3>
             <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div
-        class="bg-gray-50 team-card text-black border shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[400px] group relative">
+        class="bg-gray-50 team-card text-black border border-gray-100 shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[400px] group relative">
         <div class="text-center">
             <h3 class="font-medium mt-2">Galung Erlyan Tama</h3>
             <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
@@ -54,7 +54,7 @@
         </div>
     </div>
     <div
-        class="bg-gray-50 team-card text-black border shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-full group relative">
+        class="bg-gray-50 team-card text-black border border-gray-100 shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-full group relative">
         <div class="text-center">
             <h3 class="font-medium mt-2">Riovaldo Alfiyan Fahmi Rahman</h3>
             <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
@@ -81,7 +81,7 @@
         </div>
     </div>
     <div
-        class="bg-gray-50 team-card text-black border shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[400px] group relative">
+        class="bg-gray-50 team-card text-black border border-gray-100 shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[400px] group relative">
         <div class="text-center">
             <h3 class="font-medium mt-2">Candra</h3>
             <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
@@ -104,7 +104,7 @@
         </div>
     </div>
     <div
-        class="bg-gray-50 team-card text-black border shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[350px] group relative">
+        class="bg-gray-50 team-card text-black border border-gray-100 shadow-md rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[350px] group relative">
         <div class="text-center">
             <h3 class="font-medium mt-2">Tri Sukma Sarah</h3>
             <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
