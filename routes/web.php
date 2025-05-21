@@ -4,6 +4,9 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
+
+    });
+
     Route::get('/', function () {
         return view('landing');
     });
@@ -35,7 +38,7 @@ Route::middleware([\App\Http\Middleware\App::class])->group(function () {
     Route::get('/admin/manajemen-akun/dosen-pembimbing/tambah', function () {
         return view('admin.function.dosen.tambah');
     });
-});
+
 
 
 
