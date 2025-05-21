@@ -64,7 +64,7 @@ Route::get('/admin/laporan', function() {
 Route::get('/dosen/dashboard', function () {
     return view('dosen.dashboard');
 });
-Route::get('/dosen/bimbingan-magang', function () {
+Route::get('/dosen/magang/bimbingan-magang', function () {
     return view('dosen.bimbingan_magang');
 });
 

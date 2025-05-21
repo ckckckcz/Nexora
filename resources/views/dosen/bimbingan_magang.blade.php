@@ -1,296 +1,382 @@
 @extends('layouts.dosen')
 @section('dosen')
-    <div class="min-h-screen bg-white flex">
-        <!-- Left Sidebar - Conversation List -->
-        <div class="w-80 border-r border-gray-200 flex flex-col">
-            <!-- Header -->
-            <div class="p-4 border-b border-gray-200 flex items-center justify-between">
-                <h2 class="text-black font-medium text-lg">Inbox <span class="text-xs bg-white text-gray-300 rounded-full px-2 py-0.5 ml-1">(3)</span></h2>
-                <div class="h-8 w-8 bg-cyan-500 rounded-full flex items-center justify-center text-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+    <div class="bg-gray-50 flex">
+        <!-- Left Sidebar -->
+        <div class="w-80 border-r h-[920px] bg-gray-50 flex flex-col">
+            <!-- Chat Header -->
+            <div class="p-4 flex justify-between items-center border-b">
+                <h1 class="text-xl font-semibold">Chat</h1>
+                <button class="text-blue-500 p-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M5 12h14"></path>
                     </svg>
-                </div>
+                </button>
             </div>
-            
-            <!-- Search -->
-            <div class="p-3">
+
+            <!-- Search Bar -->
+            <div class="p-3 border-b">
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
                         </svg>
                     </div>
-                    <input type="text" placeholder="Find a conversation" class="bg-white text-sm text-gray-300 rounded-md pl-10 pr-4 py-2 w-full focus:outline-none focus:ring-1 focus:ring-gray-700">
+                    <input type="text" placeholder="Search"
+                        class="pl-10 pr-4 py-2 w-full bg-gray-100 rounded-md text-sm focus:outline-none">
                 </div>
             </div>
-            
-            <!-- Conversation List -->
+
+            <!-- Archived Section -->
+            <div class="p-3 flex justify-between items-center hover:bg-gray-100 cursor-pointer">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-3" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                    <span class="text-gray-700">Archived</span>
+                </div>
+                <span class="text-gray-500 text-sm">2</span>
+            </div>
+
+            <!-- Chat List -->
             <div class="flex-1 overflow-y-auto">
-                <!-- Amazon -->
-                <div class="flex items-start p-3 hover:bg-white cursor-pointer border-l-2 border-cyan-500">
-                    <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0">
-                        <span class="text-black font-bold">A</span>
+                <!-- Ronald Chat -->
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer border-l-4 border-blue-500">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                            <span>R</span>
+                        </div>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="text-black font-medium truncate">Amazon</h3>
-                            <span class="text-xs text-gray-400">11:32 AM</span>
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Ronald</h3>
+                            <span class="text-xs text-gray-500">10:00am</span>
                         </div>
-                        <p class="text-gray-400 text-sm truncate">Oh, let me check this out for a moment, thank you for your patience</p>
+                        <p class="text-sm text-gray-500 truncate">Meeting by 12pm</p>
+                    </div>
+                    <div class="ml-2 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                     </div>
                 </div>
-                
-                <!-- Microsoft -->
-                <div class="flex items-start p-3 hover:bg-white cursor-pointer">
-                    <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0">
-                        <span class="text-black font-bold">M</span>
+
+                <!-- Albert Chat -->
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-500">
+                            <span>A</span>
+                        </div>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="text-black font-medium truncate">Microsoft</h3>
-                            <span class="text-xs text-gray-400">10:12 AM</span>
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">10:00am</span>
                         </div>
-                        <p class="text-gray-400 text-sm truncate">I was to connect my account to a new device and could use a hand getting everything sync...</p>
+                        <p class="text-sm text-gray-500 truncate">Hello david, what are today's tasks?</p>
                     </div>
-                    <div class="ml-2 h-5 w-5 bg-cyan-500 rounded-full flex items-center justify-center text-xs text-black">2</div>
+                    <div class="ml-2 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
                 </div>
-                
-                <!-- Apple -->
-                <div class="flex items-start p-3 hover:bg-white cursor-pointer">
-                    <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0">
-                        <span class="text-black font-bold">A</span>
+
+                <!-- Robert Chats -->
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                            <span>R</span>
+                        </div>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="text-black font-medium truncate">Apple</h3>
-                            <span class="text-xs text-gray-400">10:04 AM</span>
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
+                            <span class="text-xs text-gray-500">Jan 30</span>
                         </div>
-                        <p class="text-gray-400 text-sm truncate">Got stuck during setup and figured you might be able to walk me through the last step...</p>
+                        <p class="text-sm text-gray-500 truncate">Have a great day then</p>
                     </div>
-                    <div class="ml-2 h-5 w-5 bg-cyan-500 rounded-full flex items-center justify-center text-xs text-black">1</div>
+                    <div class="ml-2 flex items-center">
+                        <span
+                            class="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                    </div>
                 </div>
-                
-                <!-- HP -->
-                <div class="flex items-start p-3 hover:bg-white cursor-pointer">
-                    <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0">
-                        <span class="text-black font-bold">HP</span>
+
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">
+                            <span>R</span>
+                        </div>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="text-black font-medium truncate">HP</h3>
-                            <span class="text-xs text-gray-400">10:01 AM</span>
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
+                            <span class="text-xs text-gray-500">Jan 30</span>
                         </div>
-                        <p class="text-gray-400 text-sm truncate">Everything was working great until today—now the screen won't load properly and I'd love s...</p>
+                        <p class="text-sm text-gray-500 truncate">Hey there, any update?</p>
                     </div>
-                    <div class="ml-2 h-5 w-5 bg-cyan-500 rounded-full flex items-center justify-center text-xs text-black">1</div>
+                    <div class="ml-2 flex items-center">
+                        <span
+                            class="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                    </div>
                 </div>
-                
-                <!-- More conversations (Intel, LG, Google, etc.) -->
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="flex items-start p-3 hover:bg-white cursor-pointer">
-                        <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0">
-                            <span class="text-black font-bold">{{ ['I', 'L', 'G', 'A', 'H'][$i] }}</span>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex justify-between items-baseline">
-                                <h3 class="text-black font-medium truncate">{{ ['Intel', 'LG', 'Google', 'Asus', 'Huawei'][$i] }}</h3>
-                                <span class="text-xs text-gray-400">{{ ['08:52', '06:37', '06:09', '07:32', '06:32'][$i] }} AM</span>
-                            </div>
-                            <p class="text-gray-400 text-sm truncate"></p>
+
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
+                            <span>R</span>
                         </div>
                     </div>
-                @endfor
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
+                            <span class="text-xs text-gray-500">Jan 30</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">We'll have the usability test run tomorrow</p>
+                    </div>
+                    <div class="ml-2 flex items-center">
+                        <span
+                            class="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                    </div>
+                </div>
+
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                            <span>R</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
+                            <span class="text-xs text-gray-500">Jan 30</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">All components are now available for use</p>
+                    </div>
+                    <div class="ml-2 flex items-center">
+                        <span
+                            class="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                    </div>
+                </div>
+
+                <!-- Albert Chats -->
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
+                    </div>
+                </div>
+
+                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
+                            <span class="text-xs text-gray-500">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col">
-            <!-- Header -->
-            <div class="bg-white border-b border-gray-800 p-4 flex items-center">
+
+        <!-- Main Chat Area -->
+        <div class="flex-1 flex flex-col h-[920px]">
+            <!-- Chat Header -->
+            <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
                 <div class="flex items-center">
-                    <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3">
-                        <span class="text-black font-bold">A</span>
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 mr-3">
+                        <span>R</span>
                     </div>
                     <div>
-                        <h3 class="text-black font-medium">Amazon</h3>
-                        <p class="text-xs text-green-500">Online</p>
+                        <h2 class="text-sm font-medium">Ronald</h2>
+                        <p class="text-xs text-gray-500">Last seen at 12:02am</p>
                     </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                        </svg>
+                    </button>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                            <circle cx="5" cy="12" r="1"></circle>
+                        </svg>
+                    </button>
                 </div>
             </div>
-            
-            <!-- Call History -->
-            <div class="flex-1 overflow-y-auto bg-white p-4">
-                <!-- Call Entry -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-white flex items-center justify-center mr-2">
-                                <span class="text-black font-bold">A</span>
-                            </div>
-                            <div>
-                                <h4 class="text-black">Amazon</h4>
-                                <p class="text-xs text-gray-400">Incoming Call</p>
-                            </div>
+
+            <!-- Chat Messages -->
+            <div class="flex-1 overflow-y-auto p-4 bg-gray-50">
+                <!-- Date Separator -->
+                <div class="flex justify-center mb-4">
+                    <div class="bg-blue-100 text-blue-800 text-xs px-4 py-1 rounded-full">Today</div>
+                </div>
+
+                <!-- Received Message with Avatar -->
+                <div class="flex mb-4">
+                    <div class="flex-shrink-0 mr-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                            <span class="text-xs">R</span>
                         </div>
-                        <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-red-500 flex items-center justify-center text-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                </svg>
-                            </div>
+                    </div>
+                    <div class="max-w-md">
+                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
+                            <p class="text-sm text-gray-800">Good morning Perzival, the design has been completed and is
+                                ready for review</p>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Active Call -->
-                <div class="bg-white rounded-lg p-4 mb-4">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center">
-                            <div class="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3">
-                                <span class="text-black font-bold">A</span>
-                            </div>
-                            <div>
-                                <h3 class="text-black">Amazon</h3>
-                                <p class="text-xs text-gray-400">02:43</p>
-                            </div>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button class="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center text-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <button class="h-8 w-8 rounded-full bg-red-500 flex items-center justify-center text-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                </svg>
-                            </button>
+
+                <!-- Received Message with Avatar (Repeated) -->
+                <div class="flex mb-4">
+                    <div class="flex-shrink-0 mr-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                            <span class="text-xs">R</span>
                         </div>
                     </div>
-                    
-                    <!-- Audio Waveform -->
-                    <div class="h-8 flex items-center justify-center space-x-1 mb-4">
-                        @for ($i = 0; $i < 30; $i++)
-                            <div class="w-1 bg-gray-600 rounded-full" style="height: {{ rand(4, 20) }}px"></div>
-                        @endfor
-                    </div>
-                </div>
-                
-                <!-- Ended Call -->
-                <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center text-black mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="text-black">Call Ended | Last call: 5m 23s</h4>
-                            </div>
+                    <div class="max-w-md">
+                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
+                            <p class="text-sm text-gray-800">Good morning Perzival, the design has been completed and is
+                                ready for review</p>
                         </div>
                     </div>
                 </div>
-                
-                <!-- More Call History -->
-                @for ($i = 0; $i < 3; $i++)
-                    <div class="mb-4">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="flex items-center">
-                                <div class="h-8 w-8 rounded-full bg-red-500 flex items-center justify-center text-black mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+
+                <!-- Received Message with Image -->
+                <div class="flex mb-4">
+                    <div class="flex-shrink-0 mr-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                            <span class="text-xs">R</span>
+                        </div>
+                    </div>
+                    <div class="max-w-md">
+                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
+                            <div class="mb-2">
+                                <img src="{{ asset('images/chat-screenshot.png') }}" alt="Design Screenshot"
+                                    class="rounded-lg w-full h-auto">
+                            </div>
+                            <div class="flex justify-end">
+                                <span class="text-yellow-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                        fill="currentColor">
+                                        <path
+                                            d="M12 2c.2 0 .5.08.65.22l9.5 9.5c.4.4.4 1.03 0 1.42l-9.5 9.5c-.4.4-1.02.4-1.41 0l-9.5-9.5c-.4-.4-.4-1.03 0-1.42l9.5-9.5c.16-.14.36-.22.56-.22z" />
                                     </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-black">Incoming Call</h4>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">9:12 am</div>
+                    </div>
+                </div>
+
+                <!-- Audio Message -->
+                <div class="flex justify-end mb-4">
+                    <div class="max-w-md">
+                        <div class="bg-blue-500 rounded-lg p-3 text-white">
+                            <div class="flex items-center">
+                                <button class="mr-2 bg-gray-50 rounded-full p-1 text-blue-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                                <div class="flex-1">
+                                    <div class="w-full bg-blue-400 rounded-full h-1.5">
+                                        <div class="bg-gray-50 h-1.5 rounded-full w-3/4"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endfor
-                
-                <!-- Call Rating Dialog -->
-                <div class="bg-white rounded-lg p-4 mb-4 relative">
-                    <button class="absolute top-2 right-2 text-gray-400 hover:text-black">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                    <h3 class="text-black text-center mb-4">How Was The Audio Quality During The Last Call?</h3>
-                    <div class="flex justify-center space-x-2">
-                        @for ($i = 0; $i < 5; $i++)
-                            <button class="text-2xl {{ $i < 3 ? 'text-yellow-400' : 'text-gray-600' }}">★</button>
-                        @endfor
+                </div>
+
+                <!-- Sent Message -->
+                <div class="flex justify-end mb-4">
+                    <div class="max-w-md">
+                        <div class="bg-blue-500 rounded-lg p-3 text-white">
+                            <p class="text-sm">Great work Ronald, keep going 👍</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Message Input -->
-            <div class="bg-white p-4 border-t border-gray-100">
+            <div class="p-3 bg-gray-50 border-t">
                 <div class="flex items-center">
-                    <button class="text-gray-400 mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                    <button class="text-gray-500 hover:text-gray-700 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
                     </button>
-                    <input type="text" placeholder="Type a message..." class="bg-gray-200 text-gray-200 rounded-full py-2 px-4 flex-1 focus:outline-none focus:ring-1 focus:ring-gray-600">
-                    <button class="text-gray-400 ml-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <button class="text-gray-500 hover:text-gray-700 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </button>
+                    <input type="text" placeholder="Write a message..."
+                        class="flex-1 border-0 focus:ring-0 focus:outline-none text-sm px-4 py-2">
+                    <button class="text-gray-500 hover:text-gray-700 mx-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // You can add JavaScript for handling interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Example: Handle conversation selection
-            const conversations = document.querySelectorAll('.hover\\:bg-white');
-            conversations.forEach(conversation => {
-                conversation.addEventListener('click', function() {
-                    // Remove active class from all conversations
-                    conversations.forEach(c => c.classList.remove('border-l-2', 'border-cyan-500'));
-                    // Add active class to clicked conversation
-                    this.classList.add('border-l-2', 'border-cyan-500');
-                    
-                    // Here you would typically load the conversation data
-                    // For a real implementation, you'd make an AJAX call to your backend
-                });
-            });
-            
-            // Example: Handle close button on rating dialog
-            const closeButton = document.querySelector('.bg-white.rounded-lg.p-4.mb-4.relative button');
-            if (closeButton) {
-                closeButton.addEventListener('click', function() {
-                    this.closest('.bg-white.rounded-lg.p-4.mb-4.relative').style.display = 'none';
-                });
-            }
-            
-            // Example: Handle star rating
-            const stars = document.querySelectorAll('.flex.justify-center.space-x-2 button');
-            stars.forEach((star, index) => {
-                star.addEventListener('click', function() {
-                    // Reset all stars
-                    stars.forEach((s, i) => {
-                        s.classList.remove('text-yellow-400');
-                        s.classList.add('text-gray-600');
-                    });
-                    
-                    // Highlight stars up to the clicked one
-                    for (let i = 0; i <= index; i++) {
-                        stars[i].classList.remove('text-gray-600');
-                        stars[i].classList.add('text-yellow-400');
-                    }
-                    
-                    // Here you would typically send the rating to your backend
-                    // For a real implementation, you'd make an AJAX call
-                });
-            });
-        });
-    </script>
 @endsection
