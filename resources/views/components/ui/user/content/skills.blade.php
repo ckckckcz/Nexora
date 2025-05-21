@@ -5,15 +5,56 @@
             Tambah Skill
         </button>
     </div>
-    <div id="skills-list" class="mt-3 flex flex-wrap gap-2">
-        <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">React.js</span>
-        <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">Tailwind CSS</span>
-        <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">JavaScript</span>
-        <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">UI/UX Design</span>
-        <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">Figma</span>
-        <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">Framer</span>
-        <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">HTML/CSS</span>
-        <span class="px-3 py-1.5 text-sm bg-blue-100 rounded-lg text-blue-800 font-medium">+5 more</span>
+    <div id="skills-list" class="mt-3 flex flex-wrap space-x-2 space-y-5">
+        <div class="group relative inline-block">
+            <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">React.js</span>
+            <button onclick="removeSkill(1, this)"
+                class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                &times;
+            </button>
+        </div>
+        <div class="group relative inline-block">
+            <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">Tailwind CSS</span>
+            <button onclick="removeSkill(2, this)"
+                class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                &times;
+            </button>
+        </div>
+        <div class="group relative inline-block">
+            <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">JavaScript</span>
+            <button onclick="removeSkill(3, this)"
+                class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                &times;
+            </button>
+        </div>
+        <div class="group relative inline-block">
+            <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">UI/UX Design</span>
+            <button onclick="removeSkill(4, this)"
+                class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                &times;
+            </button>
+        </div>
+        <div class="group relative inline-block">
+            <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">Figma</span>
+            <button onclick="removeSkill(5, this)"
+                class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                &times;
+            </button>
+        </div>
+        <div class="group relative inline-block">
+            <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">Framer</span>
+            <button onclick="removeSkill(6, this)"
+                class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                &times;
+            </button>
+        </div>
+        <div class="group relative inline-block">
+            <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">HTML/CSS</span>
+            <button onclick="removeSkill(7, this)"
+                class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                &times;
+            </button>
+        </div>
     </div>
 
     <!-- Modal Tambah Skill -->
@@ -77,13 +118,19 @@
         const skill = skillInput.value.trim();
         if (skill) {
             const skillsList = document.getElementById('skills-list');
-            const newSkill = document.createElement('span');
-            newSkill.className = 'px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium';
-            newSkill.textContent = skill;
-            skillsList.insertBefore(newSkill, skillsList.lastElementChild); // Tambah sebelum "+5 more"
+            const newSkillDiv = document.createElement('div');
+            newSkillDiv.className = 'group relative inline-block';
+            newSkillDiv.innerHTML = `
+                <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">${skill}</span>
+                <button onclick="removeSkill(null, this)"
+                    class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    &times;
+                </button>
+            `;
+            skillsList.insertBefore(newSkillDiv, skillsList.lastElementChild); // Tambah sebelum "+5 more"
             skillInput.value = ''; // Reset input
             toggleModal(); // Tutup modal
-            // Kirim data ke server (opsional, tergantung backend)
+            // Kirim data ke server
             fetch('/skills/store', {
                 method: 'POST',
                 headers: {
@@ -96,6 +143,32 @@
             }).catch(error => console.error('Error:', error));
         }
     }
+
+    function removeSkill(id, element) {
+        if (confirm('Apakah Anda yakin ingin menghapus skill ini?')) {
+            // Hapus elemen dari DOM
+            element.parentElement.remove();
+            // Jika skill memiliki ID (dari database), kirim request DELETE
+            if (id) {
+                fetch(`/skills/delete/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    }
+                }).then(response => {
+                    if (!response.ok) throw new Error('Gagal menghapus skill');
+                }).catch(error => console.error('Error:', error));
+            }
+        }
+    }
+
+    // Validasi input skill
+    document.getElementById('skill-input').addEventListener('input', function () {
+        if (this.value.length > 50) {
+            this.value = this.value.slice(0, 50);
+            alert('Skill terlalu panjang (maks 50 karakter).');
+        }
+    });
 </script>
 
 @if(isset($skills))
@@ -103,10 +176,16 @@
         // Tambahkan skill dari backend jika ada
         const skillsList = document.getElementById('skills-list');
         @foreach($skills as $skill)
-            const newSkill = document.createElement('span');
-            newSkill.className = 'px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium';
-            newSkill.textContent = '{{ $skill->name }}';
-            skillsList.insertBefore(newSkill, skillsList.lastElementChild);
+            const newSkillDiv = document.createElement('div');
+            newSkillDiv.className = 'group relative inline-block';
+            newSkillDiv.innerHTML = `
+                        <span class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg text-gray-800 font-medium">${'{{ $skill->name }}'}</span>
+                        <button onclick="removeSkill({{ $skill->id }}, this)"
+                            class="absolute top-0 right-0 h-5 w-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            &times;
+                        </button>
+                    `;
+            skillsList.insertBefore(newSkillDiv, skillsList.lastElementChild);
         @endforeach
     </script>
 @endif
