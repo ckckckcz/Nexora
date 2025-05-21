@@ -13,7 +13,7 @@
                 @csrf
                 @method('PATCH')
                 <!-- Profile Header -->
-                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 ">
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
                     Edit Profile
                 </h1>
                 <div class="flex mt-5 flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
@@ -57,6 +57,46 @@
                         <input type="text" id="location" name="location" value="Indonesia, Malang"
                             class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Masukkan lokasi">
+                    </div>
+                    <!-- Email and Phone -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" name="email" value="riovaldo@example.com"
+                                class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="Masukkan email">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                            <input type="tel" id="phone" name="phone" value="+6281234567890"
+                                class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="Masukkan nomor telepon">
+                        </div>
+                    </div>
+                    <!-- Social Media -->
+                    <div>
+                        <label for="linkedin" class="block text-sm font-medium text-gray-700">LinkedIn</label>
+                        <input type="url" id="linkedin" name="linkedin" value="https://linkedin.com/in/riovaldo"
+                            class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Masukkan link LinkedIn">
+                    </div>
+                    <div>
+                        <label for="twitter" class="block text-sm font-medium text-gray-700">Twitter</label>
+                        <input type="url" id="twitter" name="twitter" value="https://twitter.com/riovaldo"
+                            class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Masukkan link Twitter">
+                    </div>
+                    <div>
+                        <label for="github" class="block text-sm font-medium text-gray-700">GitHub</label>
+                        <input type="url" id="github" name="github" value="https://github.com/riovaldo"
+                            class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Masukkan link GitHub">
+                    </div>
+                    <div>
+                        <label for="instagram" class="block text-sm font-medium text-gray-700">Instagram</label>
+                        <input type="url" id="instagram" name="instagram" value="https://instagram.com/riovaldo"
+                            class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Masukkan link Instagram">
                     </div>
                 </div>
 
