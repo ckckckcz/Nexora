@@ -7,7 +7,7 @@
                         <svg class="w-6 h-6 text-[#DEFC79] mr-1" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" />
                         </svg>
-                        <span>Hirings</span>
+                        <span>Nexora</span>
                     </div>
                 </a>
                 <p class="text-gray-500 text-sm mb-4">
@@ -88,7 +88,7 @@
         </div>
 
         <div class="mt-12 pt-8 border-t border-gray-200 text-center">
-            <p class="text-gray-500 text-sm">© {{ date('Y') }} Hirings. All rights reserved.</p>
+            <p class="text-gray-500 text-sm">© {{ date('Y') }} Nexora. All rights reserved.</p>
         </div>
     </div>
 </footer>

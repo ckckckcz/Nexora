@@ -9,7 +9,7 @@
                 <svg class="w-6 h-6 text-[#DEFC79] mr-1" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" />
                 </svg>
-                <span>Hirings</span>
+                <span>Nexora</span>
             </a>
 
             <!-- Desktop Navigation -->
