@@ -55,7 +55,7 @@
                     <a href="/admin/manajemen-skema-magang/tambah">
                         <button id="add-skema-btn"
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
-                            <span id="plus-icon"></span>
+                            <i class="fas fa-plus mr-2"></i>
                             <span>Tambah Skema Magang</span>
                         </button>
                     </a>
@@ -83,20 +83,58 @@
                                     Tanggal Selesai
                                 </th>
                                 <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
-                                    Dibuat Pada
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">
-                                    Diperbarui Pada
-                                </th>
-                                <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Aksi
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="skema-table-body" class="bg-white divide-y divide-gray-200"></tbody>
+                        <tbody id="skema-table-body" class="bg-white divide-y divide-gray-200">
+                            <?php
+                            // Data dummy untuk skema magang
+                            $skemas = [
+                                (object) [
+                                    'id_skema_magang' => 1,
+                                    'nama_skema_magang' => 'PKL 3 Bulan',
+                                    'tanggal_mulai' => '2025-06-01',
+                                    'tanggal_selesai' => '2025-08-31',
+                                ],
+                                (object) [
+                                    'id_skema_magang' => 2,
+                                    'nama_skema_magang' => 'MBKM - Mandiri 6 Bulan',
+                                    'tanggal_mulai' => '2025-07-01',
+                                    'tanggal_selesai' => '2025-12-31',
+                                ],
+                                (object) [
+                                    'id_skema_magang' => 3,
+                                    'nama_skema_magang' => 'MBKM - MSIB 6 Bulan',
+                                    'tanggal_mulai' => '2025-08-01',
+                                    'tanggal_selesai' => '2026-01-31',
+                                ],
+                                (object) [
+                                    'id_skema_magang' => 4,
+                                    'nama_skema_magang' => 'MBKM - Kewirausahaan',
+                                    'tanggal_mulai' => '2025-09-01',
+                                    'tanggal_selesai' => '2026-02-28',
+                                ],
+                            ];
+                            ?>
+                            @foreach ($skemas as $skema)
+                                <tr>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $skema->id_skema_magang }}</td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $skema->nama_skema_magang }}</td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">{{ date('d-m-Y', strtotime($skema->tanggal_mulai)) }}</td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">{{ date('d-m-Y', strtotime($skema->tanggal_selesai)) }}</td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="/admin/manajemen-skema-magang/edit/{{ $skema->id_skema_magang }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <form action="/admin/manajemen-skema-magang/hapus/{{ $skema->id_skema_magang }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
 
@@ -113,7 +151,7 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Menampilkan <span id="start-index" class="font-medium">1</span> sampai <span id="end-index"
-                                    class="font-medium"></span> dari <span id="total-skema" class="font-medium"></span>
+                                    class="font-medium">{{ count($skemas) }}</span> dari <span id="total-skema" class="font-medium">{{ count($skemas) }}</span>
                                 data
                             </p>
                         </div>
