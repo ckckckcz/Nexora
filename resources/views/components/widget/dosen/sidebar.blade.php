@@ -30,7 +30,7 @@
         <!-- Navigation -->
         <nav class="flex-1 overflow-y-auto py-2 px-3 space-y-1" id="nav-container">
             <!-- Dashboard -->
-            <a href="/admin/dashboard"
+            <a href="/dosen/dashboard"
                 class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('dashboard') ? 'bg-[#DEFC79] text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('dashboard') ?: 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
@@ -52,8 +52,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
-                        <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Manajemen
-                            Akun</span>
+                        <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Mahasiswa</span>
                     </div>
                     <svg x-bind:class="open ? 'transform rotate-89' : ''"
                         class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-transform duration-200 flex-shrink-0 sidebar-arrow"
@@ -64,13 +63,13 @@
                 <div x-show="open" x-transition:enter="transition ease-out duration-100"
                     x-transition:enter-start="transform opacity-0 scale-95"
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
-                    <a href="/admin/manajemen-akun/mahasiswa"
+                    <a href="/dosen/mahasiswa/profile"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
-                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Mahasiswa</span>
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Profile Mahasiswa</span>
                     </a>
-                    <a href="/admin/manajemen-akun/dosen-pembimbing"
+                    <a href="/dosen/mahasiswa/log-aktivitas"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
-                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Dosen Pembimbing</span>
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Log Aktivitas</span>
                     </a>
                 </div>
             </div>
@@ -95,50 +94,18 @@
                 <div x-show="open" x-transition:enter="transition ease-out duration-100 border"
                     x-transition:enter-start="transform opacity-0 scale-95"
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
-                    <a href="/admin/skema-magang"
+                    <a href="/dosen/magang/rekomendasi-magang"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
-                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Skema Magang</span>
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Rekomendasi Magang</span>
                     </a>
-                    <a href="/admin/program-studi"
-                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
-                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Program Studi</span>
-                    </a>
-                    <a href="/admin/lowongan-magang"
-                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
-                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Lowongan Magang</span>
-                    </a>
-                    <a href="/admin/bimbingan-magang"
+                    <a href="/dosen/magang/bimbingan-magang"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Bimbingan Magang</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Upload Surat Tugas -->
-            <a href="#"
-                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('assignment.letters') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('assignment.letters') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                </svg>
-                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Pengajuan Magang</span>
-            </a>
-
-            <!-- Sistem Rekomendasi -->
-            <a href="#"
-                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('recommendation.settings') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
-                <svg class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd"
-                        d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
-                        clip-rule="evenodd" />
-                </svg>
-                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Sistem Rekomendasi</span>
-            </a>
-
-            <!-- Statistik dan Laporan -->
+            <!-- Laporan -->
             <a href="#"
                 class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('statistics.reports') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +114,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
-                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Statistik & Laporan</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Laporan</span>
             </a>
         </nav>
 

@@ -138,7 +138,7 @@
                 <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Sistem Rekomendasi</span>
             </a>
 
-            <!-- Statistik dan Laporan -->
+            <!-- Laporan -->
             <a href="#"
                 class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('statistics.reports') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +147,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
-                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Statistik & Laporan</span>
+                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Laporan</span>
             </a>
         </nav>
 
