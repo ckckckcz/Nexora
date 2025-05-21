@@ -27,7 +27,7 @@
         </div>
         <div
             class="absolute -bottom-2 -right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold shadow-md z-20">
-            3
+            5
         </div>
     </div>
     <div
@@ -100,7 +100,7 @@
         </div>
         <div
             class="absolute -bottom-2 -right-2 gradient-second-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold shadow-md z-20">
-            2
+            3
         </div>
     </div>
     <div
@@ -123,7 +123,7 @@
         </div>
         <div
             class="absolute -bottom-2 -right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold shadow-md z-20">
-            3
+            4
         </div>
     </div>
 </div>
