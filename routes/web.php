@@ -74,6 +74,9 @@ Route::get('/admin/skema-magang/tambah', function () {
     return view('admin.function.skema_magang.tambah');
 });
 
+Route::get('/admin/skema-magang/edit', function () {
+    return view('admin.function.skema_magang.edit');
+});
 Route::get('/admin/bimbingan-magang/edit', function () {
     return view('admin.function.bimbingan_magang.edit');
 });
