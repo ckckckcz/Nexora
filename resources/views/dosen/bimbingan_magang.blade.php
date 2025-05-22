@@ -375,8 +375,8 @@
                     <div class="max-w-md">
                         <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
                             <div class="mb-2">
-                                <img src="https://www.learnworlds.com/app/uploads/2025/02/user-preferences.webp" alt="Design Screenshot"
-                                    class="rounded-lg w-full h-auto">
+                                <img src="https://www.learnworlds.com/app/uploads/2025/02/user-preferences.webp"
+                                    alt="Design Screenshot" class="rounded-lg w-full h-auto">
                             </div>
                         </div>
                         <div class="text-xs text-gray-500 mt-1">9:12 am</div>
@@ -394,37 +394,55 @@
             </div>
 
             <!-- Message Input -->
-            <div class="p-3 bg-white border-t">
-                <div class="flex items-center">
-                    <button class="text-gray-500 hover:text-gray-700 mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="17 8 12 3 7 8"></polyline>
-                            <line x1="12" y1="3" x2="12" y2="15"></line>
-                        </svg>
-                    </button>
-                    <button class="text-gray-500 hover:text-gray-700 mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                        </svg>
-                    </button>
-                    <input type="text" placeholder="Tulis Pesan...."
-                        class="flex-1 border-0 focus:ring-0 focus:outline-none text-sm px-4 py-2">
-                    <button class="text-gray-500 hover:text-gray-700 mx-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
-                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                            <line x1="12" y1="19" x2="12" y2="23"></line>
-                            <line x1="8" y1="23" x2="16" y2="23"></line>
-                        </svg>
-                    </button>
-                    <button class="bg-blue-900 hover:bg-blue-600 text-white rounded-full p-2">
+            <div class="p-4 bg-white border-t shadow-sm">
+                <div
+                    class="flex items-center bg-gray-50 rounded-2xl py-3 px-3 border border-gray-200 hover:border-blue-300 transition-all duration-300">
+                    <!-- Attachment Button with Tooltip -->
+                    <div class="relative group">
+                        <button
+                            class="text-gray-500 hover:text-blue-500 p-2 rounded-full hover:bg-blue-50 transition-colors duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </button>
+                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block">
+                            <div class="bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+                                Lampirkan file
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Upload Button with Tooltip -->
+                    <div class="relative group">
+                        <button
+                            class="text-gray-500 hover:text-blue-500 p-2 rounded-full hover:bg-blue-50 transition-colors duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </button>
+                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block">
+                            <div class="bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+                                Kirim gambar
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Field -->
+                    <div class="flex-1 mx-2">
+                        <input type="text" placeholder="Tulis Pesan..." id="messageInput"
+                            class="w-full bg-transparent border-0 focus:ring-0 focus:outline-none text-sm py-2 placeholder-gray-500"
+                            autocomplete="off">
+                    </div>
+
+                    <!-- Send Button with Animation -->
+                    <button id="sendButton"
+                        class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -432,7 +450,50 @@
                         </svg>
                     </button>
                 </div>
+
+                <!-- Character Counter and Typing Indicator -->
+                <div class="flex justify-between text-xs text-gray-500 mt-1 px-4">
+                    <div id="typingIndicator" class="hidden">
+                        <span class="italic">Seseorang sedang mengetik...</span>
+                    </div>
+                    <div id="charCounter" class="hidden">
+                        <span id="currentChars">0</span>/<span id="maxChars">500</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        // Show character counter when input is focused
+        document.getElementById('messageInput').addEventListener('focus', function () {
+            document.getElementById('charCounter').classList.remove('hidden');
+        });
+
+        // Hide character counter when input is blurred and empty
+        document.getElementById('messageInput').addEventListener('blur', function () {
+            if (this.value.length === 0) {
+                document.getElementById('charCounter').classList.add('hidden');
+            }
+        });
+
+        // Update character count
+        document.getElementById('messageInput').addEventListener('input', function () {
+            const currentLength = this.value.length;
+            const maxLength = 500;
+            document.getElementById('currentChars').textContent = currentLength;
+
+            // Change color when approaching limit
+            if (currentLength > maxLength * 0.8) {
+                document.getElementById('charCounter').classList.add('text-yellow-500');
+            } else {
+                document.getElementById('charCounter').classList.remove('text-yellow-500');
+            }
+
+            if (currentLength > maxLength * 0.95) {
+                document.getElementById('charCounter').classList.add('text-red-500');
+            } else {
+                document.getElementById('charCounter').classList.remove('text-red-500');
+            }
+        });
+    </script>
 @endsection
