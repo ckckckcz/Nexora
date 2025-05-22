@@ -124,8 +124,8 @@
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $programStudi->kode_program_studi }}</td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">{{ $programStudi->nama_program_studi }}</td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/manajemen-program-studi/edit/{{ $programStudi->id_program_studi }}" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/manajemen-program-studi/hapus/{{ $programStudi->id_program_studi }}" method="POST" class="inline">
+                                        <a href="/admin/program-studi/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <form action="/admin/program-studi/hapus" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>

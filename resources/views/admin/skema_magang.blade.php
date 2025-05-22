@@ -125,8 +125,8 @@
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">{{ date('d-m-Y', strtotime($skema->tanggal_mulai)) }}</td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">{{ date('d-m-Y', strtotime($skema->tanggal_selesai)) }}</td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/manajemen-skema-magang/edit/{{ $skema->id_skema_magang }}" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/manajemen-skema-magang/hapus/{{ $skema->id_skema_magang }}" method="POST" class="inline">
+                                        <a href="/admin/manajemen-skema-magang/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <form action="/admin/manajemen-skema-magang/hapus" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>

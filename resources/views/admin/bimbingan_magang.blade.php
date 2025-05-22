@@ -134,8 +134,8 @@
                                         </span>
                                     </td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/manajemen-bimbingan-magang/edit/{{ $bimbingan->id_bimbingan }}" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/manajemen-bimbingan-magang/hapus/{{ $bimbingan->id_bimbingan }}" method="POST" class="inline">
+                                        <a href="/admin/bimbingan-magang/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <form action="/admin/bimbingan-magang/hapus" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
