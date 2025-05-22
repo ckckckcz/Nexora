@@ -70,6 +70,15 @@ Route::get('/admin/program-studi/tambah', function () {
 Route::get('/admin/lowongan-magang/tambah', function () {
     return view('admin.function.lowongan_magang.tambah');
 });
+Route::get('/admin/bimbingan-magang/edit', function () {
+    return view('admin.function.bimbingan_magang.edit');
+});
+Route::get('/admin/program-studi/edit', function () {
+    return view('admin.function.program_studi.edit');
+});
+Route::get('/admin/lowongan-magang/edit', function () {
+    return view('admin.function.lowongan_magang.edit');
+});
 
 Route::get('/admin/laporan', function() {
     return view('admin.laporan');
