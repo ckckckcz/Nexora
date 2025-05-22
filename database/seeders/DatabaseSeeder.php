@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\EvaluasiMagang;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +17,17 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MahasiswaSeeder::class,
             DosenSeeder::class,
+            SkemaMagangSeeder::class,
+            bimbinganMagangSeeder::class,
+            EvaluasiMagangSeeder::class,
+            PengajuanMagangSeeder::class,
+            PreferensiMahasiswaSeeder::class,
+            FeedbackMagangSeeder::class,
+            HasilRekomendasiSeeder::class,
+            LowonganMagangSeeder::class,
+            KriteriaSeeder::class,
+            PenilaianBobotSeeder::class,
+            logAktivitasMagangSeeder::class,
         ]);
     }
 }
