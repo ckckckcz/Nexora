@@ -50,7 +50,7 @@
           </svg>
           Edit Profile
         </a>
-        <a href="#"
+        <a href="/rekomendasi-magang"
           class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
