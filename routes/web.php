@@ -70,6 +70,10 @@ Route::get('/admin/program-studi/tambah', function () {
 Route::get('/admin/lowongan-magang/tambah', function () {
     return view('admin.function.lowongan_magang.tambah');
 });
+Route::get('/admin/skema-magang/tambah', function () {
+    return view('admin.function.skema_magang.tambah');
+});
+
 Route::get('/admin/bimbingan-magang/edit', function () {
     return view('admin.function.bimbingan_magang.edit');
 });
