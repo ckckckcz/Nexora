@@ -36,7 +36,7 @@
             <!-- Step 1: Pilih Kriteria -->
             <div id="step-1" class="step-content">
                 <header class="mb-8 text-left">
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Pilih Kriteria Magang Anda</h1>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Pilih Kriteria Magang Anda</h1 Inge
                     <p class="text-gray-600">
                         Pilih tepat 5 kriteria yang sesuai dengan preferensi magang Anda. Semua kriteria wajib dipilih untuk melanjutkan.
                     </p>
@@ -126,12 +126,23 @@
                 <header class="mb-8 text-left">
                     <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Hasil Rekomendasi Magang</h1>
                     <p class="text-gray-600">
-                        Berikut adalah beberapa rekomendasi magang berdasarkan kriteria dan bobot yang Anda pilih.
+                        Berikut adalah rekomendasi magang berdasarkan kriteria dan bobot yang Anda pilih.
                     </p>
                 </header>
 
-                <div id="recommendation-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Cards will be populated dynamically -->
+                <div id="result-card" class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">PT Teknologi Maju</h2>
+                    <p class="text-gray-600 mb-4">
+                        Perusahaan teknologi inovatif yang berfokus pada pengembangan aplikasi berbasis AI. Berlokasi di Jakarta, menawarkan budaya kerja fleksibel, proyek inovatif, dan kesempatan belajar yang luas.
+                    </p>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Kriteria Sesuai:</h3>
+                        <ul id="result-criteria" class="list-disc list-inside text-gray-600"></ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Bobot Kriteria:</h3>
+                        <ul id="result-weights" class="list-disc list-inside text-gray-600"></ul>
+                    </div>
                 </div>
 
                 <div class="mt-8 text-center">
@@ -161,7 +172,8 @@
         const backToStep1Button = document.getElementById('back-to-step-1');
         const submitWeightsButton = document.getElementById('submit-weights');
         const backToStep1FromResultButton = document.getElementById('back-to-step-1-from-result');
-        const recommendationCards = document.getElementById('recommendation-cards');
+        const resultCriteria = document.getElementById('result-criteria');
+        const resultWeights = document.getElementById('result-weights');
 
         function setActiveStep(stepNumber) {
             steps.forEach(step => step.classList.remove('active', 'font-bold', 'text-blue-900'));
@@ -308,41 +320,8 @@
                 weightError.classList.add('hidden');
                 setActiveStep(3);
                 setTimeout(() => {
-                    // Dummy recommendation data
-                    const recommendations = [
-                        {
-                            name: 'PT Teknologi Maju',
-                            description: 'Perusahaan teknologi inovatif yang berfokus pada pengembangan aplikasi berbasis AI. Berlokasi di Jakarta.',
-                            matchedCriteria: selectedTags.slice(0, 4) // Match 4 criteria
-                        },
-                        {
-                            name: 'Startup Keren',
-                            description: 'Startup dinamis yang mendorong inovasi dalam solusi teknologi mobile. Menawarkan budaya kerja fleksibel.',
-                            matchedCriteria: selectedTags.slice(1, 5) // Match different 4 criteria
-                        },
-                        {
-                            name: 'Global Corp',
-                            description: 'Perusahaan multinasional dengan proyek skala besar dan tim kolaboratif di berbagai negara.',
-                            matchedCriteria: selectedTags.slice(0, 3) // Match 3 criteria
-                        }
-                    ];
-
-                    recommendationCards.innerHTML = '';
-                    recommendations.forEach(rec => {
-                        const card = document.createElement('div');
-                        card.className = 'bg-white rounded-xl border border-gray-200 p-6 shadow-sm';
-                        card.innerHTML = `
-                            <h2 class="text-xl font-semibold text-gray-800 mb-4">${rec.name}</h2>
-                            <p class="text-gray-600 mb-4">${rec.description}</p>
-                            <div class="mb-4">
-                                <h3 class="text-lg font-semibold text-gray-800">Kriteria Sesuai:</h3>
-                                <ul class="list-disc list-inside text-gray-600">
-                                    ${rec.matchedCriteria.map(tag => `<li>${tag.icon} ${tag.name} (Bobot: ${weights[tag.name]})</li>`).join('')}
-                                </ul>
-                            </div>
-                        `;
-                        recommendationCards.appendChild(card);
-                    });
+                    resultCriteria.innerHTML = selectedTags.map(tag => `<li>${tag.icon} ${tag.name}</li>`).join('');
+                    resultWeights.innerHTML = selectedTags.map(tag => `<li>${tag.icon} ${tag.name}: ${weights[tag.name]}</li>`).join('');
                     setActiveStep(4);
                 }, 2000); // Simulate processing delay
             } else {
