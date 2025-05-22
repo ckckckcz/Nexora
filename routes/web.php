@@ -59,6 +59,12 @@ Route::get('/admin/manajemen-akun/dosen-pembimbing/tambah', function () {
     return view('admin.function.dosen.tambah');
 });
 
+// MAGANG
+
+Route::get('/admin/bimbingan-magang/tambah', function () {
+    return view('admin.function.bimbingan_magang.tambah');
+});
+
 Route::get('/admin/laporan', function() {
     return view('admin.laporan');
 });
