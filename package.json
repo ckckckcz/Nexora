@@ -16,6 +16,8 @@
         "vite": "^4.5.2"
     },
     "dependencies": {
-        "feather-icons": "^4.29.2"
+        "feather-icons": "^4.29.2",
+        "laravel-echo": "^2.1.4",
+        "pusher-js": "^8.4.0"
     }
 }
