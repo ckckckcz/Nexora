@@ -49,7 +49,7 @@
                     </div>
 
                     <!-- Add Bimbingan Magang Button -->
-                    <a href="/admin/manajemen-bimbingan-magang/tambah">
+                    <a href="/admin/bimbingan-magang/tambah">
                         <button id="add-bimbingan-btn"
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
                             <i class="fas fa-plus mr-2"></i>
