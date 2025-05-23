@@ -28,24 +28,25 @@
         <!-- User Dropdown -->
         <div class="relative hidden text-left lg:inline-block">
             <button id="user-menu-button" type="button" class="flex items-center cursor-pointer focus:outline-none">
-                {{-- <img class="object-cover w-10 h-10 border-2 border-blue-900 rounded-full" src="{{ asset('images/riovaldo.png') }}"
-                    alt="user photo"> --}}
+                {{-- <img class="object-cover w-10 h-10 border-2 border-blue-900 rounded-full"
+                    src="{{ asset('images/riovaldo.png') }}" alt="user photo"> --}}
             </button>
             <div class="flex space-x-2">
-                @auth 
+                @auth
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open"
                             class="flex items-center space-x-2 rounded-full border hover:bg-gray-100 p-1.5 focus:outline-none focus:ring-2 focus:ring-blue-900 transition-colors"
                             aria-label="User menu">
                             <div class="overflow-hidden border-2 border-gray-200 rounded-full h-9 w-9">
-                                <img src="https://i.pinimg.com/474x/f9/45/b6/f945b69a2a9a33ef4edbdb32de616ddd.jpg" alt="User Avatar" class="object-cover w-full h-full" />
+                                <img src="https://i.pinimg.com/474x/f9/45/b6/f945b69a2a9a33ef4edbdb32de616ddd.jpg"
+                                    alt="User Avatar" class="object-cover w-full h-full" />
                             </div>
                             <div class="hidden text-left md:block">
                                 <div class="text-sm font-medium text-gray-700">{{ Auth::user()->username }}</div>
                                 <div class="text-xs text-gray-500 truncate max-w-[120px]">{{ Auth::user()->email }}</div>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-4 h-4 text-gray-500 md:block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-4 h-4 text-gray-500 md:block"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
@@ -91,8 +92,8 @@
                                 <a href="{{url('/logout')}}">
                                     <button type="submit"
                                         class="flex w-full items-center px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 text-red-500" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 text-red-500"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                         </svg>
@@ -103,16 +104,20 @@
                         </div>
                     </div>
                     @if(!Auth::user())
-                    <a href="{{url('login')}}" class="text-[#1A3C34] hover:bg-gray-100 font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
-                        <button>
-                            Login
-                        </button>
-                    </a>
-                    <a href="{{url('daftar')}}" class="bg-[#DEFC79] hover:bg-[#c9eb5b] text-[#1A3C34] font-medium px-4 py-2 rounded-lg w-1/2 text-center">
-                        <button>
-                            Daftar
-                        </button>
-                    </a>
+                        <div class="flex items-center space-x-2">
+                            <a href="{{url('login')}}"
+                                class="text-[#1A3C34] hover:bg-gray-100 font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
+                                <button>
+                                    Login
+                                </button>
+                            </a>
+                            <a href="{{url('daftar')}}"
+                                class="bg-[#DEFC79] hover:bg-[#c9eb5b] text-[#1A3C34] font-medium px-4 py-2 rounded-lg w-1/2 text-center">
+                                <button>
+                                    Daftar
+                                </button>
+                            </a>
+                        </div>
                     @endif
                 @endauth
             </div>
@@ -190,8 +195,8 @@
         <div class="flex flex-col mb-2 space-y-2">
             <!-- Profile Header -->
             <div class="flex items-center space-x-4">
-                <img class="object-cover w-12 h-12 border border-gray-200 rounded-full" src="{{ asset('images/riovaldo.png') }}"
-                    alt="User Photo">
+                <img class="object-cover w-12 h-12 border border-gray-200 rounded-full"
+                    src="{{ asset('images/riovaldo.png') }}" alt="User Photo">
                 <div>
                     <p class="text-sm font-semibold text-gray-900">Riovaldo Alfiyan Fahmi Rahman</p>
                     <p class="text-xs text-gray-500">Freelancer</p>
@@ -211,10 +216,12 @@
                 <span>Home</span>
             </a>
             <div class="flex pt-2 space-x-2">
-                <a href="/login" class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
+                <a href="/login"
+                    class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
                     Login
                 </a>
-                <a href="/login" class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
+                <a href="/login"
+                    class="text-[#1A3C34] font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
                     Logout
                 </a>
             </div>
