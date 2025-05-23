@@ -16,6 +16,9 @@ Route::get('/profile', function () {
 Route::get('/rekomendasi-magang', function () {
     return view('user.rekomendasi_magang');
 });
+Route::get('/unggah-dokumen', function () {
+    return view('user.function.unggah_dokumen');
+});
 Route::get('/profile/edit', function () {
     return view('user.function.edit_profile');
 });

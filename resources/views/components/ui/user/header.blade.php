@@ -149,8 +149,7 @@
                 </div>
                 <div class="flex items-center group">
                   <div class="h-4 w-4 rounded-full border border-white/50 flex-shrink-0"></div>
-                  <label
-                    class="ml-3 text-sm text-white/50 transition-colors">Portofolio</label>
+                  <label class="ml-3 text-sm text-white/50 transition-colors">Portofolio</label>
                 </div>
                 <div class="flex items-center group">
                   <div class="h-4 w-4 rounded-full border border-white/50 flex-shrink-0"></div>
@@ -161,9 +160,13 @@
 
               <!-- Tombol Aksi -->
               <div class="mt-4">
-                <button class="text-xs font-medium text-white cursor-pointer bg-blue-900 hover:bg-blue-950 px-4 rounded-md py-2">Unggah
-                  Dokumen yang
-                  Kurang</button>
+                <a href="/unggah-dokumen">
+                  <button
+                    class="text-xs font-medium text-white cursor-pointer bg-blue-900 hover:bg-blue-950 px-4 rounded-md py-2">Unggah
+                    Dokumen yang
+                    Kurang
+                  </button>
+                </a>
               </div>
             </div>
           </div>
