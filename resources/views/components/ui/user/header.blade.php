@@ -103,20 +103,68 @@
 
       <!-- Right Column - Sidebar -->
       <div class="space-y-6">
-        <!-- Internship Status -->
-        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5">
+        <!-- Progres Dokumen Magang -->
+        <div class="bg-blue-900/30 border border-blue-200 rounded-2xl p-5">
           <div class="flex items-start">
-            <div class="flex-shrink-0 bg-blue-100 rounded-lg p-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24"
+            <div class="flex-shrink-0 bg-blue-900/10 rounded-lg p-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-900" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <div class="ml-4">
-              <h3 class="text-sm font-semibold text-blue-900">Internship Status</h3>
-              <p class="text-sm text-blue-700 font-medium mt-1">Available for internship opportunities</p>
-              <p class="text-xs text-blue-600 mt-1">Looking for Frontend Development or UI/UX Design roles</p>
+            <div class="ml-4 w-full">
+              <h3 class="text-sm font-semibold text-blue-900">Progres Dokumen Magang</h3>
+              <p class="text-xs text-blue-900 mt-1">Lengkapi dokumen yang diperlukan untuk aplikasi magang Anda</p>
+
+              <!-- Bar Progres -->
+              <div class="mt-3">
+                <div class="text-xs font-medium text-blue-900">Progres: 60%</div>
+                <div class="w-full bg-white/30 rounded-full h-2.5 mt-1">
+                  <div class="bg-blue-900 h-2.5 rounded-full" style="width: 60%"></div>
+                </div>
+              </div>
+
+              <!-- Daftar Dokumen -->
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center group">
+                  <div class="h-4 w-4 rounded-full bg-blue-900 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <label class="ml-3 text-sm text-gray-700 group-hover:text-gray-900 transition-colors">Curriculum Vitae
+                    (CV)</label>
+                </div>
+                <div class="flex items-center group">
+                  <div class="h-4 w-4 rounded-full bg-blue-900 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <label class="ml-3 text-sm text-gray-700 group-hover:text-gray-900 transition-colors">Surat
+                    Lamaran</label>
+                </div>
+                <div class="flex items-center group">
+                  <div class="h-4 w-4 rounded-full border border-white/50 flex-shrink-0"></div>
+                  <label
+                    class="ml-3 text-sm text-white/50 transition-colors">Portofolio</label>
+                </div>
+                <div class="flex items-center group">
+                  <div class="h-4 w-4 rounded-full border border-white/50 flex-shrink-0"></div>
+                  <label class="ml-3 text-sm text-white/50 transition-colors">Transkrip
+                    Nilai</label>
+                </div>
+              </div>
+
+              <!-- Tombol Aksi -->
+              <div class="mt-4">
+                <button class="text-xs font-medium text-white cursor-pointer bg-blue-900 hover:bg-blue-950 px-4 rounded-md py-2">Unggah
+                  Dokumen yang
+                  Kurang</button>
+              </div>
             </div>
           </div>
         </div>
@@ -159,7 +207,7 @@
 
             <div>
               <h4 class="text-xs text-gray-500">Phone</h4>
-              <button class="text-sm text-blue-600 hover:text-blue-800 font-medium">
+              <button class="text-sm text-blue-900 hover:text-blue-800 font-medium">
                 Show phone number
               </button>
             </div>
@@ -172,7 +220,7 @@
             <div class="pt-2">
               <h4 class="text-xs text-gray-500 mb-2">Social Profiles</h4>
               <div class="flex space-x-3">
-                <a href="#" class="text-gray-500 hover:text-blue-600">
+                <a href="#" class="text-gray-500 hover:text-blue-900">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                     <path
                       d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
