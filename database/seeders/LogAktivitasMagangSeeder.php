@@ -12,7 +12,7 @@ class LogAktivitasMagangSeeder extends Seeder
     {
         DB::table('log_aktivitas_magang')->insert([
             [
-                'id_bimbingan' => 5,
+                'id_bimbingan' => 1,
                 'tanggal' => '2024-03-01',
                 'jam_masuk' => '08:00:00',
                 'jam_pulang' => '17:00:00',
@@ -22,7 +22,7 @@ class LogAktivitasMagangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id_bimbingan' => 6,
+                'id_bimbingan' => 2,
                 'tanggal' => '2024-03-02',
                 'jam_masuk' => '08:00:00',
                 'jam_pulang' => '17:00:00',
@@ -32,7 +32,7 @@ class LogAktivitasMagangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id_bimbingan' => 7,
+                'id_bimbingan' => 3,
                 'tanggal' => '2024-02-01',
                 'jam_masuk' => '09:00:00',
                 'jam_pulang' => '18:00:00',
