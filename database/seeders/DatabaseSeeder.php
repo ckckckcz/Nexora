@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             KriteriaSeeder::class,
             PenilaianBobotSeeder::class,
             logAktivitasMagangSeeder::class,
+            PosisiMagangSeeder::class
         ]);
     }
 }
