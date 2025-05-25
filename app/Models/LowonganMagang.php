@@ -20,4 +20,16 @@ class LowonganMagang extends Model
         'bidang_keahlian',
         'status'
     ];
+
+    // Relasi dengan SkemaMagang 1 lowongan memiliki 1 skema magang
+    public function skemaMagang()
+    {
+        return $this->belongsTo(SkemaMagang::class, 'id_skema_magang', 'id_skema_magang');
+    }
+
+    // Relasi dengan PosisiMagang 1 lowongan memiliki banyak posisi magang
+    public function posisiMagang()
+    {
+        return $this->belongsTo(PosisiMagang::class, 'id_posisi_magang', 'id_posisi_magang');
+    }
 }

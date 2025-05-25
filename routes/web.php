@@ -1,18 +1,26 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AkunDosenController;
+use App\Http\Controllers\Admin\AkunMahasiswaController;
+use App\Http\Controllers\Admin\BimbinganMagangController;
+use App\Http\Controllers\Admin\LowonganMagangController;
+use App\Http\Controllers\Admin\ProdiController;
+use App\Http\Controllers\Admin\SkemaMagangController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dosen\DosenDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 
 });
 
-Route::get('/', function () {
-    return view('landing');
-});
-Route::get('/profile', function () {
-    return view('user.profile');
-});
+//Route Dashboard
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
+Route::get('/dosen/dashboard', [DosenDashboardController::class, 'index']);
+
 Route::get('/rekomendasi-magang', function () {
     return view('user.rekomendasi_magang');
 });
@@ -22,72 +30,79 @@ Route::get('/unggah-dokumen', function () {
 Route::get('/profile/edit', function () {
     return view('user.function.edit_profile');
 });
-// Route::get('/login', function () {
-//     return view('auth.login');
-// });
 Route::get('/daftar', function () {
     return view('auth.daftar');
-});
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-});
-Route::get('/admin/skema-magang', function () {
-    return view('admin.skema_magang');
-});
-Route::get('/admin/program-studi', function () {
-    return view('admin.program_studi');
-});
-Route::get('/admin/lowongan-magang', function () {
-    return view('admin.lowongan_magang');
-});
-Route::get('/admin/bimbingan-magang', function () {
-    return view('admin.bimbingan_magang');
 });
 
 // POV ADMIN
 
 // MAHASISWA
-Route::get('/admin/manajemen-akun/mahasiswa', function () {
-    return view('admin.manajemenAkun.mahasiswa');
-});
-Route::get('/admin/manajemen-akun/mahasiswa/tambah', function () {
-    return view('admin.function.mahasiswa.tambah');
+Route::group(['prefix' => 'admin/manajemen-akun/mahasiswa'], function () {
+    Route::get('/', [AkunMahasiswaController::class, 'index']);
+    Route::get('/tambah', [AkunMahasiswaController::class, 'create']);
+    Route::post('/tambah', [AkunMahasiswaController::class, 'store']);
+    Route::get('/edit/{id}', [AkunMahasiswaController::class, 'edit']);
+    Route::put('/edit/{id}', [AkunMahasiswaController::class, 'update']);
+    Route::get('/detail/{id}', [AkunMahasiswaController::class, 'show']);
+    Route::delete('/hapus/{id}', [AkunMahasiswaController::class, 'destroy']);
 });
 
+
 // DOSEN
-Route::get('/admin/manajemen-akun/dosen-pembimbing', function () {
-    return view('admin.manajemenAkun.dosen');
-});
-Route::get('/admin/manajemen-akun/dosen-pembimbing/tambah', function () {
-    return view('admin.function.dosen.tambah');
+Route::group(['prefix' => 'admin/manajemen-akun/dosen-pembimbing'], function () {
+    Route::get('/', [AkunDosenController::class, 'index']);
+    Route::get('/tambah', [AkunDosenController::class, 'create']);
+    Route::post('/tambah', [AkunDosenController::class, 'store']);
+    Route::get('/edit/{id}', [AkunDosenController::class, 'edit']);
+    Route::put('/edit/{id}', [AkunDosenController::class, 'update']);
+    Route::get('/detail/{id}', [AkunDosenController::class, 'show']);
+    Route::delete('/hapus/{id}', [AkunDosenController::class, 'destroy']);
 });
 
 // MAGANG
 
-Route::get('/admin/bimbingan-magang/tambah', function () {
-    return view('admin.function.bimbingan_magang.tambah');
-});
-Route::get('/admin/program-studi/tambah', function () {
-    return view('admin.function.program_studi.tambah');
-});
-Route::get('/admin/lowongan-magang/tambah', function () {
-    return view('admin.function.lowongan_magang.tambah');
-});
-Route::get('/admin/skema-magang/tambah', function () {
-    return view('admin.function.skema_magang.tambah');
+// BIMBINGAN MAGANG
+Route::group(['prefix' => 'admin/bimbingan-magang'], function () {
+    Route::get('/', [BimbinganMagangController::class, 'index']);
+    Route::get('/tambah', [BimbinganMagangController::class, 'create']);
+    Route::post('/tambah', [BimbinganMagangController::class, 'store']);
+    Route::get('/edit/{id}', [BimbinganMagangController::class, 'edit']);
+    Route::put('/edit/{id}', [BimbinganMagangController::class, 'update']);
+    Route::get('/detail/{id}', [BimbinganMagangController::class, 'show']);
+    Route::delete('/hapus/{id}', [BimbinganMagangController::class, 'destroy']);
 });
 
-Route::get('/admin/skema-magang/edit', function () {
-    return view('admin.function.skema_magang.edit');
+// SKEMA MAGANG
+Route::group(['prefix' => '/admin/skema-magang/'], function () {
+    Route::get('/', [SkemaMagangController::class, 'index']);
+    Route::get('/tambah', [SkemaMagangController::class, 'create']);
+    Route::post('/tambah', [SkemaMagangController::class, 'store']);
+    Route::get('/edit/{id}', [SkemaMagangController::class, 'edit']);
+    Route::put('/edit/{id}', [SkemaMagangController::class, 'update']);
+    Route::get('/detail/{id}', [SkemaMagangController::class, 'show']);
+    Route::delete('/hapus/{id}', [SkemaMagangController::class, 'destroy']);
 });
-Route::get('/admin/bimbingan-magang/edit', function () {
-    return view('admin.function.bimbingan_magang.edit');
+
+// PROGRAM STUDI
+Route::group(['prefix' => '/admin/program-studi/'], function () {
+    Route::get('/', [ProdiController::class, 'index']);
+    Route::get('/tambah', [ProdiController::class, 'create']);
+    Route::post('/tambah', [ProdiController::class, 'store']);
+    Route::get('/edit/{id}', [ProdiController::class, 'edit']);
+    Route::put('/edit/{id}', [ProdiController::class, 'update']);
+    Route::get('/detail/{id}', [ProdiController::class, 'show']);
+    Route::delete('/hapus/{id}', [ProdiController::class, 'destroy']);
 });
-Route::get('/admin/program-studi/edit', function () {
-    return view('admin.function.program_studi.edit');
-});
-Route::get('/admin/lowongan-magang/edit', function () {
-    return view('admin.function.lowongan_magang.edit');
+
+// LOWONGAN MAGANG
+Route::group(['prefix' => '/admin/lowongan-magang/'], function () {
+    Route::get('/', [LowonganMagangController::class, 'index']);
+    Route::get('/tambah', [LowonganMagangController::class, 'create']);
+    Route::post('/tambah', [LowonganMagangController::class, 'store']);
+    Route::get('/edit/{id}', [LowonganMagangController::class, 'edit']);
+    Route::put('/edit/{id}', [LowonganMagangController::class, 'update']);
+    Route::get('/detail/{id}', [LowonganMagangController::class, 'show']);
+    Route::delete('/hapus/{id}', [LowonganMagangController::class, 'destroy']);
 });
 
 Route::get('/admin/laporan', function() {
