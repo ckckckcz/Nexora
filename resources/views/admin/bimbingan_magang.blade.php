@@ -65,7 +65,7 @@
                             <tr>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    ID Bimbingan
+                                    No
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -90,59 +90,38 @@
                             </tr>
                         </thead>
                         <tbody id="bimbingan-table-body" class="bg-white divide-y divide-gray-200">
-                            <?php
-                            // Data dummy untuk bimbingan magang
-                            $bimbingans = [
-                                (object) [
-                                    'id_bimbingan' => 1,
-                                    'mahasiswa' => (object) ['nama' => 'Budi Santoso'],
-                                    'dosen' => (object) ['nama' => 'Dr. Ahmad Yani'],
-                                    'lowonganMagang' => (object) ['nama_perusahaan' => 'PT Teknologi Maju'],
-                                    'status_bimbingan' => 'aktif',
-                                    'created_at' => '2025-05-11 08:00:00',
-                                    'updated_at' => '2025-05-16 14:30:00',
-                                ],
-                                (object) [
-                                    'id_bimbingan' => 2,
-                                    'mahasiswa' => (object) ['nama' => 'Siti Aminah'],
-                                    'dosen' => (object) ['nama' => 'Prof. Maria Ulfa'],
-                                    'lowonganMagang' => (object) ['nama_perusahaan' => 'CV Inovasi Digital'],
-                                    'status_bimbingan' => 'selesai',
-                                    'created_at' => '2025-05-01 09:15:00',
-                                    'updated_at' => '2025-05-06 11:45:00',
-                                ],
-                                (object) [
-                                    'id_bimbingan' => 3,
-                                    'mahasiswa' => (object) ['nama' => 'Rudi Hartono'],
-                                    'dosen' => (object) ['nama' => 'Dr. Susanto Raharjo'],
-                                    'lowonganMagang' => (object) ['nama_perusahaan' => 'PT Solusi Bersama'],
-                                    'status_bimbingan' => 'tidak_selesai',
-                                    'created_at' => '2025-05-13 10:20:00',
-                                    'updated_at' => '2025-05-18 16:10:00',
-                                ],
-                            ];
-                            ?>
-                            @foreach ($bimbingans as $bimbingan)
+                             @if ($guidances === null)
+                            @else 
+                                @foreach ($guidances as $guidance)
                                 <tr>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $bimbingan->id_bimbingan }}</td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $bimbingan->mahasiswa->nama }}</td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">{{ $bimbingan->dosen->nama }}</td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">{{ $bimbingan->lowonganMagang->nama_perusahaan }}</td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $guidance->mahasiswa->nama_mahasiswa }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $guidance->dosen->nama_dosen }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $guidance->lowongan->nama_perusahaan }}
+                                    </td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm hidden lg:table-cell">
-                                        <span class="@if($bimbingan->status_bimbingan == 'selesai') bg-green-100 text-green-800 @elseif($bimbingan->status_bimbingan == 'aktif') bg-yellow-100 text-yellow-800 @else bg-red-100 text-red-800 @endif rounded-full px-2 py-1 text-xs font-medium">
-                                            {{ ucfirst($bimbingan->status_bimbingan) }}
+                                        <span class="@if($guidance->status_bimbingan == 'selesai') bg-green-100 text-green-800 @elseif($guidance->status_bimbingan == 'aktif') bg-yellow-100 text-yellow-800 @else bg-red-100 text-red-800 @endif rounded-full px-2 py-1 text-xs font-medium">
+                                            {{ ucfirst($guidance->status_bimbingan) }}
                                         </span>
                                     </td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/bimbingan-magang/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/bimbingan-magang/hapus" method="POST" class="inline">
+                                        <a href="/admin/program-studi/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <form action="/admin/program-studi/hapus" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -160,7 +139,7 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Menampilkan <span id="start-index" class="font-medium">1</span> sampai <span id="end-index"
-                                    class="font-medium">{{ count($bimbingans) }}</span> dari <span id="total-bimbingan" class="font-medium">{{ count($bimbingans) }}</span>
+                                    class="font-medium"></span> dari <span id="total-lowongan" class="font-medium"></span>
                                 data
                             </p>
                         </div>

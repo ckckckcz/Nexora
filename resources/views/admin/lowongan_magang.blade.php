@@ -62,7 +62,7 @@
                             <tr>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    ID Lowongan
+                                    No
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -90,7 +90,45 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="lowongan-table-body" class="bg-white divide-y divide-gray-200"></tbody>
+                        <tbody id="lowongan-table-body" class="bg-white divide-y divide-gray-200">
+                            @if ($vacancies === null)
+                            @else 
+                                @foreach ($vacancies as $vacance)
+                                <tr>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $vacance->nama_perusahaan }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ strtoupper($vacance->skemaMagang->nama_skema_magang) }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $vacance->posisiMagang->nama_posisi }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $vacance->lokasi }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        @if ($vacance->status_lowongan === 'open')
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Open</span>
+                                        @else
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Close</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="/admin/program-studi/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <form action="/admin/program-studi/hapus" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
                     </table>
                 </div>
 
