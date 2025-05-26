@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin/manajemen-akun/mahasiswa'], function () {
 
 
 // DOSEN
-Route::group(['prefix' => 'admin/manajemen-akun/dosen-pembimbing'], function () {
+Route::group(['prefix' => 'admin/manajemen-akun/dosen'], function () {
     Route::get('/', [AkunDosenController::class, 'index']);
     Route::get('/tambah', [AkunDosenController::class, 'create']);
     Route::post('/tambah', [AkunDosenController::class, 'store']);
@@ -74,7 +74,7 @@ Route::group(['prefix' => 'admin/bimbingan-magang'], function () {
 
 // SKEMA MAGANG
 Route::group(['prefix' => '/admin/skema-magang/'], function () {
-    Route::get('/', [SkemaMagangController::class, 'index']);
+    Route::get('/', [SkemaMagangController::class, 'index'])->name('admin.skema-magang');
     Route::get('/tambah', [SkemaMagangController::class, 'create']);
     Route::post('/tambah', [SkemaMagangController::class, 'store']);
     Route::get('/edit/{id}', [SkemaMagangController::class, 'edit']);
