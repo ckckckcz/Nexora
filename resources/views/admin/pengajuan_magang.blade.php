@@ -76,7 +76,8 @@
                                 </td>
                                 <td class="px-4 py-2">20-10-2025</td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="/admin/pengajuan-magang/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                    <a href="/admin/pengajuan-magang/edit"
+                                        class="text-blue-600 hover:text-blue-900">Edit</a>
                                     <form action="/admin/pengajuan-magang/hapus" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
