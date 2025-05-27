@@ -115,7 +115,7 @@
             </div>
 
             <!-- Upload Surat Tugas -->
-            <a href="#"
+            <a href="/admin/pengajuan-magang"
                 class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('assignment.letters') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('assignment.letters') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
@@ -127,7 +127,7 @@
             </a>
 
             <!-- Sistem Rekomendasi -->
-            <a href="#"
+            <a href="/admin/sistem-rekomendasi"
                 class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('recommendation.settings') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                 <svg class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
