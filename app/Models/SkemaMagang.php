@@ -16,4 +16,10 @@ class SkemaMagang extends Model
         'tanggal_mulai',
         'tanggal_selesai'
     ];
+
+    public function lowongan()
+    {
+        return $this->hasMany(Lowongan::class, 'id_skema_magang');
+    }
+
 }

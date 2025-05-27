@@ -12,21 +12,21 @@ class FeedbackMagangSeeder extends Seeder
     {
         DB::table('feedback_magang')->insert([
             [
-                'id_bimbingan_magang' => 5,
+                'id_bimbingan_magang' => 1,
                 'testimoni_magang' => 'Pengalaman magang di PT. Teknologi Maju sangat berharga. Saya belajar banyak tentang pengembangan aplikasi web dan teknologi terkini. Tim sangat supportive dan memberikan guidance yang baik.',
                 'pesan_dosen' => 'Pertahankan semangat belajar dan terus kembangkan skill programming. Jangan lupa untuk selalu update progress secara berkala.',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id_bimbingan_magang' => 6,
+                'id_bimbingan_magang' => 2,
                 'testimoni_magang' => 'Magang sebagai Digital Marketing Specialist membuka wawasan saya tentang dunia pemasaran digital. Banyak tools dan strategi baru yang saya pelajari.',
                 'pesan_dosen' => 'Manfaatkan pengalaman ini untuk mengembangkan portfolio digital marketing. Terus eksplorasi trend terbaru di bidang ini.',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id_bimbingan_magang' => 7,
+                'id_bimbingan_magang' => 3,
                 'testimoni_magang' => 'Sebagai UI/UX Designer magang, saya mendapat kesempatan untuk terlibat dalam proyek nyata dan berinteraksi langsung dengan user. Pengalaman yang sangat valuable.',
                 'pesan_dosen' => 'Hasil karya desain yang telah dibuat sangat bagus. Lanjutkan untuk membuat case study dari proyek-proyek yang telah dikerjakan.',
                 'created_at' => now(),

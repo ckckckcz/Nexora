@@ -5,23 +5,26 @@
             <h1 class="text-3xl font-bold text-blue-900">Edit Data Skema Magang 📅</h1>
         </header>
 
+        
+
         <section class="bg-white rounded-xl shadow-md transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="" method="POST" class="flex flex-col gap-6">
+                <form action="/admin/skema-magang/edit/{{ $skemaMagang->id_skema_magang }}" method="POST" class="flex flex-col gap-6">
                     @csrf
+                    @method('PUT')
                     <!-- Nama Skema Magang -->
                     <div class="flex flex-col gap-2">
-                        <label for="nama_skema_magang"
+                        <label for="nama_skema"
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Nama Skema Magang</label>
                         <div class="relative">
-                            <select id="nama_skema_magang" name="nama_skema_magang"
+                            <select id="nama_skema" name="nama_skema"
                                 class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
                                 required>
-                                <option value="" disabled selected>Pilih Skema Magang</option>
-                                <option value="pkl_3_bulan">PKL 3 Bulan</option>
-                                <option value="MBKM - Mandiri 6 bulan">MBKM - Mandiri 6 Bulan</option>
-                                <option value="MBKM - MSIB 6 Bulan">MBKM - MSIB 6 Bulan</option>
-                                <option value="MBKM - Kewirausahaan">MBKM - Kewirausahaan</option>
+                                <option value="" disabled>Pilih Skema Magang</option>
+                                <option value="pkl_3_bulan" {{ $skemaMagang->nama_skema_magang == 'pkl_3_bulan' ? 'selected' : '' }}>PKL 3 Bulan</option>
+                                <option value="MBKM - Mandiri 6 bulan" {{ $skemaMagang->nama_skema_magang == 'MBKM - Mandiri 6 bulan' ? 'selected' : '' }}>MBKM - Mandiri 6 Bulan</option>
+                                <option value="MBKM - MSIB 6 Bulan" {{ $skemaMagang->nama_skema_magang == 'MBKM - MSIB 6 Bulan' ? 'selected' : '' }}>MBKM - MSIB 6 Bulan</option>
+                                <option value="MBKM - Kewirausahaan" {{ $skemaMagang->nama_skema_magang == 'MBKM - Kewirausahaan' ? 'selected' : '' }}>MBKM - Kewirausahaan</option>
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -31,7 +34,7 @@
                                 </svg>
                             </div>
                         </div>
-                        @error('nama_skema_magang')
+                        @error('nama_skema')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
@@ -42,7 +45,7 @@
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Tanggal Mulai</label>
                         <input type="date" id="tanggal_mulai" name="tanggal_mulai"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                            required>
+                            required value="{{ old('tanggal_mulai', $skemaMagang->tanggal_mulai) }}">
                         @error('tanggal_mulai')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -54,7 +57,7 @@
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Tanggal Selesai</label>
                         <input type="date" id="tanggal_selesai" name="tanggal_selesai"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                            required>
+                            required value="{{ old('tanggal_selesai', $skemaMagang->tanggal_selesai) }}">
                         @error('tanggal_selesai')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror

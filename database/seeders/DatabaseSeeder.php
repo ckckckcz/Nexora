@@ -18,16 +18,17 @@ class DatabaseSeeder extends Seeder
             MahasiswaSeeder::class,
             DosenSeeder::class,
             SkemaMagangSeeder::class,
-            bimbinganMagangSeeder::class,
+            PosisiMagangSeeder::class,
+            LowonganMagangSeeder::class,
+            BimbinganMagangSeeder::class,
             EvaluasiMagangSeeder::class,
             PengajuanMagangSeeder::class,
+            KriteriaSeeder::class,
             PreferensiMahasiswaSeeder::class,
             FeedbackMagangSeeder::class,
             HasilRekomendasiSeeder::class,
-            LowonganMagangSeeder::class,
-            KriteriaSeeder::class,
             PenilaianBobotSeeder::class,
-            logAktivitasMagangSeeder::class,
+            LogAktivitasMagangSeeder::class,
         ]);
     }
 }

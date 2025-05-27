@@ -103,7 +103,8 @@
                             </div>
                         </div>
                     </div>
-                    @if(!Auth::user())
+                @endauth
+                @if(!Auth::user())
                         <div class="flex items-center space-x-2">
                             <a href="{{url('login')}}"
                                 class="text-[#1A3C34] hover:bg-gray-100 font-medium px-3 py-2 border border-gray-200 rounded-lg w-1/2 text-center">
@@ -119,7 +120,6 @@
                             </a>
                         </div>
                     @endif
-                @endauth
             </div>
 
             <div id="user-dropdown"

@@ -32,14 +32,6 @@ class AuthController extends Controller
                 ->withInput($request->except('password'));
         }
         
-        // Coba login dengan username dan password yang diberikan
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            // Berhasil login
-            $user = Auth::user();
-            
-            return redirect()->intended('/admin/dashboard');
-        }
-        
         // Coba cek apakah username adalah NIM mahasiswa
         $mahasiswa = Mahasiswa::where('nim', $request->username)->first();
         if ($mahasiswa) {
@@ -58,6 +50,14 @@ class AuthController extends Controller
                 Auth::login($user);
                 return redirect()->intended('/dosen/dashboard');
             }
+        }
+
+        // Coba login dengan username dan password yang diberikan
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            // Berhasil login
+            $user = Auth::user();
+            
+            return redirect()->intended('/admin/dashboard');
         }
         
         return redirect()->back()
