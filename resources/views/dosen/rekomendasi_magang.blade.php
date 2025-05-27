@@ -80,7 +80,7 @@
                         </thead>
                         <tbody id="recommendation-table-body" class="bg-white divide-y divide-gray-100">
                             <tr class="hover:bg-indigo-50 transition-all duration-200">
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">John Doe</td>
+                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Trisukmah Sarah</td>
                                 <td class="px-4 sm:px-6 py-4 hidden sm:table-cell">
                                     <div class="flex flex-col gap-2 pt-options">
                                         <label class="flex items-center gap-2">
