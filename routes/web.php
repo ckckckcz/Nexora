@@ -30,6 +30,9 @@ Route::get('/unggah-dokumen', function () {
 Route::get('/profile/edit', function () {
     return view('user.function.edit_profile');
 });
+Route::get('/profile', function () {
+    return view('user.profile');
+});
 Route::get('/daftar', function () {
     return view('auth.daftar');
 });
