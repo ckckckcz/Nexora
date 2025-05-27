@@ -50,6 +50,10 @@ Route::group(['prefix' => 'admin/manajemen-akun/mahasiswa'], function () {
     Route::delete('/hapus/{id}', [AkunMahasiswaController::class, 'destroy']);
 });
 
+Route::get('/admin/pengajuan-magang', function () {
+    return view('admin.pengajuan_magang');
+});
+
 
 // DOSEN
 Route::group(['prefix' => 'admin/manajemen-akun/dosen'], function () {
