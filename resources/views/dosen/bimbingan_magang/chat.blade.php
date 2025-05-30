@@ -67,224 +67,6 @@
                         </svg>
                     </div>
                 </div>
-
-                <!-- Albert Chat -->
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">10:00am</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Hello david, what are today's tasks?</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Robert Chats -->
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
-                            <span class="text-xs text-gray-500">Jan 30</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Have a great day then</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <span
-                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
-                            <span class="text-xs text-gray-500">Jan 30</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Hey there, any update?</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <span
-                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
-                            <span class="text-xs text-gray-500">Jan 30</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">We'll have the usability test run tomorrow</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <span
-                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
-                            <span class="text-xs text-gray-500">Jan 30</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">All components are now available for use</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <span
-                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </div>
-                </div>
-
-                <!-- Albert Chats -->
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
-                    </div>
-                </div>
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
-                    </div>
-                </div>
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
-                    </div>
-                </div>
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -329,74 +111,13 @@
             </div>
 
             <!-- Chat Messages -->
-            <div class="flex-1 overflow-y-auto p-4 bg-white">
-                <!-- Date Separator -->
-                <div class="flex justify-center mb-4">
-                    <div class="bg-blue-900/20 text-blue-900 font-bold text-xs px-4 py-1 rounded-full">Hari ini</div>
-                </div>
-
-                <!-- Received Message with Avatar -->
-                <div class="flex mb-4">
-                    <div class="flex-shrink-0 mr-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span class="text-xs">R</span>
-                        </div>
-                    </div>
-                    <div class="max-w-md">
-                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
-                            <p class="text-sm text-gray-800">Good morning Perzival, the design has been completed and is
-                                ready for review</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Received Message with Avatar (Repeated) -->
-                <div class="flex mb-4">
-                    <div class="flex-shrink-0 mr-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span class="text-xs">R</span>
-                        </div>
-                    </div>
-                    <div class="max-w-md">
-                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
-                            <p class="text-sm text-gray-800">Good morning Perzival, the design has been completed and is
-                                ready for review</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Received Message with Image -->
-                <div class="flex mb-4">
-                    <div class="flex-shrink-0 mr-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span class="text-xs">R</span>
-                        </div>
-                    </div>
-                    <div class="max-w-md">
-                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
-                            <div class="mb-2">
-                                <img src="https://www.learnworlds.com/app/uploads/2025/02/user-preferences.webp"
-                                    alt="Design Screenshot" class="rounded-lg w-full h-auto">
-                            </div>
-                        </div>
-                        <div class="text-xs text-gray-500 mt-1">9:12 am</div>
-                    </div>
-                </div>
-
-                <!-- Sent Message -->
-                <div class="flex justify-end mb-4">
-                    <div class="max-w-md">
-                        <div class="bg-blue-900 rounded-lg p-3 text-white">
-                            <p class="text-sm">Great work Ronald, keep going 👍</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="flex-1 overflow-y-auto p-4 bg-white" id="chat-messages">
+                <!-- Messages will be dynamically inserted here -->
             </div>
 
             <!-- Message Input -->
             <div class="p-4 bg-white border-t shadow-sm">
-                <div
-                    class="flex items-center bg-gray-50 rounded-2xl py-3 px-3 border border-gray-200 hover:border-blue-300 transition-all duration-300">
+                <form id="message-form" class="flex items-center bg-gray-50 rounded-2xl py-3 px-3 border border-gray-200 hover:border-blue-300 transition-all duration-300">
                     <!-- Attachment Button with Tooltip -->
                     <div class="relative group">
                         <button
@@ -435,13 +156,11 @@
 
                     <!-- Input Field -->
                     <div class="flex-1 mx-2">
-                        <input type="text" placeholder="Tulis Pesan..." id="messageInput"
+                        <input type="text" name="message" placeholder="Tulis Pesan..." id="messageInput"
                             class="w-full bg-transparent border-0 focus:ring-0 focus:outline-none text-sm py-2 placeholder-gray-500"
-                            autocomplete="off">
+                            autocomplete="off" required>
                     </div>
-
-                    <!-- Send Button with Animation -->
-                    <button id="sendButton"
+                    <button type="submit" id="sendButton"
                         class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -449,51 +168,87 @@
                             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                         </svg>
                     </button>
-                </div>
-
-                <!-- Character Counter and Typing Indicator -->
-                <div class="flex justify-between text-xs text-gray-500 mt-1 px-4">
-                    <div id="typingIndicator" class="hidden">
-                        <span class="italic">Seseorang sedang mengetik...</span>
-                    </div>
-                    <div id="charCounter" class="hidden">
-                        <span id="currentChars">0</span>/<span id="maxChars">500</span>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        // Show character counter when input is focused
-        document.getElementById('messageInput').addEventListener('focus', function () {
-            document.getElementById('charCounter').classList.remove('hidden');
-        });
+        Echo.channel('chat')
+            .listen('NewChatMessage', (e) => {
+                appendMessage(e.message);
+            });
 
-        // Hide character counter when input is blurred and empty
-        document.getElementById('messageInput').addEventListener('blur', function () {
-            if (this.value.length === 0) {
-                document.getElementById('charCounter').classList.add('hidden');
+        const chatMessages = document.getElementById('chat-messages');
+        const messageForm = document.getElementById('message-form');
+        const messageInput = document.getElementById('messageInput');
+
+        // Load existing messages
+        loadMessages();
+
+        messageForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const message = messageInput.value;
+            if (!message.trim()) return;
+
+            try {
+                const response = await fetch('/dosen/chat/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ message })
+                });
+
+                if (!response.ok) throw new Error('Message send failed');
+                const data = await response.json();
+                appendMessage(data);
+                messageInput.value = '';
+            } catch (error) {
+                console.error('Error:', error);
             }
         });
 
-        // Update character count
-        document.getElementById('messageInput').addEventListener('input', function () {
-            const currentLength = this.value.length;
-            const maxLength = 500;
-            document.getElementById('currentChars').textContent = currentLength;
-
-            // Change color when approaching limit
-            if (currentLength > maxLength * 0.8) {
-                document.getElementById('charCounter').classList.add('text-yellow-500');
-            } else {
-                document.getElementById('charCounter').classList.remove('text-yellow-500');
+        async function loadMessages() {
+            try {
+                const response = await fetch('/dosen/chat/messages');
+                const messages = await response.json();
+                chatMessages.innerHTML = '';
+                messages.forEach(appendMessage);
+            } catch (error) {
+                console.error('Error loading messages:', error);
             }
+        }
 
-            if (currentLength > maxLength * 0.95) {
-                document.getElementById('charCounter').classList.add('text-red-500');
-            } else {
-                document.getElementById('charCounter').classList.remove('text-red-500');
-            }
-        });
+        function appendMessage(message) {
+            const isCurrentUser = message.sender_id === {{ auth()->id() }};
+            const messageHTML = `
+                <div class="flex ${isCurrentUser ? 'justify-end' : ''} mb-4">
+                    ${!isCurrentUser ? `
+                    <div class="flex-shrink-0 mr-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                            <span class="text-xs">${message.sender_name.charAt(0)}</span>
+                        </div>
+                    </div>
+                    ` : ''}
+                    <div class="max-w-md">
+                        <div class="${isCurrentUser ? 'bg-blue-900 text-white' : 'bg-gray-50'} rounded-lg p-3 shadow-sm">
+                            <p class="text-sm">${message.message}</p>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                            ${new Date(message.timestamp).toLocaleTimeString()}
+                            ${isCurrentUser ? `
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML('beforeend', messageHTML);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
     </script>
 @endsection

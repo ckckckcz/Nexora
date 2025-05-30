@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SkemaMagangController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
@@ -136,3 +137,9 @@ Route::get('/dosen/magang/rekomendasi-magang', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'postlogin']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->group(function () {
+    Route::get('/chat', [ChatController::class, 'index'])->name('dosen.chat');
+    Route::post('/chat/send', [ChatController::class, 'sendMessage']);
+    Route::get('/chat/messages', [ChatController::class, 'getMessages']);
+});
