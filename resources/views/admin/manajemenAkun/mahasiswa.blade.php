@@ -262,9 +262,6 @@
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
                                     Jurusan</th>
                                 <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">
-                                    Tanggal Daftar</th>
-                                <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Aksi
                                 </th>
@@ -290,15 +287,12 @@
                                         <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
                                             {{ $college->jurusan }}
                                         </td>
-                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                            {{ $college->created_at->format('d-m-Y') }}
-                                        </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                            <a href="/admin/manajemen-akun/mahasiswa/edit/"
+                                            <a href="/admin/manajemen-akun/mahasiswa/edit/{{ $college->id_mahasiswa }}"
                                                 class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
                                                 Edit
                                             </a>
-                                            <form action="/admin/manajemen-akun/mahasiswa/hapus/" method="POST" class="inline">
+                                            <form action="/admin/manajemen-akun/mahasiswa/hapus/{{ $college->id_mahasiswa }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"

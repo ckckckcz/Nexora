@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
+use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
+use Validator;
 
 class AkunMahasiswaController extends Controller
 {
@@ -22,7 +24,8 @@ class AkunMahasiswaController extends Controller
      */
     public function create()
     {
-        return view('admin.function.mahasiswa.tambah');
+        $prodis = ProgramStudi::all();
+        return view('admin.function.mahasiswa.tambah', compact('prodis'));
     }
 
     /**
@@ -30,7 +33,35 @@ class AkunMahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nim' => 'required|string|max:20|unique:mahasiswa',
+            'nama_mahasiswa' => 'required|string|max:255',
+            'id_program_studi' => 'required|exists:program_studi,id_program_studi',
+            'jurusan' => 'required',
+            'jenis_kelamin' => 'required|in:L,P',
+        ], [
+            'nim.required' => 'NIM Harus Diisi',
+            'nama_mahasiswa.required' => 'Nama Mahasiswa Harus Diisi',
+            'id_program_studi.required' => 'Nama Program Studi Harus Diisi',
+            'jurusan.required' => 'Jurusan Harus Diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin Harus Diisi',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        Mahasiswa::create([
+            'nim' => $request->nim,
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'id_program_studi' => $request->id_program_studi,
+            'jurusan' => $request->jurusan,
+            'jenis_kelamin' => $request->jenis_kelamin,
+        ]);
+
+        return redirect()->route('admin.manajemen-akun.mahasiswa')->with('success', 'Data Mahasiswa berhasil ditambahkan');
     }
 
     /**
@@ -46,7 +77,9 @@ class AkunMahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $prodis = ProgramStudi::all();
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        return view('admin.function.mahasiswa.edit', compact('prodis', 'mahasiswa'));
     }
 
     /**
@@ -54,7 +87,35 @@ class AkunMahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nim' => 'required|string|max:20',
+            'nama_mahasiswa' => 'required|string|max:255',
+            'id_program_studi' => 'required|exists:program_studi,id_program_studi',
+            'jurusan' => 'required',
+            'jenis_kelamin' => 'required|in:L,P',
+        ], [
+            'nim.required' => 'NIM Harus Diisi',
+            'nama_mahasiswa.required' => 'Nama Mahasiswa Harus Diisi',
+            'id_program_studi.required' => 'Nama Program Studi Harus Diisi',
+            'jurusan.required' => 'Jurusan Harus Diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin Harus Diisi',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        Mahasiswa::find($id)->update([
+            'nim' => $request->nim,
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'id_program_studi' => $request->id_program_studi,
+            'jurusan' => $request->jurusan,
+            'jenis_kelamin' => $request->jenis_kelamin,
+        ]);
+
+        return redirect()->route('admin.manajemen-akun.mahasiswa')->with('success', 'Data Mahasiswa berhasil diperbarui');
     }
 
     /**
@@ -62,6 +123,10 @@ class AkunMahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        $mahasiswa->delete();
+
+        return redirect()->route('admin.manajemen-akun.mahasiswa')->with('success', 'Data Mahasiswa berhasil dihapus.');
     }
 }

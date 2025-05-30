@@ -42,7 +42,7 @@ Route::get('/daftar', function () {
 
 // MAHASISWA
 Route::group(['prefix' => 'admin/manajemen-akun/mahasiswa'], function () {
-    Route::get('/', [AkunMahasiswaController::class, 'index']);
+    Route::get('/', [AkunMahasiswaController::class, 'index'])->name('admin.manajemen-akun.mahasiswa');
     Route::get('/tambah', [AkunMahasiswaController::class, 'create']);
     Route::post('/tambah', [AkunMahasiswaController::class, 'store']);
     Route::get('/edit/{id}', [AkunMahasiswaController::class, 'edit']);

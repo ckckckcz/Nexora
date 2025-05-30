@@ -7,7 +7,7 @@
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="" method="POST" class="flex flex-col gap-6">
+                <form action="/admin/manajemen-akun/mahasiswa/tambah" method="POST" class="flex flex-col gap-6">
                     @csrf
                     <!-- NIM dan Nama Mahasiswa -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -40,8 +40,9 @@
                                 class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
                                 required>
                                 <option value="" disabled selected>Pilih Program Studi</option>
-                                <option value="1">D-IV Teknik Informatika</option>
-                                <option value="2">D-IV Sistem Informasi Bisnis</option>
+                                @foreach($prodis as $prodi)
+                                    <option value="{{ $prodi->id_program_studi }}">{{ $prodi->nama_program_studi }}</option>
+                                @endforeach
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg class="fill-current h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -57,19 +58,9 @@
                     <!-- Jurusan -->
                     <div class="flex flex-col gap-2">
                         <label for="jurusan" class="text-sm font-medium text-gray-700 transition-colors duration-200">Jurusan</label>
-                        <div class="relative">
-                            <select id="jurusan" name="jurusan"
-                                class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
-                                required>
-                                <option value="" disabled selected>Pilih Jurusan</option>
-                                <option value="Teknologi Informasi">Teknologi Informasi</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                </svg>
-                            </div>
-                        </div>
+                        <input type="text" id="jurusan" name="jurusan"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
+                            value="Teknologi Informasi" readonly required maxlength="100">
                         @error('jurusan')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
