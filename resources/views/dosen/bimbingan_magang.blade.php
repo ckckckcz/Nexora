@@ -80,7 +80,12 @@
                                 <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Dr. Siti Aminah</td>
                                 <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">PT Telkom
                                     - Frontend Dev</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Aktif</td>
+                                <td class="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                                        <span class="w-1.5 h-1.5 mr-1.5 rounded-full bg-emerald-500"></span>
+                                        Aktif
+                                    </span>
+                                </td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                                     <a href="/admin/bimbingan-magang/edit/"
                                         class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
@@ -97,7 +102,35 @@
                                     </form>
                                 </td>
                             </tr>
-                            <!-- Data dinamis akan di-loop di sini -->
+                            <tr>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Budi Santoso</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Dr. Siti Aminah</td>
+                                <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">PT Telkom
+                                    - Frontend Dev</td>
+                                <td class="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        <svg class="w-3.5 h-3.5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Selesai
+                                    </span>
+                                </td>
+                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                    <a href="/admin/bimbingan-magang/edit/"
+                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
+                                        Edit
+                                    </a>
+                                    <form action="/admin/bimbingan-magang/hapus/" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -126,7 +159,6 @@
                                     <path fill-rule="evenodd"
                                         d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                         clip-rule="evenodd" />
-                                </svg>
                             </button>
                             <button aria-current="page"
                                 class="z-10 bg-blue-50 border-blue-500 text-blue-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</button>
@@ -137,7 +169,6 @@
                                     <path fill-rule="evenodd"
                                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                         clip-rule="evenodd" />
-                                </svg>
                             </button>
                         </nav>
                     </div>
