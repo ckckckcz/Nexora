@@ -68,20 +68,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b">
+                            <tr class="">
                                 <td class="px-4 py-2">MAHASISWA 1</td>
                                 <td class="px-4 py-2">PLISS ACC BOS</td>
                                 <td class="px-4 py-2">
-                                    <span class="bg-yellow-400 text-white px-2 py-1 rounded text-sm">Menunggu</span>
+                                    <span class="bg-yellow-100 rounded-full text-yellow-700 px-2 py-1 text-sm">Menunggu</span>
                                 </td>
                                 <td class="px-4 py-2">20-10-2025</td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="/admin/pengajuan-magang/edit"
-                                        class="text-blue-600 hover:text-blue-900">Edit</a>
-                                    <form action="/admin/pengajuan-magang/hapus" method="POST" class="inline">
+                                    <a href="/admin/pegajuan-magang/edit"
+                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
+                                    <form action="/admin/pegajuan-magang/hapus" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
+                                        <button type="submit"
+                                            class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -105,13 +107,13 @@
                                 <td class="px-4 py-2">{{ $pengajuan->lowongan->judul }}</td>
                                 <td class="px-4 py-2">
                                     @if($pengajuan->status_pengajuan === 'menunggu')
-                                    <span class="bg-yellow-400 text-white px-2 py-1 rounded text-sm">Menunggu</span>
+                                    <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-sm">Menunggu</span>
                                     @elseif($pengajuan->status_pengajuan === 'diterima')
-                                    <span class="bg-green-500 text-white px-2 py-1 rounded text-sm">Diterima</span>
+                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-sm">Diterima</span>
                                     @elseif($pengajuan->status_pengajuan === 'ditolak')
-                                    <span class="bg-red-500 text-white px-2 py-1 rounded text-sm">Ditolak</span>
+                                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-sm">Ditolak</span>
                                     @else
-                                    <span class="bg-gray-400 text-white px-2 py-1 rounded text-sm">Tidak Diketahui</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">Tidak Diketahui</span>
                                     @endif
                                 </td>
                                 <td class="px-4 py-2">{{ $pengajuan->created_at->format('d-m-Y H:i') }}</td>

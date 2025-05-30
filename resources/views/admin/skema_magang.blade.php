@@ -90,30 +90,34 @@
                         </thead>
                         <tbody id="skema-table-body" class="bg-white divide-y divide-gray-200">
                             @if ($schemeInternships === null)
-                            @else 
+                            @else
                                 @foreach ($schemeInternships as $schemeInternship)
-                                <tr>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {{ $loop->iteration }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ strtoupper($schemeInternship->nama_skema_magang) }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ date('d-m-Y', strtotime($schemeInternship->tanggal_mulai)) }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ date('d-m-Y', strtotime($schemeInternship->tanggal_selesai)) }}
-                                    </td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/skema-magang/edit/{{ $schemeInternship->id_skema_magang }}" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/skema-magang/hapus/{{ $schemeInternship->id_skema_magang }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ strtoupper($schemeInternship->nama_skema_magang) }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ date('d-m-Y', strtotime($schemeInternship->tanggal_mulai)) }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ date('d-m-Y', strtotime($schemeInternship->tanggal_selesai)) }}
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="/admin/skema-magang/edit/{{ $schemeInternship->id_skema_magang }}"
+                                                class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
+                                            <form action="/admin/skema-magang/hapus/{{ $schemeInternship->id_skema_magang }}"
+                                                method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             @endif
                         </tbody>
@@ -132,7 +136,8 @@
                     <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
                         <div>
                             <p class="text-sm text-gray-700">
-                                Menampilkan <span id="start-index" class="font-medium">10</span> dari <span id="total-skema" class="font-medium">semua</span>
+                                Menampilkan <span id="start-index" class="font-medium">10</span> dari <span id="total-skema"
+                                    class="font-medium">semua</span>
                                 data
                             </p>
                         </div>

@@ -107,16 +107,19 @@
                                         {{ $guidance->lowongan->nama_perusahaan }}
                                     </td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm hidden lg:table-cell">
-                                        <span class="@if($guidance->status_bimbingan == 'selesai') bg-green-100 text-green-800 @elseif($guidance->status_bimbingan == 'aktif') bg-yellow-100 text-yellow-800 @else bg-red-100 text-red-800 @endif rounded-full px-2 py-1 text-xs font-medium">
+                                        <span class="@if($guidance->status_bimbingan == 'selesai') bg-blue-100 text-blue-800 @elseif($guidance->status_bimbingan == 'aktif') bg-emerald-100 text-emerald-800 @else bg-red-100 text-red-800 @endif rounded-full px-2 py-1 text-xs font-medium">
                                             {{ ucfirst($guidance->status_bimbingan) }}
                                         </span>
                                     </td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/program-studi/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/program-studi/hapus" method="POST" class="inline">
+                                        <a href="/admin/bimbingan-magang/edit" class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
+                                        <form action="/admin/bimbingan-magang/hapus" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
+                                            <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

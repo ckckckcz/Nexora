@@ -85,24 +85,26 @@
                         </thead>
                         <tbody id="program-studi-table-body" class="bg-white divide-y divide-gray-200">
                             @if ($majors === null)
-                            @else 
+                            @else
                                 @foreach ($majors as $major)
-                                <tr>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ $major->kode_program_studi }}
-                                    </td>
-                                    <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">
-                                        {{ $major->nama_program_studi }}
-                                    </td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/program-studi/edit/{{ $major->id_program_studi }}" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/program-studi/hapus/{{ $major->id_program_studi }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $major->kode_program_studi }}
+                                        </td>
+                                        <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">
+                                            {{ $major->nama_program_studi }}
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="/admin/program-studi/edit/{{ $major->id_program_studi }}"
+                                                class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
+                                            <form action="/admin/program-studi/hapus/{{ $major->id_program_studi }}" method="POST"
+                                                class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             @endif
                         </tbody>
@@ -122,7 +124,8 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Menampilkan <span id="start-index" class="font-medium">1</span> sampai <span id="end-index"
-                                    class="font-medium"></span> dari <span id="total-program-studi" class="font-medium"></span>
+                                    class="font-medium"></span> dari <span id="total-program-studi"
+                                    class="font-medium"></span>
                                 data
                             </p>
                         </div>

@@ -82,7 +82,6 @@
                                     - Frontend Dev</td>
                                 <td class="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                                        <span class="w-1.5 h-1.5 mr-1.5 rounded-full bg-emerald-500"></span>
                                         Aktif
                                     </span>
                                 </td>
@@ -109,9 +108,6 @@
                                     - Frontend Dev</td>
                                 <td class="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                        <svg class="w-3.5 h-3.5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                        </svg>
                                         Selesai
                                     </span>
                                 </td>

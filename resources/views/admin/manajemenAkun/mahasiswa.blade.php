@@ -272,36 +272,43 @@
                         </thead>
                         <tbody id="student-table-body" class="bg-white divide-y divide-gray-200">
                             @if ($colleges === null)
-                            @else 
+                            @else
                                 @foreach ($colleges as $college)
-                                <tr>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ $loop->iteration }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ $college->nim }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ $college->nama_mahasiswa }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ $college->programStudi->nama_program_studi }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ $college->jurusan }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                        {{ $college->created_at->format('d-m-Y') }}
-                                    </td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/program-studi/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/program-studi/hapus" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $college->nim }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $college->nama_mahasiswa }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $college->programStudi->nama_program_studi }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $college->jurusan }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $college->created_at->format('d-m-Y') }}
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                            <a href="/admin/manajemen-akun/mahasiswa/edit/"
+                                                class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
+                                                Edit
+                                            </a>
+                                            <form action="/admin/manajemen-akun/mahasiswa/hapus/" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             @endif
                         </tbody>
