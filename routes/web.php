@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin/manajemen-akun/dosen-pembimbing'], function () 
 
 // BIMBINGAN MAGANG
 Route::group(['prefix' => 'admin/bimbingan-magang'], function () {
-    Route::get('/', [BimbinganMagangController::class, 'index']);
+    Route::get('/', [BimbinganMagangController::class, 'index'])->name('admin.bimbingan-magang');
     Route::get('/tambah', [BimbinganMagangController::class, 'create']);
     Route::post('/tambah', [BimbinganMagangController::class, 'store']);
     Route::get('/edit/{id}', [BimbinganMagangController::class, 'edit']);

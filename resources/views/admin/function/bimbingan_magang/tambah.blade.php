@@ -7,7 +7,7 @@
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="" method="POST" class="flex flex-col gap-6">
+                <form action="/admin/bimbingan-magang/tambah" method="POST" class="flex flex-col gap-6">
                     @csrf
                     <!-- Mahasiswa -->
                     <div class="flex flex-col gap-2">
@@ -19,12 +19,9 @@
                                 required>
                                 <option value="" disabled selected>Pilih Mahasiswa</option>
                                 <!-- Dynamic options to be populated from Mahasiswa table -->
-                                {{-- @foreach($mahasiswas as $mahasiswa)
-                                <option value="{{ $mahasiswa->id }}">{{ $mahasiswa->nama }} ({{ $mahasiswa->nim }})</option>
-                                @endforeach --}}
-                                <option value="mahasiswa1">Mahasiswa 1</option>
-                                <option value="mahasiswa2">Mahasiswa 2</option>
-                                <option value="mahasiswa3">Mahasiswa 3</option>
+                                @foreach($mahasiswas as $mahasiswa)
+                                <option value="{{ $mahasiswa->id_mahasiswa }}">{{ $mahasiswa->nama_mahasiswa }} ({{ $mahasiswa->nim }})</option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -49,12 +46,9 @@
                                 required>
                                 <option value="" disabled selected>Pilih Dosen</option>
                                 <!-- Dynamic options to be populated from Dosen table -->
-                                {{-- @foreach($dosens as $dosen)
-                                    <option value="{{ $dosen->id }}">{{ $dosen->nama_dosen }} ({{ $dosen->nidn }})</option>
-                                @endforeach --}}
-                                    <option value="Dosen1">Dosen 1</option>
-                                    <option value="Dosen2">Dosen 2</option>
-                                    <option value="Dosen3">Dosen 3</option>
+                                @foreach($dosens as $dosen)
+                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama_dosen }} ({{ $dosen->nidn }})</option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -79,13 +73,11 @@
                                 required>
                                 <option value="" disabled selected>Pilih Lowongan Magang</option>
                                 <!-- Dynamic options to be populated from Lowongan Magang table -->
-                                {{-- @foreach($lowonganMagangs as $lowongan)
-                                    <option value="{{ $lowongan->id }}">{{ $lowongan->judul }} - {{ $lowongan->perusahaan }}
+                                @foreach($lowongans as $lowongan)
+                                    <option value="{{ $lowongan->id_lowongan }}">{{ $lowongan->nama_perusahaan }} - {{
+                                        $lowongan->posisiMagang->nama_posisi }}
                                     </option>
-                                @endforeach --}}
-                                <option value="Lowongan1">Lowongan 1</option>
-                                <option value="Lowongan2">Lowongan 2</option>
-                                <option value="Lowongan3">Lowongan 3</option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -109,8 +101,8 @@
                             <select id="status_bimbingan" name="status_bimbingan"
                                 class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
                                 required>
-                                <option value="" disabled selected>Pilih Status</option>
-                                <option value="aktif">Aktif</option>
+                                <option value="" disabled >Pilih Status</option>
+                                <option value="aktif" selected>Aktif</option>
                                 <option value="selesai">Selesai</option>
                             </select>
                             <div
