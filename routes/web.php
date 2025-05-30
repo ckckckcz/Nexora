@@ -57,8 +57,8 @@ Route::get('/admin/pengajuan-magang', function () {
 
 
 // DOSEN
-Route::group(['prefix' => 'admin/manajemen-akun/dosen-pembimbing'], function () {
-    Route::get('/', [AkunDosenController::class, 'index']);
+Route::group(['prefix' => 'admin/manajemen-akun/dosen'], function () {
+    Route::get('/', [AkunDosenController::class, 'index'])->name('admin.manajemen-akun.dosen');
     Route::get('/tambah', [AkunDosenController::class, 'create']);
     Route::post('/tambah', [AkunDosenController::class, 'store']);
     Route::get('/edit/{id}', [AkunDosenController::class, 'edit']);

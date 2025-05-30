@@ -7,8 +7,9 @@
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
+                <form action="/admin/manajemen-akun/dosen/edit/{{ $dosen->id_dosen }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
                     @csrf
+                    @method('PUT')
                     <!-- NIDN dan Nama Dosen -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div class="flex flex-col gap-2">
@@ -16,7 +17,7 @@
                                 class="text-sm font-medium text-gray-700 transition-colors duration-200">NIDN</label>
                             <input type="text" id="nidn" name="nidn"
                                 class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                                placeholder="Masukkan NIDN (contoh: 1234567890)" required maxlength="10">
+                                placeholder="Masukkan NIDN (contoh: 1234567890)" value={{ old('nidn', $dosen->nidn) }} required maxlength="10">
                             @error('nidn')
                                 <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
@@ -27,7 +28,7 @@
                                 class="text-sm font-medium text-gray-700 transition-colors duration-200">Nama Dosen</label>
                             <input type="text" id="nama_dosen" name="nama_dosen"
                                 class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                                placeholder="Masukkan Nama Dosen" required maxlength="100">
+                                placeholder="Masukkan Nama Dosen" value="{{ old('nama_dosen', $dosen->nama_dosen) }}" required maxlength="100">
                             @error('nama_dosen')
                                 <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
@@ -43,11 +44,9 @@
                                 class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
                                 required>
                                 <option value="" disabled selected>Pilih Program Studi</option>
-                                <option value="1">S1 Teknik Informatika</option>
-                                <option value="2">S1 Sistem Informasi</option>
-                                <option value="3">S1 Teknik Elektro</option>
-                                <option value="4">S1 Teknik Sipil</option>
-                                <option value="5">S1 Manajemen Bisnis</option>
+                                @foreach($prodis as $prodi)
+                                    <option value="{{ $prodi->id_program_studi }}" {{ old('id_program_studi', $prodi->id_program_studi) == $dosen->id_program_studi ? 'selected' : '' }}>{{ $prodi->nama_program_studi }}</option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -66,25 +65,9 @@
                     <div class="flex flex-col gap-2">
                         <label for="jurusan"
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Jurusan</label>
-                        <div class="relative">
-                            <select id="jurusan" name="jurusan"
-                                class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
-                                required>
-                                <option value="" disabled selected>Pilih Jurusan</option>
-                                <option value="Teknik Informatika">Teknik Informatika</option>
-                                <option value="Sistem Informasi">Sistem Informasi</option>
-                                <option value="Teknik Elektro">Teknik Elektro</option>
-                                <option value="Teknik Sipil">Teknik Sipil</option>
-                                <option value="Manajemen Bisnis">Manajemen Bisnis</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4 transition-transform duration-200"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                            </div>
-                        </div>
+                        <input type="text" id="jurusan" name="jurusan"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
+                            value="Teknologi Informasi" readonly required maxlength="100">
                         @error('jurusan')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -93,6 +76,11 @@
                     <!-- Tanda Tangan -->
                     <div class="flex flex-col gap-3">
                         <label class="text-sm font-medium text-gray-700">Tanda Tangan</label>
+                        @if($dosen->tanda_tangan)
+                            <img src="{{ Storage::url($dosen->tanda_tangan) }}" alt="Tanda Tangan {{ $dosen->nama_dosen }}" class="max-h-48 rounded-lg shadow-sm">
+                        @else
+                            <p class="text-sm text-gray-500">Tanda tangan belum tersedia.</p>
+                        @endif
 
                         <!-- Tab Navigation -->
                         <div class="flex border-b border-gray-200">

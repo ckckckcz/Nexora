@@ -82,7 +82,7 @@
                     </div>
 
                     <!-- Add Student Button -->
-                    <a href="/admin/manajemen-akun/dosen-pembimbing/tambah">
+                    <a href="/admin/manajemen-akun/dosen/tambah">
                         <button id="add-student-btn"
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
                             <span id="plus-icon"></span>
@@ -115,9 +115,6 @@
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
                                     Jurusan</th>
                                 <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">
-                                    Tanggal Daftar</th>
-                                <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Aksi
                                 </th>
@@ -143,15 +140,12 @@
                                         <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
                                             {{ $lecture->jurusan }}
                                         </td>
-                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                            {{ $lecture->created_at->format('d-m-Y') }}
-                                        </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                            <a href="/admin/manajemen-akun/dosen/edit/"
+                                            <a href="/admin/manajemen-akun/dosen/edit/{{ $lecture->id_dosen }}"
                                                 class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
                                                 Edit
                                             </a>
-                                            <form action="/admin/manajemen-akun/dosen/hapus/" method="POST" class="inline">
+                                            <form action="/admin/manajemen-akun/dosen/hapus/{{ $lecture->id_dosen }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
