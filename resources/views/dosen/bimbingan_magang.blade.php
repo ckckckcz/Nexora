@@ -1,499 +1,148 @@
 @extends('layouts.dosen')
 @section('dosen')
-    <div class="bg-gray-50 flex">
-        <!-- Left Sidebar -->
-        <div class="w-80 border-r h-[920px] bg-gray-50 flex flex-col">
-            <!-- Chat Header -->
-            <div class="p-4 flex justify-between items-center border-b">
-                <h1 class="text-xl font-semibold">Chat</h1>
-                <button class="text-blue-900 bg-blue-900/10 rounded-lg p-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 5v14M5 12h14"></path>
-                    </svg>
-                </button>
-            </div>
+    <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-blue-900">Manajemen Bimbingan Magang 📋</h1>
+            <p class="mt-2 text-gray-600 font-medium">Kelola data bimbingan magang mahasiswa</p>
+        </header>
 
-            <!-- Search Bar -->
-            <div class="p-3 border-b">
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
-                        </svg>
-                    </div>
-                    <input type="text" placeholder="Search"
-                        class="pl-10 pr-4 py-2 w-full bg-gray-100 rounded-md text-sm focus:outline-none">
-                </div>
-            </div>
+        <section class="bg-white rounded-2xl border border-gray-200">
+            <div class="p-4 sm:p-6 flex flex-col gap-4">
+                <div class="flex flex-col lg:flex-row sm:items-left sm:justify-between gap-4">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">
+                        <!-- Search Input -->
+                        <div class="relative flex-grow max-w-full sm:max-w-md">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400" id="search-icon"></i>
+                            </div>
+                            <input type="text" id="search-input"
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                placeholder="Cari berdasarkan nama mahasiswa atau status" />
+                        </div>
 
-            <!-- Archived Section -->
-            <div class="p-3 flex justify-between items-center hover:bg-gray-100 cursor-pointer">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-3" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                    </svg>
-                    <span class="text-gray-700">Archived</span>
-                </div>
-                <span class="text-gray-500 text-sm">2</span>
-            </div>
-
-            <!-- Chat List -->
-            <div class="flex-1 overflow-y-auto">
-                <!-- Ronald Chat -->
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer border-l-4 border-blue-900">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Ronald</h3>
-                            <span class="text-xs text-gray-500">10:00am</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Meeting by 12pm</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Albert Chat -->
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">10:00am</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Hello david, what are today's tasks?</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Robert Chats -->
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
-                            <span class="text-xs text-gray-500">Jan 30</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Have a great day then</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <span
-                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
-                            <span class="text-xs text-gray-500">Jan 30</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Hey there, any update?</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <span
-                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
-                            <span class="text-xs text-gray-500">Jan 30</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">We'll have the usability test run tomorrow</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <span
-                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span>R</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Robert</h3>
-                            <span class="text-xs text-gray-500">Jan 30</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">All components are now available for use</p>
-                    </div>
-                    <div class="ml-2 flex items-center">
-                        <span
-                            class="bg-blue-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </div>
-                </div>
-
-                <!-- Albert Chats -->
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
-                    </div>
-                </div>
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
-                    </div>
-                </div>
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
-                    </div>
-                </div>
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">Happy new month dan</p>
-                    </div>
-                </div>
-
-                <div class="flex p-3 hover:bg-gray-100 cursor-pointer">
-                    <div class="flex-shrink-0 mr-3">
-                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <span>A</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between">
-                            <h3 class="text-sm font-medium text-gray-900">Albert</h3>
-                            <span class="text-xs text-gray-500">Yesterday</span>
-                        </div>
-                        <p class="text-sm text-gray-500 truncate">I'm doing great, thanks!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Chat Area -->
-        <div class="flex-1 flex flex-col h-[920px]">
-            <!-- Chat Header -->
-            <div class="p-4 border-b bg-white flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 mr-3">
-                        <span>R</span>
-                    </div>
-                    <div>
-                        <h2 class="text-sm font-medium">Ronald</h2>
-                        <p class="text-xs text-gray-500">Last seen at 12:02am</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                            </path>
-                        </svg>
-                    </button>
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                        </svg>
-                    </button>
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="1"></circle>
-                            <circle cx="19" cy="12" r="1"></circle>
-                            <circle cx="5" cy="12" r="1"></circle>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Chat Messages -->
-            <div class="flex-1 overflow-y-auto p-4 bg-white">
-                <!-- Date Separator -->
-                <div class="flex justify-center mb-4">
-                    <div class="bg-blue-900/20 text-blue-900 font-bold text-xs px-4 py-1 rounded-full">Hari ini</div>
-                </div>
-
-                <!-- Received Message with Avatar -->
-                <div class="flex mb-4">
-                    <div class="flex-shrink-0 mr-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span class="text-xs">R</span>
-                        </div>
-                    </div>
-                    <div class="max-w-md">
-                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
-                            <p class="text-sm text-gray-800">Good morning Perzival, the design has been completed and is
-                                ready for review</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Received Message with Avatar (Repeated) -->
-                <div class="flex mb-4">
-                    <div class="flex-shrink-0 mr-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span class="text-xs">R</span>
-                        </div>
-                    </div>
-                    <div class="max-w-md">
-                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
-                            <p class="text-sm text-gray-800">Good morning Perzival, the design has been completed and is
-                                ready for review</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Received Message with Image -->
-                <div class="flex mb-4">
-                    <div class="flex-shrink-0 mr-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                            <span class="text-xs">R</span>
-                        </div>
-                    </div>
-                    <div class="max-w-md">
-                        <div class="bg-gray-50 rounded-lg p-3 shadow-sm">
-                            <div class="mb-2">
-                                <img src="https://www.learnworlds.com/app/uploads/2025/02/user-preferences.webp"
-                                    alt="Design Screenshot" class="rounded-lg w-full h-auto">
+                        <!-- Optional: Filter Dropdown for Status -->
+                        <div class="relative w-full sm:w-auto">
+                            <button id="status-filter-btn"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
+                                <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
+                                <span id="status-filter-text">Semua Status</span>
+                                <i class="fas fa-chevron-down text-gray-300" id="status-chevron"></i>
+                            </button>
+                            <div id="status-dropdown"
+                                class="absolute z-10 mt-1 w-full sm:w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+                                <ul class="py-1 max-h-60 overflow-auto">
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="Semua">Semua Status</button></li>
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="aktif">Aktif</button></li>
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="selesai">Selesai</button></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="text-xs text-gray-500 mt-1">9:12 am</div>
                     </div>
+
+                    <!-- Optional: Add Bimbingan Button -->
+                    <a href="/admin/bimbingan-magang/tambah">
+                        <button id="add-bimbingan-btn"
+                            class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
+                            <i class="fas fa-plus mr-2"></i>
+                            <span>Tambah Bimbingan</span>
+                        </button>
+                    </a>
                 </div>
 
-                <!-- Sent Message -->
-                <div class="flex justify-end mb-4">
-                    <div class="max-w-md">
-                        <div class="bg-blue-900 rounded-lg p-3 text-white">
-                            <p class="text-sm">Great work Ronald, keep going 👍</p>
-                        </div>
-                    </div>
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    Mahasiswa</th>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dosen
+                                    Pembimbing</th>
+                                <th
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase hidden sm:table-cell">
+                                    Lowongan</th>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
+                                </th>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Contoh row statis -->
+                            <tr>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Budi Santoso</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Dr. Siti Aminah</td>
+                                <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">PT Telkom
+                                    - Frontend Dev</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Aktif</td>
+                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                    <a href="/admin/bimbingan-magang/edit/"
+                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
+                                        Edit
+                                    </a>
+                                    <form action="/admin/bimbingan-magang/hapus/" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <!-- Data dinamis akan di-loop di sini -->
+                        </tbody>
+                    </table>
                 </div>
-            </div>
 
-            <!-- Message Input -->
-            <div class="p-4 bg-white border-t shadow-sm">
+                <!-- Pagination -->
                 <div
-                    class="flex items-center bg-gray-50 rounded-2xl py-3 px-3 border border-gray-200 hover:border-blue-300 transition-all duration-300">
-                    <!-- Attachment Button with Tooltip -->
-                    <div class="relative group">
+                    class="px-4 sm:px-6 py-4 bg-white border-t border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex-1 flex justify-between sm:hidden">
                         <button
-                            class="text-gray-500 hover:text-blue-500 p-2 rounded-full hover:bg-blue-50 transition-colors duration-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="17 8 12 3 7 8"></polyline>
-                                <line x1="12" y1="3" x2="12" y2="15"></line>
-                            </svg>
-                        </button>
-                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block">
-                            <div class="bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
-                                Lampirkan file
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Image Upload Button with Tooltip -->
-                    <div class="relative group">
+                            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Sebelumnya</button>
                         <button
-                            class="text-gray-500 hover:text-blue-500 p-2 rounded-full hover:bg-blue-50 transition-colors duration-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                <polyline points="21 15 16 10 5 21"></polyline>
-                            </svg>
-                        </button>
-                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block">
-                            <div class="bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
-                                Kirim gambar
-                            </div>
+                            class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Selanjutnya</button>
+                    </div>
+                    <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-700">
+                                Menampilkan <span class="font-medium">1</span> sampai <span class="font-medium">10</span>
+                                dari <span class="font-medium">50</span> data
+                            </p>
                         </div>
-                    </div>
-
-                    <!-- Input Field -->
-                    <div class="flex-1 mx-2">
-                        <input type="text" placeholder="Tulis Pesan..." id="messageInput"
-                            class="w-full bg-transparent border-0 focus:ring-0 focus:outline-none text-sm py-2 placeholder-gray-500"
-                            autocomplete="off">
-                    </div>
-
-                    <!-- Send Button with Animation -->
-                    <button id="sendButton"
-                        class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="22" y1="2" x2="11" y2="13"></line>
-                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Character Counter and Typing Indicator -->
-                <div class="flex justify-between text-xs text-gray-500 mt-1 px-4">
-                    <div id="typingIndicator" class="hidden">
-                        <span class="italic">Seseorang sedang mengetik...</span>
-                    </div>
-                    <div id="charCounter" class="hidden">
-                        <span id="currentChars">0</span>/<span id="maxChars">500</span>
+                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                            <button
+                                class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">Previous</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <button aria-current="page"
+                                class="z-10 bg-blue-50 border-blue-500 text-blue-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</button>
+                            <button
+                                class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">Next</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </nav>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-    <script>
-        // Show character counter when input is focused
-        document.getElementById('messageInput').addEventListener('focus', function () {
-            document.getElementById('charCounter').classList.remove('hidden');
-        });
-
-        // Hide character counter when input is blurred and empty
-        document.getElementById('messageInput').addEventListener('blur', function () {
-            if (this.value.length === 0) {
-                document.getElementById('charCounter').classList.add('hidden');
-            }
-        });
-
-        // Update character count
-        document.getElementById('messageInput').addEventListener('input', function () {
-            const currentLength = this.value.length;
-            const maxLength = 500;
-            document.getElementById('currentChars').textContent = currentLength;
-
-            // Change color when approaching limit
-            if (currentLength > maxLength * 0.8) {
-                document.getElementById('charCounter').classList.add('text-yellow-500');
-            } else {
-                document.getElementById('charCounter').classList.remove('text-yellow-500');
-            }
-
-            if (currentLength > maxLength * 0.95) {
-                document.getElementById('charCounter').classList.add('text-red-500');
-            } else {
-                document.getElementById('charCounter').classList.remove('text-red-500');
-            }
-        });
-    </script>
 @endsection

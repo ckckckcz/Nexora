@@ -6,7 +6,7 @@
             <p class="mt-2 text-gray-600 font-medium">Kelola data laporan magang</p>
         </header>
 
-        <section class="bg-white rounded-xl shadow-md">
+        <section class="bg-white rounded-2xl border border-gray-200">
             <div class="p-4 sm:p-6 flex flex-col gap-4">
                 <div class="flex flex-col lg:flex-row sm:items-left sm:justify-between gap-4">
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">

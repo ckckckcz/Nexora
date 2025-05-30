@@ -7,7 +7,7 @@
 
         
 
-        <section class="bg-white rounded-xl shadow-md transition-shadow duration-300 hover:shadow-lg">
+        <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
                 <form action="/admin/skema-magang/edit/{{ $skemaMagang->id_skema_magang }}" method="POST" class="flex flex-col gap-6">
                     @csrf
