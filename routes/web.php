@@ -92,7 +92,7 @@ Route::group(['prefix' => '/admin/skema-magang/'], function () {
 
 // PROGRAM STUDI
 Route::group(['prefix' => '/admin/program-studi/'], function () {
-    Route::get('/', [ProdiController::class, 'index']);
+    Route::get('/', [ProdiController::class, 'index'])->name('admin.program-studi');;
     Route::get('/tambah', [ProdiController::class, 'create']);
     Route::post('/tambah', [ProdiController::class, 'store']);
     Route::get('/edit/{id}', [ProdiController::class, 'edit']);

@@ -7,7 +7,7 @@
 
         <section class="bg-white rounded-xl shadow-md transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="" method="POST" class="flex flex-col gap-6">
+                <form action="/admin/program-studi/tambah" method="POST" class="flex flex-col gap-6">
                     @csrf
                     <!-- Kode Program Studi -->
                     <div class="flex flex-col gap-2">

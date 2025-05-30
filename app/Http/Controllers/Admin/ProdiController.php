@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dosen;
+use App\Models\Mahasiswa;
 use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
+use Validator;
 
 class ProdiController extends Controller
 {
@@ -22,7 +25,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        return view('admin.function.program-studi.tambah');
+        return view('admin.function.program_studi.tambah');
     }
     
     /**
@@ -30,7 +33,26 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kode_program_studi' => 'required|string',
+            'nama_program_studi' => 'required|string',
+        ], [
+            'kode_program_studi.required' => 'Kode Program Studi Harus Diisi',
+            'nama_program_studi.required' => 'Nama Program Studi Harus Diisi',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        ProgramStudi::create([
+            'kode_program_studi' => $request->kode_program_studi,
+            'nama_program_studi' => $request->nama_program_studi,
+        ]);
+
+        return redirect()->route('admin.program-studi')->with('success', 'Program Studi berhasil ditambahkan');
     }
     
     /**
@@ -46,7 +68,8 @@ class ProdiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.function.program-studi.edit');
+        $programStudi = ProgramStudi::findOrFail($id);
+        return view('admin.function.program_studi.edit', compact('programStudi'));
     }
 
     /**
@@ -54,7 +77,26 @@ class ProdiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kode_program_studi' => 'required|string',
+            'nama_program_studi' => 'required|string',
+        ], [
+            'kode_program_studi.required' => 'Kode Program Studi Harus Diisi',
+            'nama_program_studi.required' => 'Nama Program Studi Harus Diisi',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        ProgramStudi::find($id)->update([
+            'kode_program_studi' => $request->kode_program_studi,
+            'nama_program_studi' => $request->nama_program_studi,
+        ]);
+
+        return redirect()->route('admin.program-studi')->with('success', 'Program Studi berhasil ditambahkan');
     }
 
     /**
@@ -62,6 +104,19 @@ class ProdiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ProgramStudi = ProgramStudi::findOrFail($id);
+
+        // Cek apakah masih ada program studi di mahasiswa dan dosen 
+        $checkMahasiswa = Mahasiswa::where('id_program_studi', $id)->count();
+        $chekDosen = Dosen::where('id_program_studi', $id)->count();
+
+        if ($checkMahasiswa > 0 || $chekDosen > 0) {
+            return redirect()->route('admin.program-studi')->with('error', 'Program Studi tidak dapat dihapus karena masih digunakan oleh mahasiswa dan dosen.');
+        }
+
+        // Jika tidak ada lowongan open, lanjut hapus
+        $ProgramStudi->delete();
+
+        return redirect()->route('admin.program-studi')->with('success', 'Program Studi berhasil dihapus.');
     }
 }

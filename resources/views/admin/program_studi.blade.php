@@ -71,10 +71,6 @@
                             <tr>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    ID Program Studi
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Kode Program Studi
                                 </th>
                                 <th scope="col"
@@ -88,51 +84,27 @@
                             </tr>
                         </thead>
                         <tbody id="program-studi-table-body" class="bg-white divide-y divide-gray-200">
-                            <?php
-                            // Data dummy untuk program studi
-                            $programStudis = [
-                                (object) [
-                                    'id_program_studi' => 1,
-                                    'kode_program_studi' => 'TI01',
-                                    'nama_program_studi' => 'Teknik Informatika',
-                                ],
-                                (object) [
-                                    'id_program_studi' => 2,
-                                    'kode_program_studi' => 'SI02',
-                                    'nama_program_studi' => 'Sistem Informasi',
-                                ],
-                                (object) [
-                                    'id_program_studi' => 3,
-                                    'kode_program_studi' => 'TE03',
-                                    'nama_program_studi' => 'Teknik Elektro',
-                                ],
-                                (object) [
-                                    'id_program_studi' => 4,
-                                    'kode_program_studi' => 'TS04',
-                                    'nama_program_studi' => 'Teknik Sipil',
-                                ],
-                                (object) [
-                                    'id_program_studi' => 5,
-                                    'kode_program_studi' => 'MB05',
-                                    'nama_program_studi' => 'Manajemen Bisnis',
-                                ],
-                            ];
-                            ?>
-                            @foreach ($programStudis as $programStudi)
+                            @if ($majors === null)
+                            @else 
+                                @foreach ($majors as $major)
                                 <tr>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $programStudi->id_program_studi }}</td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $programStudi->kode_program_studi }}</td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">{{ $programStudi->nama_program_studi }}</td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $major->kode_program_studi }}
+                                    </td>
+                                    <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">
+                                        {{ $major->nama_program_studi }}
+                                    </td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/program-studi/edit" class="text-blue-600 hover:text-blue-900">Edit</a>
-                                        <form action="/admin/program-studi/hapus" method="POST" class="inline">
+                                        <a href="/admin/program-studi/edit/{{ $major->id_program_studi }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <form action="/admin/program-studi/hapus/{{ $major->id_program_studi }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -150,7 +122,7 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Menampilkan <span id="start-index" class="font-medium">1</span> sampai <span id="end-index"
-                                    class="font-medium">{{ count($programStudis) }}</span> dari <span id="total-program-studi" class="font-medium">{{ count($programStudis) }}</span>
+                                    class="font-medium"></span> dari <span id="total-program-studi" class="font-medium"></span>
                                 data
                             </p>
                         </div>

@@ -7,15 +7,16 @@
 
         <section class="bg-white rounded-xl shadow-md transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="" method="POST" class="flex flex-col gap-6">
+                <form action="/admin/program-studi/edit/{{ $programStudi->id_program_studi }}" method="POST" class="flex flex-col gap-6">
                     @csrf
+                    @method('PUT')
                     <!-- Kode Program Studi -->
                     <div class="flex flex-col gap-2">
                         <label for="kode_program_studi"
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Kode Program Studi</label>
                         <input type="text" id="kode_program_studi" name="kode_program_studi"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                            placeholder="Masukkan Kode Program Studi (contoh: TI001)" required maxlength="10">
+                            placeholder="Masukkan Kode Program Studi (contoh: TI001)" value="{{ old('kode_program_studi', $programStudi->kode_program_studi) }}" required maxlength="10">
                         @error('kode_program_studi')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -27,7 +28,7 @@
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Nama Program Studi</label>
                         <input type="text" id="nama_program_studi" name="nama_program_studi"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                            placeholder="Masukkan Nama Program Studi" required maxlength="100">
+                            placeholder="Masukkan Nama Program Studi" required value="{{ old('kode_program_studi', $programStudi->nama_program_studi) }}" maxlength="100">
                         @error('nama_program_studi')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
