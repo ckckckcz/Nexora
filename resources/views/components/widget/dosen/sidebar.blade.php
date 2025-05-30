@@ -21,7 +21,9 @@
         <!-- Logo Section -->
         <div class="p-4 border-b border-gray-200 flex items-center justify-between h-16">
             <a href="#" class="flex items-center">
-                <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-8 w-8 flex-shrink-0">
+                <svg class="w-6 h-6 text-[#DEFC79] mr-1" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" />
+                </svg>
                 <span
                     class="text-lg font-semibold text-blue-900 ml-3 transition-opacity duration-200 whitespace-nowrap sidebar-text">Nexora</span>
             </a>
@@ -65,7 +67,8 @@
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
                     <a href="/dosen/mahasiswa/profile"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
-                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Profile Mahasiswa</span>
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Profile
+                            Mahasiswa</span>
                     </a>
                     <a href="/dosen/mahasiswa/log-aktivitas"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
@@ -96,7 +99,8 @@
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
                     <a href="/dosen/magang/rekomendasi-magang"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
-                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Rekomendasi Magang</span>
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Rekomendasi
+                            Magang</span>
                     </a>
                     <a href="/dosen/magang/bimbingan-magang"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">

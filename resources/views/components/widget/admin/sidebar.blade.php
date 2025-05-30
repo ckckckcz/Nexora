@@ -21,7 +21,9 @@
         <!-- Logo Section -->
         <div class="p-4 border-b border-gray-200 flex items-center justify-between h-16">
             <a href="#" class="flex items-center">
-                <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-8 w-8 flex-shrink-0">
+                <svg class="w-6 h-6 text-[#DEFC79] mr-1" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" />
+                </svg>
                 <span
                     class="text-lg font-semibold text-blue-900 ml-3 transition-opacity duration-200 whitespace-nowrap sidebar-text">Nexora</span>
             </a>
@@ -129,8 +131,9 @@
             <!-- Sistem Rekomendasi -->
             <a href="/admin/sistem-rekomendasi"
                 class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('recommendation.settings') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
-                <svg class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <svg class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    viewBox="0 0 24 24">
                     <path fill-rule="evenodd"
                         d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
                         clip-rule="evenodd" />
