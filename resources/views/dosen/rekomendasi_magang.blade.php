@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- Add Program Studi Button -->
-                    <a href="/admin/program-studi/tambah">
+                    <a href="/dosen/program-studi/tambah">
                         <button id="add-program-studi-btn"
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
                             <i class="fas fa-plus mr-2"></i>
@@ -92,11 +92,11 @@
                                     testing
                                 </td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                    <a href="/admin/rekomendasi-magang/edit/"
+                                    <a href="/dosen/rekomendasi-magang/edit/"
                                         class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
                                         Edit
                                     </a>
-                                    <form action="/admin/rekomendasi-magang/hapus/" method="POST" class="inline">
+                                    <form action="/dosen/rekomendasi-magang/hapus/" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"

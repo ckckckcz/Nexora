@@ -123,6 +123,9 @@ Route::get('/dosen/dashboard', function () {
 Route::get('/dosen/magang/bimbingan-magang', function () {
     return view('dosen.bimbingan_magang');
 });
+Route::get('/dosen/magang/bimbingan-magang/chat', function () {
+    return view('dosen.bimbingan_magang.chat');
+});
 Route::get('/dosen/magang/rekomendasi-magang', function () {
     return view('dosen.rekomendasi_magang');
 });
