@@ -7,15 +7,16 @@
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="" method="POST" class="flex flex-col gap-6">
+                <form action="/admin/lowongan-magang/edit/{{$lowongan->id_lowongan}}" method="POST" class="flex flex-col gap-6">
                     @csrf
+                    @method('PUT')
                     <!-- Nama Perusahaan -->
                     <div class="flex flex-col gap-2">
                         <label for="nama_perusahaan"
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Nama Perusahaan</label>
                         <input type="text" id="nama_perusahaan" name="nama_perusahaan"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                            placeholder="Masukkan Nama Perusahaan" required maxlength="50">
+                            placeholder="Masukkan Nama Perusahaan" required value="{{old('nama_perusahaan', $lowongan->nama_perusahaan )}}" maxlength="50">
                         @error('nama_perusahaan')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -31,12 +32,13 @@
                                 required>
                                 <option value="" disabled selected>Pilih Skema Magang</option>
                                 <!-- Dynamic options to be populated from Skema Magang table -->
-                                {{-- @foreach($skemaMagangs as $skema)
-                                    <option value="{{ $skema->id }}">{{ $skema->nama_skema }}</option>
-                                @endforeach --}}
-                                <option value="skema1">Skema Magang 1</option>
-                                <option value="skema2">Skema Magang 2</option>
-                                <option value="skema3">Skema Magang 3</option>
+                                @foreach($skemaMagangs as $skema)
+                                    <option 
+                                        value="{{ $skema->id_skema_magang }}" 
+                                        {{ old('id_skema_magang', $lowongan->id_skema_magang) == $skema->id_skema_magang ? 'selected' : '' }}>
+                                        {{ strtoupper($skema->nama_skema_magang) }}
+                                    </option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -61,12 +63,13 @@
                                 required>
                                 <option value="" disabled selected>Pilih Posisi Magang</option>
                                 <!-- Dynamic options to be populated from Posisi Magang table -->
-                                {{-- @foreach($posisiMagangs as $posisi)
-                                    <option value="{{ $posisi->id }}">{{ $posisi->nama_posisi }}</option>
-                                @endforeach --}}
-                                <option value="posisi1">Posisi Magang 1</option>
-                                <option value="posisi2">Posisi Magang 2</option>
-                                <option value="posisi3">Posisi Magang 3</option>
+                                @foreach($posisiMagangs as $posisi)
+                                    <option 
+                                        value="{{ $posisi->id_posisi_magang }}" 
+                                        {{ old('id_posisi_magang', $lowongan->id_posisi_magang) == $posisi->id_posisi_magang ? 'selected' : '' }}>
+                                        {{ $posisi->nama_posisi }}
+                                    </option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -87,7 +90,7 @@
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Deskripsi</label>
                         <textarea id="deskripsi" name="deskripsi"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                            placeholder="Masukkan Deskripsi Lowongan" required rows="5"></textarea>
+                            placeholder="Masukkan Deskripsi Lowongan" required rows="5">{{ old('deskripsi', $lowongan->deskripsi) }}</textarea>
                         @error('deskripsi')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -99,7 +102,7 @@
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Lokasi</label>
                         <input type="text" id="lokasi" name="lokasi"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                            placeholder="Masukkan Lokasi (contoh: Jakarta)" required maxlength="100">
+                            placeholder="Masukkan Lokasi (contoh: Jakarta)" value="{{ old('lokasi', $lowongan->lokasi) }}" required maxlength="100">
                         @error('lokasi')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -111,7 +114,7 @@
                             class="text-sm font-medium text-gray-700 transition-colors duration-200">Bidang Keahlian</label>
                         <textarea id="bidang_keahlian" name="bidang_keahlian"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                            placeholder="Masukkan Bidang Keahlian" required rows="5"></textarea>
+                            placeholder="Masukkan Bidang Keahlian"required rows="5">{{ old('bidang_keahlian', $lowongan->bidang_keahlian ) }}</textarea>
                         @error('bidang_keahlian')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -126,8 +129,8 @@
                                 class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
                                 required>
                                 <option value="" disabled selected>Pilih Status</option>
-                                <option value="open">Open</option>
-                                <option value="close">Close</option>
+                                <option value="open" {{ old('status_lowongan', $lowongan->status_lowongan) == 'open' ? 'selected' : '' }}>Open</option>
+                                <option value="close" {{ old('status_lowongan', $lowongan->status_lowongan) == 'close' ? 'selected' : '' }}>Close</option>
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

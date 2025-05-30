@@ -104,7 +104,7 @@ Route::group(['prefix' => '/admin/program-studi/'], function () {
 
 // LOWONGAN MAGANG
 Route::group(['prefix' => '/admin/lowongan-magang/'], function () {
-    Route::get('/', [LowonganMagangController::class, 'index']);
+    Route::get('/', [LowonganMagangController::class, 'index'])->name('admin.lowongan-magang');
     Route::get('/tambah', [LowonganMagangController::class, 'create']);
     Route::post('/tambah', [LowonganMagangController::class, 'store']);
     Route::get('/edit/{id}', [LowonganMagangController::class, 'edit']);

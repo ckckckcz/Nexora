@@ -19,7 +19,7 @@ class SkemaMagang extends Model
 
     public function lowongan()
     {
-        return $this->hasMany(Lowongan::class, 'id_skema_magang');
+        return $this->hasMany(LowonganMagang::class, 'id_skema_magang');
     }
 
 }

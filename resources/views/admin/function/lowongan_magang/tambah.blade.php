@@ -7,7 +7,7 @@
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="" method="POST" class="flex flex-col gap-6">
+                <form action="/admin/lowongan-magang/tambah" method="POST" class="flex flex-col gap-6">
                     @csrf
                     <!-- Nama Perusahaan -->
                     <div class="flex flex-col gap-2">
@@ -31,12 +31,9 @@
                                 required>
                                 <option value="" disabled selected>Pilih Skema Magang</option>
                                 <!-- Dynamic options to be populated from Skema Magang table -->
-                                {{-- @foreach($skemaMagangs as $skema)
-                                    <option value="{{ $skema->id }}">{{ $skema->nama_skema }}</option>
-                                @endforeach --}}
-                                <option value="skema1">Skema Magang 1</option>
-                                <option value="skema2">Skema Magang 2</option>
-                                <option value="skema3">Skema Magang 3</option>
+                                @foreach($skemaMagangs as $skema)
+                                    <option value="{{ $skema->id_skema_magang }}">{{ strtoupper($skema->nama_skema_magang) }}</option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -61,12 +58,9 @@
                                 required>
                                 <option value="" disabled selected>Pilih Posisi Magang</option>
                                 <!-- Dynamic options to be populated from Posisi Magang table -->
-                                {{-- @foreach($posisiMagangs as $posisi)
-                                    <option value="{{ $posisi->id }}">{{ $posisi->nama_posisi }}</option>
-                                @endforeach --}}
-                                <option value="posisi1">Posisi Magang 1</option>
-                                <option value="posisi2">Posisi Magang 2</option>
-                                <option value="posisi3">Posisi Magang 3</option>
+                                @foreach($posisiMagangs as $posisi)
+                                    <option value="{{ $posisi->id_posisi_magang }}">{{ $posisi->nama_posisi }}</option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
