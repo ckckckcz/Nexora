@@ -15,13 +15,9 @@
             <!-- Desktop Navigation -->
             <nav class="hidden ml-10 space-x-6 md:flex">
                 <a href="/"
-                    class="text-[#1A3C34] font-medium {{ request()->routeIs('home') ? 'underline' : '' }}">Home</a>
-                <a href="/"
-                    class="text-gray-500 hover:text-[#1A3C34] transition-colors {{ request()->routeIs('advice') ? 'text-[#1A3C34]' : '' }}">Advice</a>
-                <a href="/"
-                    class="text-gray-500 hover:text-[#1A3C34] transition-colors {{ request()->routeIs('jobseeker') ? 'text-[#1A3C34]' : '' }}">Jobseeker</a>
-                <a href="/"
-                    class="text-gray-500 hover:text-[#1A3C34] transition-colors {{ request()->routeIs('pricing') ? 'text-[#1A3C34]' : '' }}">Pricing</a>
+                    class="text-[#1A3C34] font-medium">Home</a>
+                <a href="/rekomendsi-magang"
+                    class="text-gray-500 hover:text-[#1A3C34] transition-colors">Rekomendasi Magang</a>
             </nav>
         </div>
 
