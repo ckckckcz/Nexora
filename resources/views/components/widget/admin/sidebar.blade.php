@@ -81,6 +81,38 @@
                     class="flex items-center justify-between w-full text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('users.*') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
                     <div class="flex items-center min-w-0">
                         <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('users.*') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Manajemen
+                            Profile</span>
+                    </div>
+                    <svg x-bind:class="open ? 'transform rotate-89' : ''"
+                        class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-transform duration-200 flex-shrink-0 sidebar-arrow"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
+                    <a href="/admin/profile/mahasiswa"
+                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Profile Mahasiswa</span>
+                    </a>
+                    <a href="/admin/profile/dosen"
+                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Profile Dosen</span>
+                    </a>
+                </div>
+            </div>
+            <div x-data="{ open: false }" class="space-y-1">
+                <button @click="open = !open" type="button"
+                    class="flex items-center justify-between w-full text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('users.*') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
+                    <div class="flex items-center min-w-0">
+                        <svg xmlns="http://www.w3.org/2000/svg"
                             class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('internship.vacancies') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
