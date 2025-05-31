@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AkunDosenController;
 use App\Http\Controllers\Admin\AkunMahasiswaController;
 use App\Http\Controllers\Admin\BimbinganMagangController;
 use App\Http\Controllers\Admin\LowonganMagangController;
+use App\Http\Controllers\Admin\PosisiMagangController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\ProfileDosenController;
 use App\Http\Controllers\Admin\ProfilemahasiswaController;
@@ -131,6 +132,17 @@ Route::group(['prefix' => '/admin/lowongan-magang/'], function () {
     Route::put('/edit/{id}', [LowonganMagangController::class, 'update']);
     Route::get('/detail/{id}', [LowonganMagangController::class, 'show']);
     Route::delete('/hapus/{id}', [LowonganMagangController::class, 'destroy']);
+});
+
+// POSISI MAGANG
+Route::group(['prefix' => '/admin/posisi-magang/'], function () {
+    Route::get('/', [PosisiMagangController::class, 'index'])->name('admin.posisi-magang');
+    Route::get('/tambah', [PosisiMagangController::class, 'create']);
+    Route::post('/tambah', [PosisiMagangController::class, 'store']);
+    Route::get('/edit/{id}', [PosisiMagangController::class, 'edit']);
+    Route::put('/edit/{id}', [PosisiMagangController::class, 'update']);
+    Route::get('/detail/{id}', [PosisiMagangController::class, 'show']);
+    Route::delete('/hapus/{id}', [PosisiMagangController::class, 'destroy']);
 });
 
 Route::get('/admin/laporan', function() {
