@@ -1,4 +1,3 @@
-```
 @extends('layouts.user')
 @section('user')
     <!-- Profile Header with Background Image -->
@@ -110,7 +109,8 @@
                                 </div>
                                 <div class="ml-4 w-full">
                                     <h3 class="text-sm font-semibold text-blue-900">Progres Dokumen Magang</h3>
-                                    <p class="text-xs text-blue-900 mt-1">Lengkapi dokumen yang diperlukan untuk aplikasi magang
+                                    <p class="text-xs text-blue-900 mt-1">Lengkapi dokumen yang diperlukan untuk aplikasi
+                                        magang
                                         Anda</p>
 
                                     <!-- Bar Progres -->
@@ -126,8 +126,8 @@
                                         <div class="flex items-center group">
                                             <div
                                                 class="h-4 w-4 rounded-full bg-blue-900 flex items-center justify-center flex-shrink-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M5 13l4 4L19 7" />
                                                 </svg>
@@ -140,8 +140,8 @@
                                         <div class="flex items-center group">
                                             <div
                                                 class="h-4 w-4 rounded-full bg-blue-900 flex items-center justify-center flex-shrink-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M5 13l4 4L19 7" />
                                                 </svg>
@@ -266,49 +266,57 @@
                 <div id="activity-content" class="tab-content hidden grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <!-- Left Column -->
                     <div class="lg:col-span-2 space-y-8">
-                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-                            <h3 class="text-lg font-semibold text-gray-900">Log Aktivitas</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li class="flex items-start">
-                                    <div class="flex-shrink-0 bg-blue-900/10 rounded-lg p-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-900" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-6">
+                            <div class="flex items-center space-x-3 mb-6">
+                                <div class="h-10 w-1.5 bg-blue-900 rounded-full"></div>
+                                <h3 class="text-xl font-bold text-gray-800">Tambah Log Aktivitas</h3>
+                            </div>
+
+                            <form action="/log-aktivitas/store" method="POST" class="mt-6 space-y-5">
+                                @csrf
+                                <div class="space-y-1.5">
+                                    <label for="id_bimbingan" class="block text-sm font-medium text-gray-700">ID
+                                        Bimbingan</label>
+                                    <input type="number" name="id_bimbingan" id="id_bimbingan" required
+                                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200">
+                                </div>
+
+                                <div class="space-y-1.5">
+                                    <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
+                                    <input type="date" name="tanggal" id="tanggal" required
+                                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200">
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div class="space-y-1.5">
+                                        <label for="jam_masuk" class="block text-sm font-medium text-gray-700">Jam
+                                            Masuk</label>
+                                        <input type="time" name="jam_masuk" id="jam_masuk" required
+                                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200">
                                     </div>
-                                    <div class="ml-3">
-                                        <p class="text-sm text-gray-900">Menyelesaikan proyek <strong>"Desain UI Aplikasi Mobile"</strong></p>
-                                        <p class="text-xs text-gray-500">20 Mei 2025</p>
+                                    <div class="space-y-1.5">
+                                        <label for="jam_pulang" class="block text-sm font-medium text-gray-700">Jam
+                                            Pulang</label>
+                                        <input type="time" name="jam_pulang" id="jam_pulang" required
+                                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200">
                                     </div>
-                                </li>
-                                <li class="flex items-start">
-                                    <div class="flex-shrink-0 bg-blue-900/10 rounded-lg p-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-900" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-3">
-                                        <p class="text-sm text-gray-900">Mengunggah dokumen <strong>"Curriculum Vitae"</strong></p>
-                                        <p class="text-xs text-gray-500">15 Mei 2025</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start">
-                                    <div class="flex-shrink-0 bg-blue-900/10 rounded-lg p-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-900" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-3">
-                                        <p class="text-sm text-gray-900">Bergabung dengan <strong>Workshop Riset Informatika</strong></p>
-                                        <p class="text-xs text-gray-500">10 Mei 2025</p>
-                                    </div>
-                                </li>
-                            </ul>
+                                </div>
+
+                                <div class="space-y-1.5">
+                                    <label for="kegiatan" class="block text-sm font-medium text-gray-700">Kegiatan</label>
+                                    <textarea name="kegiatan" id="kegiatan" rows="4" required
+                                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200"></textarea>
+                                </div>
+
+                                <input type="hidden" name="status_log" value="diterima">
+
+                                <div class="pt-2">
+                                    <button type="submit"
+                                        class="inline-flex items-center justify-center bg-blue-900 hover:bg-blue-950 cursor-pointer active:bg-blue-950 text-white font-medium px-6 py-3 rounded-xl transition-colors duration-200 w-full sm:w-auto">
+                                        Simpan Log Aktivitas
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
@@ -326,7 +334,8 @@
                                 </div>
                                 <div class="ml-4 w-full">
                                     <h3 class="text-sm font-semibold text-blue-900">Progres Dokumen Magang</h3>
-                                    <p class="text-xs text-blue-900 mt-1">Lengkapi dokumen yang diperlukan untuk aplikasi magang
+                                    <p class="text-xs text-blue-900 mt-1">Lengkapi dokumen yang diperlukan untuk aplikasi
+                                        magang
                                         Anda</p>
 
                                     <!-- Bar Progres -->
@@ -342,8 +351,8 @@
                                         <div class="flex items-center group">
                                             <div
                                                 class="h-4 w-4 rounded-full bg-blue-900 flex items-center justify-center flex-shrink-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M5 13l4 4L19 7" />
                                                 </svg>
@@ -356,8 +365,8 @@
                                         <div class="flex items-center group">
                                             <div
                                                 class="h-4 w-4 rounded-full bg-blue-900 flex items-center justify-center flex-shrink-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M5 13l4 4L19 7" />
                                                 </svg>
@@ -481,6 +490,7 @@
         </div>
     </section>
 
+    <!-- JavaScript for Tab Switching -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const tabs = document.querySelectorAll('.tab-button');
@@ -488,18 +498,22 @@
 
             tabs.forEach(tab => {
                 tab.addEventListener('click', function () {
+                    // Remove active class from all tabs
                     tabs.forEach(t => {
                         t.classList.remove('border-blue-900', 'text-blue-900', 'active');
                         t.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
                     });
 
+                    // Add active class to clicked tab
                     tab.classList.add('border-blue-900', 'text-blue-900', 'active');
                     tab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
 
+                    // Hide all content
                     contents.forEach(content => {
                         content.classList.add('hidden');
                     });
 
+                    // Show selected content
                     const targetContent = document.getElementById(`${tab.dataset.tab}-content`);
                     if (targetContent) {
                         targetContent.classList.remove('hidden');
@@ -509,4 +523,3 @@
         });
     </script>
 @endsection
-```
