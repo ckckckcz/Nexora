@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AkunMahasiswaController;
 use App\Http\Controllers\Admin\BimbinganMagangController;
 use App\Http\Controllers\Admin\LowonganMagangController;
 use App\Http\Controllers\Admin\ProdiController;
+use App\Http\Controllers\Admin\ProfileDosenController;
 use App\Http\Controllers\Admin\ProfilemahasiswaController;
 use App\Http\Controllers\Admin\SkemaMagangController;
 use App\Http\Controllers\AuthController;
@@ -44,8 +45,6 @@ Route::get('/daftar', function () {
 // MAHASISWA
 Route::group(['prefix' => 'admin/manajemen-akun/mahasiswa'], function () {
     Route::get('/', [AkunMahasiswaController::class, 'index'])->name('admin.manajemen-akun.mahasiswa');
-    Route::get('/tambah', [AkunMahasiswaController::class, 'create']);
-    Route::post('/tambah', [AkunMahasiswaController::class, 'store']);
     Route::get('/edit/{id}', [AkunMahasiswaController::class, 'edit']);
     Route::put('/edit/{id}', [AkunMahasiswaController::class, 'update']);
     Route::get('/detail/{id}', [AkunMahasiswaController::class, 'show']);
@@ -54,7 +53,7 @@ Route::group(['prefix' => 'admin/manajemen-akun/mahasiswa'], function () {
 
 // MAHASISWA
 Route::group(['prefix' => 'admin/profile/mahasiswa'], function () {
-    Route::get('/', [ProfilemahasiswaController::class, 'index'])->name('admin.manajemen-profile.mahasiswa');
+    Route::get('/', [ProfilemahasiswaController::class, 'index'])->name('admin.profile.mahasiswa');
     Route::get('/tambah', [ProfilemahasiswaController::class, 'create']);
     Route::post('/tambah', [ProfilemahasiswaController::class, 'store']);
     Route::get('/edit/{id}', [ProfilemahasiswaController::class, 'edit']);
@@ -71,8 +70,6 @@ Route::get('/admin/pengajuan-magang', function () {
 // DOSEN
 Route::group(['prefix' => 'admin/manajemen-akun/dosen'], function () {
     Route::get('/', [AkunDosenController::class, 'index'])->name('admin.manajemen-akun.dosen');
-    Route::get('/tambah', [AkunDosenController::class, 'create']);
-    Route::post('/tambah', [AkunDosenController::class, 'store']);
     Route::get('/edit/{id}', [AkunDosenController::class, 'edit']);
     Route::put('/edit/{id}', [AkunDosenController::class, 'update']);
     Route::get('/detail/{id}', [AkunDosenController::class, 'show']);
@@ -81,13 +78,13 @@ Route::group(['prefix' => 'admin/manajemen-akun/dosen'], function () {
 
 // DOSEN
 Route::group(['prefix' => 'admin/profile/dosen'], function () {
-    Route::get('/', [AkunDosenController::class, 'index'])->name('admin.manajemen-profile.dosen');
-    Route::get('/tambah', [AkunDosenController::class, 'create']);
-    Route::post('/tambah', [AkunDosenController::class, 'store']);
-    Route::get('/edit/{id}', [AkunDosenController::class, 'edit']);
-    Route::put('/edit/{id}', [AkunDosenController::class, 'update']);
-    Route::get('/detail/{id}', [AkunDosenController::class, 'show']);
-    Route::delete('/hapus/{id}', [AkunDosenController::class, 'destroy']);
+    Route::get('/', [ProfileDosenController::class, 'index'])->name('admin.profile.dosen');
+    Route::get('/tambah', [ProfileDosenController::class, 'create']);
+    Route::post('/tambah', [ProfileDosenController::class, 'store']);
+    Route::get('/edit/{id}', [ProfileDosenController::class, 'edit']);
+    Route::put('/edit/{id}', [ProfileDosenController::class, 'update']);
+    Route::get('/detail/{id}', [ProfileDosenController::class, 'show']);
+    Route::delete('/hapus/{id}', [ProfileDosenController::class, 'destroy']);
 });
 
 // MAGANG

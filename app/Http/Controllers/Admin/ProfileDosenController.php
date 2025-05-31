@@ -90,8 +90,8 @@ class ProfileDosenController extends Controller
 
 
         // Redirect with success message
-        return redirect('/admin/manajemen-profile/dosen')->with('success', 'Data dosen berhasil ditambahkan!');
-    }
+        return redirect('/admin/profile/dosen')->with('success', 'Data dosen berhasil ditambahkan!');
+    }   
 
     /**
      * Display the specified resource.
@@ -172,7 +172,7 @@ class ProfileDosenController extends Controller
         ]);
 
         // Redirect with success message
-        return redirect('/admin/manajemen-profile/dosen')->with('success', 'Data dosen berhasil diperbarui!');
+        return redirect('/admin/profile/dosen')->with('success', 'Data dosen berhasil diperbarui!');
     }
 
     /**
@@ -180,6 +180,22 @@ class ProfileDosenController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $dosen = Dosen::findOrFail($id);
+        $user = User::where('id_user', $dosen->id_user)->first();
+
+        // Delete the signature file if it exists
+        if ($dosen->tanda_tangan && Storage::disk('public')->exists($dosen->tanda_tangan)) {
+            Storage::disk('public')->delete($dosen->tanda_tangan);
+        }
+
+        // Delete the Dosen record
+        $dosen->delete();
+
+        // Delete the associated User record
+        if ($user) {
+            $user->delete();
+        }
+
+        return redirect('/admin/profile/dosen')->with('success', 'Data dosen berhasil dihapus!');
     }
 }

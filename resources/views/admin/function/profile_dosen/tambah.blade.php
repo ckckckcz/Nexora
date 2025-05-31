@@ -7,7 +7,7 @@
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="/admin/manajemen-akun/dosen/tambah" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
+                <form action="/admin/profile/dosen/tambah" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
                     @csrf
                     <!-- NIDN dan Nama Dosen -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">

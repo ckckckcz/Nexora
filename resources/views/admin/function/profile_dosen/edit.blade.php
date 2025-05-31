@@ -7,7 +7,7 @@
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="/admin/manajemen-akun/dosen/edit/{{ $dosen->id_dosen }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
+                <form action="/admin/profile/dosen/edit/{{ $dosen->id_dosen }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
                     @csrf
                     @method('PUT')
                     <!-- NIDN dan Nama Dosen -->

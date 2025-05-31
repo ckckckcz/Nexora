@@ -74,7 +74,7 @@ class ProfileMahasiswaController extends Controller
         });
 
 
-        return redirect()->route('admin.manajemen-profile.mahasiswa')->with('success', 'Data Mahasiswa berhasil ditambahkan');
+        return redirect()->route('admin.profile.mahasiswa')->with('success', 'Data Mahasiswa berhasil ditambahkan');
     }
 
     /**
@@ -128,7 +128,7 @@ class ProfileMahasiswaController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
-        return redirect()->route('admin.manajemen-profile.mahasiswa')->with('success', 'Data Mahasiswa berhasil diperbarui');
+        return redirect()->route('admin.profile.mahasiswa')->with('success', 'Data Mahasiswa berhasil diperbarui');
     }
 
     /**
@@ -137,9 +137,13 @@ class ProfileMahasiswaController extends Controller
     public function destroy(string $id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
+        $user = User::where('id_user', $mahasiswa->id_user)->first();
 
         $mahasiswa->delete();
+        if ($user) {
+            $user->delete();
+        }
 
-        return redirect()->route('admin.manajemen-profile.mahasiswa')->with('success', 'Data Mahasiswa berhasil dihapus.');
+        return redirect()->route('admin.profile.mahasiswa')->with('success', 'Data Mahasiswa berhasil dihapus.');
     }
 }
