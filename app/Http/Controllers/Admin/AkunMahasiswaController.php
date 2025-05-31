@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mahasiswa;
-use App\Models\ProgramStudi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -15,7 +14,7 @@ class AkunMahasiswaController extends Controller
      */
     public function index()
     {
-        $colleges = Mahasiswa::limit(10)->get();
+        $colleges = User::where('role', 'mahasiswa')->limit(10)->get();
         return view('admin.manajemenAkun.mahasiswa', compact('colleges'));
     }
 
@@ -24,8 +23,7 @@ class AkunMahasiswaController extends Controller
      */
     public function create()
     {
-        $prodis = ProgramStudi::all();
-        return view('admin.function.mahasiswa.tambah', compact('prodis'));
+        //
     }
 
     /**
@@ -33,35 +31,7 @@ class AkunMahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nim' => 'required|string|max:20|unique:mahasiswa',
-            'nama_mahasiswa' => 'required|string|max:255',
-            'id_program_studi' => 'required|exists:program_studi,id_program_studi',
-            'jurusan' => 'required',
-            'jenis_kelamin' => 'required|in:L,P',
-        ], [
-            'nim.required' => 'NIM Harus Diisi',
-            'nama_mahasiswa.required' => 'Nama Mahasiswa Harus Diisi',
-            'id_program_studi.required' => 'Nama Program Studi Harus Diisi',
-            'jurusan.required' => 'Jurusan Harus Diisi',
-            'jenis_kelamin.required' => 'Jenis kelamin Harus Diisi',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-        
-        Mahasiswa::create([
-            'nim' => $request->nim,
-            'nama_mahasiswa' => $request->nama_mahasiswa,
-            'id_program_studi' => $request->id_program_studi,
-            'jurusan' => $request->jurusan,
-            'jenis_kelamin' => $request->jenis_kelamin,
-        ]);
-
-        return redirect()->route('admin.manajemen-akun.mahasiswa')->with('success', 'Data Mahasiswa berhasil ditambahkan');
+        //
     }
 
     /**
@@ -77,9 +47,8 @@ class AkunMahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        $prodis = ProgramStudi::all();
-        $mahasiswa = Mahasiswa::findOrFail($id);
-        return view('admin.function.mahasiswa.edit', compact('prodis', 'mahasiswa'));
+        $mahasiswa = User::findOrFail($id);
+        return view('admin.function.mahasiswa.edit', compact('mahasiswa'));
     }
 
     /**
@@ -87,35 +56,53 @@ class AkunMahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nim' => 'required|string|max:20',
-            'nama_mahasiswa' => 'required|string|max:255',
-            'id_program_studi' => 'required|exists:program_studi,id_program_studi',
-            'jurusan' => 'required',
-            'jenis_kelamin' => 'required|in:L,P',
-        ], [
-            'nim.required' => 'NIM Harus Diisi',
-            'nama_mahasiswa.required' => 'Nama Mahasiswa Harus Diisi',
-            'id_program_studi.required' => 'Nama Program Studi Harus Diisi',
-            'jurusan.required' => 'Jurusan Harus Diisi',
-            'jenis_kelamin.required' => 'Jenis kelamin Harus Diisi',
-        ]);
+        // Define validation rules
+        $rules = [
+            'username' => 'required|string|max:50',
+            'email' => 'required|email',
+        ];
+
+        // Add password validation only if password is provided
+        if ($request->filled('password')) {
+            $rules['password'] = 'min:8|required_with:confirm_password';
+            $rules['confirm_password'] = 'min:8|same:password';
+        }
+
+        // Custom error messages
+        $messages = [
+            'username.required' => 'Username Harus Diisi',
+            'username.unique' => 'Username Sudah Digunakan',
+            'password.min' => 'Password Minimal 8 Karakter',
+            'password.confirmed' => 'Konfirmasi Password Tidak Cocok',
+            'email.required' => 'Email Harus Diisi',
+            'email.email' => 'Format Email Tidak Valid',
+        ];
+
+        // Validate the request
+        $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
-        
-        Mahasiswa::find($id)->update([
-            'nim' => $request->nim,
-            'nama_mahasiswa' => $request->nama_mahasiswa,
-            'id_program_studi' => $request->id_program_studi,
-            'jurusan' => $request->jurusan,
-            'jenis_kelamin' => $request->jenis_kelamin,
-        ]);
 
-        return redirect()->route('admin.manajemen-akun.mahasiswa')->with('success', 'Data Mahasiswa berhasil diperbarui');
+        // Prepare data for update
+        $updateData = [
+            'username' => $request->username,
+            'email' => $request->email,
+            'role' => 'mahasiswa',
+        ];
+
+        // Only include password in update if provided
+        if ($request->filled('password')) {
+            $updateData['password'] = bcrypt($request->password);
+        }
+
+        // Update the user
+        User::find($id)->update($updateData);
+
+        return redirect()->route('admin.manajemen-akun.mahasiswa')->with('success', 'Data Akun Mahasiswa berhasil diupdate');
     }
 
     /**
@@ -123,7 +110,7 @@ class AkunMahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa = User::findOrFail($id);
 
         $mahasiswa->delete();
 

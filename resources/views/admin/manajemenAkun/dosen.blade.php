@@ -80,15 +80,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Add Student Button -->
-                    <a href="/admin/manajemen-akun/dosen/tambah">
-                        <button id="add-student-btn"
-                            class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
-                            <span id="plus-icon"></span>
-                            <span>Tambah Dosen</span>
-                        </button>
-                    </a>
                 </div>
 
                 <!-- Table -->
@@ -102,18 +93,14 @@
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    NIDN
+                                    Username
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nama
-                                    Dosen</th>
+                                    Email</th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
-                                    Program Studi</th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
-                                    Jurusan</th>
+                                    Role</th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Aksi
@@ -129,23 +116,20 @@
                                             {{ $loop->iteration }}
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                            {{ $lecture->nidn }}
+                                            {{ $lecture->username }}
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                            {{ $lecture->nama_dosen }}
+                                            {{ $lecture->email }}
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                            {{ $lecture->programStudi->nama_program_studi }}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                            {{ $lecture->jurusan }}
+                                            {{ $lecture->role }}
                                         </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                            <a href="/admin/manajemen-akun/dosen/edit/{{ $lecture->id_dosen }}"
+                                            <a href="/admin/manajemen-akun/dosen/edit/{{ $lecture->id_user }}"
                                                 class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
                                                 Edit
                                             </a>
-                                            <form action="/admin/manajemen-akun/dosen/hapus/{{ $lecture->id_dosen }}" method="POST" class="inline">
+                                            <form action="/admin/manajemen-akun/dosen/hapus/{{ $lecture->id_user }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
