@@ -76,7 +76,7 @@ class ProfileDosenController extends Controller
             'username' => $request->nidn,
             'email' => $request->nidn . '@example.com',
             'password' => bcrypt($request->nidn),
-            'role' => 'mahasiswa',
+            'role' => 'dosen',
         ]);
 
         // Create the Dosen record
