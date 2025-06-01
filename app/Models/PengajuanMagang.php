@@ -9,7 +9,7 @@ class PengajuanMagang extends Model
 {
     use HasFactory;
     protected $table = 'pengajuan_magang';
-    protected $primaryKey = 'id_pengajuan_magang';
+    protected $primaryKey = 'id_pengajuan';
     protected $fillable = [
         'id_pengajuan',
         'id_mahasiswa',
@@ -27,4 +27,14 @@ class PengajuanMagang extends Model
         'CV',
         'Surat_Tugas',
     ];
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa', 'id_mahasiswa');
+    }
+
+    public function lowongan()
+    {
+        return $this->belongsTo(LowonganMagang::class, 'id_lowongan', 'id_lowongan');
+    }
 }

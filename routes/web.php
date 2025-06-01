@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AkunDosenController;
 use App\Http\Controllers\Admin\AkunMahasiswaController;
 use App\Http\Controllers\Admin\BimbinganMagangController;
 use App\Http\Controllers\Admin\LowonganMagangController;
+use App\Http\Controllers\Admin\PengajuanMagangController;
 use App\Http\Controllers\Admin\PosisiMagangController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\ProfileDosenController;
@@ -63,8 +64,12 @@ Route::group(['prefix' => 'admin/profile/mahasiswa'], function () {
     Route::delete('/hapus/{id}', [ProfilemahasiswaController::class, 'destroy']);
 });
 
-Route::get('/admin/pengajuan-magang', function () {
-    return view('admin.pengajuan_magang');
+Route::group(['prefix' => 'admin/pengajuan-magang'], function () {
+    Route::get('/', [PengajuanMagangController::class, 'index'])->name('admin.pengajuan-magang');
+    Route::get('/edit/{id}', [PengajuanMagangController::class, 'edit']);
+    Route::put('/edit/{id}', [PengajuanMagangController::class, 'update']);
+    Route::get('/detail/{id}', [PengajuanMagangController::class, 'show']);
+    Route::delete('/hapus/{id}', [PengajuanMagangController::class, 'destroy']);
 });
 
 

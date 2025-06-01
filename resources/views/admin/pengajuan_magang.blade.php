@@ -44,84 +44,70 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Add Lowongan Magang Button -->
-                    {{-- <a href="/admin/lowongan-magang/tambah">
-                        <button id="add-lowongan-btn"
-                            class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
-                            <i class="fas fa-plus mr-2"></i>
-                            <span>Tambah Lowongan Magang</span>
-                        </button>
-                    </a> --}}
                 </div>
 
                 <!-- Table -->
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-full border-collapse">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="px-4 py-2 text-left">Nama Mahasiswa</th>
-                                <th class="px-4 py-2 text-left">Judul Lowongan</th>
-                                <th class="px-4 py-2 text-left">Status</th>
-                                <th class="px-4 py-2 text-left">Tanggal Pengajuan</th>
-                                <th class="px-4 py-2 text-left">Aksi</th>
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    No
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Nama Mahasiswa
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                                    Nama Perusahaan
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+                                    Status Pengajuan
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Aksi
+                                </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="">
-                                <td class="px-4 py-2">MAHASISWA 1</td>
-                                <td class="px-4 py-2">PLISS ACC BOS</td>
-                                <td class="px-4 py-2">
-                                    <span class="bg-yellow-100 rounded-full text-yellow-700 px-2 py-1 text-sm">Menunggu</span>
-                                </td>
-                                <td class="px-4 py-2">20-10-2025</td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="/admin/pegajuan-magang/edit"
-                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
-                                    <form action="/admin/pegajuan-magang/hapus" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
+                        <tbody id="lowongan-table-body" class="bg-white divide-y divide-gray-200">
+                            @if ($pengajuans === null)
+                            @else 
+                                @foreach($pengajuans as $pengajuan)
+                                <tr>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $pengajuan->mahasiswa->nama_mahasiswa }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $pengajuan->lowongan->nama_perusahaan }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        @if($pengajuan->status_pengajuan === 'menunggu')
+                                        <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-sm">Menunggu</span>
+                                        @elseif($pengajuan->status_pengajuan === 'diterima')
+                                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-sm">Diterima</span>
+                                        @elseif($pengajuan->status_pengajuan === 'ditolak')
+                                        <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-sm">Ditolak</span>
+                                        @else
+                                        <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">Tidak Diketahui</span>
+                                    @endif
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="/admin/pengajuan-magang/edit/{{ $pengajuan->id_pengajuan }}" class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
-
-                    {{-- VERSI DINAMIS DISINI --}}
-                    {{-- <table class="table-auto w-full border-collapse">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="px-4 py-2 text-left">Nama Mahasiswa</th>
-                                <th class="px-4 py-2 text-left">Judul Lowongan</th>
-                                <th class="px-4 py-2 text-left">Status</th>
-                                <th class="px-4 py-2 text-left">Tanggal Pengajuan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($pengajuans as $pengajuan)
-                            <tr class="border-b">
-                                <td class="px-4 py-2">{{ $pengajuan->mahasiswa->nama }}</td>
-                                <td class="px-4 py-2">{{ $pengajuan->lowongan->judul }}</td>
-                                <td class="px-4 py-2">
-                                    @if($pengajuan->status_pengajuan === 'menunggu')
-                                    <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-sm">Menunggu</span>
-                                    @elseif($pengajuan->status_pengajuan === 'diterima')
-                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-sm">Diterima</span>
-                                    @elseif($pengajuan->status_pengajuan === 'ditolak')
-                                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-sm">Ditolak</span>
-                                    @else
-                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">Tidak Diketahui</span>
-                                    @endif
-                                </td>
-                                <td class="px-4 py-2">{{ $pengajuan->created_at->format('d-m-Y H:i') }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table> --}}
                 </div>
+
 
                 <!-- Pagination -->
                 <div
