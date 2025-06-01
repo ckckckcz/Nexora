@@ -32,12 +32,6 @@ Route::get('/rekomendasi-magang', function () {
 Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
 });
-Route::get('/profile/edit', function () {
-    return view('user.function.edit_profile');
-});
-Route::get('/profile', function () {
-    return view('user.profile');
-});
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/{id}', [ProfileController::class, 'index']);
