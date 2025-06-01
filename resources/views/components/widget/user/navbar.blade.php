@@ -34,7 +34,7 @@
                             class="flex items-center space-x-2 rounded-full border hover:bg-gray-100 p-1.5 focus:outline-none focus:ring-2 focus:ring-blue-900 transition-colors"
                             aria-label="User menu">
                             <div class="overflow-hidden border-2 border-gray-200 rounded-full h-9 w-9">
-                                <img src="https://i.pinimg.com/474x/f9/45/b6/f945b69a2a9a33ef4edbdb32de616ddd.jpg"
+                                <img src="{{ Storage::url(auth()->user()->mahasiswa->profile_mahasiswa) }}"
                                     alt="User Avatar" class="object-cover w-full h-full" />
                             </div>
                             <div class="hidden text-left md:block">
@@ -61,7 +61,7 @@
                             </div>  
 
                             <div class="py-1">
-                                <a href="/profile"
+                                <a href="/profile/{{ Auth::user()->mahasiswa->nim }}"
                                     class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 text-gray-500" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">

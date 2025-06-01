@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
@@ -36,6 +37,15 @@ Route::get('/profile/edit', function () {
 });
 Route::get('/profile', function () {
     return view('user.profile');
+});
+
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/{id}', [ProfileController::class, 'index']);
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/edit/{id}/', [ProfileController::class, 'edit'])->name('user.profile.edit');
+        Route::put('/edit/{nim}', [ProfileController::class, 'update']);
+    });
 });
 
 // PENGAJUAN MAGANG

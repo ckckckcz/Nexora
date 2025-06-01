@@ -165,17 +165,39 @@
             </a>
 
             <!-- Sistem Rekomendasi -->
-            <a href="/admin/sistem-rekomendasi"
-                class="flex items-center text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('recommendation.settings') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
-                <svg class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
-                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                    viewBox="0 0 24 24">
-                    <path fill-rule="evenodd"
-                        d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
-                        clip-rule="evenodd" />
-                </svg>
-                <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Sistem Rekomendasi</span>
-            </a>
+            <div x-data="{ open: false }" class="space-y-1">
+                <button @click="open = !open" type="button"
+                    class="flex items-center justify-between w-full text-gray-700 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2.5 font-medium text-sm group relative {{ request()->routeIs('users.*') ? 'bg-green-50 text-[#DEFC79]' : '' }}">
+                    <div class="flex items-center min-w-0">
+                        <svg class="h-5 w-5 flex-shrink-0 {{ request()->routeIs('recommendation.settings') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-colors duration-200"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="ml-3 transition-all duration-200 whitespace-nowrap sidebar-text">Sistem Rekomendasi
+                            </span>
+                    </div>
+                    <svg x-bind:class="open ? 'transform rotate-89' : ''"
+                        class="h-4 w-4 {{ request()->routeIs('users.*') ? 'text-[#DEFC79]' : 'text-gray-500' }} group-hover:text-blue-900 transition-transform duration-200 flex-shrink-0 sidebar-arrow"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
+                    <a href="/admin/manajemen-akun/mahasiswa"
+                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Manajemen Kriteria</span>
+                    </a>
+                    <a href="/admin/manajemen-akun/dosen"
+                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Pembobotan Lowongan</span>
+                    </a>
+                </div>
+            </div>
 
             <!-- Laporan -->
             <a href="/admin/laporan"

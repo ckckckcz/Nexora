@@ -13,13 +13,14 @@
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                     <img class="w-32 h-32 rounded-full border-4 border-white shadow-md object-cover"
-                        src="https://randomuser.me/api/portraits/women/44.jpg" alt="Riovaldo Alfiyan's Profile Photo">
+                        src="{{ Storage::url($mahasiswa->profile_mahasiswa) }}" alt="Riovaldo Alfiyan's Profile Photo">
                     <div>
-                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-2 sm:mt-0">Riovaldo Alfiyan Fahmi Rahman
+                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-2 sm:mt-0">{{ $mahasiswa->nama_mahasiswa}}
                         </h1>
                         <p class="text-gray-600 mt-1 max-w-2xl">
-                            Informatics Engineering Student at State Polytechnic of Malang | Frontend Web Developer | UI/UX
-                            Designer | Framer Designer Enthusiast | Member of Workshop Riset Informatika
+                            {{-- Informatics Engineering Student at State Polytechnic of Malang | Frontend Web Developer | UI/UX
+                            Designer | Framer Designer Enthusiast | Member of Workshop Riset Informatika --}}
+                            {{ $mahasiswa->deskripsi }}
                         </p>
                         <div class="flex items-center gap-3 mt-2">
                             <span class="flex items-center text-gray-600">
@@ -43,8 +44,9 @@
                         </div>
                     </div>
                 </div>
+                @if (auth()->user()->username == $mahasiswa->nim)
                 <div class="flex flex-wrap gap-3 mt-4 sm:mt-0">
-                    <a href="/profile/edit"
+                    <a href="/profile/edit/{{ auth()->user()->username }}"
                         class="inline-flex items-center bg-[#DEFC79] hover:bg-[#c9eb5b] text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -63,6 +65,7 @@
                         Cari Rekomendasi Magang Kamu
                     </a>
                 </div>
+                @endif
             </div>
 
             <!-- Profile Tabs -->
@@ -98,6 +101,7 @@
                     <!-- Right Column - Sidebar -->
                     <div class="space-y-6">
                         <!-- Progres Dokumen Magang -->
+                        @if (auth()->user()->username == $mahasiswa->nim)
                         <div class="bg-blue-900/30 border border-blue-200 rounded-2xl p-5">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 bg-blue-900/10 rounded-lg p-2">
@@ -174,6 +178,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Ranking -->
                         <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
@@ -209,46 +214,46 @@
                             <div class="space-y-3">
                                 <div>
                                     <h4 class="text-xs text-gray-500">Email</h4>
-                                    <p class="text-sm text-gray-900 font-medium">riovaldo.alfiyan@gmail.com</p>
+                                    <p class="text-sm text-gray-900 font-medium">{{ $mahasiswa->user->email }}</p>
                                 </div>
 
                                 <div>
                                     <h4 class="text-xs text-gray-500">Phone</h4>
                                     <button class="text-sm text-blue-900 hover:text-blue-800 font-medium">
-                                        Show phone number
+                                        {{ $mahasiswa->nomor_telepon }}
                                     </button>
                                 </div>
 
                                 <div>
                                     <h4 class="text-xs text-gray-500">Location</h4>
-                                    <p class="text-sm text-gray-900 font-medium">Malang, East Java, Indonesia</p>
+                                    <p class="text-sm text-gray-900 font-medium">{{ $mahasiswa->nomor_telepon }}</p>
                                 </div>
 
                                 <div class="pt-2">
                                     <h4 class="text-xs text-gray-500 mb-2">Social Profiles</h4>
                                     <div class="flex space-x-3">
-                                        <a href="#" class="text-gray-500 hover:text-blue-900">
+                                        <a href="{{ $mahasiswa->linkedin }}" class="text-gray-500 hover:text-blue-900">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path
                                                     d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                                             </svg>
                                         </a>
-                                        <a href="#" class="text-gray-500 hover:text-blue-400">
+                                        <a href="{{ $mahasiswa->twitter }}" class="text-gray-500 hover:text-blue-400">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path
                                                     d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
                                             </svg>
                                         </a>
-                                        <a href="#" class="text-gray-500 hover:text-gray-900">
+                                        <a href="{{ $mahasiswa->github }}" class="text-gray-500 hover:text-gray-900">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path
                                                     d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.166-1.26-.126-1.732-.126-1.732 1.273-.465 2.6 1.491 2.6 1.491.892 1.533 2.341 1.089 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026.799-.223 1.654-.333 2.504-.337.85.004 1.705.114 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.801.482 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                             </svg>
                                         </a>
-                                        <a href="#" class="text-gray-500 hover:text-pink-500">
+                                        <a href="{{ $mahasiswa->instagram }}" class="text-gray-500 hover:text-pink-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path
