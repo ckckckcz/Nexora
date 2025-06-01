@@ -11,9 +11,10 @@ class HasilRekomendasi extends Model
     protected $table = 'hasil_rekomendasi';
     protected $primaryKey = 'id_hasil_rekomendasi';
     protected $fillable = [
-        'id_hasil_rekomendasi',
         'id_mahasiswa',
-        'nilai_akhir',
+        'id_lowongan',
+        'nilai_akhir', // VIKOR Q value
         'ranking',
-    ];
+        'rekomendasi_dosen', // Boolean flag for lecturer recommendation
+    ];
 }
