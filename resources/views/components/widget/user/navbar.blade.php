@@ -18,6 +18,10 @@
                     class="text-[#1A3C34] font-medium">Home</a>
                 <a href="/rekomendasi-magang"
                     class="text-gray-500 hover:text-[#1A3C34] transition-colors">Rekomendasi Magang</a>
+                <a href="/log-aktivitas"
+                    class="text-gray-500 hover:text-[#1A3C34] transition-colors">Log Aktivitas</a>
+                <a href="/rekomendasi-magang"
+                    class="text-gray-500 hover:text-[#1A3C34] transition-colors">Lowongan</a>
             </nav>
         </div>
 
@@ -34,8 +38,7 @@
                             class="flex items-center space-x-2 rounded-full border hover:bg-gray-100 p-1.5 focus:outline-none focus:ring-2 focus:ring-blue-900 transition-colors"
                             aria-label="User menu">
                             <div class="overflow-hidden border-2 border-gray-200 rounded-full h-9 w-9">
-                                <img src="{{ Storage::url(auth()->user()->mahasiswa->profile_mahasiswa) }}"
-                                    alt="User Avatar" class="object-cover w-full h-full" />
+                                <img src="{{ auth()->user() && auth()->user()->mahasiswa && auth()->user()->mahasiswa->profile_mahasiswa ? Storage::url(auth()->user()->mahasiswa->profile_mahasiswa) : asset('images/default-avatar.png') }}" alt="User Avatar" class="object-cover w-full h-full" />
                             </div>
                             <div class="hidden text-left md:block">
                                 <div class="text-sm font-medium text-gray-700">{{ Auth::user()->username }}</div>
@@ -61,7 +64,7 @@
                             </div>
 
                             <div class="py-1">
-                                <a href="/profile/{{ Auth::user()->mahasiswa->nim }}"
+                                <a href="/profile/{{ Auth::user()->username }}"
                                     class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 text-gray-500" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
