@@ -58,7 +58,7 @@
                             <div class="px-4 py-3 border-b border-gray-100 bg-gray-50">
                                 <p class="text-sm font-medium text-gray-800">{{ Auth::user()->username }}</p>
                                 <p class="text-xs text-gray-500">{{ Auth::user()->role }}</p>
-                            </div>  
+                            </div>
 
                             <div class="py-1">
                                 <a href="/profile/{{ Auth::user()->mahasiswa->nim }}"
