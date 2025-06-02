@@ -34,7 +34,7 @@
                             class="flex items-center space-x-2 rounded-full border hover:bg-gray-100 p-1.5 focus:outline-none focus:ring-2 focus:ring-blue-900 transition-colors"
                             aria-label="User menu">
                             <div class="overflow-hidden border-2 border-gray-200 rounded-full h-9 w-9">
-                                <img src="{{ Storage::url(auth()->user()->mahasiswa->profile_mahasiswa) ? Storage::url(auth()->user()->mahasiswa->profile_mahasiswa) : "" }}"
+                                <img src="{{ Storage::url(auth()->user()->mahasiswa->profile_mahasiswa) }}"
                                     alt="User Avatar" class="object-cover w-full h-full" />
                             </div>
                             <div class="hidden text-left md:block">

@@ -86,17 +86,6 @@
                                     </span>
                                 </td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                    <a href="/dosen/bimbingan-magang/edit/"
-                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
-                                        Edit
-                                    </a>
-                                    <form action="/dosen/bimbingan-magang/hapus/" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            Hapus
                                         </button>
                                     </form>
                                     <a href="/dosen/magang/bimbingan-magang/chat/"
@@ -116,17 +105,6 @@
                                     </span>
                                 </td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                    <a href="/admin/bimbingan-magang/edit/"
-                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
-                                        Edit
-                                    </a>
-                                    <form action="/admin/bimbingan-magang/hapus/" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            Hapus
                                         </button>
                                     </form>
                                     <a href="/admin/bimbingan-magang/chat/"
