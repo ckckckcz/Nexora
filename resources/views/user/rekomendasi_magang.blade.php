@@ -280,12 +280,12 @@
                     const inputDiv = document.createElement('div');
                     inputDiv.className = 'flex items-center gap-4';
                     inputDiv.innerHTML = `
-                        <label class="text-gray-800 font-medium" for="weight-${tag.name}">${tag.icon} ${tag.name}</label>
+                        <label class="text-gray-800 font-medium w-56 text-left" for="weight-${tag.name}">${tag.icon} ${tag.name}</label>
                         <input
                             type="number"
                             id="weight-${tag.name}"
                             data-tag-name="${tag.name}"
-                            class="w-20 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900"
+                            class="w-42 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900"
                             min="1"
                             max="10"
                             placeholder="1-10"
