@@ -279,18 +279,6 @@
 
                             <form action="/log-aktivitas/store" method="POST" class="mt-6 space-y-5">
                                 @csrf
-                                <div class="space-y-1.5">
-                                    <label for="id_bimbingan" class="block text-sm font-medium text-gray-700">ID
-                                        Bimbingan</label>
-                                    <input type="number" name="id_bimbingan" id="id_bimbingan" required
-                                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200">
-                                </div>
-
-                                <div class="space-y-1.5">
-                                    <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
-                                    <input type="date" name="tanggal" id="tanggal" required
-                                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200">
-                                </div>
 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div class="space-y-1.5">
