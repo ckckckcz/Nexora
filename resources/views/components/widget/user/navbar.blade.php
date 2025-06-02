@@ -16,7 +16,7 @@
             <nav class="hidden ml-10 space-x-6 md:flex">
                 <a href="/"
                     class="text-[#1A3C34] font-medium">Home</a>
-                <a href="/rekomendsi-magang"
+                <a href="/rekomendasi-magang"
                     class="text-gray-500 hover:text-[#1A3C34] transition-colors">Rekomendasi Magang</a>
             </nav>
         </div>

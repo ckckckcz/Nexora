@@ -10,12 +10,12 @@
     <div
         class="bg-gray-50 team-card text-black border border-gray-200 shadow-sm rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[350px] group relative">
         <div class="text-center">
-            <h3 class="font-medium mt-2">Tri Sukma Sarah</h3>
-            <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
+            <h3 class="font-medium mt-2">Muhammad Ali Zulfikar</h3>
+            <p class="text-sm text-gray-500">Lion Core | Teknik Informatika</p>
         </div>
         <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
-            <img src="{{ asset('images/sarah.png') }}" alt="Tri Sukma Sarah"
-                class="object-contain transition duration-300 h-[320px] w-full" />
+            <img src="{{ asset('images/ali-zulfikar.png') }}" alt="Tri Sukma Sarah"
+                class="object-contain transition duration-300 h-[250px] w-full" />
         </div>
         <!-- Overlay with blur and button covering entire card -->
         <div
@@ -33,12 +33,12 @@
     <div
         class="bg-gray-50 team-card text-black border border-gray-200 shadow-sm rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[400px] group relative">
         <div class="text-center">
-            <h3 class="font-medium mt-2">Galung Erlyan Tama</h3>
+            <h3 class="font-medium mt-2">Sri Kresna Maha Dewa</h3>
             <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
         </div>
         <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
-            <img src="{{ asset('images/riovaldo.png') }}" alt="Galung Erlyan Tama"
-                class="object-contain transition duration-300 h-[310px] w-full" />
+            <img src="{{ asset('images/sri-kresna.png') }}" alt="Galung Erlyan Tama"
+                class="object-contain transition duration-300 h-[250px] w-full" />
         </div>
         <!-- Overlay with blur and button covering entire card -->
         <div
