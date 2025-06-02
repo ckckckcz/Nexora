@@ -77,7 +77,7 @@ Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->group(function () {
     Route::get('/chat/messages', [ChatController::class, 'getMessages']);
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['authorize:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
     
     // MAHASISWA
