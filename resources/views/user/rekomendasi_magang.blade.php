@@ -130,19 +130,35 @@
                     </p>
                 </header>
 
-                <div id="result-card" class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">PT Teknologi Maju</h2>
-                    <p class="text-gray-600 mb-4">
-                        Perusahaan teknologi inovatif yang berfokus pada pengembangan aplikasi berbasis AI. Berlokasi di Jakarta, menawarkan budaya kerja fleksibel, proyek inovatif, dan kesempatan belajar yang luas.
-                    </p>
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">Kriteria Sesuai:</h3>
-                        <ul id="result-criteria" class="list-disc list-inside text-gray-600"></ul>
+                <div id="result-card" class="lg:max-w-sm w-full p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    <h5 class="mb-1 text-2xl font-bold tracking-tight text-gray-900">Frontend-End Developer</h5>
+                    <div class="flex items-center space-x-1 mb-2">
+                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z" clip-rule="evenodd"/>
+                        </svg>
+                        <p class="text-sm text-gray-400">Jawa Timur, Malang</p>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800">Bobot Kriteria:</h3>
-                        <ul id="result-weights" class="list-disc list-inside text-gray-600"></ul>
+
+                    <div class="flex items-center gap-3 mb-5 mt-5">
+                        <div class="w-6 h-6 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/800px-Google_%22G%22_logo.svg.png" alt="Google Malang" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-md font-semibold text-gray-900">Google Malang</span>
                     </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Kriteria Sesuai:</h3>
+                        <ul id="result-criteria" class="grid grid-cols-2 gap-2"></ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Bobot Kriteria:</h3>
+                        <ul id="result-weights" class="grid grid-cols-2 gap-2"></ul>
+                    </div>
+
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-BLACK bg-[#DEFC79] hover:bg-[#c9eb5b] rounded-xl focus:ring-4 focus:outline-none focus:ring-[#DEFC79]/50">
+                        Lamar Magang 📄
+                    </a>
                 </div>
 
                 <div class="mt-8 text-center">
@@ -343,3 +359,4 @@
             setActiveStep(1);
         });
     </script>
+@endsection
