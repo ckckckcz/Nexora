@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,9 @@ Route::get('/dosen/magang/bimbingan-magang/chat', function () {
 Route::get('/dosen/magang/rekomendasi-magang', function () {
     return view('dosen.rekomendasi_magang');
 });
+
+Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
+Route::post('/log-aktivitas/store', [LogAktivitasController::class, 'store']);
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'postlogin']);
