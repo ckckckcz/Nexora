@@ -67,6 +67,9 @@ Route::get('/dosen/magang/rekomendasi-magang', function () {
 Route::get('/dosen/mahasiswa/log-aktivitas', function () {
     return view('dosen.log_aktivitas');
 });
+Route::get('/dosen/mahasiswa/profile', function () {
+    return view('dosen.profile_mahasiswa');
+});
 
 Route::get('/rekomendasi-test', [RekomendasiController::class, 'calculateVikor']);
 Route::group(['prefix' => 'detail-lowongan'], function () {
