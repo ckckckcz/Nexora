@@ -2,8 +2,8 @@
 @section('dosen')
     <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-blue-900">Manajemen Program Studi 📚</h1>
-            <p class="mt-2 text-gray-600 font-medium">Kelola data program studi</p>
+            <h1 class="text-3xl font-bold text-blue-900">Manajemen Rekomendasi Magang 📚</h1>
+            <p class="mt-2 text-gray-600 font-medium">Kelola data Rekomendasi Magang</p>
         </header>
 
         <section class="bg-white rounded-2xl border border-gray-200">
@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- Add Program Studi Button -->
-                
+
                 </div>
 
                 <!-- Table -->
