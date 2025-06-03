@@ -33,7 +33,7 @@ class RekomendasiController extends Controller
             $decisionMatrix[$l->id_lowongan] = $row;
         }
 
-        
+
         // Step 2: Normalize decision matrix
         $normalizedMatrix = [];
         foreach ($kriteria as $k) {
@@ -49,15 +49,14 @@ class RekomendasiController extends Controller
                 }
             }
         }
-        dd($normalizedMatrix);
 
         // Step 3: Apply weights
         $weightedMatrix = [];
         $bobot = $preferensi->pluck('bobot', 'id_kriteria')->toArray();
         foreach ($lowongan as $l) {
             foreach ($kriteria as $k) {
-                $weightedMatrix[$l->id_lowongan][$k->id_kriteria] = 
-                    ($bobot[$k->id_kriteria] ?? $k->bobot) * $normalizedMatrix[$l->id_lowongan][$k->id_kriteria];
+                $weightedMatrix[$l->id_lowongan][$k->id_kriteria] =
+                ($bobot[$k->id_kriteria] ?? $k->bobot) * $normalizedMatrix[$l->id_lowongan][$k->id_kriteria];
             }
         }
 
@@ -78,8 +77,9 @@ class RekomendasiController extends Controller
         $Q = [];
         foreach ($lowongan as $l) {
             $Q[$l->id_lowongan] = $v * ($S[$l->id_lowongan] - $S_min) / ($S_max - $S_min + 1e-10) +
-                                 (1 - $v) * ($R[$l->id_lowongan] - $R_min) / ($R_max - $R_min + 1e-10);
+            (1 - $v) * ($R[$l->id_lowongan] - $R_min) / ($R_max - $R_min + 1e-10);
         }
+        dd($Q);
 
         // Step 6: Rank and save results
         asort($Q);
