@@ -12,7 +12,6 @@ class Kriteria extends Model
     protected $primaryKey = 'id_kriteria';
     protected $fillable = [
         'nama_kriteria',
-        'bobot',
         'tipe',
         'keterangan',
     ];

@@ -15,4 +15,12 @@ class PenilaianLowongan extends Model
         'id_kriteria',
         'nilai',
     ];
+
+    public function kriteria() {
+        return $this->belongsTo(Kriteria::class, 'id_kriteria', 'id_kriteria');
+    }
+
+    public function lowongan() {
+        return $this->belongsTo(LowonganMagang::class, 'id_lowongan', 'id_lowongan_magang');
+    }
 }

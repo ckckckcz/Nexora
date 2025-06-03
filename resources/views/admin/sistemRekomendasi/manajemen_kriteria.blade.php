@@ -46,7 +46,7 @@
                     </div>
 
                     <!-- Add Lowongan Magang Button -->
-                    <a href="/admin/lowongan-magang/tambah">
+                    <a href="/admin/sistem-rekomendasi/manajemen-kriteria/tambah">
                         <button id="add-lowongan-btn"
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
                             <i class="fas fa-plus mr-2"></i>
@@ -70,7 +70,11 @@
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Bobot
+                                    Tipe
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Deskripsi
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -80,21 +84,37 @@
                         </thead>
                         <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             <!-- Example rows for UI demonstration -->
-                            <tr>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Pengalaman</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">30%</td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button
-                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
-                                        Edit
-                                    </button>
-                                    <button
-                                        class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200">
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
+                            {{-- @if ($kriterias === null) --}}
+                            @if ($kriterias)
+                                @foreach ($kriterias as $kriteria)
+                                    <tr>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $kriteria->nama_kriteria }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $kriteria->tipe }}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                            {{ $kriteria->keterangan }}
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="/admin/sistem-rekomendasi/manajemen-kriteria/edit/{{ $kriteria->id_kriteria }}"
+                                                class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
+                                            <form action="/admin/sistem-rekomendasi/manajemen-kriteria/hapus/{{ $kriteria->id_kriteria }}"
+                                                method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
