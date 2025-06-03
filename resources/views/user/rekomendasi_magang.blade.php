@@ -5,16 +5,13 @@
             [
                 'name' => 'Kriteria Magang',
                 'tags' => [
-                    ['name' => 'Perusahaan Teknologi', 'icon' => '💻'],
-                    ['name' => 'Lokasi di Kota Besar', 'icon' => '🏙️'],
-                    ['name' => 'Budaya Kerja Fleksibel', 'icon' => '🕒'],
+                    ['name' => 'Relevansi Bidang Studi', 'icon' => '💻'],
+                    ['name' => 'Jarak lokasi', 'icon' => '🏙️'],
+                    ['name' => 'Konversi ke Karyawan Tetap', 'icon' => '🕒'],
                     ['name' => 'Gaji Kompetitif', 'icon' => '💸'],
-                    ['name' => 'Kesempatan Belajar', 'icon' => '📚'],
-                    ['name' => 'Perusahaan Startup', 'icon' => '🚀'],
-                    ['name' => 'Tim Kolaboratif', 'icon' => '🤝'],
-                    ['name' => 'Proyek Inovatif', 'icon' => '💡'],
-                    ['name' => 'Perusahaan Multinasional', 'icon' => '🌍'],
-                    ['name' => 'Lingkungan Kerja Kreatif', 'icon' => '🎨'],
+                    ['name' => 'Reputasi Perusahaan', 'icon' => '📚'],
+                    ['name' => 'Fasilitas perusahaan', 'icon' => '🚀'],
+                    ['name' => 'Koneksi perusahaan', 'icon' => '🤝'],
                 ],
             ],
         ],
@@ -95,13 +92,28 @@
             <div id="step-2" class="step-content hidden">
                 <header class="mb-8 text-left">
                     <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Input Bobot Kriteria</h1>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 mb-2">
                         Masukkan bobot (angka 1-10) untuk setiap kriteria yang dipilih. Bobot mencerminkan tingkat kepentingan.
                     </p>
+                    <div class="mt-4 bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-yellow-700">
+                                    <strong class="font-medium">Peringatan:</strong> Total keseluruhan bobot tidak boleh lebih dari 100
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </header>
 
                 <div id="weight-inputs" class="space-y-4"></div>
                 <p id="weight-error" class="text-red-600 text-sm mt-2 hidden">Semua bobot harus berupa angka antara 1 dan 10.</p>
+                <p id="total-weight-error" class="text-red-600 text-sm mt-2 hidden">Total bobot tidak boleh lebih dari 100.</p>
 
                 <div class="mt-8 flex justify-center gap-4">
                     <button id="back-to-step-1" class="px-6 py-3 rounded-lg font-medium text-gray-800 border border-gray-300 shadow-lg transition-all duration-200 hover:bg-gray-100">
@@ -323,15 +335,29 @@
         submitWeightsButton.addEventListener('click', () => {
             weights = {};
             let valid = true;
+            let totalWeight = 0;
+            
             document.querySelectorAll('#weight-inputs input').forEach(input => {
-                const value = input.value;
+                const value = parseInt(input.value);
                 const tagName = input.dataset.tagName;
-                if (!value || isNaN(value) || value < 1 || value > 10) {
+                
+                if (!input.value || isNaN(value) || value < 1 || value > 10) {
                     valid = false;
                 } else {
-                    weights[tagName] = parseInt(value);
+                    weights[tagName] = value;
+                    totalWeight += value;
                 }
             });
+
+            // Check total weight
+            if (totalWeight > 100) {
+                valid = false;
+                document.getElementById('total-weight-error').classList.remove('hidden');
+                return;
+            } else {
+                document.getElementById('total-weight-error').classList.add('hidden');
+            }
+
             if (valid) {
                 weightError.classList.add('hidden');
                 setActiveStep(3);
@@ -342,6 +368,27 @@
                 }, 2000); // Simulate processing delay
             } else {
                 weightError.classList.remove('hidden');
+            }
+        });
+
+        // Add real-time validation
+        weightInputsContainer.addEventListener('input', (e) => {
+            if (e.target.tagName === 'INPUT') {
+                let totalWeight = 0;
+                document.querySelectorAll('#weight-inputs input').forEach(input => {
+                    const value = parseInt(input.value) || 0;
+                    totalWeight += value;
+                });
+
+                if (totalWeight > 100) {
+                    document.getElementById('total-weight-error').classList.remove('hidden');
+                    submitWeightsButton.disabled = true;
+                    submitWeightsButton.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    document.getElementById('total-weight-error').classList.add('hidden');
+                    submitWeightsButton.disabled = false;
+                    submitWeightsButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
             }
         });
 
