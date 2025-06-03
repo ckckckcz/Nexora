@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     searchInput.addEventListener('input', function(e) {
         const searchTerm = e.target.value.toLowerCase();
-        const tableRows = document.querySelectorAll('#student-table-body tr');
+        const tableRows = document.querySelectorAll('#table-body tr');
         
         tableRows.forEach(row => {
             const username = row.querySelector('td:nth-child(2)').textContent.toLowerCase();

@@ -90,7 +90,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="lowongan-table-body" class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             @if ($vacancies === null)
                             @else 
                                 @foreach ($vacancies as $vacance)

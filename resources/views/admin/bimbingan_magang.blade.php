@@ -89,7 +89,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="bimbingan-table-body" class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                              @if ($guidances === null)
                             @else 
                                 @foreach ($guidances as $guidance)

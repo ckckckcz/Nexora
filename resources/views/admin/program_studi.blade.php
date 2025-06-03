@@ -71,6 +71,10 @@
                             <tr>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    No
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Kode Program Studi
                                 </th>
                                 <th scope="col"
@@ -83,11 +87,14 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="program-studi-table-body" class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             @if ($majors === null)
                             @else
                                 @foreach ($majors as $major)
                                     <tr>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $loop->iteration }}
+                                        </td>
                                         <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
                                             {{ $major->kode_program_studi }}
                                         </td>

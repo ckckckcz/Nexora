@@ -9,12 +9,83 @@
         <section class="bg-white rounded-2xl border border-gray-200">
             <div class="p-4 sm:p-6 flex flex-col gap-4">
                 <div class="flex flex-col lg:flex-row sm:items-left sm:justify-between gap-4">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">
+                        <!-- Search Input -->
+                        <div class="relative flex-grow max-w-full sm:max-w-md">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400" id="search-icon"></i>
+                            </div>
+                            <input type="text" id="search-input"
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                placeholder="Cari berdasarkan NIM atau Nama" />
+                        </div>
 
-                    <!-- Add posisi Magang Button -->
+                        <!-- Filter Dropdowns -->
+                        <div class="flex flex-row gap-3">
+                            <!-- Department Filter -->
+                            <div class="relative w-full sm:w-auto">
+                                <button id="department-filter-btn"
+                                    class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
+                                    <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
+                                    <span id="department-filter-text">Semua Jurusan</span>
+                                    <i class="fas fa-chevron-down text-gray-300" id="department-chevron"></i>
+                                </button>
+                                <div id="department-dropdown"
+                                    class="absolute z-10 mt-1 w-full sm:w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+                                    <ul class="py-1 max-h-60 overflow-auto">
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-dept="Semua Jurusan">Semua Jurusan</button></li>
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-dept="Teknik Informatika">Teknik Informatika</button></li>
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-dept="Sistem Informasi">Sistem Informasi</button></li>
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-dept="Teknik Elektro">Teknik Elektro</button></li>
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-dept="Teknik Sipil">Teknik Sipil</button></li>
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-dept="Manajemen Bisnis">Manajemen Bisnis</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Gender Filter -->
+                            <div class="relative w-full sm:w-auto">
+                                <button id="gender-filter-btn"
+                                    class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
+                                    <i class="fas fa-venus-mars text-gray-500" id="gender-filter-icon"></i>
+                                    <span id="gender-filter-text">Semua Jenis Kelamin</span>
+                                    <i class="fas fa-chevron-down text-gray-300" id="gender-chevron"></i>
+                                </button>
+                                <div id="gender-dropdown"
+                                    class="absolute z-10 mt-1 w-full sm:w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+                                    <ul class="py-1">
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-gender="Semua">Semua Jenis Kelamin</button></li>
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-gender="L">Laki-laki</button></li>
+                                        <li><button
+                                                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                                data-gender="P">Perempuan</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Student Button -->
                     <a href="/admin/posisi-magang/tambah">
-                        <button id="add-posisi-btn"
+                        <button id="add-student-btn"
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
-                            <i class="fas fa-plus mr-2"></i>
+                            <span id="plus-icon"></span>
                             <span>Tambah Posisi Magang</span>
                         </button>
                     </a>
@@ -39,7 +110,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="posisi-table-body" class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             @if ($posisis === null)
                             @else
                                 @foreach ($posisis as $posisi)

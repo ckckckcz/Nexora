@@ -78,7 +78,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             <!-- Example rows for UI demonstration -->
                             <tr>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
