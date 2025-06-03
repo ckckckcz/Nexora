@@ -27,13 +27,6 @@ Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dosen/dashboard', [DosenDashboardController::class, 'index']);
 
-Route::get('/rekomendasi-magang', function () {
-    return view('user.rekomendasi_magang');
-});
-Route::get('/unggah-dokumen', function () {
-    return view('user.function.unggah_dokumen');
-});
-
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/{id}', [ProfileController::class, 'index']);
 
@@ -48,24 +41,6 @@ Route::group(['prefix' => 'admin/pengajuan-magang'], function () {
     Route::get('/', [PengajuanMagangController::class, 'index'])->name('admin.pengajuan-magang');
     Route::get('/edit/{id}', [PengajuanMagangController::class, 'edit']);
     Route::put('/edit/{id}', [PengajuanMagangController::class, 'update']);
-});
-
-Route::get('/admin/laporan', function() {
-    return view('admin.laporan');
-});
-
-// POV DOSEN
-Route::get('/dosen/dashboard', function () {
-    return view('dosen.dashboard');
-});
-Route::get('/dosen/magang/bimbingan-magang', function () {
-    return view('dosen.bimbingan_magang');
-});
-Route::get('/dosen/magang/bimbingan-magang/chat', function () {
-    return view('dosen.bimbingan_magang.chat');
-});
-Route::get('/dosen/magang/rekomendasi-magang', function () {
-    return view('dosen.rekomendasi_magang');
 });
 
 Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
@@ -180,4 +155,40 @@ Route::middleware(['authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [PosisiMagangController::class, 'show']);
         Route::delete('/hapus/{id}', [PosisiMagangController::class, 'destroy']);
     });
+});
+
+
+// YANG BARU DISINI
+
+// POV ADMINT
+Route::get('/admin/laporan', function () {
+    return view('admin.laporan');
+});
+Route::get('/admin/sistem-rekomendasi/manajemen-kriteria', function () {
+    return view('admin.sistemRekomendasi.manajemen_kriteria');
+});
+Route::get('/admin/sistem-rekomendasi/pembobotan-lowongan', function () {
+    return view('admin.sistemRekomendasi.pembobotan_lowongan');
+});
+
+// POV USER
+Route::get('/rekomendasi-magang', function () {
+    return view('user.rekomendasi_magang');
+});
+Route::get('/unggah-dokumen', function () {
+    return view('user.function.unggah_dokumen');
+});
+
+// POV DOSEN
+Route::get('/dosen/dashboard', function () {
+    return view('dosen.dashboard');
+});
+Route::get('/dosen/magang/bimbingan-magang', function () {
+    return view('dosen.bimbingan_magang');
+});
+Route::get('/dosen/magang/bimbingan-magang/chat', function () {
+    return view('dosen.bimbingan_magang.chat');
+});
+Route::get('/dosen/magang/rekomendasi-magang', function () {
+    return view('dosen.rekomendasi_magang');
 });

@@ -188,11 +188,11 @@
                 <div x-show="open" x-transition:enter="transition ease-out duration-100"
                     x-transition:enter-start="transform opacity-0 scale-95"
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
-                    <a href="/admin/manajemen-akun/mahasiswa"
+                    <a href="/admin/sistem-rekomendasi/manajemen-kriteria"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Manajemen Kriteria</span>
                     </a>
-                    <a href="/admin/manajemen-akun/dosen"
+                    <a href="/admin/sistem-rekomendasi/pembobotan-lowongan"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Pembobotan Lowongan</span>
                     </a>
