@@ -15,4 +15,11 @@ class PreferensiMahasiswa extends Model
         'id_kriteria',
         'bobot',
     ];
+
+    public function mahasiswa () {
+        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa', 'id_mahasiswa');
+    }
+    public function kriteria () {
+        return $this->belongsTo(Kriteria::class, 'id_kriteria', 'id_kriteria');
+    }
 }

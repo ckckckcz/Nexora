@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AkunDosenController;
 use App\Http\Controllers\Admin\AkunMahasiswaController;
 use App\Http\Controllers\Admin\BimbinganMagangController;
+use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\LowonganMagangController;
+use App\Http\Controllers\Admin\PembobotanLowonganController;
 use App\Http\Controllers\Admin\PengajuanMagangController;
 use App\Http\Controllers\Admin\PosisiMagangController;
 use App\Http\Controllers\Admin\ProdiController;
@@ -67,7 +69,10 @@ Route::get('/dosen/mahasiswa/log-aktivitas', function () {
 });
 
 Route::get('/rekomendasi-test', [RekomendasiController::class, 'calculateVikor']);
-Route::get('/detail-lowongan', [DetailLowonganController::class, 'index']);
+Route::group(['prefix' => 'detail-lowongan'], function () {
+    Route::get('/', [DetailLowonganController::class, 'index']);
+    Route::get('/{id}', [DetailLowonganController::class, 'view']);
+});
 
 Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
 Route::post('/log-aktivitas/store', [LogAktivitasController::class, 'store']);
@@ -82,7 +87,7 @@ Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->group(function () {
     Route::get('/chat/messages', [ChatController::class, 'getMessages']);
 });
 
-Route::middleware(['authorize:admin'])->group(function () {
+Route::middleware(['auth', 'authorize:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
     
     // MAHASISWA
@@ -181,6 +186,29 @@ Route::middleware(['authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [PosisiMagangController::class, 'show']);
         Route::delete('/hapus/{id}', [PosisiMagangController::class, 'destroy']);
     });
+
+    // SPK 
+    Route::group(['prefix' => 'admin/sistem-rekomendasi'], function () {
+        Route::group(['prefix' => 'manajemen-kriteria'], function () {
+            Route::get('/', [KriteriaController::class, 'index'])->name('admin.manajemen-kriteria');
+            Route::get('/tambah', [KriteriaController::class, 'create']);
+            Route::post('/tambah', [KriteriaController::class, 'store']);
+            Route::get('/edit/{id}', [KriteriaController::class, 'edit']);
+            Route::put('/edit/{id}', [KriteriaController::class, 'update']);
+            Route::get('/detail/{id}', [KriteriaController::class, 'show']);
+            Route::delete('/hapus/{id}', [KriteriaController::class, 'destroy']);
+        });
+
+        Route::group(['prefix' => 'pembobotan-lowongan'], function () {
+            Route::get('/', [PembobotanLowonganController::class, 'index'])->name('admin.pembobotan-lowongan');
+            Route::get('/tambah', [PembobotanLowonganController::class, 'create']);
+            Route::post('/tambah', [PembobotanLowonganController::class, 'store']);
+            Route::get('/edit/{id}', [PembobotanLowonganController::class, 'edit']);
+            Route::put('/edit/{id}', [PembobotanLowonganController::class, 'update']);
+            Route::get('/detail/{id}', [PembobotanLowonganController::class, 'show']);
+            Route::delete('/hapus/{id}', [PembobotanLowonganController::class, 'destroy']);
+        });
+    });
 });
 
 
@@ -189,12 +217,6 @@ Route::middleware(['authorize:admin'])->group(function () {
 // POV ADMINT
 Route::get('/admin/laporan', function () {
     return view('admin.laporan');
-});
-Route::get('/admin/sistem-rekomendasi/manajemen-kriteria', function () {
-    return view('admin.sistemRekomendasi.manajemen_kriteria');
-});
-Route::get('/admin/sistem-rekomendasi/pembobotan-lowongan', function () {
-    return view('admin.sistemRekomendasi.pembobotan_lowongan');
 });
 
 // POV USER

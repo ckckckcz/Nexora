@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('kriteria', function (Blueprint $table) {
             $table->id('id_kriteria')->autoIncrement();
             $table->string('nama_kriteria', 100);
-            $table->float('bobot');
             $table->enum('tipe', ['benefit', 'cost']);
             $table->text('keterangan');
             $table->timestamps(); // Added timestamps to match other tables
