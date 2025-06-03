@@ -33,42 +33,55 @@
                         <!-- ID Mahasiswa -->
                         <div class="relative">
                             <label for="id_mahasiswa" class="block text-sm font-medium text-gray-700 mb-1">
-                                ID Mahasiswa <span class="text-red-500">*</span>
+                                Nama Mahasiswa <span class="text-red-500">*</span>
                             </label>
                             <input type="number" name="id_mahasiswa" id="id_mahasiswa" required
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400">
                         </div>
 
-                        <!-- ID Lowongan -->
+                        <!-- Jenis Magang Selection -->
+                        <div class="relative">
+                            <label for="jenis_magang" class="block text-sm font-medium text-gray-700 mb-1">
+                                Jenis Magang <span class="text-red-500">*</span>
+                            </label>
+                            <select id="jenis_magang" name="jenis_magang" required
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
+                                <option value="">Pilih Jenis Magang</option>
+                                <option value="mandiri">Magang Mandiri</option>
+                                <option value="rekomendasi">Magang Rekomendasi</option>
+                            </select>
+                        </div>
+
+                        <!-- ID Lowongan (always visible but conditionally enabled) -->
                         <div class="relative">
                             <label for="id_lowongan" class="block text-sm font-medium text-gray-700 mb-1">
                                 ID Lowongan <span class="text-red-500">*</span>
                             </label>
-                            <input type="number" name="id_lowongan" id="id_lowongan" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400">
+                            <input type="number" name="id_lowongan" id="id_lowongan" disabled
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400 disabled:bg-gray-100 disabled:text-gray-500"
+                                placeholder="Pilih jenis magang terlebih dahulu">
                         </div>
-                    </div>
-
-                    <!-- Status Pengajuan -->
-                    <div class="relative">
-                        <label for="status_pengajuan" class="block text-sm font-medium text-gray-700 mb-1">
-                            Status Pengajuan <span class="text-red-500">*</span>
-                        </label>
-                        <div class="relative">
-                            <select name="status_pengajuan" id="status_pengajuan" required
-                                class="appearance-none w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
-                                <option value="menunggu">Menunggu</option>
-                                <option value="diterima">Diterima</option>
-                                <option value="ditolak">Ditolak</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd" />
-                                </svg>
+                        <!-- Status Pengajuan -->
+                        <div>
+                            <label for="status_pengajuan" class="block text-sm font-medium text-gray-700 mb-1">
+                                Status Pengajuan <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <select name="status_pengajuan" id="status_pengajuan" required
+                                    class="appearance-none w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
+                                    <option value="menunggu">Menunggu</option>
+                                    <option value="diterima">Diterima</option>
+                                    <option value="ditolak">Ditolak</option>
+                                </select>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -605,5 +618,25 @@
                 dropArea.classList.add('border-gray-300');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const jenisMagangSelect = document.getElementById('jenis_magang');
+            const idLowonganInput = document.getElementById('id_lowongan');
+
+            jenisMagangSelect.addEventListener('change', function() {
+                if (this.value === 'mandiri') {
+                    idLowonganInput.disabled = false;
+                    idLowonganInput.required = true;
+                    idLowonganInput.placeholder = 'Masukkan ID Lowongan';
+                    idLowonganInput.classList.remove('bg-gray-100');
+                } else {
+                    idLowonganInput.disabled = true;
+                    idLowonganInput.required = false;
+                    idLowonganInput.value = '';
+                    idLowonganInput.placeholder = 'Input dinonaktifkan untuk Magang Rekomendasi';
+                    idLowonganInput.classList.add('bg-gray-100');
+                }
+            });
+        });
     </script>
 @endsection
