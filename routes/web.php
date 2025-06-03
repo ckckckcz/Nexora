@@ -15,6 +15,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\RekomendasiController;
+use App\Http\Controllers\User\DetailLowonganController;
 use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +44,27 @@ Route::group(['prefix' => 'admin/pengajuan-magang'], function () {
     Route::get('/edit/{id}', [PengajuanMagangController::class, 'edit']);
     Route::put('/edit/{id}', [PengajuanMagangController::class, 'update']);
 });
+
+Route::get('/admin/laporan', function() {
+    return view('admin.laporan');
+});
+
+// POV DOSEN
+Route::get('/dosen/dashboard', function () {
+    return view('dosen.dashboard');
+});
+Route::get('/dosen/magang/bimbingan-magang', function () {
+    return view('dosen.bimbingan_magang');
+});
+Route::get('/dosen/magang/bimbingan-magang/chat', function () {
+    return view('dosen.bimbingan_magang.chat');
+});
+Route::get('/dosen/magang/rekomendasi-magang', function () {
+    return view('dosen.rekomendasi_magang');
+});
+
+Route::get('/rekomendasi-test', [RekomendasiController::class, 'calculateVikor']);
+Route::get('/detail-lowongan', [DetailLowonganController::class, 'index']);
 
 Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
 Route::post('/log-aktivitas/store', [LogAktivitasController::class, 'store']);
