@@ -10,15 +10,6 @@
             <div class="p-4 sm:p-6 flex flex-col gap-4">
                 <div class="flex flex-col lg:flex-row sm:items-left sm:justify-between gap-4">
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">
-                        <!-- Search Input -->
-                        <div class="relative flex-grow max-w-full sm:max-w-md">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-search text-gray-400" id="search-icon"></i>
-                            </div>
-                            <input type="text" id="search-input"
-                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
-                                placeholder="Cari berdasarkan Nama Perusahaan atau Lokasi" />
-                        </div>
 
                         <!-- Filter Dropdown for Status Lowongan -->
                         <div class="relative w-full sm:w-auto">
@@ -44,59 +35,32 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Add Lowongan Magang Button -->
-                    <a href="/admin/lowongan-magang/tambah">
-                        <button id="add-lowongan-btn"
-                            class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
-                            <i class="fas fa-plus mr-2"></i>
-                            <span>Tambah Bobot Lowongan</span>
-                        </button>
-                    </a>
                 </div>
 
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
+                        <thead>
                             <tr>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    No
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nama Kriteria
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Bobot
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Aksi
-                                </th>
+                                <th>Perusahaan</th>
+                                @foreach ($kriteria as $k)
+                                    <th>{{ $k->nama_kriteria }}</th>
+                                @endforeach
                             </tr>
                         </thead>
-                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
-                            <!-- Example rows for UI demonstration -->
-                            <tr>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Pengalaman</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">30%</td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button
-                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
-                                        Edit
-                                    </button>
-                                    <button
-                                        class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200">
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody>
+                            @foreach ($matriks as $row)
+                                <tr>
+                                    <td>{{ $row['nama_perusahaan'] }}</td>
+                                    @foreach ($kriteria as $k)
+                                        <td>{{ $row[$k->id_kriteria] ?? '-' }}</td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
+
+
                 </div>
 
                 <!-- Pagination -->
