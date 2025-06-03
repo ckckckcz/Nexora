@@ -1,8 +1,7 @@
 @extends('layouts.admin')
 @section('admin')
     <div class="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 flex items-center justify-center py-12 px-4 sm:px-6">
-        <div
-            class="bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 w-full max-w-6xl shadow-xl transition-all duration-300">
+        <div class="bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 w-full shadow-xl transition-all duration-300">
             <!-- Header -->
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-8 border-b border-gray-100 pb-6">
                 <div class="flex-shrink-0 bg-blue-900 rounded-xl p-3 shadow-md text-white">
@@ -33,7 +32,8 @@
                                 Nama Mahasiswa <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="id_mahasiswa" id="id_mahasiswa" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400" value="{{ old('id_mahasiswa', $pengajuan->mahasiswa->nama_mahasiswa) }}">
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400"
+                                value="{{ old('id_mahasiswa', $pengajuan->mahasiswa->nama_mahasiswa) }}">
                         </div>
 
                         <!-- ID Lowongan -->
@@ -42,11 +42,12 @@
                                 Nama Perusahaan <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="id_lowongan" id="id_lowongan" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400" value="{{ old('id_lowongan', $pengajuan->lowongan->nama_perusahaan) }}">
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400"
+                                value="{{ old('id_lowongan', $pengajuan->lowongan->nama_perusahaan) }}">
                         </div>
                     </div>
 
-                    <!-- Status Pengajuan -->   
+                    <!-- Status Pengajuan -->
                     <div class="relative">
                         <label for="status_pengajuan" class="block text-sm font-medium text-gray-700 mb-1">
                             Status Pengajuan <span class="text-red-500">*</span>
@@ -94,20 +95,20 @@
                                         data-input="ktp">
                                         <div id="ktp-preview"
                                             class="file-preview flex flex-col items-center justify-center gap-2">
-                                               <iframe src="{{ asset('storage/uploads/2341720054/ktp_003.pdf') }}" width="100%" height="600px"></iframe>
-
-
-
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                                </svg>
-                                                <div>
-                                                    <p class="text-sm font-medium text-gray-700">Pilih file atau seret & letakkan di sini</p>
-                                                    <p class="text-xs text-gray-500 mt-1">Format JPEG, PNG, PDF, maks 50MB</p>
-                                                </div>
-                                                <button type="button" class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                    Pilih File
-                                                </button>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                            </svg>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
+                                                    letakkan di sini</p>
+                                                <p class="text-xs text-gray-500 mt-1">Format JPEG, PNG, PDF, maks 50MB</p>
+                                            </div>
+                                            <button type="button"
+                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                Pilih File
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -423,15 +424,55 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <div class="pt-4">
-                        <button type="submit"
-                            class="w-full bg-blue-900 text-white font-medium py-3 px-4 rounded-xl hover:bg-blue-950 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-md">
-                            <div class="flex items-center justify-center">
-                                Submit 📃
-                            </div>
-                        </button>
+                    <div class="grid grid-cols-2 gap-5 pt-4">
+                        <a href="/admin/pengajuan-magang">
+                            <button type="button"
+                                class="w-full bg-gray-50 border border-gray-200 text-gray-900 font-medium py-3 px-4 rounded-xl hover:bg-gray-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-2 transform transition-all duration-300 hover:scale-[1.01] active:scale-[0.99]">
+                                <div class="flex items-center justify-center">
+                                    👈🏽 Kembali
+                                </div>
+                            </button>
+                        </a>
+                        <div class="">
+                            <button type="submit"
+                                class="w-full bg-blue-900 text-white font-medium py-3 px-4 rounded-xl hover:bg-blue-950 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-md">
+                                <div class="flex items-center justify-center">
+                                    Simpan Perubahan 📃
+                                </div>
+                            </button>
+                        </div>
                     </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Add Modal for File Preview -->
+    <div id="preview-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="w-full">
+                            <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-title"></h3>
+                                <div class="mt-2" id="preview-content">
+                                    <!-- Preview content will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="closePreviewModal()"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Tutup
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -459,49 +500,7 @@
 
                     if (file) {
                         // Update the preview area with file info
-                        let fileTypeIcon = '';
-                        const fileExt = file.name.split('.').pop().toLowerCase();
-
-                        if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
-                            // Create image preview for image files
-                            const reader = new FileReader();
-                            reader.onload = function (e) {
-                                previewElement.innerHTML = `
-                                        <div class="w-full flex flex-col items-center">
-                                            <img src="${e.target.result}" class="h-20 object-contain mb-2" />
-                                            <p class="text-sm font-medium text-gray-800">${file.name}</p>
-                                            <p class="text-xs text-gray-500">${(file.size / (1024 * 1024)).toFixed(2)} MB</p>
-                                            <button type="button" class="mt-2 text-sm text-red-600 hover:text-red-800" onclick="removeFile('${input.id}', '${targetId}')">
-                                                Hapus File
-                                            </button>
-                                        </div>
-                                    `;
-                            };
-                            reader.readAsDataURL(file);
-                        } else {
-                            // For non-image files (e.g., PDF)
-                            let iconPath = '';
-                            if (fileExt === 'pdf') {
-                                iconPath = `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                    </svg>`;
-                            } else {
-                                iconPath = `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>`;
-                            }
-
-                            previewElement.innerHTML = `
-                                    <div class="w-full flex flex-col items-center">
-                                        ${iconPath}
-                                        <p class="text-sm font-medium text-gray-800 mt-2">${file.name}</p>
-                                        <p class="text-xs text-gray-500">${(file.size / (1024 * 1024)).toFixed(2)} MB</p>
-                                        <button type="button" class="mt-2 text-sm text-red-600 hover:text-red-800" onclick="removeFile('${input.id}', '${targetId}')">
-                                            Hapus File
-                                        </button>
-                                    </div>
-                                `;
-                        }
+                        updateFilePreview(file, previewElement, this);
 
                         // Add a selected class to the drop area
                         const dropArea = document.querySelector(`.file-drop-area[data-input="${input.id}"]`);
@@ -574,17 +573,17 @@
             // Reset the preview
             const accept = input.accept.includes('.pdf') ? 'Format PDF, maks 50MB' : 'Format JPEG, PNG, PDF, maks 50MB';
             preview.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    <div>
-                        <p class="text-sm font-medium text-gray-700">Pilih file atau seret & letakkan di sini</p>
-                        <p class="text-xs text-gray-500 mt-1">${accept}</p>
-                    </div>
-                    <button type="button" class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Pilih File
-                    </button>
-                `;
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <div>
+                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret & letakkan di sini</p>
+                                <p class="text-xs text-gray-500 mt-1">${accept}</p>
+                            </div>
+                            <button type="button" class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Pilih File
+                            </button>
+                        `;
 
             // Reset the drop area styling
             if (dropArea) {
@@ -592,5 +591,92 @@
                 dropArea.classList.add('border-gray-300');
             }
         }
+
+        // Update the file preview function
+        function updateFilePreview(file, previewElement, input) {
+            const fileExt = file.name.split('.').pop().toLowerCase();
+            let iconPath = '';
+
+            if (fileExt === 'pdf') {
+                iconPath = `<svg class="h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>`;
+            } else if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
+                iconPath = `<svg class="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>`;
+            }
+
+            previewElement.innerHTML = `
+                        <div class="w-full flex flex-col items-center">
+                            ${iconPath}
+                            <p class="text-sm font-medium text-gray-800 mt-2">${file.name}</p>
+                            <p class="text-xs text-gray-500">${(file.size / (1024 * 1024)).toFixed(2)} MB</p>
+                            <div class="flex gap-2 mt-2">
+                                <button type="button" class="px-4 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm" onclick="previewFile('${input.id}', '${file.name}')">
+                                    Preview File
+                                </button>
+                            </div>
+                        </div>
+                    `;
+        }
+
+        // Add preview modal functions
+        function previewFile(inputId, fileName) {
+            const input = document.getElementById(inputId);
+            const file = input.files[0];
+            const modal = document.getElementById('preview-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const previewContent = document.getElementById('preview-content');
+
+            modalTitle.textContent = fileName;
+
+            if (file) {
+                const fileExt = file.name.split('.').pop().toLowerCase();
+
+                if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewContent.innerHTML = `
+                                    <img src="${e.target.result}" class="max-w-full max-h-[70vh] mx-auto" alt="${file.name}">
+                                `;
+                    };
+                    reader.readAsDataURL(file);
+                } else if (fileExt === 'pdf') {
+                    const fileUrl = URL.createObjectURL(file);
+                    previewContent.innerHTML = `
+                                <iframe src="${fileUrl}" width="100%" height="600px" class="border-0"></iframe>
+                            `;
+                }
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closePreviewModal() {
+            const modal = document.getElementById('preview-modal');
+            const previewContent = document.getElementById('preview-content');
+            modal.classList.add('hidden');
+            previewContent.innerHTML = '';
+        }
+
+        // Update event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            // ...existing code...
+
+            // Add ESC key listener for modal
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    closePreviewModal();
+                }
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('preview-modal').addEventListener('click', function (e) {
+                if (e.target === this) {
+                    closePreviewModal();
+                }
+            });
+        });
     </script>
 @endsection

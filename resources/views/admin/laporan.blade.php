@@ -93,7 +93,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="report-table-body" class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             <?php
                                 // Data dummy untuk laporan magang
                                 $reports = [

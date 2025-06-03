@@ -267,7 +267,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="student-table-body" class="bg-white divide-y divide-gray-200">
+                        <tbody iid="table-body" class="bg-white divide-y divide-gray-200">
                             @if ($colleges === null)
                             @else
                                 @foreach ($colleges as $college)

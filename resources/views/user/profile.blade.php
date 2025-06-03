@@ -33,19 +33,19 @@
                                 </svg>
                                 Indonesia, Malang
                             </span>
-                            <span class="flex items-center text-blue-900 font-semibold">
+                            {{-- <span class="flex items-center text-blue-900 font-semibold">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
                                 2,000 pengikut
-                            </span>
+                            </span> --}}
                         </div>
                     </div>
                 </div>
                 @if (auth()->user()->username == $mahasiswa->nim)
-                <div class="flex flex-wrap gap-3 mt-4 sm:mt-0">
+                <div class="flex flex-col gap-3 mt-4 sm:mt-0">
                     <a href="/profile/edit/{{ auth()->user()->username }}"
                         class="inline-flex items-center bg-[#DEFC79] hover:bg-[#c9eb5b] text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
@@ -75,10 +75,10 @@
                         class="tab-button border-blue-900 text-blue-900 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm active">
                         Profile
                     </button>
-                    <button data-tab="activity"
+                    {{-- <button data-tab="activity"
                         class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                         Log Aktivitas
-                    </button>
+                    </button> --}}
                 </nav>
             </div>
 
@@ -279,18 +279,6 @@
 
                             <form action="/log-aktivitas/store" method="POST" class="mt-6 space-y-5">
                                 @csrf
-                                <div class="space-y-1.5">
-                                    <label for="id_bimbingan" class="block text-sm font-medium text-gray-700">ID
-                                        Bimbingan</label>
-                                    <input type="number" name="id_bimbingan" id="id_bimbingan" required
-                                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200">
-                                </div>
-
-                                <div class="space-y-1.5">
-                                    <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
-                                    <input type="date" name="tanggal" id="tanggal" required
-                                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 transition-all duration-200">
-                                </div>
 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div class="space-y-1.5">

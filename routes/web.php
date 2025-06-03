@@ -15,6 +15,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\RekomendasiController;
+use App\Http\Controllers\User\DetailLowonganController;
+use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,13 +28,6 @@ Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 //Route Dashboard
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dosen/dashboard', [DosenDashboardController::class, 'index']);
-
-Route::get('/rekomendasi-magang', function () {
-    return view('user.rekomendasi_magang');
-});
-Route::get('/unggah-dokumen', function () {
-    return view('user.function.unggah_dokumen');
-});
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/{id}', [ProfileController::class, 'index']);
@@ -67,6 +63,12 @@ Route::get('/dosen/magang/rekomendasi-magang', function () {
     return view('dosen.rekomendasi_magang');
 });
 
+Route::get('/rekomendasi-test', [RekomendasiController::class, 'calculateVikor']);
+Route::get('/detail-lowongan', [DetailLowonganController::class, 'index']);
+
+Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
+Route::post('/log-aktivitas/store', [LogAktivitasController::class, 'store']);
+
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'postlogin']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
@@ -77,7 +79,7 @@ Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->group(function () {
     Route::get('/chat/messages', [ChatController::class, 'getMessages']);
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['authorize:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
     
     // MAHASISWA
@@ -176,4 +178,40 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/detail/{id}', [PosisiMagangController::class, 'show']);
         Route::delete('/hapus/{id}', [PosisiMagangController::class, 'destroy']);
     });
+});
+
+
+// YANG BARU DISINI
+
+// POV ADMINT
+Route::get('/admin/laporan', function () {
+    return view('admin.laporan');
+});
+Route::get('/admin/sistem-rekomendasi/manajemen-kriteria', function () {
+    return view('admin.sistemRekomendasi.manajemen_kriteria');
+});
+Route::get('/admin/sistem-rekomendasi/pembobotan-lowongan', function () {
+    return view('admin.sistemRekomendasi.pembobotan_lowongan');
+});
+
+// POV USER
+Route::get('/rekomendasi-magang', function () {
+    return view('user.rekomendasi_magang');
+});
+Route::get('/unggah-dokumen', function () {
+    return view('user.function.unggah_dokumen');
+});
+
+// POV DOSEN
+Route::get('/dosen/dashboard', function () {
+    return view('dosen.dashboard');
+});
+Route::get('/dosen/magang/bimbingan-magang', function () {
+    return view('dosen.bimbingan_magang');
+});
+Route::get('/dosen/magang/bimbingan-magang/chat', function () {
+    return view('dosen.bimbingan_magang.chat');
+});
+Route::get('/dosen/magang/rekomendasi-magang', function () {
+    return view('dosen.rekomendasi_magang');
 });

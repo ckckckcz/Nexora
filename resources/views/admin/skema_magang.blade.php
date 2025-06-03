@@ -17,7 +17,7 @@
                             </div>
                             <input type="text" id="search-input"
                                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
-                                placeholder="Cari berdasarkan Nama Skema Magang" />
+                                placeholder="Cari berdasarkan NIM atau Nama" />
                         </div>
 
                         <!-- Filter Dropdown for Skema Magang -->
@@ -88,7 +88,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="skema-table-body" class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             @if ($schemeInternships === null)
                             @else
                                 @foreach ($schemeInternships as $schemeInternship)
