@@ -16,5 +16,5 @@ class HasilRekomendasi extends Model
         'nilai_akhir', // VIKOR Q value
         'ranking',
         'rekomendasi_dosen', // Boolean flag for lecturer recommendation
-    ];
+    ];
 }
