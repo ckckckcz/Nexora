@@ -2,20 +2,55 @@
 @section('admin')
     <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-blue-900">Manajemen Kriteria</h1>
-            <p class="mt-2 text-gray-600 font-medium">Kelola data posisi magang</p>
+            <h1 class="text-3xl font-bold text-blue-900">Manajemen Kriteria 🎁</h1>
+            <p class="mt-2 text-gray-600 font-medium">Kelola data kriteria</p>
         </header>
 
         <section class="bg-white rounded-2xl border border-gray-200">
             <div class="p-4 sm:p-6 flex flex-col gap-4">
                 <div class="flex flex-col lg:flex-row sm:items-left sm:justify-between gap-4">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">
+                        <!-- Search Input -->
+                        <div class="relative flex-grow max-w-full sm:max-w-md">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400" id="search-icon"></i>
+                            </div>
+                            <input type="text" id="search-input"
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                placeholder="Cari berdasarkan Nama Perusahaan atau Lokasi" />
+                        </div>
 
-                    <!-- Add posisi Magang Button -->
-                    <a href="/admin/posisi-magang/tambah">
-                        <button id="add-posisi-btn"
+                        <!-- Filter Dropdown for Status Lowongan -->
+                        <div class="relative w-full sm:w-auto">
+                            {{-- <button id="status-filter-btn"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
+                                <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
+                                <span id="status-filter-text">Semua Status</span>
+                                <i class="fas fa-chevron-down text-gray-300" id="status-chevron"></i>
+                            </button> --}}
+                            <div id="status-dropdown"
+                                class="absolute z-10 mt-1 w-full sm:w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+                                <ul class="py-1">
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="Semua">Semua Status</button></li>
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="open">Open</button></li>
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="close">Close</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Lowongan Magang Button -->
+                    <a href="/admin/lowongan-magang/tambah">
+                        <button id="add-lowongan-btn"
                             class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors text-sm w-full sm:w-auto">
                             <i class="fas fa-plus mr-2"></i>
-                            <span>Tambah Posisi Magang</span>
+                            <span>Tambah Kriteria</span>
                         </button>
                     </a>
                 </div>
@@ -31,7 +66,11 @@
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nama Posisi
+                                    Nama Kriteria
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Bobot
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -39,32 +78,23 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="posisi-table-body" class="bg-white divide-y divide-gray-200">
-                            @if ($posisis === null)
-                            @else
-                                @foreach ($posisis as $posisi)
-                                    <tr>
-                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $loop->iteration }}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
-                                            {{ $posisi->nama_posisi }}
-                                        </td>
-                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="/admin/posisi-magang/edit/{{ $posisi->id_posisi_magang }}"
-                                                class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
-                                            <form action="/admin/posisi-magang/hapus/{{ $posisi->id_posisi_magang }}"
-                                                method="POST" class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Example rows for UI demonstration -->
+                            <tr>
+                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Pengalaman</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">30%</td>
+                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button
+                                        class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
+                                        Edit
+                                    </button>
+                                    <button
+                                        class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200">
+                                        Hapus
+                                    </button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -81,8 +111,8 @@
                     <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
                         <div>
                             <p class="text-sm text-gray-700">
-                                Menampilkan <span id="start-index" class="font-medium">10</span> dari <span id="total-posisi"
-                                    class="font-medium">semua</span>
+                                Menampilkan <span id="start-index" class="font-medium">10</span> dari <span
+                                    id="total-posisi" class="font-medium">semua</span>
                                 data
                             </p>
                         </div>
