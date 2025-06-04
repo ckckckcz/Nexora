@@ -9,6 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+     //belum fix
     public function up(): void
     {
         Schema::table('preferensi_mahasiswa', function (Blueprint $table) {
