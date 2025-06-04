@@ -22,6 +22,8 @@ use App\Http\Controllers\User\DetailLowonganController;
 use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Testing\SMCController;
+use App\Http\Controllers\User\LowonganMagangMahasiswaController;
 
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 
@@ -32,7 +34,6 @@ Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dosen/dashboard', [DosenDashboardController::class, 'index']);
 
 Route::group(['prefix' => 'profile'], function () {
-    Route::get('/{id}', [ProfileController::class, 'index']);
 
     Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}/', [ProfileController::class, 'edit'])->name('user.profile.edit');
@@ -73,8 +74,8 @@ Route::get('/dosen/mahasiswa/profile', function () {
 
 Route::get('/rekomendasi-test', [RekomendasiController::class, 'calculateVikor']);
 Route::group(['prefix' => 'detail-lowongan'], function () {
-    Route::get('/', [DetailLowonganController::class, 'index']);
-    Route::get('/{id}', [DetailLowonganController::class, 'view']);
+    // Route::get('/', [DetailLowonganController::class, 'index']);
+    // Route::get('/{id}', [DetailLowonganController::class, 'view']);
 });
 
 Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
@@ -223,9 +224,7 @@ Route::get('/admin/laporan', function () {
 });
 
 // POV USER
-Route::get('/rekomendasi-magang', function () {
-    return view('user.rekomendasi_magang');
-});
+Route::get('/rekomendasi-magang', [LowonganMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');
 Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
 });
@@ -243,3 +242,7 @@ Route::get('/dosen/magang/bimbingan-magang/chat', function () {
 Route::get('/dosen/magang/rekomendasi-magang', function () {
     return view('dosen.rekomendasi_magang');
 });
+
+// SMC Testing Routes
+Route::get('/testing/smc', [SMCController::class, 'index'])->name('smc.test');
+Route::post('/testing/smc/calculate', [SMCController::class, 'calculate'])->name('smc.calculate');

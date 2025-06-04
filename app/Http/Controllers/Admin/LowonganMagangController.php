@@ -9,7 +9,7 @@ use App\Models\PengajuanMagang;
 use App\Models\PosisiMagang;
 use App\Models\SkemaMagang;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Http\Validator;
 
 class LowonganMagangController extends Controller
 {
