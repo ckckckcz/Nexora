@@ -21,15 +21,13 @@ class LogAktivitasController extends Controller
             ->whereDate('created_at', $currentDate)
             ->exists();
 
-        if ($existingLog) {
-            abort(403, 'Anda sudah mengisi log aktivitas hari ini.');
-            // return redirect()->to('/profile/'.auth()->user()->username)->withErrors(['error' => 'Anda sudah mengisi log aktivitas hari ini.']);
-        } else if (!$isAccessible) {
+        if (!$isAccessible) {
             abort(403, 'Anda tidak bisa mengisi log harian diluar hari kerja.');
-            // return redirect()->to('/profile/'.auth()->user()->username)->withErrors(['error' => 'Anda tidak bisa mengakses log aktivitas diluar jam kerja']);
         }
 
-        return view('user.log_aktivitas');
+        return view('user.log_aktivitas', [
+            'hasFilledLog' => $existingLog
+        ]);
     }
 
     public function store(Request $request) {
@@ -60,6 +58,6 @@ class LogAktivitasController extends Controller
             'status_log' => 'diterima',
         ]);
 
-        return redirect()->to('/')->with('success', 'Log aktivitas berhasil disimpan.');
+        return redirect()->to('/log-aktivitas')->with('success', 'Log aktivitas berhasil disimpan.');
     }
 }
