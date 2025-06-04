@@ -28,9 +28,7 @@ class DatabaseSeeder extends Seeder
             PreferensiMahasiswaSeeder::class,
             FeedbackMagangSeeder::class,
             HasilRekomendasiSeeder::class,
-            PenilaianBobotSeeder::class,
             LogAktivitasMagangSeeder::class,
-            PenilaianLowonganSeeder::class,
         ]);
     }
 }

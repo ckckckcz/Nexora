@@ -14,16 +14,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('preferensi_mahasiswa', function (Blueprint $table) {
-            $table->float('bobot_reputasi')->default(0.2); // Bobot dinamis (0-1)
-            $table->float('bobot_fasilitas')->default(0.2);
             $table->float('bobot_minat')->default(0.2);
+            $table->float('bobot_fasilitas')->default(0.2);
+            $table->float('bobot_gaji')->default(0.2);
             $table->float('bobot_tipe')->default(0.2);
             $table->float('bobot_fleksibilitas')->default(0.2);
-            $table->json('keahlian')->nullable(); // Array keahlian, misalnya ["Web Development", "PHP"]
-            $table->string('tipe_perusahaan')->nullable(); // Misalnya "startup"
-            $table->string('fleksibilitas')->nullable(); // Misalnya "remote"
-            $table->integer('reputasi_min')->default(3); // Ambang batas reputasi (1-5)
-            $table->json('fasilitas')->nullable(); // Array fasilitas, misalnya ["gaji", "pelatihan"]
+            $table->json('keahlian')->nullable(); // ["UI/UX Design", "Web Development"]
+            $table->json('fasilitas')->nullable(); // ["Laptop kerja", "Makan siang gratis"]
+            $table->string('status_gaji')->nullable(); // "dibayar"
+            $table->string('tipe_perusahaan')->nullable(); // "startup"
+            $table->string('fleksibilitas_kerja')->nullable();
         });
     }
 
@@ -34,16 +34,16 @@ return new class extends Migration
     {
         Schema::table('preferensi_mahasiswa', function (Blueprint $table) {
             $table->dropColumn([
-                'bobot_reputasi',
                 'bobot_fasilitas',
                 'bobot_minat',
                 'bobot_tipe',
+                'bobot_gaji',
                 'bobot_fleksibilitas',
                 'keahlian',
+                'fasilitas',
+                'status_gaji',
                 'tipe_perusahaan',
-                'fleksibilitas',
-                'reputasi_min',
-                'fasilitas'
+                'fleksibilitas_kerja',
             ]);
         });
     }
