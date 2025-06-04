@@ -2,8 +2,8 @@
 @section('admin')
     <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-blue-900">Manajemen Pembobotan Lowongan 💪🏽</h1>
-            <p class="mt-2 text-gray-600 font-medium">Kelola data pembobotan lowongan</p>
+            <h1 class="text-3xl font-bold text-blue-900">Manajemen Penilaian Lowongan 💪🏽</h1>
+            <p class="mt-2 text-gray-600 font-medium">Kelola data Penilaian lowongan</p>
         </header>
 
         <section class="bg-white rounded-2xl border border-gray-200">
@@ -40,27 +40,68 @@
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead>
+                        <thead class="bg-gray-50">
                             <tr>
-                                <th>Perusahaan</th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    No
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Perusahaan
+                                </th>
                                 @foreach ($kriteria as $k)
-                                    <th>{{ $k->nama_kriteria }}</th>
+                                    <th scope="col"
+                                        class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{ $k->nama_kriteria }}
+                                    </th>
                                 @endforeach
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Aksi
+                                </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($matriks as $row)
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($matriks as $index => $row)
                                 <tr>
-                                    <td>{{ $row['nama_perusahaan'] }}</td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $index + 1 }}
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $row['nama_perusahaan'] }}
+                                    </td>
                                     @foreach ($kriteria as $k)
-                                        <td>{{ $row[$k->id_kriteria] ?? '-' }}</td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <div class="editable-cell" data-row="{{ $index }}" data-kriteria="{{ $k->id_kriteria }}">
+                                                <span class="display-value @if(isset($row[$k->id_kriteria])) bg-blue-100 text-blue-800 @else bg-gray-100 text-gray-800 @endif rounded-full px-2 py-1 text-xs font-medium">
+                                                    {{ $row[$k->id_kriteria] ?? '-' }}
+                                                </span>
+                                                <input type="number" 
+                                                    class="edit-input hidden w-full px-2 py-1 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                                    value="{{ $row[$k->id_kriteria] ?? '' }}"
+                                                    min="1"
+                                                    max="5">
+                                            </div>
+                                        </td>
                                     @endforeach
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                        <button onclick="toggleEdit(this, {{ $index }})"
+                                            class="edit-btn inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
+                                            Edit
+                                        </button>
+                                        <button onclick="saveChanges(this, {{ $index }})"
+                                            class="save-btn hidden inline-flex items-center px-3 py-1.5 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition-colors duration-200">
+                                            Simpan
+                                        </button>
+                                        <button class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200">
+                                            Hapus
+                                        </button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-
-
                 </div>
 
                 <!-- Pagination -->
@@ -75,13 +116,14 @@
                     <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
                         <div>
                             <p class="text-sm text-gray-700">
-                                Menampilkan <span id="start-index" class="font-medium">10</span> dari <span id="total-posisi"
-                                    class="font-medium">semua</span>
+                                Menampilkan <span id="start-index" class="font-medium">10</span> dari <span
+                                    id="total-posisi" class="font-medium">semua</span>
                                 data
                             </p>
                         </div>
                         <div>
-                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                                aria-label="Pagination">
                                 <button
                                     class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                     <span class="sr-only">Previous</span>
@@ -112,3 +154,65 @@
         </section>
     </div>
 @endsection
+
+<script>
+function toggleEdit(btn, rowIndex) {
+    const row = btn.closest('tr');
+    const editBtn = row.querySelector('.edit-btn');
+    const saveBtn = row.querySelector('.save-btn');
+    const cells = row.querySelectorAll('.editable-cell');
+    
+    editBtn.classList.add('hidden');
+    saveBtn.classList.remove('hidden');
+    
+    cells.forEach(cell => {
+        const displayValue = cell.querySelector('.display-value');
+        const input = cell.querySelector('.edit-input');
+        
+        displayValue.classList.add('hidden');
+        input.classList.remove('hidden');
+    });
+}
+
+function saveChanges(btn, rowIndex) {
+    const row = btn.closest('tr');
+    const editBtn = row.querySelector('.edit-btn');
+    const saveBtn = row.querySelector('.save-btn');
+    const cells = row.querySelectorAll('.editable-cell');
+    
+    // Collect the updated values
+    const updates = {};
+    cells.forEach(cell => {
+        const kriteriaId = cell.dataset.kriteria;
+        const input = cell.querySelector('.edit-input');
+        const displayValue = cell.querySelector('.display-value');
+        const newValue = input.value;
+        
+        updates[kriteriaId] = newValue;
+        
+        // Update display value
+        displayValue.textContent = newValue || '-';
+        displayValue.classList.remove('hidden');
+        input.classList.add('hidden');
+    });
+    
+    // Here you would typically make an AJAX call to save the changes
+    // For example:
+    /*
+    fetch('/admin/pembobotan-lowongan/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+            rowIndex: rowIndex,
+            updates: updates
+        })
+    });
+    */
+    
+    editBtn.classList.remove('hidden');
+    saveBtn.classList.add('hidden');
+}
+</script>
