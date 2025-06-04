@@ -23,6 +23,7 @@ use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Testing\SMCController;
+use App\Http\Controllers\User\LowonganMagangMahasiswaController;
 
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 
@@ -33,7 +34,6 @@ Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dosen/dashboard', [DosenDashboardController::class, 'index']);
 
 Route::group(['prefix' => 'profile'], function () {
-    Route::get('/{id}', [ProfileController::class, 'index']);
 
     Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}/', [ProfileController::class, 'edit'])->name('user.profile.edit');
@@ -224,9 +224,7 @@ Route::get('/admin/laporan', function () {
 });
 
 // POV USER
-Route::get('/rekomendasi-magang', function () {
-    return view('user.rekomendasi_magang');
-});
+Route::get('/rekomendasi-magang', [LowonganMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');
 Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
 });

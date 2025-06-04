@@ -3,15 +3,41 @@
     @props([
         'tagCategories' => [
             [
-                'name' => 'Kriteria Magang',
+                'name' => 'Bidang Keahlian',
+                'tags' => $bidangKeahlian->flatMap(function ($keahlian) {
+                    return collect(explode(',', $keahlian->bidang_keahlian))->map(function ($tag) {
+                        return ['name' => trim($tag), 'icon' => '📚'];
+                    });
+                })->toArray(), // Dynamically fetched and split by commas
+            ],
+            [
+                'name' => 'Tipe Perusahaan',
                 'tags' => [
-                    ['name' => 'Relevansi Bidang Studi', 'icon' => '💻'],
-                    ['name' => 'Jarak lokasi', 'icon' => '🏙️'],
-                    ['name' => 'Konversi ke Karyawan Tetap', 'icon' => '🕒'],
-                    ['name' => 'Gaji Kompetitif', 'icon' => '💸'],
-                    ['name' => 'Reputasi Perusahaan', 'icon' => '📚'],
-                    ['name' => 'Fasilitas perusahaan', 'icon' => '🚀'],
-                    ['name' => 'Koneksi perusahaan', 'icon' => '🤝'],
+                    ['name' => 'BUMN', 'icon' => '🏢'],
+                    ['name' => 'CV', 'icon' => '📄'],
+                    ['name' => 'PT', 'icon' => '🏛️'],
+                ],
+            ],
+            [
+                'name' => 'Fasilitas Perusahaan',
+                'tags' => [
+                    ['name' => 'Mirip Bidang Keahlian', 'icon' => '🚀'],
+                ],
+            ],
+            [
+                'name' => 'Gaji',
+                'tags' => [
+                    ['name' => 'Digaji', 'icon' => '💸'],
+                    ['name' => 'Tidak Digaji', 'icon' => '❌'],
+                ],
+            ],
+            [
+                'name' => 'Fleksibilitas Kerja',
+                'tags' => [
+                    ['name' => 'Hybrid', 'icon' => '🌐'],
+                    ['name' => 'WFH', 'icon' => '🏠'],
+                    ['name' => 'WFO', 'icon' => '🏢'],
+                    ['name' => 'Remote', 'icon' => '🖥️'],
                 ],
             ],
         ],
@@ -33,9 +59,9 @@
             <!-- Step 1: Pilih Kriteria -->
             <div id="step-1" class="step-content">
                 <header class="mb-8 text-left">
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Pilih Kriteria Magang Anda</h1 Inge
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Pilih Subkriteria Magang Anda</h1>
                     <p class="text-gray-600">
-                        Pilih tepat 5 kriteria yang sesuai dengan preferensi magang Anda. Semua kriteria wajib dipilih untuk melanjutkan.
+                        Pilih tepat 5 subkriteria yang sesuai dengan preferensi magang Anda. Semua subkriteria wajib dipilih untuk melanjutkan.
                     </p>
                 </header>
 
