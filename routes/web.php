@@ -22,6 +22,7 @@ use App\Http\Controllers\User\DetailLowonganController;
 use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Testing\SMCController;
 
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 
@@ -73,8 +74,8 @@ Route::get('/dosen/mahasiswa/profile', function () {
 
 Route::get('/rekomendasi-test', [RekomendasiController::class, 'calculateVikor']);
 Route::group(['prefix' => 'detail-lowongan'], function () {
-    Route::get('/', [DetailLowonganController::class, 'index']);
-    Route::get('/{id}', [DetailLowonganController::class, 'view']);
+    // Route::get('/', [DetailLowonganController::class, 'index']);
+    // Route::get('/{id}', [DetailLowonganController::class, 'view']);
 });
 
 Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
@@ -243,3 +244,7 @@ Route::get('/dosen/magang/bimbingan-magang/chat', function () {
 Route::get('/dosen/magang/rekomendasi-magang', function () {
     return view('dosen.rekomendasi_magang');
 });
+
+// SMC Testing Routes
+Route::get('/testing/smc', [SMCController::class, 'index'])->name('smc.test');
+Route::post('/testing/smc/calculate', [SMCController::class, 'calculate'])->name('smc.calculate');

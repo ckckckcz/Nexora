@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Kriteria;
 use App\Models\LowonganMagang;
 use App\Models\PenilaianLowongan;
-use DB;
+use App\Models\PreferensiMahasiswa; // Added import for PreferensiMahasiswa
+use Illuminate\Support\Facades\DB; // Added import for DB
+use Illuminate\Support\Facades\Validator; // Added import for Validator
 use Illuminate\Http\Request;
 
 class PenilaianLowonganController extends Controller
@@ -67,15 +69,17 @@ class PenilaianLowonganController extends Controller
                 'nama_perusahaan' => $baris['nama_perusahaan']
             ];
             foreach ($kriteria as $k) {
-                $nilai = $baris[$k->id_kriteria];
-                if ($nilai !== null) {
+                $nilai = $baris[$k->id_kriteria] ?? null;
+
+                // Ensure $nilai is numeric and $bestValues/$worstValues are arrays before accessing offsets
+                if (is_numeric($nilai) && isset($bestValues[$k->id_kriteria]) && isset($worstValues[$k->id_kriteria])) {
                     if ($k->tipe == 'Benefit') {
                         $barisNormalisasi[$k->id_kriteria] = ($nilai - $worstValues[$k->id_kriteria]) / ($bestValues[$k->id_kriteria] - $worstValues[$k->id_kriteria]);
                     } else {
                         $barisNormalisasi[$k->id_kriteria] = ($bestValues[$k->id_kriteria] - $nilai) / ($bestValues[$k->id_kriteria] - $worstValues[$k->id_kriteria]);
                     }
                 } else {
-                    $barisNormalisasi[$k->id_kriteria] = null;
+                    $barisNormalisasi[$k->id_kriteria] = null; // Default to null if values are invalid
                 }
             }
             $matriksNormalisasi[] = $barisNormalisasi;
@@ -98,7 +102,13 @@ class PenilaianLowonganController extends Controller
             foreach ($kriteria as $k) {
                 $nilaiNormalisasi = $barisNormalisasi[$k->id_kriteria] ?? 0;
                 $bobot = $weights[$k->id_kriteria] ?? 1; // Default to 1 if weight is not defined
-                $barisTerbobot[$k->id_kriteria] = $nilaiNormalisasi * $bobot;
+
+                // Ensure $nilaiNormalisasi is numeric before performing multiplication
+                if (is_numeric($nilaiNormalisasi)) {
+                    $barisTerbobot[$k->id_kriteria] = $nilaiNormalisasi * $bobot;
+                } else {
+                    $barisTerbobot[$k->id_kriteria] = 0; // Default to 0 if $nilaiNormalisasi is not numeric
+                }
             }
             $matriksTerbobot[] = $barisTerbobot;
         }
@@ -115,22 +125,29 @@ class PenilaianLowonganController extends Controller
                 $s += $nilaiTerbobot;
                 $r = max($r, $nilaiTerbobot);
             }
-            $sValues[] = $s;
-            $rValues[] = $r;
+            $sValues[] = ['nama_perusahaan' => $baris['nama_perusahaan'], 's' => $s];
+            $rValues[] = ['nama_perusahaan' => $baris['nama_perusahaan'], 'r' => $r];
         }
-        // dd($sValues);
-        // dd($rValues);
 
         // Calculate Q values
         $v = 0.5; // Weight for the strategy of maximum group utility
-        $sBest = min($sValues);
-        $sWorst = max($sValues);
-        $rBest = min($rValues);
-        $rWorst = max($rValues);
+        $sBest = min(array_column($sValues, 's'));
+        $sWorst = max(array_column($sValues, 's'));
+        $rBest = min(array_column($rValues, 'r'));
+        $rWorst = max(array_column($rValues, 'r'));
         $qValues = [];
         foreach (range(0, count($matriksNormalisasi) - 1) as $i) {
-            $q = $v * (($sValues[$i] - $sBest) / ($sWorst - $sBest)) + (1 - $v) * (($rValues[$i] - $rBest) / ($rWorst - $rBest));
-            $qValues[] = $q;
+            // Ensure $sValues and $rValues are numeric before performing calculations
+            $sValue = $sValues[$i]['s'] ?? 0;
+            $rValue = $rValues[$i]['r'] ?? 0;
+
+            if (is_numeric($sValue) && is_numeric($rValue) && $sWorst != $sBest && $rWorst != $rBest) {
+                $q = $v * (($sValue - $sBest) / ($sWorst - $sBest)) + (1 - $v) * (($rValue - $rBest) / ($rWorst - $rBest));
+            } else {
+                $q = 0; // Default to 0 if values are not numeric or division by zero occurs
+            }
+
+            $qValues[] =  ['nama_perusahaan' => $matriksNormalisasi[$i]['nama_perusahaan'], 'q' => $q];
         }
 
         // dd($qValues);
@@ -140,9 +157,9 @@ class PenilaianLowonganController extends Controller
         foreach (range(0, count($matriksNormalisasi) - 1) as $i) {
             $rankedAlternatives[] = [
                 'nama_perusahaan' => $matriksNormalisasi[$i]['nama_perusahaan'],
-                's' => $sValues[$i],
-                'r' => $rValues[$i],
-                'q' => $qValues[$i],
+                's' => $sValues[$i]['s'],
+                'r' => $rValues[$i]['r'],
+                'q' => $qValues[$i]['q'],
             ];
         }
         // dd($rankedAlternatives);
@@ -152,7 +169,7 @@ class PenilaianLowonganController extends Controller
             return $a['q'] <=> $b['q'];
         });
 
-        return view('admin.sistemRekomendasi.pembobotan_lowongan', compact('kriteria', 'rankedAlternatives'));
+        return view('admin.sistemRekomendasi.pembobotan_lowongan', compact('kriteria', 'rankedAlternatives', 'matriks', 'matriksNormalisasi', 'matriksTerbobot', 'sValues', 'rValues', 'qValues', 'bestValues', 'worstValues'));
     }
     /**
      * Show the form for creating a new resource.
