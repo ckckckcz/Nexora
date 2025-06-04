@@ -38,6 +38,15 @@
                     </svg>
                     <span class="text-left">Riwayat Log Aktivitas</span>
                 </button>
+                <hr class="my-2 border-gray-200">
+                <a href="/"
+                    class="flex items-center cursor-pointer hover:bg-gray-50 space-x-3 px-4 py-2.5 rounded-xl transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                    </svg>
+
+                    <span class="text-left">Kembali</span>
+                </a>
             </nav>
         </div>
     </aside>
