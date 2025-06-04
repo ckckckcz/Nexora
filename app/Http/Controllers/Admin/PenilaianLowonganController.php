@@ -21,8 +21,16 @@ class PenilaianLowonganController extends Controller
         $lowongan = DB::table('lowongan_magang')->get();
         $penilaian = DB::table('penilaian_lowongan')->get();
 
-        // Bangun matriks
+        // Bangun matriks Perbandingan
         $matriks = [];
+        $bestValues = [];
+        $worstValues = [];
+
+        // Inisialisasi bestValues dan worstValues dengan nilai awal null
+        foreach ($kriteria as $k) {
+            $bestValues[$k->id_kriteria] = null;
+            $worstValues[$k->id_kriteria] = null;
+        }
 
         foreach ($lowongan as $l) {
             $baris = [
@@ -35,15 +43,117 @@ class PenilaianLowonganController extends Controller
                     return $p->id_lowongan == $l->id_lowongan && $p->id_kriteria == $k->id_kriteria;
                 });
 
-                // Gunakan ID kriteria sebagai key (lebih aman)
-                $baris[$k->id_kriteria] = $nilai ? $nilai->nilai : null;
-            }
+                $nilaiKriteria = $nilai ? $nilai->nilai : null;
+                $baris[$k->id_kriteria] = $nilaiKriteria;
 
+                // Menentukan nilai best dan worst
+                if ($nilaiKriteria !== null) {
+                    if ($bestValues[$k->id_kriteria] === null || $nilaiKriteria > $bestValues[$k->id_kriteria]) {
+                        $bestValues[$k->id_kriteria] = $nilaiKriteria;
+                    }
+                    if ($worstValues[$k->id_kriteria] === null || $nilaiKriteria < $worstValues[$k->id_kriteria]) {
+                        $worstValues[$k->id_kriteria] = $nilaiKriteria;
+                    }
+                }
+            }
+            
             $matriks[] = $baris;
         }
+        
+        // Normalisasi matriks
+        $matriksNormalisasi = [];
+        foreach ($matriks as $baris) {
+            $barisNormalisasi = [
+                'nama_perusahaan' => $baris['nama_perusahaan']
+            ];
+            foreach ($kriteria as $k) {
+                $nilai = $baris[$k->id_kriteria];
+                if ($nilai !== null) {
+                    if ($k->tipe == 'Benefit') {
+                        $barisNormalisasi[$k->id_kriteria] = ($nilai - $worstValues[$k->id_kriteria]) / ($bestValues[$k->id_kriteria] - $worstValues[$k->id_kriteria]);
+                    } else {
+                        $barisNormalisasi[$k->id_kriteria] = ($bestValues[$k->id_kriteria] - $nilai) / ($bestValues[$k->id_kriteria] - $worstValues[$k->id_kriteria]);
+                    }
+                } else {
+                    $barisNormalisasi[$k->id_kriteria] = null;
+                }
+            }
+            $matriksNormalisasi[] = $barisNormalisasi;
+        }
+        // dd($matriksNormalisasi);
+        
+        // Calculate the weighted matrix
+        $weights = [ 
+            1 => 2,
+            2 => 1,
+            3 => 2,
+            4 => 3,
+            5 => 3,
+        ];
+        $matriksTerbobot = [];
+        foreach ($matriksNormalisasi as $barisNormalisasi) {
+            $barisTerbobot = [
+                'nama_perusahaan' => $barisNormalisasi['nama_perusahaan']
+            ];
+            foreach ($kriteria as $k) {
+                $nilaiNormalisasi = $barisNormalisasi[$k->id_kriteria] ?? 0;
+                $bobot = $weights[$k->id_kriteria] ?? 1; // Default to 1 if weight is not defined
+                $barisTerbobot[$k->id_kriteria] = $nilaiNormalisasi * $bobot;
+            }
+            $matriksTerbobot[] = $barisTerbobot;
+        }
+        // dd($matriksTerbobot);
+        
+        // Calculate S and R values using the weighted matrix
+        $sValues = [];
+        $rValues = [];
+        foreach ($matriksTerbobot as $baris) {
+            $s = 0;
+            $r = 0;
+            foreach ($kriteria as $k) {
+                $nilaiTerbobot = $baris[$k->id_kriteria] ?? 0;
+                $s += $nilaiTerbobot;
+                $r = max($r, $nilaiTerbobot);
+            }
+            $sValues[] = $s;
+            $rValues[] = $r;
+        }
+        // dd($sValues);
+        // dd($rValues);
 
-        return view('admin.sistemRekomendasi.pembobotan_lowongan', compact('kriteria', 'matriks'));
-    }    
+        // Calculate Q values
+        $v = 0.5; // Weight for the strategy of maximum group utility
+        $sBest = min($sValues);
+        $sWorst = max($sValues);
+        $rBest = min($rValues);
+        $rWorst = max($rValues);
+        $qValues = [];
+        foreach (range(0, count($matriksNormalisasi) - 1) as $i) {
+            $q = $v * (($sValues[$i] - $sBest) / ($sWorst - $sBest)) + (1 - $v) * (($rValues[$i] - $rBest) / ($rWorst - $rBest));
+            $qValues[] = $q;
+        }
+
+        // dd($qValues);
+        
+        // Rank the alternatives
+        $rankedAlternatives = [];
+        foreach (range(0, count($matriksNormalisasi) - 1) as $i) {
+            $rankedAlternatives[] = [
+                'nama_perusahaan' => $matriksNormalisasi[$i]['nama_perusahaan'],
+                's' => $sValues[$i],
+                'r' => $rValues[$i],
+                'q' => $qValues[$i],
+            ];
+        }
+        // dd($rankedAlternatives);
+
+        // Sort by Q value (ascending)
+        usort($rankedAlternatives, function ($a, $b) {
+            return $a['q'] <=> $b['q'];
+        });
+
+        return view('admin.sistemRekomendasi.pembobotan_lowongan', compact('kriteria', 'rankedAlternatives'));
+    }
     /**
      * Show the form for creating a new resource.
      */
