@@ -12,9 +12,13 @@ class LowonganMagangMahasiswaController extends Controller
      */
     public function index()
     {
-        $bidangKeahlian = LowonganMagang::all(); // Fetch all data from the database
+        $bidangKeahlian = LowonganMagang::select('bidang_keahlian')->distinct()->get();
+        $tipePerusahaan = LowonganMagang::select('tipe_perusahaan')->distinct()->get();
+        $fasilitasPerusahaan = LowonganMagang::select('fasilitas_perusahaan')->distinct()->get();
+        $statusGaji = LowonganMagang::select('status_gaji')->distinct()->get();
+        $fleksibilitasKerja = LowonganMagang::select('fleksibilitas_kerja')->distinct()->get();
 
-        return view('user.rekomendasi_magang', compact('bidangKeahlian'));
+        return view('user.rekomendasi_magang', compact('bidangKeahlian', 'tipePerusahaan', 'fasilitasPerusahaan', 'statusGaji', 'fleksibilitasKerja'));
     }
 
     /**

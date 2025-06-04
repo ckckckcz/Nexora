@@ -8,37 +8,33 @@
                     return collect(explode(',', $keahlian->bidang_keahlian))->map(function ($tag) {
                         return ['name' => trim($tag), 'icon' => '📚'];
                     });
-                })->toArray(), // Dynamically fetched and split by commas
+                })->toArray(),
             ],
             [
                 'name' => 'Tipe Perusahaan',
-                'tags' => [
-                    ['name' => 'BUMN', 'icon' => '🏢'],
-                    ['name' => 'CV', 'icon' => '📄'],
-                    ['name' => 'PT', 'icon' => '🏛️'],
-                ],
+                'tags' => $tipePerusahaan->map(function ($tipe) {
+                    return ['name' => $tipe->tipe_perusahaan, 'icon' => '🏢'];
+                })->toArray(),
             ],
             [
                 'name' => 'Fasilitas Perusahaan',
-                'tags' => [
-                    ['name' => 'Mirip Bidang Keahlian', 'icon' => '🚀'],
-                ],
+                'tags' => $fasilitasPerusahaan->flatMap(function ($fasilitas) {
+                    return collect(explode(',', $fasilitas->fasilitas_perusahaan))->map(function ($tag) {
+                        return ['name' => trim($tag), 'icon' => '🚀'];
+                    });
+                })->toArray(),
             ],
             [
-                'name' => 'Gaji',
-                'tags' => [
-                    ['name' => 'Digaji', 'icon' => '💸'],
-                    ['name' => 'Tidak Digaji', 'icon' => '❌'],
-                ],
+                'name' => 'Status Gaji',
+                'tags' => $statusGaji->map(function ($status) {
+                    return ['name' => $status->status_gaji, 'icon' => '💸'];
+                })->toArray(),
             ],
             [
                 'name' => 'Fleksibilitas Kerja',
-                'tags' => [
-                    ['name' => 'Hybrid', 'icon' => '🌐'],
-                    ['name' => 'WFH', 'icon' => '🏠'],
-                    ['name' => 'WFO', 'icon' => '🏢'],
-                    ['name' => 'Remote', 'icon' => '🖥️'],
-                ],
+                'tags' => $fleksibilitasKerja->map(function ($fleksibilitas) {
+                    return ['name' => $fleksibilitas->fleksibilitas_kerja, 'icon' => '🌐'];
+                })->toArray(),
             ],
         ],
         'selectedTags' => []
