@@ -7,7 +7,7 @@
         </header>
 
         <!-- Top Internship Placements Podium -->
-        <div class="w-full mx-auto">
+        {{-- <div class="w-full mx-auto">
             <section class="mb-10 bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-gray-100 relative overflow-hidden">
                 <!-- Background decoration -->
                 <div class="absolute -top-10 -right-10 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-100 rounded-full opacity-50">
@@ -150,7 +150,7 @@
                     <i class="fas fa-certificate"></i>
                 </div>
             </section>
-        </div>
+        </div> --}}
 
         <!-- Student Management Table -->
         <section class="bg-white rounded-2xl border border-gray-200">
