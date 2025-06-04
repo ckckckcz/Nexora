@@ -76,10 +76,6 @@
                                 </th>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status Log
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Aksi
                                 </th>
                             </tr>
@@ -94,7 +90,6 @@
                                         'nama_mahasiswa' => 'Budi Santoso',
                                         'tanggal' => '2025-06-03',
                                         'kegiatan' => 'Orientasi perusahan dan pengenalan film development',
-                                        'status_log' => 'Ditentukan',
                                         'created_at' => '2025-06-03 10:00:00',
                                         'updated_at' => '2025-06-03 10:00:00',
                                     ],
@@ -104,7 +99,6 @@
                                         'nama_mahasiswa' => 'Ani Wijaya',
                                         'tanggal' => '2025-06-04',
                                         'kegiatan' => 'Setup environment development dan instalasi tools',
-                                        'status_log' => 'Ditentukan',
                                         'created_at' => '2025-06-04 10:00:00',
                                         'updated_at' => '2025-06-04 10:00:00',
                                     ],
@@ -114,7 +108,6 @@
                                         'nama_mahasiswa' => 'Citra Lestari',
                                         'tanggal' => '2025-06-05',
                                         'kegiatan' => 'Pelatihan dasar digital marketing dan pengenalan p...',
-                                        'status_log' => 'Ditentukan',
                                         'created_at' => '2025-06-05 10:00:00',
                                         'updated_at' => '2025-06-05 10:00:00',
                                     ],
@@ -144,17 +137,12 @@
                                             {{ date('d-m-Y', strtotime($log->tanggal)) }}</td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">
                                             {{ $log->kegiatan }}</td>
-                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 status-log">
-                                            {{ $log->status_log }}</td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <div class="relative w-full sm:w-auto">
-                                                <select onchange="handleAction(this, {{ $log->id_log_aktivitas }}, '{{ $log->nama_mahasiswa }}', '{{ $log->tanggal }}')"
-                                                    class="block w-full px-3 py-1.5 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm">
-                                                    <option value="">Pilih Aksi</option>
-                                                    <option value="evaluasi">Evaluasi</option>
-                                                    <option value="terima">Terima</option>
-                                                    <option value="tolak">Tolak</option>
-                                                </select>
+                                            <div class="flex gap-2">
+                                                <button onclick="openEvaluationModal({{ $log->id_log_aktivitas }}, '{{ $log->nama_mahasiswa }}', '{{ $log->tanggal }}')"
+                                                    class="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">
+                                                    Evaluasi
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -339,26 +327,18 @@
             });
         });
 
-        function handleAction(select, logId, studentName, submissionDate) {
-            const action = select.value;
-            if (!action) return;
-
+        function handleAction(action, logId) {
             const row = document.querySelector(`tr[data-log-id="${logId}"]`);
             const statusCell = row.querySelector('.status-log');
 
-            if (action === 'evaluasi') {
-                openEvaluationModal(logId, studentName, submissionDate);
-            } else if (action === 'terima' || action === 'tolak') {
-                if (!confirm(`Apakah Anda yakin ingin ${action} log ini?`)) {
-                    select.value = ''; // Reset dropdown
+            if (action === 'terima') {
+                if (!confirm(`Apakah Anda yakin ingin terima log ini?`)) {
                     return;
                 }
-
                 // Simulasi AJAX request ke BE
                 setTimeout(() => {
-                    alert(`Log berhasil ${action}!`);
-                    statusCell.textContent = action.charAt(0).toUpperCase() + action.slice(1);
-                    select.value = ''; // Reset dropdown
+                    alert('Log berhasil diterima!');
+                    statusCell.textContent = 'Terima';
                 }, 500);
             }
         }
@@ -398,12 +378,11 @@
                     student_name: studentName,
                     submission_date: submissionDate,
                     result: evaluation,
-                    evaluation_date: '03-06-2025 22:57' // Waktu saat ini (WIB)
+                    evaluation_date: '04-06-2025 09:18' // Waktu saat ini (WIB)
                 };
                 evaluations.push(evaluationData);
                 updateEvaluationTable();
                 closeModal();
-                document.querySelector(`select[onchange="handleAction(this, ${logId}, '${studentName}', '${submissionDate}')"]`).value = ''; // Reset dropdown
             }, 500);
         });
 

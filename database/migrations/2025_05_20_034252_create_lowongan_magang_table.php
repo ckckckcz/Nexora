@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('lokasi', 100);
             $table->text('bidang_keahlian');
             $table->enum('status_lowongan', ['open', 'close']);
+            $table->date('tanggal_pendaftaran');
+            $table->date('tanggal_penutupan');
             $table->timestamps();
 
             $table->foreign('id_skema_magang')->references('id_skema_magang')->on('skema_magang');
