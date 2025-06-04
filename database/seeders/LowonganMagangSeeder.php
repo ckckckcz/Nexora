@@ -26,7 +26,7 @@ DB::table('lowongan_magang')->insert([
     ],
     [
         'nama_perusahaan' => 'PT. Data Analytics Pro',
-        'id_skema_magang' => 3,
+        'id_skema_magang' => 2,
         'id_posisi_magang' => 4,
         'deskripsi' => 'Program magang Data Analyst untuk menganalisis big data dan membuat laporan bisnis yang mendukung pengambilan keputusan strategis.',
         'lokasi' => 'Surabaya',
@@ -39,7 +39,7 @@ DB::table('lowongan_magang')->insert([
     ],
     [
         'nama_perusahaan' => 'StartUp Tech Indonesia',
-        'id_skema_magang' => 4,
+        'id_skema_magang' => 3,
         'id_posisi_magang' => 5,
         'deskripsi' => 'Kesempatan magang sebagai Business Development untuk membantu mengembangkan strategi bisnis dan mencari peluang kerjasama baru.',
         'lokasi' => 'Jakarta Pusat',
@@ -50,6 +50,19 @@ DB::table('lowongan_magang')->insert([
         'created_at' => now(),
         'updated_at' => now(),
     ],
+    [
+        'nama_perusahaan' => 'PT. Digital Transformation',
+        'id_skema_magang' => 4,
+        'id_posisi_magang' => 6,
+        'deskripsi' => 'Program magang sebagai Data Scientist untuk menganalisis data dan membuat model prediksi yang akurat.',
+        'lokasi' => 'Bandung',
+        'bidang_keahlian' => 'Data Science, Machine Learning, Deep Learning',
+        'status_lowongan' => 'close',
+        'tanggal_pendaftaran' => '2025-05-15',
+        'tanggal_penutupan' => '2025-06-15',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]
 ]);
 
     }

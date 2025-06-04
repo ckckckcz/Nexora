@@ -35,6 +35,14 @@ class BimbinganMagangSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id_mahasiswa' => 4,
+                'id_dosen' => 2,
+                'id_lowongan_magang' => 4,
+                'status_bimbingan' => 'selesai',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
     }
 }
