@@ -13,6 +13,10 @@ class LowonganMagangSeeder extends Seeder
 DB::table('lowongan_magang')->insert([
     [
         'nama_perusahaan' => 'PT. Inovasi Kreatif',
+        'tipe_perusahaan' => 'startup',
+        'fasilitas_perusahaan' => 'Laptop kerja, Ruang kerja nyaman, Makan siang gratis',
+        'status_gaji' => 'dibayar',
+        'fleksibilitas_kerja' => 'onsite',
         'id_skema_magang' => 1,
         'id_posisi_magang' => 3,
         'deskripsi' => 'Magang sebagai UI/UX Designer untuk mengembangkan interface aplikasi mobile dan web yang user-friendly dan menarik.',
@@ -26,6 +30,10 @@ DB::table('lowongan_magang')->insert([
     ],
     [
         'nama_perusahaan' => 'PT. Data Analytics Pro',
+        'tipe_perusahaan' => 'korporat',
+        'fasilitas_perusahaan' => 'Training, Sertifikat, Akses ke data perusahaan',
+        'status_gaji' => 'dibayar',
+        'fleksibilitas_kerja' => 'hybrid',
         'id_skema_magang' => 2,
         'id_posisi_magang' => 4,
         'deskripsi' => 'Program magang Data Analyst untuk menganalisis big data dan membuat laporan bisnis yang mendukung pengambilan keputusan strategis.',
@@ -39,6 +47,10 @@ DB::table('lowongan_magang')->insert([
     ],
     [
         'nama_perusahaan' => 'StartUp Tech Indonesia',
+        'tipe_perusahaan' => 'startup',
+        'fasilitas_perusahaan' => 'Mentoring bisnis, Networking, Ruang kreatif',
+        'status_gaji' => 'tidak dibayar',
+        'fleksibilitas_kerja' => 'remote',
         'id_skema_magang' => 3,
         'id_posisi_magang' => 5,
         'deskripsi' => 'Kesempatan magang sebagai Business Development untuk membantu mengembangkan strategi bisnis dan mencari peluang kerjasama baru.',
@@ -52,6 +64,10 @@ DB::table('lowongan_magang')->insert([
     ],
     [
         'nama_perusahaan' => 'PT. Digital Transformation',
+        'tipe_perusahaan' => 'korporat',
+        'fasilitas_perusahaan' => 'Pelatihan AI, Akses ke GPU, Lingkungan kerja profesional',
+        'status_gaji' => 'dibayar',
+        'fleksibilitas_kerja' => 'onsite',
         'id_skema_magang' => 4,
         'id_posisi_magang' => 6,
         'deskripsi' => 'Program magang sebagai Data Scientist untuk menganalisis data dan membuat model prediksi yang akurat.',
