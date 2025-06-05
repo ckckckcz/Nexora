@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
             EvaluasiMagangSeeder::class,
             PengajuanMagangSeeder::class,
             KriteriaSeeder::class,
-            PreferensiMahasiswaSeeder::class,
             FeedbackMagangSeeder::class,
             HasilRekomendasiSeeder::class,
             LogAktivitasMagangSeeder::class,
