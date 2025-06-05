@@ -11,7 +11,6 @@ class PengajuanMagang extends Model
     protected $table = 'pengajuan_magang';
     protected $primaryKey = 'id_pengajuan';
     protected $fillable = [
-        'id_pengajuan',
         'id_mahasiswa',
         'id_lowongan',
         'status_pengajuan',

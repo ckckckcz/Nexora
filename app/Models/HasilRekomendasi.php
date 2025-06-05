@@ -13,8 +13,16 @@ class HasilRekomendasi extends Model
     protected $fillable = [
         'id_mahasiswa',
         'id_lowongan',
-        'nilai_akhir', // VIKOR Q value
+        'nilai_akhir', 
         'ranking',
-        'rekomendasi_dosen', // Boolean flag for lecturer recommendation
+        'rekomendasi_dosen', 
     ];
+
+    public function mahasiswa() {
+        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa', 'id_mahasiswa');
+    }
+
+    public function lowongan() {
+        return $this->belongsTo(LowonganMagang::class, 'id_lowongan', 'id_lowongan');
+    }
 }

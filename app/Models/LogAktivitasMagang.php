@@ -18,4 +18,8 @@ class LogAktivitasMagang extends Model
         'kegiatan',
         'status_log'
     ];
+
+    public function logAktivitas() {
+        return $this->belongsTo(LogAktivitasMagang::class, 'id_log_aktivitas','id_log_aktivitas');
+    }
 }

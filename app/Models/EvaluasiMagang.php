@@ -15,4 +15,12 @@ class EvaluasiMagang extends Model
         'komentar',
         'id_log_aktivitas',
     ];
+
+    public function bimbinganMagang() {
+        return $this->belongsTo(BimbinganMagang::class, 'id_bimbingan_magang','id_bimbingan');
+    }
+
+    public function logAktivitas() {
+        return $this->belongsTo(LogAktivitasMagang::class, 'id_log_aktivitas','id_log_aktivitas');
+    }
 }

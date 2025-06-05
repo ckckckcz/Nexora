@@ -78,6 +78,23 @@ DB::table('lowongan_magang')->insert([
         'tanggal_penutupan' => '2025-06-15',
         'created_at' => now(),
         'updated_at' => now(),
+    ],
+    [
+        'nama_perusahaan' => 'PT. XYZ',
+        'tipe_perusahaan' => 'PT',
+        'fasilitas_perusahaan' => 'Pelatihan Fullstack, Laptop Kerja, Lingkungan kerja profesional',
+        'status_gaji' => 'tidak dibayar',
+        'fleksibilitas_kerja' => 'remote',
+        'id_skema_magang' => 3,
+        'id_posisi_magang' => 8,
+        'deskripsi' => 'Program magang sebagai Full Stack Developer yang akan mengurusi urusan frontend seperti next js dan backend  rust.',
+        'lokasi' => 'Solo',
+        'bidang_keahlian' => 'Frontend Developer, Backend Developer, Database Engineer',
+        'status_lowongan' => 'close',
+        'tanggal_pendaftaran' => '2025-04-01',
+        'tanggal_penutupan' => '2025-10-01',
+        'created_at' => now(),
+        'updated_at' => now(),
     ]
 ]);
 

@@ -11,7 +11,6 @@ class PosisiMagang extends Model
     protected $table = 'posisi_magang';
     protected $primaryKey = 'id_posisi_magang';
     protected $fillable = [
-        'id_posisi_magang',
         'nama_posisi'
     ];
 }
