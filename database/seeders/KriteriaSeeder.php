@@ -12,9 +12,9 @@ public function run(): void
 {
     DB::table('kriteria')->insert([
         [
-            'nama_kriteria' => 'reputasi perusahaan',
+            'nama_kriteria' => 'minat keahlian',
             'tipe' => 'benefit',
-            'keterangan' => 'Kriteria penilaian berdasarkan reputasi dan kredibilitas perusahaan di industri',
+            'keterangan' => 'Kriteria penilaian berdasarkan keahlian yang disediakan oleh perusahaan',
             'created_at' => now(),
             'updated_at' => now(),
         ],
@@ -26,23 +26,23 @@ public function run(): void
             'updated_at' => now(),
         ],
         [
-            'nama_kriteria' => 'minat keahlian',
+            'nama_kriteria' => 'status gaji',
             'tipe' => 'benefit',
-            'keterangan' => 'Kriteria penilaian berdasarkan kesesuaian antara minat dan keahlian mahasiswa dengan posisi magang yang ditawarkan',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ],
-        [
-            'nama_kriteria' => 'jarak lokasi',
-            'tipe' => 'cost',
-            'keterangan' => 'Kriteria penilaian berdasarkan jarak lokasi magang dari tempat tinggal mahasiswa (semakin dekat semakin baik)',
+            'keterangan' => 'Kriteria penilaian berdasarkan apakah perusahaan ini memberikan gaji ke anak magang apa tidak',
             'created_at' => now(),
             'updated_at' => now(),
         ],
         [
             'nama_kriteria' => 'tipe perusahaan',
             'tipe' => 'benefit',
-            'keterangan' => 'Kriteria penilaian berdasarkan jenis atau kategori perusahaan (misalnya startup, BUMN, multinasional) yang sesuai dengan preferensi mahasiswa',
+            'keterangan' => 'Kriteria penilaian berdasarkan tipe perusahaan apakah perusahaan tersebut BUMN CV PT atau startup',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+        [
+            'nama_kriteria' => 'fleksibilitas kerja',
+            'tipe' => 'benefit',
+            'keterangan' => 'Kriteria fleksibilitas kerja berdasarkan jenis bekerja nya apakah wfh onsite remote',
             'created_at' => now(),
             'updated_at' => now(),
         ],

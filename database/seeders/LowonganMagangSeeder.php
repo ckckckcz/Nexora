@@ -30,7 +30,7 @@ DB::table('lowongan_magang')->insert([
     ],
     [
         'nama_perusahaan' => 'PT. Data Analytics Pro',
-        'tipe_perusahaan' => 'korporat',
+        'tipe_perusahaan' => 'BUMN',
         'fasilitas_perusahaan' => 'Training, Sertifikat, Akses ke data perusahaan',
         'status_gaji' => 'dibayar',
         'fleksibilitas_kerja' => 'hybrid',
@@ -47,7 +47,7 @@ DB::table('lowongan_magang')->insert([
     ],
     [
         'nama_perusahaan' => 'StartUp Tech Indonesia',
-        'tipe_perusahaan' => 'startup',
+        'tipe_perusahaan' => 'CV',
         'fasilitas_perusahaan' => 'Mentoring bisnis, Networking, Ruang kreatif',
         'status_gaji' => 'tidak dibayar',
         'fleksibilitas_kerja' => 'remote',
@@ -64,7 +64,7 @@ DB::table('lowongan_magang')->insert([
     ],
     [
         'nama_perusahaan' => 'PT. Digital Transformation',
-        'tipe_perusahaan' => 'korporat',
+        'tipe_perusahaan' => 'PT',
         'fasilitas_perusahaan' => 'Pelatihan AI, Akses ke GPU, Lingkungan kerja profesional',
         'status_gaji' => 'dibayar',
         'fleksibilitas_kerja' => 'onsite',
