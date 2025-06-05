@@ -7,6 +7,7 @@ use App\Models\Kriteria;
 use App\Models\LowonganMagang;
 use App\Models\PenilaianLowongan;
 use App\Models\PreferensiMahasiswa; // Added import for PreferensiMahasiswa
+use App\Models\SkorKecocokan;
 use Illuminate\Support\Facades\DB; // Added import for DB
 use Illuminate\Support\Facades\Validator; // Added import for Validator
 use Illuminate\Http\Request;
@@ -24,7 +25,6 @@ class PenilaianLowonganController extends Controller
         $penilaian = DB::table('penilaian_lowongan')->get();
 
         // Bangun matriks Perbandingan
-        $matriks = [];
         $bestValues = [];
         $worstValues = [];
 
@@ -34,57 +34,82 @@ class PenilaianLowonganController extends Controller
             $worstValues[$k->id_kriteria] = null;
         }
 
-        foreach ($lowongan as $l) {
-            $baris = [
-                'nama_perusahaan' => $l->nama_perusahaan
+        // Fetch data from SkorKecocokan for id_mahasiswa = 3
+        $skorData = SkorKecocokan::where('id_mahasiswa', 3)->get();
+
+        // Build matrix comparison
+        $matriks = [];
+        foreach ($skorData as $item) {
+            $matriks[$item->id_lowongan] = [
+                'nama_perusahaan' => $item->lowongan->nama_perusahaan,
+                'skor_minat' => $item->skor_minat,
+                'skor_fasilitas' => $item->skor_fasilitas,
+                'skor_gaji' => $item->skor_gaji,
+                'skor_tipe' => $item->skor_tipe,
+                'skor_fleksibilitas' => $item->skor_fleksibilitas,
+                'skor_total' => $item->skor_total,
             ];
+        }
+        // dd($matriks);
 
-            foreach ($kriteria as $k) {
-                // Perhatikan penggunaan id_kriteria dan id_lowongan
-                $nilai = $penilaian->first(function ($p) use ($l, $k) {
-                    return $p->id_lowongan == $l->id_lowongan && $p->id_kriteria == $k->id_kriteria;
-                });
+        // Map score keys to numeric keys
+        $scoreKeys = [
+            1 => 'skor_minat',
+            2 => 'skor_fasilitas',
+            3 => 'skor_gaji',
+            4 => 'skor_tipe',
+            5 => 'skor_fleksibilitas',
+        ];
 
-                $nilaiKriteria = $nilai ? $nilai->nilai : null;
-                $baris[$k->id_kriteria] = $nilaiKriteria;
+        // Initialize bestValues and worstValues
+        foreach ($scoreKeys as $key => $scoreKey) {
+            $bestValues[$key] = null; // Initialize best value
+            $worstValues[$key] = null; // Initialize worst value
+        }
 
-                // Menentukan nilai best dan worst
-                if ($nilaiKriteria !== null) {
-                    if ($bestValues[$k->id_kriteria] === null || $nilaiKriteria > $bestValues[$k->id_kriteria]) {
-                        $bestValues[$k->id_kriteria] = $nilaiKriteria;
+        // Calculate bestValues and worstValues
+        foreach ($matriks as $baris) {
+            foreach ($scoreKeys as $key => $scoreKey) {
+                $nilai = $baris[$scoreKey] ?? null;
+
+                if (is_numeric($nilai)) {
+                    // Update bestValues
+                    if ($bestValues[$key] === null || $nilai > $bestValues[$key]) {
+                        $bestValues[$key] = $nilai;
                     }
-                    if ($worstValues[$k->id_kriteria] === null || $nilaiKriteria < $worstValues[$k->id_kriteria]) {
-                        $worstValues[$k->id_kriteria] = $nilaiKriteria;
+
+                    // Update worstValues
+                    if ($worstValues[$key] === null || $nilai < $worstValues[$key]) {
+                        $worstValues[$key] = $nilai;
                     }
                 }
             }
-            
-            $matriks[] = $baris;
         }
+        // dd( $bestValues, $worstValues);
         
         // Normalisasi matriks
         $matriksNormalisasi = [];
-        foreach ($matriks as $baris) {
+        foreach ($matriks as $idLowongan => $baris) {
             $barisNormalisasi = [
                 'nama_perusahaan' => $baris['nama_perusahaan']
             ];
-            foreach ($kriteria as $k) {
-                $nilai = $baris[$k->id_kriteria] ?? null;
+            foreach ($scoreKeys as $key => $scoreKey) {
+                $nilai = $baris[$scoreKey] ?? null;
 
-                // Ensure $nilai is numeric and $bestValues/$worstValues are arrays before accessing offsets
-                if (is_numeric($nilai) && isset($bestValues[$k->id_kriteria]) && isset($worstValues[$k->id_kriteria])) {
-                    if ($k->tipe == 'Benefit') {
-                        $barisNormalisasi[$k->id_kriteria] = ($nilai - $worstValues[$k->id_kriteria]) / ($bestValues[$k->id_kriteria] - $worstValues[$k->id_kriteria]);
+                // Perform normalization based on criteria type
+                if (is_numeric($nilai) && isset($bestValues[$key]) && isset($worstValues[$key]) && $bestValues[$key] != $worstValues[$key]) {
+                    if ($kriteria->where('id_kriteria', $key)->first()->tipe == 'Benefit') {
+                        $barisNormalisasi[$key] = ($nilai - $worstValues[$key]) / ($bestValues[$key] - $worstValues[$key]);
                     } else {
-                        $barisNormalisasi[$k->id_kriteria] = ($bestValues[$k->id_kriteria] - $nilai) / ($bestValues[$k->id_kriteria] - $worstValues[$k->id_kriteria]);
+                        $barisNormalisasi[$key] = ($bestValues[$key] - $nilai) / ($bestValues[$key] - $worstValues[$key]);
                     }
                 } else {
-                    $barisNormalisasi[$k->id_kriteria] = null; // Default to null if values are invalid
+                    $barisNormalisasi[$key] = 0; // Default to 0 if division by zero occurs
                 }
             }
-            $matriksNormalisasi[] = $barisNormalisasi;
+            $matriksNormalisasi[$idLowongan] = $barisNormalisasi;
         }
-        // dd($matriksNormalisasi);
+        // dd( $matriksNormalisasi);
         
         // Calculate the weighted matrix
         $weights = [ 
@@ -128,41 +153,47 @@ class PenilaianLowonganController extends Controller
             $sValues[] = ['nama_perusahaan' => $baris['nama_perusahaan'], 's' => $s];
             $rValues[] = ['nama_perusahaan' => $baris['nama_perusahaan'], 'r' => $r];
         }
+        // dd($sValues, $rValues);
 
         // Calculate Q values
         $v = 0.5; // Weight for the strategy of maximum group utility
-        $sBest = min(array_column($sValues, 's'));
-        $sWorst = max(array_column($sValues, 's'));
-        $rBest = min(array_column($rValues, 'r'));
-        $rWorst = max(array_column($rValues, 'r'));
+
+        // Ensure compatibility with array structure
+        $sBest = max(array_column($sValues, 's') ?: [0]);
+        $sWorst = min(array_column($sValues, 's') ?: [0]);
+        $rBest = max(array_column($rValues, 'r') ?: [0]);
+        $rWorst = min(array_column($rValues, 'r') ?: [0]);
+        // dd($sBest, $rBest, $sWorst, $rWorst);
+
         $qValues = [];
-        foreach (range(0, count($matriksNormalisasi) - 1) as $i) {
-            // Ensure $sValues and $rValues are numeric before performing calculations
-            $sValue = $sValues[$i]['s'] ?? 0;
-            $rValue = $rValues[$i]['r'] ?? 0;
+        foreach ($matriksNormalisasi as $idLowongan => $baris) {
+            $sValue = $sValues[$idLowongan]['s'] ?? 0;
+            $rValue = $rValues[$idLowongan]['r'] ?? 0;
 
             if (is_numeric($sValue) && is_numeric($rValue) && $sWorst != $sBest && $rWorst != $rBest) {
                 $q = $v * (($sValue - $sBest) / ($sWorst - $sBest)) + (1 - $v) * (($rValue - $rBest) / ($rWorst - $rBest));
             } else {
-                $q = 0; // Default to 0 if values are not numeric or division by zero occurs
+                $q = 0; // Default to 0 if division by zero occurs
             }
 
-            $qValues[] =  ['nama_perusahaan' => $matriksNormalisasi[$i]['nama_perusahaan'], 'q' => $q];
+            $qValues[] = ['nama_perusahaan' => $baris['nama_perusahaan'], 'q' => $q];
         }
 
         // dd($qValues);
+
         
         // Rank the alternatives
         $rankedAlternatives = [];
-        foreach (range(0, count($matriksNormalisasi) - 1) as $i) {
+        foreach ($qValues as $index => $qValue) {
             $rankedAlternatives[] = [
-                'nama_perusahaan' => $matriksNormalisasi[$i]['nama_perusahaan'],
-                's' => $sValues[$i]['s'],
-                'r' => $rValues[$i]['r'],
-                'q' => $qValues[$i]['q'],
+                'nama_perusahaan' => $qValue['nama_perusahaan'],
+                's' => $sValues[$index]['s'] ?? 0,
+                'r' => $rValues[$index]['r'] ?? 0,
+                'q' => $qValue['q'],
             ];
         }
-        // dd($rankedAlternatives);
+
+        // dd($qValues);
 
         // Sort by Q value (ascending)
         usort($rankedAlternatives, function ($a, $b) {

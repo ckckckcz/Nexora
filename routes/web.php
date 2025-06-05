@@ -227,6 +227,7 @@ Route::get('/admin/laporan', function () {
 // POV USER
 Route::get('/rekomendasi-magang', [RekomendasiMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');
 Route::post('/rekomendasi-magang/tambah', [RekomendasiMagangMahasiswaController::class, 'store'])->name('user.rekomendasi-magang.store');
+Route::get('/rekomendasi-magang/hasil', [RekomendasiMagangMahasiswaController::class, 'hasil'])->name('user.rekomendasi-magang.hasil');
 Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
 });

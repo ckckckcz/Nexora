@@ -12,8 +12,6 @@ class PreferensiMahasiswa extends Model
     protected $primaryKey = 'id_preferensi_mahasiswa';
     protected $fillable = [
         'id_mahasiswa',
-        'id_kriteria',
-        'bobot',
         'bobot_minat',
         'bobot_fasilitas',
         'bobot_gaji',
@@ -28,8 +26,5 @@ class PreferensiMahasiswa extends Model
 
     public function mahasiswa () {
         return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa', 'id_mahasiswa');
-    }
-    public function kriteria () {
-        return $this->belongsTo(Kriteria::class, 'id_kriteria', 'id_kriteria');
     }
 }

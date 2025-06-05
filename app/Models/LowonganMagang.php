@@ -10,6 +10,7 @@ class LowonganMagang extends Model
     use HasFactory;
 
     protected $table = 'lowongan_magang';
+    protected $primaryKey = 'id_lowongan';
 
     protected $fillable = [
         'nama_perusahaan',
