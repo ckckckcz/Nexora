@@ -47,6 +47,15 @@
 
     <div class="min-h-screen bg-white p-4 md:p-8 justify-center items-center flex">
         <div class="max-w-4xl mx-auto">
+            <!-- Stepper Navigation -->
+            <div class="mb-8">
+                <ul class="flex justify-between text-sm font-medium text-gray-600">
+                    <li class="step step-1 active font-bold text-blue-900">1. Pilih Kriteria</li>
+                    <li class="step step-2">2. Proses</li>
+                    <li class="step step-3">3. Hasil</li>
+                </ul>
+            </div>
+
             <!-- Step 1: Pilih Kriteria -->
             <div id="step-1" class="step-content">
                 <header class="mb-8 text-left">
@@ -89,8 +98,21 @@
                 </div>
             </div>
 
-            <!-- Step 4: Hasil -->
-            <div id="step-4" class="step-content hidden">
+            <!-- Step 2: Proses -->
+            <div id="step-2" class="step-content hidden">
+                <div class="flex flex-col items-center justify-center min-h-[300px]">
+                    <!-- Enhanced Loading Animation -->
+                    <div class="relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4 border-blue-900 animate-spin"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-900 animate-spin-slow"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-transparent border-b-white animate-spin-reverse"></div>
+                    </div>
+                    <p class="mt-4 text-gray-600">Memproses preferensi Anda...</p>
+                </div>
+            </div>
+
+            <!-- Step 3: Hasil -->
+            <div id="step-3" class="step-content hidden">
                 <header class="mb-8 text-left">
                     <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Hasil Rekomendasi Magang</h1>
                     <p class="text-gray-600">
@@ -177,17 +199,22 @@
         });
 
         submitTagsButton.addEventListener('click', () => {
-            resultCriteria.innerHTML = '';
-            Object.keys(selectedTags).forEach(category => {
-                selectedTags[category]?.forEach(tag => {
-                    const li = document.createElement('li');
-                    li.textContent = `${category}: ${tag}`;
-                    resultCriteria.appendChild(li);
-                });
-            });
-
             document.getElementById('step-1').classList.add('hidden');
-            document.getElementById('step-4').classList.remove('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+
+            setTimeout(() => {
+                resultCriteria.innerHTML = '';
+                Object.keys(selectedTags).forEach(category => {
+                    selectedTags[category]?.forEach(tag => {
+                        const li = document.createElement('li');
+                        li.textContent = `${category}: ${tag}`;
+                        resultCriteria.appendChild(li);
+                    });
+                });
+
+                document.getElementById('step-2').classList.add('hidden');
+                document.getElementById('step-3').classList.remove('hidden');
+            }, 3000); // Simulate 3 seconds of processing
         });
 
         backToStep1FromResultButton.addEventListener('click', () => {
@@ -202,8 +229,49 @@
             });
 
             updateSelectedTagsDisplay();
-            document.getElementById('step-4').classList.add('hidden');
+            document.getElementById('step-3').classList.add('hidden');
             document.getElementById('step-1').classList.remove('hidden');
         });
     </script>
+
+    <style>
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin-slow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+
+        @keyframes spin-reverse {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 2s linear infinite;
+        }
+
+        .animate-spin-reverse {
+            animation: spin-reverse 1.5s linear infinite;
+        }
+    </style>
 @endsection
