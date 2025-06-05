@@ -7,6 +7,7 @@ use App\Models\PreferensiMahasiswa;
 use App\Models\LowonganMagang;
 use App\Models\PenilaianLowongan;
 use App\Models\HasilRekomendasi;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -93,6 +94,85 @@ class RekomendasiController extends Controller
         }
 
         return redirect()->route('rekomendasi.index')->with('success', 'Rekomendasi berhasil dihitung.');
+    }
+
+    public function calculateSmc($mahasiswaId, $preferensi) {
+        $lowonganList = DB::table('lowongan_magang')
+            ->where('status_lowongan', 'open')
+            ->get()
+            ->map(function ($lowongan) {
+                return [
+                    'id' => $lowongan->id,
+                    'keahlian' => explode(', ', $lowongan->bidang_keahlian),
+                    'fasilitas' => explode(', ', $lowongan->fasilitas_perusahaan),
+                    'status_gaji' => $lowongan->status_gaji,
+                    'tipe_perusahaan' => $lowongan->tipe_perusahaan,
+                    'fleksibilitas_kerja' => $lowongan->fleksibilitas_kerja,
+                ];
+            })->toArray();
+        
+        $matriks = [];
+        foreach ($lowonganList as $lowongan) {
+            $vectorLowongan = [];
+            $vectorPreferensi = [];
+
+            // Minat Keahlian
+            $keahlianCocok = !empty(array_intersect($lowongan['keahlian'], $preferensi['keahlian']));
+            $vectorLowongan[] = $keahlianCocok ? 1 : 0;
+            $vectorPreferensi[] = 1;
+
+            // Fasilitas
+            $fasilitasCocok = !empty(array_intersect($lowongan['fasilitas'], $preferensi['fasilitas']));
+            $vectorLowongan[] = $fasilitasCocok ? 1 : 0;
+            $vectorPreferensi[] = 1;
+
+            // Status Gaji
+            $gajiCocok = $lowongan['status_gaji'] === $preferensi['status_gaji'];
+            $vectorLowongan[] = $gajiCocok ? 1 : 0;
+            $vectorPreferensi[] = 1;
+
+            // Tipe Perusahaan
+            $tipeCocok = $lowongan['tipe_perusahaan'] === $preferensi['tipe_perusahaan'];
+            $vectorLowongan[] = $tipeCocok ? 1 : 0;
+            $vectorPreferensi[] = 1;
+
+            // Fleksibilitas
+            $fleksibilitasCocok = $lowongan['fleksibilitas_kerja'] === $preferensi['fleksibilitas_kerja'];
+            $vectorLowongan[] = $fleksibilitasCocok ? 1 : 0;
+            $vectorPreferensi[] = 1;
+
+            // Hitung SMC
+            $matches = 0;
+            $total = count($vectorLowongan);
+            for ($i = 0; $i < $total; $i++) {
+                if ($vectorLowongan[$i] === $vectorPreferensi[$i]) {
+                    $matches++;
+                }
+            }
+            $smc = $total ? $matches / $total : 0;
+
+            // Simpan skor
+            DB::table('skor_kecocokan')->updateOrInsert(
+                ['mahasiswa_id' => $mahasiswaId, 'lowongan_id' => $lowongan['id']],
+                [
+                    'skor_minat' => $vectorLowongan[0] * 5,
+                    'skor_fasilitas' => $vectorLowongan[1] * 5,
+                    'skor_gaji' => $vectorLowongan[2] * 5,
+                    'skor_tipe' => $vectorLowongan[3] * 5,
+                    'skor_fleksibilitas' => $vectorLowongan[4] * 5,
+                    'skor_total' => $smc * 5,
+                    'updated_at' => now()
+                ]
+            );
+
+            $matriks[] = [
+                $vectorLowongan[0] * 5,
+                $vectorLowongan[1] * 5,
+                $vectorLowongan[2] * 5,
+                $vectorLowongan[3] * 5,
+                $vectorLowongan[4] * 5
+            ];
+        }
     }
 
     public function setRekomendasiDosen(Request $request, $id_hasil_rekomendasi)

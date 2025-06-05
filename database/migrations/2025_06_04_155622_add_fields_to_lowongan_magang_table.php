@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('lowongan_magang', function (Blueprint $table) {
-            $table->enum('tipe_perusahaan', ['startup', 'korporat', 'pemerintah'])
+            $table->enum('tipe_perusahaan', ['startup', 'BUMN', 'PT', 'CV'])
                   ->after('nama_perusahaan');
             $table->text('fasilitas_perusahaan')->after('tipe_perusahaan');
             $table->enum('gaji', ['dibayar', 'tidak dibayar'])->after('fasilitas_perusahaan');

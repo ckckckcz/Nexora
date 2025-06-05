@@ -21,6 +21,7 @@ use App\Http\Controllers\RekomendasiController;
 use App\Http\Controllers\User\DetailLowonganController;
 use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\RekomendasiMagangMahasiswaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Testing\SMCController;
 use App\Http\Controllers\User\LowonganMagangMahasiswaController;
@@ -224,7 +225,8 @@ Route::get('/admin/laporan', function () {
 });
 
 // POV USER
-Route::get('/rekomendasi-magang', [LowonganMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');
+Route::get('/rekomendasi-magang', [RekomendasiMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');
+Route::post('/rekomendasi-magang/tambah', [RekomendasiMagangMahasiswaController::class, 'store'])->name('user.rekomendasi-magang.store');
 Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
 });

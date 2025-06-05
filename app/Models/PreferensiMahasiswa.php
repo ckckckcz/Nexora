@@ -14,6 +14,16 @@ class PreferensiMahasiswa extends Model
         'id_mahasiswa',
         'id_kriteria',
         'bobot',
+        'bobot_minat',
+        'bobot_fasilitas',
+        'bobot_gaji',
+        'bobot_tipe',
+        'bobot_fleksibilitas',
+        'keahlian',
+        'fasilitas',
+        'status_gaji',
+        'tipe_perusahaan',
+        'fleksibilitas_kerja',
     ];
 
     public function mahasiswa () {

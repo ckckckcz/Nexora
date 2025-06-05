@@ -1,3 +1,4 @@
+
 @extends('layouts.spk')
 @section('spk')
     @props([
@@ -65,27 +66,64 @@
                     </p>
                 </header>
 
-                <div class="space-y-8">
-                    @foreach($tagCategories as $category)
+                    <div class="space-y-8">
+                        @foreach($tagCategories as $category)
+                            <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
+                                <h2 class="text-xl font-semibold text-gray-800 mb-4">{{ $category['name'] }} (Max: {{ $category['maxSelection'] }})</h2>
+                                <div class="flex flex-wrap gap-2 md:gap-3">
+                                    @if($category['maxSelection'] > 1)
+                                        @foreach($category['tags'] as $tag)
+                                            <div class="flex items-center">
+                                                <input
+                                                    type="checkbox"
+                                                    id="{{ $category['name'] }}-{{ $tag['name'] }}"
+                                                    name="{{ $category['name'] }}[]"
+                                                    value="{{ $tag['name'] }}"
+                                                    class="mr-2"
+                                                >
+                                                <label for="{{ $category['name'] }}-{{ $tag['name'] }}" class="text-gray-700">{{ $tag['icon'] }} {{ $tag['name'] }}</label>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        @foreach($category['tags'] as $tag)
+                                            <div class="flex items-center">
+                                                <input
+                                                    type="radio"
+                                                    id="{{ $category['name'] }}-{{ $tag['name'] }}"
+                                                    name="{{ $category['name'] }}"
+                                                    value="{{ $tag['name'] }}"
+                                                    class="mr-2"
+                                                >
+                                                <label for="{{ $category['name'] }}-{{ $tag['name'] }}" class="text-gray-700">{{ $tag['icon'] }} {{ $tag['name'] }}</label>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+
+                        {{-- <!-- Bobot Kriteria -->
                         <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
-                            <h2 class="text-xl font-semibold text-gray-800 mb-4">{{ $category['name'] }} (Max: {{ $category['maxSelection'] }})</h2>
-                            <div class="flex flex-wrap gap-2 md:gap-3">
-                                @foreach($category['tags'] as $tag)
-                                    <button
-                                        data-tag-name="{{ $tag['name'] }}"
-                                        data-tag-icon="{{ $tag['icon'] }}"
-                                        data-category-name="{{ $category['name'] }}"
-                                        class="tag-button px-4 py-2 rounded-full cursor-pointer text-sm md:text-base transition-all duration-200 flex items-center bg-gray-100 text-gray-800 hover:bg-blue-100 hover:text-blue-900 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-opacity-50"
-                                        aria-pressed="false"
-                                    >
-                                        <span class="mr-2">{{ $tag['icon'] }}</span>
-                                        {{ $tag['name'] }}
-                                    </button>
+                            <h2 class="text-xl font-semibold text-gray-800 mb-4">Bobot Kriteria (Total harus 1)</h2>
+                            <div class="flex flex-wrap gap-4">
+                                @foreach($tagCategories as $category)
+                                    <div>
+                                        <label for="bobot_{{ str_replace(' ', '_', strtolower($category['name'])) }}" class="text-gray-700">{{ $category['name'] }}</label>
+                                        <input
+                                            type="number"
+                                            step="0.1"
+                                            min="0"
+                                            max="1"
+                                            name="bobot[{{ $category['name'] }}]"
+                                            id="bobot_{{ str_replace(' ', '_', strtolower($category['name'])) }}"
+                                            class="border rounded p-2"
+                                            value="0.2"
+                                        >
+                                    </div>
                                 @endforeach
                             </div>
-                        </div>
-                    @endforeach
-                </div>
+                        </div> --}}
+                    </div>
 
                 <div class="mt-8 text-center">
                     <button
@@ -127,52 +165,22 @@
                         <ul id="result-criteria" class="grid grid-cols-2 gap-2"></ul>
                     </div>
                 </div>
-
-                <div class="mt-8 text-center">
-                    <button id="back-to-step-1-from-result" class="px-6 py-3 rounded-lg font-medium text-gray-800 border border-gray-300 shadow-lg transition-all duration-200 hover:bg-gray-100">
-                        Ulangi
-                    </button>
-                </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <script>
-        const selectedTags = {};
-        const maxSelections = {
-            'Bidang Keahlian': 2,
-            'Tipe Perusahaan': 1,
-            'Fasilitas Perusahaan': 2,
-            'Status Gaji': 1,
-            'Fleksibilitas Kerja': 1,
-        };
-
-        const submitTagsButton = document.getElementById('submit-tags');
-        const resultCriteria = document.getElementById('result-criteria');
-        const backToStep1FromResultButton = document.getElementById('back-to-step-1-from-result');
-
-        function updateSelectedTagsDisplay() {
+        document.getElementById('rekomendasi-form').addEventListener('submit', function(event) {
+            const categories = @json($tagCategories);
             let valid = true;
-            Object.keys(maxSelections).forEach(category => {
-                const selectedCount = selectedTags[category]?.length || 0;
-                if (selectedCount > maxSelections[category]) {
+            let totalBobot = 0;
+
+            // Validasi maxSelection
+            categories.forEach(category => {
+                const selected = document.querySelectorAll(`input[name="${category.name}[]"]:checked, input[name="${category.name}"]:checked`).length;
+                if (selected > category.maxSelection) {
                     valid = false;
-                }
-            });
-
-            submitTagsButton.disabled = !valid;
-            submitTagsButton.classList.toggle('bg-gray-400', !valid);
-            submitTagsButton.classList.toggle('cursor-not-allowed', !valid);
-            submitTagsButton.classList.toggle('bg-blue-900', valid);
-        }
-
-        document.querySelectorAll('.tag-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const tagName = button.dataset.tagName;
-                const categoryName = button.dataset.categoryName;
-
-                if (!selectedTags[categoryName]) {
-                    selectedTags[categoryName] = [];
+                    alert(`Maksimum ${category.maxSelection} pilihan untuk ${category.name}`);
                 }
 
                 const selectedCount = selectedTags[categoryName].length;
