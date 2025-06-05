@@ -11,6 +11,9 @@ class CreatePenilaianLowonganTable extends Migration
     Schema::create('penilaian_lowongan', function (Blueprint $table) {
     $table->id('id_penilaian');
 
+    $table->unsignedBigInteger('id_mahasiswa');
+    $table->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswa')->onDelete('cascade');
+
     $table->unsignedBigInteger('id_lowongan');
     $table->foreign('id_lowongan')->references('id_lowongan')->on('lowongan_magang')->onDelete('cascade');
 
