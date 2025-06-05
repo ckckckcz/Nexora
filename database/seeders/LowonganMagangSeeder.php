@@ -65,7 +65,7 @@ DB::table('lowongan_magang')->insert([
     [
         'nama_perusahaan' => 'PT. Digital Transformation',
         'tipe_perusahaan' => 'PT',
-        'fasilitas_perusahaan' => 'Pelatihan AI, Akses ke GPU, Lingkungan kerja profesional',
+        'fasilitas_perusahaan' => 'Pelatihan AI, Akses ke Sistem Cloud Perusahaan, Lingkungan kerja profesional',
         'status_gaji' => 'dibayar',
         'fleksibilitas_kerja' => 'onsite',
         'id_skema_magang' => 4,
