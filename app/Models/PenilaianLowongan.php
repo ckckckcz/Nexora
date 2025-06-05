@@ -13,6 +13,7 @@ class PenilaianLowongan extends Model
     protected $fillable = [
         'id_lowongan',
         'id_kriteria',
+        'id_mahasiswa',
         'nilai',
     ];
 
@@ -22,5 +23,9 @@ class PenilaianLowongan extends Model
 
     public function lowongan() {
         return $this->belongsTo(LowonganMagang::class, 'id_lowongan', 'id_lowongan_magang');
+    }
+
+    public function mahasiswa() {
+        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa', 'id_mahasiswa');
     }
 }
