@@ -39,7 +39,7 @@
                                     Pembimbing</th>
                                 <th
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase hidden sm:table-cell">
-                                    Nama Perusahaan</th>
+                                     Nama Perusahaan</th>
                                 <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
                                 </th>
                                 <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi
@@ -56,7 +56,7 @@
                                         {{ $guidance->dosen->nama_dosen }}
                                     </td>
                                     <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">
-                                        {{ $guidance->lowongan->nama_lowongan }}
+                                        {{ $guidance->lowongan->nama_perusahaan }}
                                     </td>
                                     <td class="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
                                         <span

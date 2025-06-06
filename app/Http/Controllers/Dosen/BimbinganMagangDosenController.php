@@ -18,7 +18,9 @@ class BimbinganMagangDosenController extends Controller
     public function index()
     {
         try {
-            $guidances = BimbinganMagang::with('mahasiswa', 'dosen', 'lowongan')->get();
+            $guidances = BimbinganMagang::with('mahasiswa', 'dosen', 'lowongan')
+                ->where('id_dosen', auth()->user()->dosen->id_dosen)
+                ->get();
             return view('dosen.bimbingan_magang', compact('guidances'));
         } catch (\Exception $e) {
             // Jika error, kirim array kosong
@@ -70,7 +72,11 @@ class BimbinganMagangDosenController extends Controller
      */
     public function show(string $id)
     {
-        $guidance = BimbinganMagang::with('mahasiswa', 'dosen', 'lowongan')->findOrFail($id);
+        $dosenId = auth()->user()->id_dosen;
+        $guidance = BimbinganMagang::with('mahasiswa', 'dosen', 'lowongan')
+            ->where('id_bimbingan', $id)
+            ->where('id_dosen', $dosenId)
+            ->firstOrFail();
         return view('dosen.bimbingan_magang_detail', compact('guidance'));
     }
 
