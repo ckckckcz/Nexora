@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\SkemaMagangController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
+use App\Http\Controllers\Dosen\BimbinganMagangDosenController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\RekomendasiController;
 use App\Http\Controllers\User\DetailLowonganController;
@@ -57,9 +58,8 @@ Route::get('/admin/laporan', function() {
 Route::get('/dosen/dashboard', function () {
     return view('dosen.dashboard');
 });
-Route::get('/dosen/magang/bimbingan-magang', function () {
-    return view('dosen.bimbingan_magang');
-});
+Route::get('/dosen/magang/bimbingan-magang', [BimbinganMagangDosenController::class, 'index'])->name('dosen.bimbingan-magang');
+
 Route::get('/dosen/magang/bimbingan-magang/chat', function () {
     return view('dosen.bimbingan_magang.chat');
 });
@@ -94,7 +94,7 @@ Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->group(function () {
 
 Route::middleware(['auth', 'authorize:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
-    
+
     // MAHASISWA
     Route::group(['prefix' => 'admin/manajemen-akun/mahasiswa'], function () {
         Route::get('/', [AkunMahasiswaController::class, 'index'])->name('admin.manajemen-akun.mahasiswa');
@@ -192,7 +192,7 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::delete('/hapus/{id}', [PosisiMagangController::class, 'destroy']);
     });
 
-    // SPK 
+    // SPK
     Route::group(['prefix' => 'admin/sistem-rekomendasi'], function () {
         Route::group(['prefix' => 'manajemen-kriteria'], function () {
             Route::get('/', [KriteriaController::class, 'index'])->name('admin.manajemen-kriteria');
@@ -232,19 +232,19 @@ Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
 });
 
-// POV DOSEN
-Route::get('/dosen/dashboard', function () {
-    return view('dosen.dashboard');
-});
-Route::get('/dosen/magang/bimbingan-magang', function () {
-    return view('dosen.bimbingan_magang');
-});
-Route::get('/dosen/magang/bimbingan-magang/chat', function () {
-    return view('dosen.bimbingan_magang.chat');
-});
-Route::get('/dosen/magang/rekomendasi-magang', function () {
-    return view('dosen.rekomendasi_magang');
-});
+// // POV DOSEN
+// Route::get('/dosen/dashboard', function () {
+//     return view('dosen.dashboard');
+// });
+// Route::get('/dosen/magang/bimbingan-magang', function () {
+//     return view('dosen.bimbingan_magang');
+// });
+// Route::get('/dosen/magang/bimbingan-magang/chat', function () {
+//     return view('dosen.bimbingan_magang.chat');
+// });
+// Route::get('/dosen/magang/rekomendasi-magang', function () {
+//     return view('dosen.rekomendasi_magang');
+// });
 
 // SMC Testing Routes
 Route::get('/testing/smc', [SMCController::class, 'index'])->name('smc.test');

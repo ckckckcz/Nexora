@@ -10,24 +10,6 @@
             <div class="p-4 sm:p-6 flex flex-col gap-4">
                 <div class="flex flex-col lg:flex-row sm:items-left sm:justify-between gap-4">
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">
-                        <!-- Search Input -->
-                        <div class="relative flex-grow max-w-full sm:max-w-md">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-search text-gray-400" id="search-icon"></i>
-                            </div>
-                            <input type="text" id="search-input"
-                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
-                                placeholder="Cari berdasarkan nama mahasiswa atau status" />
-                        </div>
-
-                        <!-- Optional: Filter Dropdown for Status -->
-                        <div class="relative w-full sm:w-auto">
-                            <button id="status-filter-btn"
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
-                                <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
-                                <span id="status-filter-text">Semua Status</span>
-                                <i class="fas fa-chevron-down text-gray-300" id="status-chevron"></i>
-                            </button>
                             <div id="status-dropdown"
                                 class="absolute z-10 mt-1 w-full sm:w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
                                 <ul class="py-1 max-h-60 overflow-auto">
@@ -57,7 +39,7 @@
                                     Pembimbing</th>
                                 <th
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase hidden sm:table-cell">
-                                    Lowongan</th>
+                                    Nama Perusahaan</th>
                                 <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
                                 </th>
                                 <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi
@@ -65,45 +47,33 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <!-- Contoh row statis -->
-                            <tr>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Budi Santoso</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Dr. Siti Aminah</td>
-                                <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">PT Telkom
-                                    - Frontend Dev</td>
-                                <td class="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                                        Aktif
-                                    </span>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                        </button>
-                                    </form>
-                                    <a href="https://wa.me/6281234567890"
-                                        class="inline-flex items-center px-3 py-1.5 bg-green-100 text-green-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
-                                        Hubungi Mahasiswa
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Budi Santoso</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Dr. Siti Aminah</td>
-                                <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">PT Telkom
-                                    - Frontend Dev</td>
-                                <td class="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                        Selesai
-                                    </span>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                        </button>
-                                    </form>
-                                    <a href="https://wa.me/6281234567890"
-                                        class="inline-flex items-center px-3 py-1.5 bg-green-100 text-green-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
-                                        Hubungi Mahasiswa
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach ($guidances as $guidance)
+                                <tr>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $guidance->mahasiswa->nama_mahasiswa }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $guidance->dosen->nama_dosen }}
+                                    </td>
+                                    <td class="hidden sm:table-cell px-4 py-4 text-sm text-gray-900 whitespace-nowrap">
+                                        {{ $guidance->lowongan->nama_lowongan }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm sm:px-6 whitespace-nowrap">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium {{ $guidance->status_bimbingan == 'aktif' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800' }}">
+                                            {{ $guidance->status_bimbingan }}
+                                        </span>
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                            </button>
+                                        </form>
+                                        <a href="https://wa.me/{{ $guidance->mahasiswa->no_telp }}"
+                                            class="inline-flex items-center px-3 py-1.5 bg-green-100 text-green-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
+                                            Hubungi Mahasiswa
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
