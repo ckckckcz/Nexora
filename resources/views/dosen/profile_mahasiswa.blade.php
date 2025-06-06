@@ -12,16 +12,6 @@
         <!-- Student Management Table -->
         <section class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <!-- Search Input -->
-                <div class="relative flex-grow max-w-full sm:max-w-md">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fas fa-search text-gray-400 transition-colors duration-200"></i>
-                    </div>
-                    <input type="text" id="search-input"
-                        class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 text-sm bg-gray-50 transition-all duration-200 ease-in-out hover:bg-white"
-                        placeholder="Cari berdasarkan NIM atau Nama" />
-                </div>
-
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
@@ -55,7 +45,7 @@
                                 <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">{{ $mahasiswa->nim }}</td>
                                 <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">{{ $mahasiswa->nama_mahasiswa }}</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap hidden sm:table-cell">{{ $mahasiswa->program_studi->nama_program_studi ?? 'N/A' }}</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap hidden sm:table-cell">{{ $mahasiswa->jurusan }}</td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <button
                                         data-id="{{ $mahasiswa->id }}"
