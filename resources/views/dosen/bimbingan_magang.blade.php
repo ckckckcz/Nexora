@@ -44,8 +44,6 @@
                             </div>
                         </div>
                     </div>
-
-                
                 </div>
 
                 <!-- Table -->
@@ -81,7 +79,7 @@
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                                         </button>
                                     </form>
-                                    <a href="/dosen/magang/bimbingan-magang/chat/"
+                                    <a href="https://wa.me/6281234567890"
                                         class="inline-flex items-center px-3 py-1.5 bg-green-100 text-green-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
                                         Hubungi Mahasiswa
                                     </a>
@@ -100,7 +98,7 @@
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                                         </button>
                                     </form>
-                                    <a href="/admin/bimbingan-magang/chat/"
+                                    <a href="https://wa.me/6281234567890"
                                         class="inline-flex items-center px-3 py-1.5 bg-green-100 text-green-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
                                         Hubungi Mahasiswa
                                     </a>
