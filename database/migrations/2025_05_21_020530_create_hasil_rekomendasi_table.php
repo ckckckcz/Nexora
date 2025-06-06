@@ -17,7 +17,8 @@ class CreateHasilRekomendasiTable extends Migration
             $table->unsignedBigInteger('id_lowongan');
             $table->foreign('id_lowongan')->references('id_lowongan')->on('lowongan_magang')->onDelete('cascade');
 
-            $table->float('nilai_akhir');
+            $table->float('wmsc', 8, 3);
+            $table->float('qi', 8,3);
             $table->integer('ranking');
             $table->boolean('rekomendasi_dosen')->default(false);
             $table->timestamps();

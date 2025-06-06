@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('preferensi_mahasiswa', function (Blueprint $table) {
             $table->id('id_preferensi_mahasiswa')->autoIncrement();
             $table->unsignedBigInteger('id_mahasiswa');
-            // $table->unsignedBigInteger('id_kriteria')->default(1); // Add default value
-            // $table->decimal('bobot', 8, 2);
+            $table->text('keahlian')->nullable(); // ["UI/UX Design", "Web Development"]
+            $table->text('fasilitas')->nullable(); // ["Laptop kerja", "Makan siang gratis"]
+            $table->string('status_gaji')->nullable(); // "dibayar"
+            $table->string('tipe_perusahaan')->nullable(); // "startup"
+            $table->string('fleksibilitas_kerja')->nullable();
             $table->timestamps();
 
             $table->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswa');
-            // $table->foreign('id_kriteria')->references('id_kriteria')->on('kriteria');
         });
     }
 

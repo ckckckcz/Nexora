@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             PengajuanMagangSeeder::class,
             KriteriaSeeder::class,
             FeedbackMagangSeeder::class,
-            HasilRekomendasiSeeder::class,
             LogAktivitasMagangSeeder::class,
         ]);
     }

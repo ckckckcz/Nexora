@@ -82,7 +82,7 @@ DB::table('lowongan_magang')->insert([
     [
         'nama_perusahaan' => 'PT. XYZ',
         'tipe_perusahaan' => 'PT',
-        'fasilitas_perusahaan' => 'Pelatihan Fullstack, Laptop Kerja, Lingkungan kerja profesional',
+        'fasilitas_perusahaan' => 'Pelatihan Fullstack, Uang Transport, Akses Webinar',
         'status_gaji' => 'tidak dibayar',
         'fleksibilitas_kerja' => 'remote',
         'id_skema_magang' => 3,

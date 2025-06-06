@@ -13,7 +13,8 @@ class HasilRekomendasi extends Model
     protected $fillable = [
         'id_mahasiswa',
         'id_lowongan',
-        'nilai_akhir', 
+        'wmsc',
+        'qi',
         'ranking',
         'rekomendasi_dosen', 
     ];
