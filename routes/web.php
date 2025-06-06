@@ -17,6 +17,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
 use App\Http\Controllers\Dosen\BimbinganMagangDosenController;
+use App\Http\Controllers\Dosen\ProfileMahasiswaDosenController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\RekomendasiController;
 use App\Http\Controllers\User\DetailLowonganController;
@@ -69,9 +70,7 @@ Route::get('/dosen/magang/rekomendasi-magang', function () {
 Route::get('/dosen/mahasiswa/log-aktivitas', function () {
     return view('dosen.log_aktivitas');
 });
-Route::get('/dosen/mahasiswa/profile', function () {
-    return view('dosen.profile_mahasiswa');
-});
+Route::get('/dosen/mahasiswa/profile', [App\Http\Controllers\Dosen\ProfileMahasiswaDosenController::class, 'index']);
 
 Route::get('/rekomendasi-test', [RekomendasiController::class, 'calculateVikor']);
 Route::group(['prefix' => 'detail-lowongan'], function () {

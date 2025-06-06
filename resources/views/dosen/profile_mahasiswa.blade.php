@@ -50,43 +50,25 @@
                             </tr>
                         </thead>
                         <tbody id="table-body" class="bg-white divide-y divide-gray-100">
-                            <!-- Dummy Data for Front-End Display -->
+                            @foreach($mahasiswas as $mahasiswa)
                             <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">1</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">1234567890</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Dian Permata</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap hidden sm:table-cell">Informatika</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">{{ $loop->iteration }}</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">{{ $mahasiswa->nim }}</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">{{ $mahasiswa->nama_mahasiswa }}</td>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap hidden sm:table-cell">{{ $mahasiswa->program_studi->nama_program_studi ?? 'N/A' }}</td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button data-id="1" data-nama="Dian Permata" data-jurusan="Teknik Informatika" data-program="Informatika" data-gender="Perempuan"
+                                    <button
+                                        data-id="{{ $mahasiswa->id }}"
+                                        data-nama="{{ $mahasiswa->nama_mahasiswa }}"
+                                        data-jurusan="{{ $mahasiswa->jurusan }}"
+                                        data-program="{{ $mahasiswa->program_studi->nama_program_studi ?? 'N/A' }}"
+                                        data-gender="{{ $mahasiswa->jenis_kelamin }}"
                                         class="view-profile-btn inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md transform hover:scale-105 drop-shadow-sm">
                                         Lihat Profil
                                     </button>
                                 </td>
                             </tr>
-                            <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">2</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">0987654321</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Reza Mahendra</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap hidden sm:table-cell">Sistem Informasi</td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button data-id="2" data-nama="Reza Mahendra" data-jurusan="Sistem Informasi" data-program="Sistem Informasi" data-gender="Laki-laki"
-                                        class="view-profile-btn inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md transform hover:scale-105 drop-shadow-sm">
-                                        Lihat Profil
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">3</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">1122334455</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">Anisa Putri</td>
-                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap hidden sm:table-cell">Manajemen</td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button data-id="3" data-nama="Anisa Putri" data-jurusan="Manajemen Bisnis" data-program="Manajemen" data-gender="Perempuan"
-                                        class="view-profile-btn inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md transform hover:scale-105 drop-shadow-sm">
-                                        Lihat Profil
-                                    </button>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -169,6 +151,10 @@
                         <label class="block text-sm font-semibold text-gray-700">Jenis Kelamin</label>
                         <p id="modal-gender" class="text-lg text-gray-900 font-medium mt-1"></p>
                     </div>
+                     <div>
+                        <label class="block text-sm font-semibold text-gray-700">NIM</label>
+                        <p id="modal-nim" class="text-lg text-gray-900 font-medium mt-1"></p>
+                    </div>
                 </div>
                 <div class="mt-6 flex justify-end">
                     <button id="close-modal-btn"
@@ -180,97 +166,36 @@
         </div>
     </div>
 
-    <!-- JavaScript for Interactivity -->
-    <script>
-        // Dummy data for front-end simulation
-        const students = [
-            { id: 1, nim: '1234567890', nama: 'Dian Permata', programStudi: 'Informatika', jurusan: 'Teknik Informatika', gender: 'Perempuan' },
-            { id: 2, nim: '0987654321', nama: 'Reza Mahendra', programStudi: 'Sistem Informasi', jurusan: 'Sistem Informasi', gender: 'Laki-laki' },
-            { id: 3, nim: '1122334455', nama: 'Anisa Putri', programStudi: 'Manajemen', jurusan: 'Manajemen Bisnis', gender: 'Perempuan' }
-        ];
-
-        // DOM Elements
-        const searchInput = document.getElementById('search-input');
-        const tableBody = document.getElementById('table-body');
-        const startIndex = document.getElementById('start-index');
-        const endIndex = document.getElementById('end-index');
-        const totalStudents = document.getElementById('total-students');
-        const profileModal = document.getElementById('profile-modal');
+@endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttons = document.querySelectorAll('.view-profile-btn');
         const modalNama = document.getElementById('modal-nama');
         const modalJurusan = document.getElementById('modal-jurusan');
         const modalProgram = document.getElementById('modal-program');
         const modalGender = document.getElementById('modal-gender');
+        const modalNim = document.getElementById('modal-nim');
+        const profileModal = document.getElementById('profile-modal');
         const closeModal = document.getElementById('close-modal');
         const closeModalBtn = document.getElementById('close-modal-btn');
 
-        // Search input event
-        searchInput.addEventListener('input', filterAndRenderTable);
-
-        // Render table with filtered data
-        function filterAndRenderTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-
-            const filteredStudents = students.filter(student => {
-                return student.nim.toLowerCase().includes(searchTerm) || 
-                       student.nama.toLowerCase().includes(searchTerm);
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                modalNama.textContent = this.dataset.nama;
+                modalJurusan.textContent = this.dataset.jurusan;
+                modalProgram.textContent = this.dataset.program;
+                modalGender.textContent = this.dataset.gender;
+                modalNim.textContent = this.dataset.nim;
+                profileModal.classList.remove('hidden');
             });
-
-            // Clear table
-            tableBody.innerHTML = '';
-
-            // Render filtered students
-            filteredStudents.forEach((student, index) => {
-                const row = document.createElement('tr');
-                row.classList.add('hover:bg-blue-50', 'transition-colors', 'duration-200');
-                row.innerHTML = `
-                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">${index + 1}</td>
-                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">${student.nim}</td>
-                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">${student.nama}</td>
-                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap hidden sm:table-cell">${student.programStudi}</td>
-                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button data-id="${student.id}" data-nama="${student.nama}" data-jurusan="${student.jurusan}" data-program="${student.programStudi}" data-gender="${student.gender}"
-                            class="view-profile-btn inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md transform hover:scale-105 drop-shadow-sm">
-                            Lihat Profil
-                        </button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-
-            // Update pagination info
-            startIndex.textContent = filteredStudents.length > 0 ? 1 : 0;
-            endIndex.textContent = filteredStudents.length;
-            totalStudents.textContent = filteredStudents.length;
-
-            // Re-attach event listeners for view profile buttons
-            document.querySelectorAll('.view-profile-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    modalNama.textContent = button.dataset.nama;
-                    modalJurusan.textContent = button.dataset.jurusan;
-                    modalProgram.textContent = button.dataset.program;
-                    modalGender.textContent = button.dataset.gender;
-                    profileModal.classList.remove('hidden');
-                    setTimeout(() => {
-                        profileModal.querySelector('div').classList.remove('scale-95');
-                        profileModal.querySelector('div').classList.add('scale-100');
-                    }, 10);
-                });
-            });
-        }
-
-        // Close modal
-        closeModal.addEventListener('click', () => {
-            profileModal.querySelector('div').classList.remove('scale-100');
-            profileModal.querySelector('div').classList.add('scale-95');
-            setTimeout(() => profileModal.classList.add('hidden'), 200);
-        });
-        closeModalBtn.addEventListener('click', () => {
-            profileModal.querySelector('div').classList.remove('scale-100');
-            profileModal.querySelector('div').classList.add('scale-95');
-            setTimeout(() => profileModal.classList.add('hidden'), 200);
         });
 
-        // Initial render
-        filterAndRenderTable();
-    </script>
-@endsection
+        closeModal.addEventListener('click', function () {
+            profileModal.classList.add('hidden');
+        });
+
+        closeModalBtn.addEventListener('click', function () {
+            profileModal.classList.add('hidden');
+        });
+    });
+</script>
