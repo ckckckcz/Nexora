@@ -20,20 +20,24 @@
                             <table class="table-auto border-collapse border border-gray-300 w-full">
                                 <thead>
                                     <tr>
-                                        <th class="border border-gray-300 px-4 py-2">ID Mahasiswa</th>
-                                        <th class="border border-gray-300 px-4 py-2">ID Lowongan</th>
-                                        <th class="border border-gray-300 px-4 py-2">Skor Total</th>
+                                        <th>Nama Perusahaan</th>
+                                        <th>Skor WMSC</th>
+                                        <th>Skor QI</th>
+                                        <th>Ranking</th>
                                     </tr>
+
                                 </thead>
                                 <tbody>
-                                    @foreach($skorKecocokan as $skor)
+                                    @foreach($hasilRekomendasi as $hasil)
                                         <tr>
-                                            <td class="border border-gray-300 px-4 py-2">{{ $skor->id_mahasiswa }}</td>
-                                            <td class="border border-gray-300 px-4 py-2">{{ $skor->id_lowongan }}</td>
-                                            <td class="border border-gray-300 px-4 py-2">{{ $skor->skor_total }}</td>
+                                            <td>{{ $hasil->lowongan->nama_perusahaan }}</td>
+                                            <td>{{ $hasil->wmsc }}</td>
+                                            <td>{{ $hasil->qi }}</td>
+                                            <td>{{ $hasil->ranking }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
