@@ -136,6 +136,87 @@
                         @enderror
                     </div>
 
+                    <!-- Tipe Perusahaan -->
+                    <div class="flex flex-col gap-2">
+                        <label for="tipe_perusahaan" class="text-sm font-medium text-gray-700">Tipe Perusahaan</label>
+                        <select id="tipe_perusahaan" name="tipe_perusahaan"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            required>
+                            <option value="" disabled selected>Pilih Tipe Perusahaan</option>
+                            <option value="BUMN">BUMN</option>
+                            <option value="PT">PT</option>
+                            <option value="CV">CV</option>
+                            <option value="startup">Startup</option>
+                        </select>
+                        @error('tipe_perusahaan')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Fasilitas Perusahaan -->
+                    <div class="flex flex-col gap-2">
+                        <label for="fasilitas_perusahaan" class="text-sm font-medium text-gray-700">Fasilitas Perusahaan</label>
+                        <textarea id="fasilitas_perusahaan" name="fasilitas_perusahaan"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            placeholder="Masukkan Fasilitas Perusahaan" rows="3"></textarea>
+                        @error('fasilitas_perusahaan')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Status Gaji -->
+                    <div class="flex flex-col gap-2">
+                        <label for="status_gaji" class="text-sm font-medium text-gray-700">Status Gaji</label>
+                        <select id="status_gaji" name="status_gaji"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            required>
+                            <option value="" disabled selected>Pilih Status Gaji</option>
+                            <option value="dibayar">Gaji</option>
+                            <option value="tidak dibayar">Tidak Di Gaji</option>
+                        </select>
+                        @error('status_gaji')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Fleksibilitas Kerja -->
+                    <div class="flex flex-col gap-2">
+                        <label for="fleksibilitas_kerja" class="text-sm font-medium text-gray-700">Fleksibilitas Kerja</label>
+                        <select id="fleksibilitas_kerja" name="fleksibilitas_kerja"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            required>
+                            <option value="" disabled selected>Pilih Fleksibilitas Kerja</option>
+                            <option value="remote">Remote</option>
+                            <option value="onsite">Onsite</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                        @error('fleksibilitas_kerja')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Tanggal Pendaftaran & Penutupan (Sejajar) -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="tanggal_pendaftaran" class="text-sm font-medium text-gray-700">Tanggal Pendaftaran</label>
+                            <input type="date" id="tanggal_pendaftaran" name="tanggal_pendaftaran"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                required>
+                            @error('tanggal_pendaftaran')
+                                <span class="text-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="tanggal_penutupan" class="text-sm font-medium text-gray-700">Tanggal Penutupan</label>
+                            <input type="date" id="tanggal_penutupan" name="tanggal_penutupan"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                required>
+                            @error('tanggal_penutupan')
+                                <span class="text-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <!-- Submit and Cancel Buttons -->
                     <div class="flex flex-col sm:flex-row gap-3 pt-1">
                         <button type="submit"

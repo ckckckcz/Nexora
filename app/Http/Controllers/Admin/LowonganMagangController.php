@@ -9,7 +9,7 @@ use App\Models\PengajuanMagang;
 use App\Models\PosisiMagang;
 use App\Models\SkemaMagang;
 use Illuminate\Http\Request;
-use Illuminate\Http\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class LowonganMagangController extends Controller
 {
@@ -45,6 +45,12 @@ class LowonganMagangController extends Controller
             'lokasi' => 'required|string',
             'bidang_keahlian' => 'required|string',
             'status_lowongan' => 'required',
+            'tipe_perusahaan' => 'required|string',
+            'fasilitas_perusahaan' => 'nullable|string',
+            'status_gaji' => 'required|string',
+            'fleksibilitas_kerja' => 'required|string',
+            'tanggal_pendaftaran' => 'required|date',
+            'tanggal_penutupan' => 'required|date|after_or_equal:tanggal_pendaftaran',
         ], [
             'nama_perusahaan.required' => 'Nama Perusahaan Harus Diisi',
             'id_skema_magang.required' => 'Skema Magang Harus Diisi',
@@ -52,7 +58,13 @@ class LowonganMagangController extends Controller
             'deskripsi.required' => 'Deskripsi Harus Diisi',
             'lokasi.required' => 'Lokasi Harus Diisi',
             'bidang_keahlian.required' => 'Bidang Harus Diisi',
-            'status_lowongan.required' => 'Status Harus Diisi', 
+            'status_lowongan.required' => 'Status Harus Diisi',
+            'tipe_perusahaan.required' => 'Tipe Perusahaan Harus Diisi',
+            'status_gaji.required' => 'Status Gaji Harus Diisi',
+            'fleksibilitas_kerja.required' => 'Fleksibilitas Kerja Harus Diisi',
+            'tanggal_pendaftaran.required' => 'Tanggal Pendaftaran Harus Diisi',
+            'tanggal_penutupan.required' => 'Tanggal Penutupan Harus Diisi',
+            'tanggal_penutupan.after_or_equal' => 'Tanggal Penutupan harus setelah atau sama dengan Tanggal Pendaftaran',
         ]);
 
         if ($validator->fails()) {
@@ -69,6 +81,11 @@ class LowonganMagangController extends Controller
             'lokasi' => $request->lokasi,
             'bidang_keahlian' => $request->bidang_keahlian,
             'status_lowongan' => $request->status_lowongan,
+            'fasilitas_perusahaan' => $request->fasilitas_perusahaan,
+            'status_gaji' => $request->status_gaji,
+            'fleksibilitas_kerja' => $request->fleksibilitas_kerja,
+            'tanggal_pendaftaran' => $request->tanggal_pendaftaran,
+            'tanggal_penutupan' => $request->tanggal_penutupan,
         ]);
 
         return redirect()->route('admin.lowongan-magang')->with('success', 'Lowongan Magang berhasil ditambahkan');
@@ -106,6 +123,12 @@ class LowonganMagangController extends Controller
             'lokasi' => 'required|string',
             'bidang_keahlian' => 'required|string',
             'status_lowongan' => 'required',
+            'tipe_perusahaan' => 'required|string',
+            'fasilitas_perusahaan' => 'nullable|string',
+            'status_gaji' => 'required|string',
+            'fleksibilitas_kerja' => 'required|string',
+            'tanggal_pendaftaran' => 'required|date',
+            'tanggal_penutupan' => 'required|date|after_or_equal:tanggal_pendaftaran',
         ], [
             'nama_perusahaan.required' => 'Nama Perusahaan Harus Diisi',
             'id_skema_magang.required' => 'Skema Magang Harus Diisi',
@@ -114,6 +137,12 @@ class LowonganMagangController extends Controller
             'lokasi.required' => 'Lokasi Harus Diisi',
             'bidang_keahlian.required' => 'Bidang Harus Diisi',
             'status_lowongan.required' => 'Status Harus Diisi', 
+            'tipe_perusahaan.required' => 'Tipe Perusahaan Harus Diisi',
+            'status_gaji.required' => 'Status Gaji Harus Diisi',
+            'fleksibilitas_kerja.required' => 'Fleksibilitas Kerja Harus Diisi',
+            'tanggal_pendaftaran.required' => 'Tanggal Pendaftaran Harus Diisi',
+            'tanggal_penutupan.required' => 'Tanggal Penutupan Harus Diisi',
+            'tanggal_penutupan.after_or_equal' => 'Tanggal Penutupan harus setelah atau sama dengan Tanggal Pendaftaran',
         ]);
 
         if ($validator->fails()) {
@@ -130,6 +159,11 @@ class LowonganMagangController extends Controller
             'lokasi' => $request->lokasi,
             'bidang_keahlian' => $request->bidang_keahlian,
             'status_lowongan' => $request->status_lowongan,
+            'fasilitas_perusahaan' => $request->fasilitas_perusahaan,
+            'status_gaji' => $request->status_gaji,
+            'fleksibilitas_kerja' => $request->fleksibilitas_kerja,
+            'tanggal_pendaftaran' => $request->tanggal_pendaftaran,
+            'tanggal_penutupan' => $request->tanggal_penutupan,
         ]);
 
         return redirect()->route('admin.lowongan-magang')->with('success', 'Lowongan Magang berhasil diperbarui');
