@@ -73,76 +73,45 @@
                             <tr>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    ID Laporan
+                                    No
                                 </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nama Laporan
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                                    Nama Mahasiswa
                                 </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
-                                    Tanggal Mulai
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                                    Nama Program Studi
                                 </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
-                                    Tanggal Selesai
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                                    Nama Dosen Pembimbing
                                 </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Aksi
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                                    Nama Perusahaan
+                                </th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                                    Tipe Skema
                                 </th>
                             </tr>
                         </thead>
                         <tbody id="table-body" class="bg-white divide-y divide-gray-200">
-                            <?php
-                                // Data dummy untuk laporan magang
-                                $reports = [
-                                    (object) [
-                                        'id_laporan' => 1,
-                                        'nama_laporan' => 'PKL 3 Bulan',
-                                        'tanggal_mulai' => '2025-06-01',
-                                        'tanggal_selesai' => '2025-08-31',
-                                    ],
-                                    (object) [
-                                        'id_laporan' => 2,
-                                        'nama_laporan' => 'MBKM - Mandiri 6 Bulan',
-                                        'tanggal_mulai' => '2025-07-01',
-                                        'tanggal_selesai' => '2025-12-31',
-                                    ],
-                                    (object) [
-                                        'id_laporan' => 3,
-                                        'nama_laporan' => 'MBKM - MSIB 6 Bulan',
-                                        'tanggal_mulai' => '2025-08-01',
-                                        'tanggal_selesai' => '2026-01-31',
-                                    ],
-                                    (object) [
-                                        'id_laporan' => 4,
-                                        'nama_laporan' => 'MBKM - Kewirausahaan',
-                                        'tanggal_mulai' => '2025-09-01',
-                                        'tanggal_selesai' => '2026-02-28',
-                                    ],
-                                ];
-                                ?>
-                            @foreach ($reports as $report)
+                            @foreach ($laporan as $report)
                                 <tr>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {{ $report->id_laporan }}</td>
+                                        {{ $loop->iteration  }}
+                                    </td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {{ $report->nama_laporan }}</td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">
-                                        {{ date('d-m-Y', strtotime($report->tanggal_mulai)) }}</td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">
-                                        {{ date('d-m-Y', strtotime($report->tanggal_selesai)) }}</td>
-                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/admin/manajemen-laporan-magang/edit/{{ $report->id_laporan }}"
-                                            class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">Edit</a>
-                                        <form action="/admin/manajemen-laporan-magang/hapus/{{ $report->id_laporan }}"
-                                            method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors duration-200"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                        </form>
+                                        {{ $report['nama_mahasiswa'] }}
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $report['nama_program_studi'] }}
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $report['nama_dosen'] }}
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $report['nama_perusahaan'] }}
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ strtoupper($report['nama_skema']) }}
                                     </td>
                                 </tr>
                             @endforeach
@@ -163,8 +132,8 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Menampilkan <span id="start-index" class="font-medium">1</span> sampai <span id="end-index"
-                                    class="font-medium">{{ count($reports) }}</span> dari <span id="total-report"
-                                    class="font-medium">{{ count($reports) }}</span>
+                                    class="font-medium">{{ count($laporan) }}</span> dari <span id="total-report"
+                                    class="font-medium">{{ count($laporan) }}</span>
                                 data
                             </p>
                         </div>
@@ -202,11 +171,11 @@
 
     <script>
         function exportToPDF() {
-            window.location.href = '/admin/manajemen-laporan-magang/export/pdf';
+            window.location.href = '/admin/laporan/export-pdf';
         }
 
         function exportToExcel() {
-            window.location.href = '/admin/manajemen-laporan-magang/export/excel';
+            window.location.href = '/admin/laporan/export-excel';
         }
     </script>
 @endsection

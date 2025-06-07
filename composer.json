@@ -7,11 +7,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.1",
         "beyondcode/laravel-websockets": "^1.14",
         "guzzlehttp/guzzle": "^7.8.1",
         "laravel/framework": "^v10.46",
         "laravel/sanctum": "v3.3.3",
         "laravel/tinker": "^v2.9",
+        "phpoffice/phpspreadsheet": "^4.3",
         "pusher/pusher-php-server": "^7.2"
     },
     "require-dev": {
