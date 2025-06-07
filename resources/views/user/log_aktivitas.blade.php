@@ -69,7 +69,25 @@
         <div class="container mx-auto px-4 py-8">
             <!-- Form Content -->
             <div id="form-content" class="tab-content">
-                @if($hasFilledLog)
+                @if($isAccessible)
+                    <div class="bg-blue-50 border-l-4 w-full border-blue-400 p-4 mb-6 rounded-md">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-blue-800">
+                                    Pemberitahuan
+                                </h3>
+                                <p class="text-sm text-blue-700 mt-1">
+                                    Anda Tidak bisa mengisi log aktivitas diluar hari kerja.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @elseif($hasFilledLog)
                     <div class="bg-blue-50 border-l-4 w-full border-blue-400 p-4 mb-6 rounded-md">
                         <div class="flex">
                             <div class="flex-shrink-0">
@@ -152,33 +170,17 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200 text-sm text-gray-700">
                                 <!-- Dummy data -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">1 Januari 2024</td>
-                                    <td class="px-6 py-4">08:00</td>
-                                    <td class="px-6 py-4">17:00</td>
-                                    <td class="px-6 py-4 max-w-md">Mengerjakan fitur login dan register pada aplikasi</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Diterima</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">2 Januari 2024</td>
-                                    <td class="px-6 py-4">08:30</td>
-                                    <td class="px-6 py-4">16:30</td>
-                                    <td class="px-6 py-4 max-w-md">Meeting dengan tim developer membahas sprint planning</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">3 Januari 2024</td>
-                                    <td class="px-6 py-4">09:00</td>
-                                    <td class="px-6 py-4">17:30</td>
-                                    <td class="px-6 py-4 max-w-md">Debugging dan testing aplikasi</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">Ditolak</span>
-                                    </td>
-                                </tr>
+                                @foreach ($logAktivitas as $item)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
+                                        <td class="px-6 py-4">{{ date('H:i', strtotime($item->jam_masuk)) }}</td>
+                                        <td class="px-6 py-4">{{ date('H:i', strtotime($item->jam_pulang)) }}</td>
+                                        <td class="px-6 py-4 max-w-md">{{ $item->kegiatan }}</td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">{{ $item->status_log }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

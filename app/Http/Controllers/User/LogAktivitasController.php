@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BimbinganMagang;
 use App\Models\LogAktivitasMagang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LogAktivitasController extends Controller
 {
@@ -14,19 +15,19 @@ class LogAktivitasController extends Controller
         $userId = auth()->user()->mahasiswa->id_mahasiswa;
         $bimbingan = BimbinganMagang::where('id_mahasiswa', $userId)->first();
 
-        $currentDay = now()->dayOfWeek; 
+        $currentDay = now()->dayOfWeek;
         $isAccessible = $currentDay >= 1 && $currentDay <= 6;
 
         $existingLog = LogAktivitasMagang::where('id_bimbingan', $bimbingan->id_bimbingan)
-            ->whereDate('created_at', $currentDate)
+            ->whereDate('tanggal', $currentDate)
             ->exists();
 
-        if (!$isAccessible) {
-            abort(403, 'Anda tidak bisa mengisi log harian diluar hari kerja.');
-        }
+        $logAktivitas = LogAktivitasMagang::where('id_bimbingan', $userId)->get()->sortDesc();
 
         return view('user.log_aktivitas', [
-            'hasFilledLog' => $existingLog
+            'hasFilledLog' => $existingLog,
+            'isAccessible' => $isAccessible,
+            'logAktivitas' => $logAktivitas
         ]);
     }
 
