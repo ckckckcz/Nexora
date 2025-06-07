@@ -12,11 +12,6 @@ class PreferensiMahasiswa extends Model
     protected $primaryKey = 'id_preferensi_mahasiswa';
     protected $fillable = [
         'id_mahasiswa',
-        'bobot_minat',
-        'bobot_fasilitas',
-        'bobot_gaji',
-        'bobot_tipe',
-        'bobot_fleksibilitas',
         'keahlian',
         'fasilitas',
         'status_gaji',

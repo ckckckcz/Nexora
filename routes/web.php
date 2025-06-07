@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AkunDosenController;
 use App\Http\Controllers\Admin\AkunMahasiswaController;
 use App\Http\Controllers\Admin\BimbinganMagangController;
+use App\Http\Controllers\Admin\DetailPerhitunganSPKController;
 use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\LowonganMagangController;
@@ -200,9 +201,9 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
             Route::delete('/hapus/{id}', [KriteriaController::class, 'destroy']);
         });
 
-        Route::group(['prefix' => 'pembobotan-lowongan'], function () {
-            Route::get('/', [PenilaianLowonganController::class, 'index'])->name('admin.pembobotan-lowongan');
-            Route::get('/detail/{id}', [PenilaianLowonganController::class, 'show']);
+        Route::group(['prefix' => 'perhitungan-spk'], function () {
+            Route::get('/', [DetailPerhitunganSPKController::class, 'index'])->name('admin.pembobotan-lowongan');
+            Route::get('/detail/{id}', [DetailPerhitunganSPKController::class, 'show']);
         });
     });
 
