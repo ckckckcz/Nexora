@@ -110,39 +110,15 @@ class RekomendasiMagangMahasiswaController extends Controller
 
     public function hasil()
     {
-        $mahasiswaId = Mahasiswa::where('nim', auth()->user()->username)->first()->id_mahasiswa;
-
-        $preferensi = PreferensiMahasiswa::where('id_mahasiswa', $mahasiswaId)->first();
-
-        if (!$preferensi) {
-            return redirect()->route('user.rekomendasi_magang')->with('error', 'Preferensi tidak ditemukan.');
-        }
-
-        $calculationResult = $this->calculateSmc($mahasiswaId, [
-            'keahlian' => explode(', ', $preferensi->keahlian),
-            'fasilitas' => explode(', ', $preferensi->fasilitas),
-            'status_gaji' => $preferensi->status_gaji,
-            'tipe_perusahaan' => $preferensi->tipe_perusahaan,
-            'fleksibilitas_kerja' => $preferensi->fleksibilitas_kerja,
-        ]);
-
-        $ranking = isset($calculationResult['ranking']) ? $calculationResult['ranking'] : [];
-        $scores = isset($calculationResult['scores']) ? $calculationResult['scores'] : [];
-        $matriks = isset($calculationResult['matriks'][0]) ? $calculationResult['matriks'][0] : [];
-
-        $skorKecocokan = DB::table('skor_kecocokan')
-            ->select('id_mahasiswa', 'id_lowongan', 'skor_total')
-            ->where('id_mahasiswa', $mahasiswaId)
-            ->distinct()
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->username)->first();
+        $hasilRekomendasi = HasilRekomendasi::with('lowongan')
+            ->where('id_mahasiswa', $mahasiswa->id_mahasiswa)
+            ->orderBy('ranking', 'asc')
+            ->limit(3)
             ->get();
 
-        return view('user.hasil_rekomendasi', [
-            'ranking' => $ranking,
-            'scores' => $scores,
-            'matriks' => $matriks,
-            'skorKecocokan' => $skorKecocokan,
-        ]);
-    } 
+        return view('user.hasil_rekomendasi', compact('hasilRekomendasi'));
+    }
 
 
     
