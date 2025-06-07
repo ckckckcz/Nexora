@@ -81,6 +81,9 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
     Route::get('/unggah-dokumen', function () {
         return view('user.function.unggah_dokumen');
     });
+    Route::get('/unggah-dokumen-perusahaan', function () {
+        return view('user.unggah_dokumen_perusahaan');
+    });
 });
 
 Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->group(function () {
