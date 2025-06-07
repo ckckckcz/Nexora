@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\LowonganMagang;
+use App\Models\SkemaMagang;
 use Illuminate\Http\Request;
 
 class DetailLowonganController extends Controller
@@ -15,8 +16,7 @@ class DetailLowonganController extends Controller
     }
 
     public function view($id) {
-        $lowongan = LowonganMagang::where('id_lowongan', $id)->first()->get();
-
-        return view('user.detail-lowongan.view', compact('lowongan'));
+        $lowongan = LowonganMagang::with(['skemaMagang', 'posisiMagang'])->findOrFail($id);
+        return view('user.detail_lowongan', compact('lowongan'));
     }
 }

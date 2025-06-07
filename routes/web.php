@@ -64,8 +64,8 @@ Route::get('/dosen/mahasiswa/log-aktivitas', function () {
 Route::get('/dosen/mahasiswa/profile', [App\Http\Controllers\Dosen\ProfileMahasiswaDosenController::class, 'index']);
 
 Route::group(['prefix' => 'detail-lowongan'], function () {
-    // Route::get('/', [DetailLowonganController::class, 'index']);
-    // Route::get('/{id}', [DetailLowonganController::class, 'view']);
+    Route::get('/', [DetailLowonganController::class, 'index']);
+    Route::get('/{id}', [DetailLowonganController::class, 'view'])->name('user.detail-lowongan.view');
 });
 
 

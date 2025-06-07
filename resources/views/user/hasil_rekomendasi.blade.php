@@ -35,7 +35,10 @@
                                             <td class="border border-gray-300 px-6 py-5 text-gray-800">{{ $hasil->qi }}</td>
                                             <td class="border border-gray-300 px-6 py-5 text-gray-800">{{ $hasil->ranking }}</td>
                                             <td class="border border-gray-300 px-6 py-5 text-gray-800">
-                                                <a href="/detail-lowongan/{{ $hasil->lowongan->id }}" class="px-4 py-2 rounded-lg text-white bg-blue-900 hover:bg-blue-950 transition-all duration-200">
+                                                {{-- <a href="/detail-lowongan/{{$id}}" class="px-4 py-2 rounded-lg text-white bg-blue-900 hover:bg-blue-950 transition-all duration-200">
+                                                    Detail Lowongan
+                                                </a> --}}
+                                                <a href="/detail-lowongan/1" class="px-4 py-2 rounded-lg text-white bg-blue-900 hover:bg-blue-950 transition-all duration-200">
                                                     Detail Lowongan
                                                 </a>
                                             </td>
