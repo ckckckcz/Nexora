@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class DetailPerhitunganSPKController extends Controller
 {
-      /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -40,7 +40,6 @@ class DetailPerhitunganSPKController extends Controller
             'fleksibilitas_kerja' => $preferensiMahasiswa->fleksibilitas_kerja ?? null,
         ];
 
-
         $spk = new SpkController();
 
         $matriks = $spk->matriksPerbandingan($data);
@@ -49,8 +48,43 @@ class DetailPerhitunganSPKController extends Controller
         $filtered = $spk->filterWmsc($wmscScore, $matriks);
         $vikor = $spk->hitungVIKOR($filtered[0]);
         $output = $spk->ValidasiAkhir($vikor, $wmscScore, $filtered[0]);
-        dd($vikor);
         
-        return view('admin.sistemRekomendasi.detail_spk',compact($vikor, $preferensiMahasiswa, $kriteria, $matriks, $normalisasi, $filtered, $output));
+        $rankedAlternatives = [];
+        foreach ($vikor['q'] as $index => $qValue) {
+            $lowonganMagangId = $filtered[1][$index];
+            $lowonganMagang = LowonganMagang::find($lowonganMagangId);
+            // dd($lowonganMagangId);
+            
+            $rankedAlternatives[] = [
+                'nama_perusahaan' => $lowonganMagang->nama_perusahaan ?? 'Unknown',
+                'q' => $qValue,
+                's' => $vikor['s'][$index] ?? null,
+                'r' => $vikor['r'][$index] ?? null,
+            ];
+        }
+
+        $sValues = array_map(fn($alt) => ['nama_perusahaan' => $alt['nama_perusahaan'], 's' => $alt['s']], $rankedAlternatives);
+        $rValues = array_map(fn($alt) => ['nama_perusahaan' => $alt['nama_perusahaan'], 'r' => $alt['r']], $rankedAlternatives);
+        $qValues = array_map(fn($alt) => ['nama_perusahaan' => $alt['nama_perusahaan'], 'q' => $alt['q']], $rankedAlternatives);
+
+        $bestValues = $vikor['nilai_max'] ?? [];
+        $worstValues = $vikor['nilai_min'] ?? [];
+        $matriksNormalisasi = $normalisasi;
+        $matriksTerbobot = $filtered[0];
+
+        return view('admin.sistemRekomendasi.detail_spk', compact(
+            'preferensiMahasiswa',
+            'kriteria',
+            'matriks',
+            'matriksNormalisasi',
+            'matriksTerbobot',
+            'rankedAlternatives',
+            'bestValues',
+            'worstValues',
+            'output',
+            'sValues',
+            'rValues',
+            'qValues'
+        ));
     }
 }
