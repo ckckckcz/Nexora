@@ -157,7 +157,7 @@
                     </div>  
 
                     <div class="py-1">
-                        <a href="/profile"
+                        <a href="/dosen/profile"
                             class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 text-gray-500" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">

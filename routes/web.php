@@ -245,6 +245,10 @@ Route::get('/unggah-dokumen', function () {
 //     return view('dosen.rekomendasi_magang');
 // });
 
+Route::get('/dosen/profile', function () {
+        return view('dosen.profile');
+    });
+
 // SMC Testing Routes
 Route::get('/testing/smc', [SMCController::class, 'index'])->name('smc.test');
 Route::post('/testing/smc/calculate', [SMCController::class, 'calculate'])->name('smc.calculate');
