@@ -14,7 +14,7 @@
             <p class="text-sm text-gray-500">Lion Core | Teknik Informatika</p>
         </div>
         <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
-            <img src="{{ asset('images/ali-zulfikar.png') }}" alt="Tri Sukma Sarah"
+            <img src="{{ asset('images/ali-zulfikar.png') }}" alt="Ali Zulfikar"
                 class="object-contain transition duration-300 h-[250px] w-full" />
         </div>
         <!-- Overlay with blur and button covering entire card -->
@@ -25,10 +25,10 @@
                 Lihat Profile
             </a>
         </div>
-        <div
+        {{-- <div
             class="absolute -bottom-2 -right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold shadow-md">
             5
-        </div>
+        </div> --}}
     </div>
     <div
         class="bg-gray-50 team-card text-black border border-gray-200 shadow-sm rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[400px] group relative">
@@ -37,7 +37,7 @@
             <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
         </div>
         <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
-            <img src="{{ asset('images/sri-kresna.png') }}" alt="Galung Erlyan Tama"
+            <img src="{{ asset('images/sri-kresna.png') }}" alt="Sri Kresna Maha Dewa"
                 class="object-contain transition duration-300 h-[250px] w-full" />
         </div>
         <!-- Overlay with blur and button covering entire card -->
@@ -48,19 +48,19 @@
                 Lihat Profile
             </a>
         </div>
-        <div
+        {{-- <div
             class="absolute -bottom-2 -right-2 gradient-second-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold shadow-md">
             2
-        </div>
+        </div> --}}
     </div>
     <div
-        class="bg-gray-50 team-card text-black border border-gray-200 shadow-sm rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-full group relative">
+        class="bg-gray-50 team-card text-black border border-gray-200 shadow-sm rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[450px] group relative">
         <div class="text-center">
-            <h3 class="font-medium mt-2">Riovaldo Alfiyan Fahmi Rahman</h3>
-            <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
+            <h3 class="font-medium mt-2">Muhammad Ilzam Mulkhaq</h3>
+            <p class="text-sm text-gray-500">DOT Indonesia | Teknik Informatika</p>
         </div>
         <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
-            <img src="{{ asset('images/riovaldo.png') }}" alt="Riovaldo Alfiyan Fahmi Rahman"
+            <img src="{{ asset('images/ilzam.png') }}" alt="Muhammad Ilzam Mulkhaq"
                 class="object-contain transition duration-300 w-full" />
         </div>
         <!-- Overlay with blur and button covering entire card -->
@@ -71,24 +71,24 @@
                 Lihat Profile
             </a>
         </div>
-        <div
+        {{-- <div
             class="absolute -bottom-2 sm:-bottom-3 -right-2 sm:-right-3 gradient-first-place-number text-white rounded-full w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center font-bold shadow-lg">
             1
         </div>
         <div class="absolute top-[-1px] sm:top-[-33px] text-yellow-500 text-4xl w-16 h-16 flex items-center justify-center"
             style="left: 50%; transform: translateX(-50%); display: inline-block;">
             <i class="fas fa-crown"></i>
-        </div>
+        </div> --}}
     </div>
     <div
         class="bg-gray-50 team-card text-black border border-gray-200 shadow-sm rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[400px] group relative">
         <div class="text-center">
-            <h3 class="font-medium mt-2">Candra</h3>
-            <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
+            <h3 class="font-medium mt-2">Ahmad Shodikin</h3>
+            <p class="text-sm text-gray-500">PT. Rekaindo Global Jasa | Teknik Informatika</p>
         </div>
         <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
-            <img src="{{ asset('images/riovaldo.png') }}" alt="Candra"
-                class="object-contain transition duration-300 h-[310px] w-full" />
+            <img src="{{ asset('images/shodikin.png') }}" alt="Ahmad Shodikin"
+                class="object-contain transition duration-300 w-full" />
         </div>
         <!-- Overlay with blur and button covering entire card -->
         <div
@@ -98,20 +98,20 @@
                 Lihat Profile
             </a>
         </div>
-        <div
+        {{-- <div
             class="absolute -bottom-2 -right-2 gradient-second-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold shadow-md">
             3
-        </div>
+        </div> --}}
     </div>
     <div
         class="bg-gray-50 team-card text-black border border-gray-200 shadow-sm rounded-3xl pr-4 pt-4 pl-4 flex flex-col justify-between items-center h-[350px] group relative">
         <div class="text-center">
-            <h3 class="font-medium mt-2">Tri Sukma Sarah</h3>
-            <p class="text-sm text-gray-500">PT. Onitsuka | Teknik Informatika</p>
+            <h3 class="font-medium mt-2">Ziedny Mubarok</h3>
+            <p class="text-sm text-gray-500">Lion Core | Teknik Informatika</p>
         </div>
         <div class="w-full mt-5 relative overflow-hidden rounded-lg flex-1 flex items-end">
-            <img src="{{ asset('images/sarah.png') }}" alt="Tri Sukma Sarah"
-                class="object-contain transition duration-300 h-[320px] w-full" />
+            <img src="{{ asset('images/zidni.png') }}" alt="Ziedny Mubarok"
+                class="object-contain transition duration-300 w-full" />
         </div>
         <!-- Overlay with blur and button covering entire card -->
         <div
@@ -121,10 +121,10 @@
                 Lihat Profile
             </a>
         </div>
-        <div
+        {{-- <div
             class="absolute -bottom-2 -right-2 gradient-third-place-number text-white rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold shadow-md">
             4
-        </div>
+        </div> --}}
     </div>
 </div>
 
