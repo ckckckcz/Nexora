@@ -122,7 +122,7 @@
                 <!-- Right Column - Sidebar -->
                 <div class="space-y-6">
                     <!-- Quick Info Card -->
-                    <div class="bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 xl:sticky xl:top-8">
+                    <div class="bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 xl:top-8">
                         <div class="flex items-center mb-4">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 bg-[#DEFC79] rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
                                 <svg class="w-4 h-4 sm:w-6 sm:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
