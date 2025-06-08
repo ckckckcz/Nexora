@@ -3,7 +3,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-blue-900">Log Aktivitas Mingguan 🕰️</h1>
+            <h1 class="text-3xl font-bold text-blue-900">Log Aktivitas Mingguan 🕰</h1>
             <p class="mt-2 text-gray-600 font-medium">Kelola log aktivitas mingguan mahasiswa bimbingan</p>
         </header>
 
@@ -80,66 +80,27 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="log-table-body" class="bg-white divide-y divide-gray-200">
-                            <?php
-                                // Data dummy sesuai dengan struktur DB, tanpa jam_masuk dan jam_pulang
-                                $logs = [
-                                    (object) [
-                                        'id_log_aktivitas' => 1,
-                                        'id_bimbingan' => 1,
-                                        'nama_mahasiswa' => 'Budi Santoso',
-                                        'tanggal' => '2025-06-03',
-                                        'kegiatan' => 'Orientasi perusahan dan pengenalan film development',
-                                        'created_at' => '2025-06-03 10:00:00',
-                                        'updated_at' => '2025-06-03 10:00:00',
-                                    ],
-                                    (object) [
-                                        'id_log_aktivitas' => 2,
-                                        'id_bimbingan' => 2,
-                                        'nama_mahasiswa' => 'Ani Wijaya',
-                                        'tanggal' => '2025-06-04',
-                                        'kegiatan' => 'Setup environment development dan instalasi tools',
-                                        'created_at' => '2025-06-04 10:00:00',
-                                        'updated_at' => '2025-06-04 10:00:00',
-                                    ],
-                                    (object) [
-                                        'id_log_aktivitas' => 3,
-                                        'id_bimbingan' => 3,
-                                        'nama_mahasiswa' => 'Citra Lestari',
-                                        'tanggal' => '2025-06-05',
-                                        'kegiatan' => 'Pelatihan dasar digital marketing dan pengenalan p...',
-                                        'created_at' => '2025-06-05 10:00:00',
-                                        'updated_at' => '2025-06-05 10:00:00',
-                                    ],
-                                ];
-
-                                // Menghitung minggu berdasarkan tanggal (simulasi sederhana)
-                                foreach ($logs as $log) {
-                                    $date = new DateTime($log->tanggal);
-                                    $week = 'Minggu ' . ceil((int)$date->format('j') / 7);
-                                    $log->minggu = $week;
-                                }
-                            ?>
-                            @if (empty($logs))
+                            <tbody id="log-table-body" class="bg-white divide-y divide-gray-200">
+                            @if (empty($logAktivitas))
                                 <tr>
                                     <td colspan="6" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
                                         Tidak ada data log aktivitas mingguan.
                                     </td>
                                 </tr>
                             @else
-                                @foreach ($logs as $log)
+                                @foreach ($logAktivitas as $log)
                                     <tr data-log-id="{{ $log->id_log_aktivitas }}">
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $log->nama_mahasiswa }}</td>
+                                            {{ $log->bimbinganMagang->mahasiswa->nama_mahasiswa }}</td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">
-                                            {{ $log->minggu }}</td>
+                                            Minggu ke-{{ $log->minggu }}</td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">
                                             {{ date('d-m-Y', strtotime($log->tanggal)) }}</td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">
                                             {{ $log->kegiatan }}</td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div class="flex gap-2">
-                                                <button onclick="openEvaluationModal({{ $log->id_log_aktivitas }}, '{{ $log->nama_mahasiswa }}', '{{ $log->tanggal }}')"
+                                                <button onclick="openEvaluationModal({{ $log->id_log_aktivitas }}, '{{ $log->bimbinganMagang->mahasiswa->nama_mahasiswa }}', '{{ $log->tanggal }}')"
                                                     class="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">
                                                     Evaluasi
                                                 </button>
@@ -162,8 +123,8 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Menampilkan <span id="start-index" class="font-medium">1</span> sampai <span id="end-index"
-                                    class="font-medium">{{ count($logs) }}</span> dari <span id="total-log"
-                                    class="font-medium">{{ count($logs) }}</span> data
+                                    class="font-medium">{{ count($logAktivitas) }}</span> dari <span id="total-log"
+                                    class="font-medium">{{ count($logAktivitas) }}</span> data
                             </p>
                         </div>
                         <div>
@@ -299,122 +260,122 @@
 
     <script>
         // Simulasi penyimpanan evaluasi di FE
-        let evaluations = [];
+        // let evaluations = [];
 
         // Toggle dropdown visibility
-        document.getElementById('week-filter-btn').addEventListener('click', function() {
-            const dropdown = document.getElementById('week-dropdown');
-            dropdown.classList.toggle('hidden');
-        });
+        // document.getElementById('week-filter-btn').addEventListener('click', function() {
+        //     const dropdown = document.getElementById('week-dropdown');
+        //     dropdown.classList.toggle('hidden');
+        // });
 
         // Handle week filter selection
-        document.querySelectorAll('#week-dropdown button').forEach(button => {
-            button.addEventListener('click', function() {
-                const selectedWeek = this.getAttribute('data-week');
-                document.getElementById('week-filter-text').textContent = selectedWeek;
-                document.getElementById('week-dropdown').classList.add('hidden');
-                console.log('Filter by week:', selectedWeek);
-            });
-        });
+        // document.querySelectorAll('#week-dropdown button').forEach(button => {
+        //     button.addEventListener('click', function() {
+        //         const selectedWeek = this.getAttribute('data-week');
+        //         document.getElementById('week-filter-text').textContent = selectedWeek;
+        //         document.getElementById('week-dropdown').classList.add('hidden');
+        //         console.log('Filter by week:', selectedWeek);
+        //     });
+        // });
 
         // Handle search input (simulasi tanpa BE)
-        document.getElementById('search-input').addEventListener('input', function() {
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#log-table-body tr');
-            rows.forEach(row => {
-                const studentName = row.cells[0].textContent.toLowerCase();
-                row.style.display = studentName.includes(searchValue) ? '' : 'none';
-            });
-        });
+        // document.getElementById('search-input').addEventListener('input', function() {
+        //     const searchValue = this.value.toLowerCase();
+        //     const rows = document.querySelectorAll('#log-table-body tr');
+        //     rows.forEach(row => {
+        //         const studentName = row.cells[0].textContent.toLowerCase();
+        //         row.style.display = studentName.includes(searchValue) ? '' : 'none';
+        //     });
+        // });
 
-        function handleAction(action, logId) {
-            const row = document.querySelector(`tr[data-log-id="${logId}"]`);
-            const statusCell = row.querySelector('.status-log');
+        // function handleAction(action, logId) {
+        //     const row = document.querySelector(tr[data-log-id="${logId}"]);
+        //     const statusCell = row.querySelector('.status-log');
 
-            if (action === 'terima') {
-                if (!confirm(`Apakah Anda yakin ingin terima log ini?`)) {
-                    return;
-                }
-                // Simulasi AJAX request ke BE
-                setTimeout(() => {
-                    alert('Log berhasil diterima!');
-                    statusCell.textContent = 'Terima';
-                }, 500);
-            }
-        }
+        //     if (action === 'terima') {
+        //         if (!confirm(Apakah Anda yakin ingin terima log ini?)) {
+        //             return;
+        //         }
+        //         // Simulasi AJAX request ke BE
+        //         setTimeout(() => {
+        //             alert('Log berhasil diterima!');
+        //             statusCell.textContent = 'Terima';
+        //         }, 500);
+        //     }
+        // }
 
-        function openEvaluationModal(logId, studentName, submissionDate) {
-            document.getElementById('log_id').value = logId;
-            document.getElementById('student_name').value = studentName;
-            document.getElementById('submission_date').value = submissionDate;
-            document.getElementById('evaluation-modal').classList.remove('hidden');
-        }
+        // function openEvaluationModal(logId, studentName, submissionDate) {
+        //     document.getElementById('log_id').value = logId;
+        //     document.getElementById('student_name').value = studentName;
+        //     document.getElementById('submission_date').value = submissionDate;
+        //     document.getElementById('evaluation-modal').classList.remove('hidden');
+        // }
 
-        function closeModal() {
-            document.getElementById('evaluation-modal').classList.add('hidden');
-            document.getElementById('evaluation').value = '';
-            document.getElementById('log_id').value = '';
-            document.getElementById('student_name').value = '';
-            document.getElementById('submission_date').value = '';
-        }
+        // function closeModal() {
+        //     document.getElementById('evaluation-modal').classList.add('hidden');
+        //     document.getElementById('evaluation').value = '';
+        //     document.getElementById('log_id').value = '';
+        //     document.getElementById('student_name').value = '';
+        //     document.getElementById('submission_date').value = '';
+        // }
 
-        document.getElementById('evaluation-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const logId = document.getElementById('log_id').value;
-            const studentName = document.getElementById('student_name').value;
-            const submissionDate = document.getElementById('submission_date').value;
-            const evaluation = document.getElementById('evaluation').value;
+        // document.getElementById('evaluation-form').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     const logId = document.getElementById('log_id').value;
+        //     const studentName = document.getElementById('student_name').value;
+        //     const submissionDate = document.getElementById('submission_date').value;
+        //     const evaluation = document.getElementById('evaluation').value;
 
-            if (!evaluation.trim()) {
-                alert('Catatan evaluasi tidak boleh kosong!');
-                return;
-            }
+        //     if (!evaluation.trim()) {
+        //         alert('Catatan evaluasi tidak boleh kosong!');
+        //         return;
+        //     }
 
-            // Simulasi AJAX request ke BE
-            setTimeout(() => {
-                alert('Evaluasi berhasil disimpan!');
-                const evaluationData = {
-                    log_id: logId,
-                    student_name: studentName,
-                    submission_date: submissionDate,
-                    result: evaluation,
-                    evaluation_date: '04-06-2025 09:18' // Waktu saat ini (WIB)
-                };
-                evaluations.push(evaluationData);
-                updateEvaluationTable();
-                closeModal();
-            }, 500);
-        });
+        //     // Simulasi AJAX request ke BE
+        //     setTimeout(() => {
+        //         alert('Evaluasi berhasil disimpan!');
+        //         const evaluationData = {
+        //             log_id: logId,
+        //             student_name: studentName,
+        //             submission_date: submissionDate,
+        //             result: evaluation,
+        //             evaluation_date: '04-06-2025 09:18' // Waktu saat ini (WIB)
+        //         };
+        //         evaluations.push(evaluationData);
+        //         updateEvaluationTable();
+        //         closeModal();
+        //     }, 500);
+        // });
 
-        function updateEvaluationTable() {
-            const tbody = document.getElementById('evaluation-table-body');
-            tbody.innerHTML = '';
+        // function updateEvaluationTable() {
+        //     const tbody = document.getElementById('evaluation-table-body');
+        //     tbody.innerHTML = '';
 
-            if (evaluations.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="4" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                            Belum ada catatan evaluasi.
-                        </td>
-                    </tr>
-                `;
-            } else {
-                evaluations.forEach(eval => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">${eval.student_name}</td>
-                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">${eval.submission_date}</td>
-                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">${eval.result}</td>
-                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">${eval.evaluation_date}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            }
+        //     if (evaluations.length === 0) {
+        //         tbody.innerHTML = `
+        //             <tr>
+        //                 <td colspan="4" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+        //                     Belum ada catatan evaluasi.
+        //                 </td>
+        //             </tr>
+        //         `;
+        //     } else {
+        //         evaluations.forEach(eval => {
+        //             const row = document.createElement('tr');
+        //             row.innerHTML = `
+        //                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">${eval.student_name}</td>
+        //                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">${eval.submission_date}</td>
+        //                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">${eval.result}</td>
+        //                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">${eval.evaluation_date}</td>
+        //             `;
+        //             tbody.appendChild(row);
+        //         });
+        //     }
 
-            // Update pagination info
-            document.getElementById('eval-start-index').textContent = evaluations.length > 0 ? 1 : 0;
-            document.getElementById('eval-end-index').textContent = evaluations.length;
-            document.getElementById('total-eval').textContent = evaluations.length;
-        }
+        //     // Update pagination info
+        //     // document.getElementById('eval-start-index').textContent = evaluations.length > 0 ? 1 : 0;
+        //     // document.getElementById('eval-end-index').textContent = evaluations.length;
+        //     // document.getElementById('total-eval').textContent = evaluations.length;
+        // }
     </script>
 @endsection

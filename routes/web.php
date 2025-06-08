@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
 use App\Http\Controllers\Dosen\BimbinganMagangDosenController;
 use App\Http\Controllers\Dosen\ProfileMahasiswaDosenController;
+use App\Http\Controllers\Dosen\LogAktivitasMagangController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\RekomendasiController;
 use App\Http\Controllers\User\DetailLowonganController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\User\RekomendasiMagangMahasiswaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Testing\SMCController;
 use App\Http\Controllers\User\LowonganMagangMahasiswaController;
+use App\Http\Controllers\Dosen\RekomendasiMagangDosenController;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dosen/dashboard', [DosenDashboardController::class, 'index']);
@@ -55,12 +57,8 @@ Route::get('/dosen/magang/bimbingan-magang', [BimbinganMagangDosenController::cl
 Route::get('/dosen/magang/bimbingan-magang/chat', function () {
     return view('dosen.bimbingan_magang.chat');
 });
-Route::get('/dosen/magang/rekomendasi-magang', function () {
-    return view('dosen.rekomendasi_magang');
-});
-Route::get('/dosen/mahasiswa/log-aktivitas', function () {
-    return view('dosen.log_aktivitas');
-});
+Route::get('/dosen/magang/rekomendasi-magang', [RekomendasiMagangDosenController::class, 'index'])->name('dosen.rekomendasi_magang');
+Route::get('/dosen/mahasiswa/log-aktivitas', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'index'])->name('dosen.log-aktivitas');
 Route::get('/dosen/mahasiswa/profile', [App\Http\Controllers\Dosen\ProfileMahasiswaDosenController::class, 'index']);
 
 Route::group(['prefix' => 'detail-lowongan'], function () {
@@ -239,3 +237,5 @@ Route::get('/dosen/profile', function () {
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 
 });
+
+

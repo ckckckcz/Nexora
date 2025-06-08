@@ -1,4 +1,3 @@
-
 @extends('layouts.dosen')
 @section('dosen')
     <html lang="en">
@@ -73,12 +72,7 @@
 
         // Komponen utama
         const App = () => {
-        // Data dummy untuk simulasi tanpa backend
-        const [students, setStudents] = useState([
-            { id: 1, name: "Budi Santoso", nim: "123456789", vikor: 0.85, ranking: 1, company: "PT Teknologi Maju", status: "Direkomendasikan" },
-            { id: 2, name: "Siti Aminah", nim: "987654321", vikor: 0.78, ranking: 2, company: "CV Inovasi Digital", status: "Direkomendasikan" },
-            { id: 3, name: "Ahmad Yani", nim: "456789123", vikor: 0.65, ranking: 3, company: "PT Solusi Cerdas", status: "Tidak Direkomendasikan" },
-        ]);
+        const [students, setStudents] = useState(@json($mahasiswas));
 
         const [selectedStudent, setSelectedStudent] = useState(null);
 
