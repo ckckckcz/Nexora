@@ -58,6 +58,7 @@ Route::get('/dosen/magang/bimbingan-magang/chat', function () {
     return view('dosen.bimbingan_magang.chat');
 });
 Route::get('/dosen/magang/rekomendasi-magang', [RekomendasiMagangDosenController::class, 'index'])->name('dosen.rekomendasi_magang');
+Route::get('/dosen/magang/rekomendasi-magang/profile/{nim}', [RekomendasiMagangDosenController::class, 'showProfile'])->name('dosen.mahasiswa.profile');
 Route::get('/dosen/mahasiswa/log-aktivitas', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'index'])->name('dosen.log-aktivitas');
 Route::get('/dosen/mahasiswa/profile', [App\Http\Controllers\Dosen\ProfileMahasiswaDosenController::class, 'index']);
 
@@ -235,9 +236,6 @@ Route::get('/dosen/profile', function () {
     return view('dosen.profile');
 });
 
-Route::get('/dosen/magang/rekomendasi-magang/profile', function () {
-    return view('dosen.detail_profile_mahasiswa');
-});
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 
 });

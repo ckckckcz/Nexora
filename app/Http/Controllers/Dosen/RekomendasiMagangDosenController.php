@@ -35,6 +35,15 @@ class RekomendasiMagangDosenController extends Controller
 
         return view('dosen.rekomendasi_magang', compact('mahasiswas'));
     }
+    
+    // New method to show student profile details
+    public function showProfile($nim)
+    {
+        // Get mahasiswa data based on NIM - similar to ProfileController's index method
+        $mahasiswa = Mahasiswa::where('nim', $nim)->firstOrFail();
+        
+        return view('dosen.detail_profile_mahasiswa', compact('mahasiswa'));
+    }
 
     // Alternative method using Eloquent accessors
     public function indexWithAccessors()
@@ -75,7 +84,7 @@ class RekomendasiMagangDosenController extends Controller
     //                 'nim' => $mahasiswa->nim,
     //                 'jurusan' => $mahasiswa->jurusan,
     //                 'original_data' => $mahasiswa->toArray(), // Keep original for debugging
-    //             ];
+    //             };
     //         })
     //         ->values();
 
