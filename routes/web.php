@@ -239,4 +239,7 @@ Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
 });
 
+// Add this route to the middleware auth group or where appropriate
+Route::get('/download/template/{file}', [App\Http\Controllers\User\TemplateController::class, 'download'])->name('download.template');
+
 

@@ -27,6 +27,87 @@
                 </div>
             </div>
 
+            <!-- Download Template Section -->
+            <div class="mb-8 p-5 bg-blue-50 rounded-xl border border-blue-100">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                    <span class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                        </svg>
+                        Template Dokumen
+                    </span>
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">Download template dokumen berikut untuk memudahkan proses pengajuan magang Anda:</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex flex-col">
+                        <div class="flex items-start mb-3">
+                            <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800">Riwayat Hidup</h4>
+                                <p class="text-xs text-gray-500 mt-1">Format Doc (100 KB)</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('download.template', ['file' => 'riwayat-hidup']) }}" class="mt-auto">
+                            <button type="button" class="w-full bg-blue-900 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download Template
+                            </button>
+                        </a>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex flex-col">
+                        <div class="flex items-start mb-3">
+                            <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800">Izin Orang Tua</h4>
+                                <p class="text-xs text-gray-500 mt-1">Format Docs (85 KB)</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('download.template', ['file' => 'izin-ortu']) }}" class="mt-auto">
+                            <button type="button" class="w-full bg-blue-900 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download Template
+                            </button>
+                        </a>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex flex-col">
+                        <div class="flex items-start mb-3">
+                            <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800">Pakta Integritas</h4>
+                                <p class="text-xs text-gray-500 mt-1">Format Docs (120 KB)</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('download.template', ['file' => 'pakta-integritas']) }}" class="mt-auto">
+                            <button type="button" class="w-full bg-blue-900 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download Template
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <form action="" method="POST" enctype="multipart/form-data" class="space-y-8">
                 @csrf
                 <!-- Basic Information Section -->
@@ -51,9 +132,9 @@
                             <select name="id_lowongan" id="id_lowongan"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
                                 <option value="">Pilih Lowongan</option>
-                                @foreach ($lowongan as $item)
+                                {{-- @foreach ($lowongan as $item)
                                     <option value="{{ $item->id_lowongan }}">{{ $item->nama_perusahaan }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                     </div>
