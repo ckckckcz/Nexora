@@ -69,7 +69,7 @@
         <div class="container mx-auto px-4 py-8">
             <!-- Form Content -->
             <div id="form-content" class="tab-content">
-                @if($isAccessible)
+                @if(!$isAccessible)
                     <div class="bg-blue-50 border-l-4 w-full border-blue-400 p-4 mb-6 rounded-md">
                         <div class="flex">
                             <div class="flex-shrink-0">

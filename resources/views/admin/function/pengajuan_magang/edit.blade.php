@@ -19,7 +19,6 @@
 
             <form action="" method="POST" enctype="multipart/form-data" class="space-y-8">
                 @csrf
-
                 <!-- Basic Information Section -->
                 <div class="space-y-6">
                     <h3 class="text-lg font-semibold text-gray-800 border-l-4 border-blue-900 rounded-sm pl-3">Informasi
