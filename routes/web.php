@@ -92,6 +92,9 @@ Route::middleware(['auth', 'role:dosen'])->group(function () {
     Route::get('/chat', [ChatController::class, 'index'])->name('dosen.chat');
     Route::post('/chat/send', [ChatController::class, 'sendMessage']);
     Route::get('/chat/messages', [ChatController::class, 'getMessages']);
+    
+    // Add route for evaluation submission
+    Route::post('/dosen/log-aktivitas/evaluate', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'saveEvaluation']);
 });
 
 // Allow guest access to dosen profile with NIDN parameter

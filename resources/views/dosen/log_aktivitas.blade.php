@@ -183,28 +183,48 @@
                             </tr>
                         </thead>
                         <tbody id="evaluation-table-body" class="bg-white divide-y divide-gray-200">
-                            <!-- Awalnya kosong, akan diisi saat aksi evaluasi dilakukan -->
-                            <tr>
-                                <td colspan="4" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                    Belum ada catatan evaluasi.
-                                </td>
-                            </tr>
+                            @if(isset($evaluasi) && $evaluasi->count() > 0)
+                                @foreach($evaluasi as $eval)
+                                    <tr>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $eval->bimbinganMagang->mahasiswa->nama_mahasiswa ?? 'Nama tidak tersedia' }}
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">
+                                            {{ isset($eval->logAktivitas) ? date('d-m-Y', strtotime($eval->logAktivitas->tanggal)) : 'Tidak tersedia' }}
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 text-sm text-gray-900">
+                                            <div class="max-w-xs md:max-w-md lg:max-w-lg overflow-hidden">
+                                                {{ $eval->komentar }}
+                                            </div>
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">
+                                            {{ date('d-m-Y H:i', strtotime($eval->created_at)) }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="4" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                        Belum ada catatan evaluasi.
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Pagination for Evaluation Table -->
                 <div class="px-4 sm:px-6 py-4 bg-white border-t border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div class="flex-1 flex justify-between sm:hidden">
-                        <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Sebelumnya</button>
-                        <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Selanjutnya</button>
-                    </div>
                     <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
                         <div>
                             <p class="text-sm text-gray-700">
-                                Menampilkan <span id="eval-start-index" class="font-medium">0</span> sampai <span id="eval-end-index"
-                                    class="font-medium">0</span> dari <span id="total-eval"
-                                    class="font-medium">0</span> data
+                                Menampilkan <span id="eval-start-index" class="font-medium">
+                                    {{ isset($evaluasi) && $evaluasi->count() > 0 ? 1 : 0 }}
+                                </span> sampai <span id="eval-end-index" class="font-medium">
+                                    {{ isset($evaluasi) ? $evaluasi->count() : 0 }}
+                                </span> dari <span id="total-eval" class="font-medium">
+                                    {{ isset($evaluasi) ? $evaluasi->count() : 0 }}
+                                </span> data
                             </p>
                         </div>
                         <div>
@@ -237,9 +257,19 @@
         </section>
 
         <!-- Modal for Evaluation -->
-        <div id="evaluation-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+        <div id="evaluation-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
             <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Evaluasi Log Aktivitas</h3>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Evaluasi Log Aktivitas</h3>
+                    <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="evaluation-status-message"></div>
+                
                 <form id="evaluation-form">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="log_id" id="log_id">
@@ -257,125 +287,139 @@
             </div>
         </div>
     </div>
-
+    
     <script>
-        // Simulasi penyimpanan evaluasi di FE
-        // let evaluations = [];
+        // Debug function to help troubleshoot
+        function showDebug(message) {
+            console.log(message);
+            // You can uncomment this to show debug messages on the page
+            // document.getElementById('evaluation-status-message').innerHTML = `<div class="p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg">${message}</div>`;
+        }
+        
+        // Function to open the evaluation modal
+        function openEvaluationModal(logId, studentName, submissionDate) {
+            showDebug(`Opening modal for log ID: ${logId}, Student: ${studentName}`);
+            
+            try {
+                // Set form values
+                document.getElementById('log_id').value = logId;
+                document.getElementById('student_name').value = studentName;
+                document.getElementById('submission_date').value = submissionDate;
+                
+                // Show the modal
+                const modal = document.getElementById('evaluation-modal');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    showDebug('Modal displayed successfully');
+                } else {
+                    showDebug('Modal element not found!');
+                    alert('Error: Modal element not found!');
+                }
+                
+                // Check if this log already has an evaluation
+                const evaluations = @json(isset($evaluasi) ? $evaluasi : []);
+                if (evaluations.length > 0) {
+                    for (let i = 0; i < evaluations.length; i++) {
+                        if (evaluations[i].id_log_aktivitas == logId) {
+                            document.getElementById('evaluation').value = evaluations[i].komentar;
+                            showDebug('Found existing evaluation, populated the form');
+                            break;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error in openEvaluationModal:', error);
+                alert('Error opening modal: ' + error.message);
+            }
+        }
 
-        // Toggle dropdown visibility
-        // document.getElementById('week-filter-btn').addEventListener('click', function() {
-        //     const dropdown = document.getElementById('week-dropdown');
-        //     dropdown.classList.toggle('hidden');
-        // });
+        // Function to close the modal
+        function closeModal() {
+            showDebug('Closing modal');
+            document.getElementById('evaluation-modal').classList.add('hidden');
+            document.getElementById('evaluation-form').reset();
+        }
 
-        // Handle week filter selection
-        // document.querySelectorAll('#week-dropdown button').forEach(button => {
-        //     button.addEventListener('click', function() {
-        //         const selectedWeek = this.getAttribute('data-week');
-        //         document.getElementById('week-filter-text').textContent = selectedWeek;
-        //         document.getElementById('week-dropdown').classList.add('hidden');
-        //         console.log('Filter by week:', selectedWeek);
-        //     });
-        // });
+        // Submit evaluation form via AJAX
+        document.getElementById('evaluation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showDebug('Form submitted');
+            
+            const logId = document.getElementById('log_id').value;
+            const evaluation = document.getElementById('evaluation').value;
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Menyimpan...';
+            submitBtn.disabled = true;
+            
+            fetch('/dosen/log-aktivitas/evaluate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({
+                    log_id: logId,
+                    evaluation: evaluation
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    document.getElementById('evaluation-status-message').innerHTML = 
+                        '<div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg">Evaluasi berhasil disimpan!</div>';
+                    
+                    // Close modal after delay and reload page
+                    setTimeout(() => {
+                        closeModal();
+                        window.location.reload();
+                    }, 1500);
+                } else {
+                    document.getElementById('evaluation-status-message').innerHTML = 
+                        `<div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">Error: ${data.message}</div>`;
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('evaluation-status-message').innerHTML = 
+                    '<div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">Terjadi kesalahan saat menyimpan evaluasi</div>';
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
 
-        // Handle search input (simulasi tanpa BE)
-        // document.getElementById('search-input').addEventListener('input', function() {
-        //     const searchValue = this.value.toLowerCase();
-        //     const rows = document.querySelectorAll('#log-table-body tr');
-        //     rows.forEach(row => {
-        //         const studentName = row.cells[0].textContent.toLowerCase();
-        //         row.style.display = studentName.includes(searchValue) ? '' : 'none';
-        //     });
-        // });
-
-        // function handleAction(action, logId) {
-        //     const row = document.querySelector(tr[data-log-id="${logId}"]);
-        //     const statusCell = row.querySelector('.status-log');
-
-        //     if (action === 'terima') {
-        //         if (!confirm(Apakah Anda yakin ingin terima log ini?)) {
-        //             return;
-        //         }
-        //         // Simulasi AJAX request ke BE
-        //         setTimeout(() => {
-        //             alert('Log berhasil diterima!');
-        //             statusCell.textContent = 'Terima';
-        //         }, 500);
-        //     }
-        // }
-
-        // function openEvaluationModal(logId, studentName, submissionDate) {
-        //     document.getElementById('log_id').value = logId;
-        //     document.getElementById('student_name').value = studentName;
-        //     document.getElementById('submission_date').value = submissionDate;
-        //     document.getElementById('evaluation-modal').classList.remove('hidden');
-        // }
-
-        // function closeModal() {
-        //     document.getElementById('evaluation-modal').classList.add('hidden');
-        //     document.getElementById('evaluation').value = '';
-        //     document.getElementById('log_id').value = '';
-        //     document.getElementById('student_name').value = '';
-        //     document.getElementById('submission_date').value = '';
-        // }
-
-        // document.getElementById('evaluation-form').addEventListener('submit', function(e) {
-        //     e.preventDefault();
-        //     const logId = document.getElementById('log_id').value;
-        //     const studentName = document.getElementById('student_name').value;
-        //     const submissionDate = document.getElementById('submission_date').value;
-        //     const evaluation = document.getElementById('evaluation').value;
-
-        //     if (!evaluation.trim()) {
-        //         alert('Catatan evaluasi tidak boleh kosong!');
-        //         return;
-        //     }
-
-        //     // Simulasi AJAX request ke BE
-        //     setTimeout(() => {
-        //         alert('Evaluasi berhasil disimpan!');
-        //         const evaluationData = {
-        //             log_id: logId,
-        //             student_name: studentName,
-        //             submission_date: submissionDate,
-        //             result: evaluation,
-        //             evaluation_date: '04-06-2025 09:18' // Waktu saat ini (WIB)
-        //         };
-        //         evaluations.push(evaluationData);
-        //         updateEvaluationTable();
-        //         closeModal();
-        //     }, 500);
-        // });
-
-        // function updateEvaluationTable() {
-        //     const tbody = document.getElementById('evaluation-table-body');
-        //     tbody.innerHTML = '';
-
-        //     if (evaluations.length === 0) {
-        //         tbody.innerHTML = `
-        //             <tr>
-        //                 <td colspan="4" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-        //                     Belum ada catatan evaluasi.
-        //                 </td>
-        //             </tr>
-        //         `;
-        //     } else {
-        //         evaluations.forEach(eval => {
-        //             const row = document.createElement('tr');
-        //             row.innerHTML = `
-        //                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">${eval.student_name}</td>
-        //                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">${eval.submission_date}</td>
-        //                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">${eval.result}</td>
-        //                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">${eval.evaluation_date}</td>
-        //             `;
-        //             tbody.appendChild(row);
-        //         });
-        //     }
-
-        //     // Update pagination info
-        //     // document.getElementById('eval-start-index').textContent = evaluations.length > 0 ? 1 : 0;
-        //     // document.getElementById('eval-end-index').textContent = evaluations.length;
-        //     // document.getElementById('total-eval').textContent = evaluations.length;
-        // }
+        // Make sure to initialize all elements once DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing components...');
+            // Any additional initialization can go here
+            
+            // Add event listeners to all evaluation buttons for redundancy
+            const evaluationButtons = document.querySelectorAll('button[onclick^="openEvaluationModal"]');
+            evaluationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const clickFunction = this.getAttribute('onclick');
+                    console.log('Button clicked with function:', clickFunction);
+                    // This is just for logging - the actual function is called via the onclick attribute
+                });
+            });
+            
+            // Make sure the evaluation form exists
+            const form = document.getElementById('evaluation-form');
+            if (!form) {
+                console.error('Evaluation form not found!');
+            }
+            
+            // Make sure the modal exists
+            const modal = document.getElementById('evaluation-modal');
+            if (!modal) {
+                console.error('Evaluation modal not found!');
+            }
+        });
     </script>
 @endsection
