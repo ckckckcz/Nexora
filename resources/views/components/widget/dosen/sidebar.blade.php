@@ -65,11 +65,11 @@
                 <div x-show="open" x-transition:enter="transition ease-out duration-100"
                     x-transition:enter-start="transform opacity-0 scale-95"
                     x-transition:enter-end="transform opacity-100 scale-100" class="pl-10 space-y-1 sidebar-submenu">
-                    <a href="/dosen/mahasiswa/profile"
+                    {{-- <a href="/dosen/mahasiswa/profile"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.students') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Profile
                             Mahasiswa</span>
-                    </a>
+                    </a> --}}
                     <a href="/dosen/mahasiswa/log-aktivitas"
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Log Aktivitas</span>
