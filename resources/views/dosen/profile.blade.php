@@ -1,6 +1,17 @@
 @extends('layouts.dosen')
 @section('dosen')
     <div class="max-w-7xl mx-auto mt-12 px-4 sm:px-6 lg:px-8">
+        @if(session('success'))
+            <div class="mb-4 rounded-lg bg-green-100 px-4 py-3 text-sm text-green-700">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="mb-4 rounded-lg bg-red-100 px-4 py-3 text-sm text-red-700">
+                {{ session('error') }}
+            </div>
+        @endif
+        
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <!-- Left Sidebar -->
             <div class="lg:col-span-1">
@@ -10,14 +21,19 @@
                         <!-- Avatar -->
                         <div
                             class="w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center ring-4 ring-blue-50">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-0F5qEGhS6Jfj1LWwiWGpqNLkoxjWUB.png"
-                                alt="User Avatar" class="w-16 h-16 rounded-full object-cover">
+                            @if($dosen->tanda_tangan)
+                                <img src="{{ Storage::url($dosen->tanda_tangan) }}" alt="User Avatar" class="w-16 h-16 rounded-full object-cover">
+                            @else
+                                <div class="w-16 h-16 rounded-full bg-blue-800 flex items-center justify-center text-white text-xl font-semibold">
+                                    {{ substr($dosen->nama_dosen, 0, 1) }}
+                                </div>
+                            @endif
                         </div>
                         <!-- User Info -->
                         <div class="flex flex-col">
-                            <h3 class="font-semibold text-lg text-gray-900">Menampilkan Nama</h3>
-                            <h3 class="font-semibold text-sm text-gray-400">Menampilkan NIDN</h3>
-                            <h3 class="font-semibold text-sm text-gray-400">Menampilkan Program Studi</h3>
+                            <h3 class="font-semibold text-lg text-gray-900">{{ $dosen->nama_dosen }}</h3>
+                            <h3 class="font-semibold text-sm text-gray-400">{{ $dosen->nidn }}</h3>
+                            <h3 class="font-semibold text-sm text-gray-400">{{ $dosen->programStudi->nama_program_studi ?? 'Belum ada program studi' }}</h3>
                         </div>
                     </div>
                 </div>
@@ -27,193 +43,177 @@
             <div class="lg:col-span-3 space-y-8">
                 <!-- Personal Information -->
                 <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Personal Information</h2>
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 class="text-xl font-semibold text-gray-900">Informasi Pribadi</h2>
+                        
+                        @if(!isset($isOwner) || $isOwner || isset($isAdmin) && $isAdmin)
+                        <a href="{{ route('dosen.profile') }}" class="px-4 py-2 text-sm font-medium text-blue-700 bg-blue-100 rounded-lg hover:bg-blue-200">
+                            Edit Profil
+                        </a>
+                        @endif
+                    </div>
 
-                    <form action="" method="POST" class="space-y-6">
-                        @csrf
-                        {{-- @method('PUT') --}}
+                    <div class="space-y-6">
                         <!-- Username and Email -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">NIDN</label>
-                                <input type="text" id="NIDN" name="NIDN" value="NIDN DOSEN"
-                                    class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50"
-                                    placeholder="Masukkan username (contoh: 2341720xxx)" required maxlength="20">
-                                @error('nidn')
-                                    <span class="text-sm text-red-500">{{ $message }}</span>
-                                @enderror
+                                <label class="block text-sm font-medium text-gray-700 mb-2">NIDN</label>
+                                <div class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-700">
+                                    {{ $dosen->nidn }}
+                                </div>
                             </div>
                             <div>
-                                <label for="text" class="block text-sm font-medium text-gray-700 mb-2">Nama Dosen</label>
-                                <input type="text" id="nama" name="nama" value="Nama DOSEN"
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Dosen</label>
+                                <div class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-700">
+                                    {{ $dosen->nama_dosen }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-sm font-medium text-gray-700 mb-2">Program Studi</label>
+                            <div class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-700">
+                                {{ $dosen->programStudi->nama_program_studi ?? 'Belum ada program studi' }}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-sm font-medium text-gray-700 mb-2">Jurusan</label>
+                            <div class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-700">
+                                {{ $dosen->jurusan ?? 'Teknologi Informasi' }}
+                            </div>
+                        </div>
+
+                        @if($dosen->tanda_tangan)
+                        <div>
+                            <label class="text-sm font-medium text-gray-700 mb-2">Tanda Tangan</label>
+                            <div class="mt-2">
+                                <img src="{{ Storage::url($dosen->tanda_tangan) }}" alt="Tanda Tangan {{ $dosen->nama_dosen }}"
+                                class="max-h-48 rounded-lg shadow-sm">
+                            </div>
+                        </div>
+                        @endif
+
+                        @if(!isset($isOwner) || $isOwner)
+                        <form action="{{ route('dosen.profile.update') }}" method="POST" class="space-y-6 border-t border-gray-200 pt-6 mt-6" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            
+                            <!-- Password -->
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi</label>
+                                <input type="password" id="password" name="password"
                                     class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50"
-                                    placeholder="Masukkan Nama Dosen" required maxlength="100">
-                                @error('nama')
+                                    placeholder="Masukkan Password" maxlength="100">
+                                @error('password')
                                     <span class="text-sm text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="flex flex-col gap-2">
-                            <label for="id_program_studi"
-                                class="text-sm font-medium text-gray-700 transition-colors duration-200">Program
-                                Studi</label>
-                            <div class="relative">
-                                <select id="id_program_studi" name="id_program_studi"
-                                    class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
-                                    required>
-                                    <option value="" disabled selected>Pilih Program Studi</option>
-                                    {{-- @foreach($prodis as $prodi)
-                                    <option value="{{ $prodi->id_program_studi }}" {{ old('id_program_studi', $prodi->
-                                        id_program_studi) == $dosen->id_program_studi ? 'selected' : '' }}>
-                                        {{ $prodi->nama_program_studi }}</option>
-                                    @endforeach --}}
-                                </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4 transition-transform duration-200"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path
-                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                    </svg>
+                            <p class="text-sm text-gray-500">Tinggalkan password kosong jika tidak ingin diubah</p>
+
+                            <div class="flex flex-col gap-3">
+                                <label class="text-sm font-medium text-gray-700">Tanda Tangan</label>
+                                <!-- Tab Navigation -->
+                                <div class="flex border-b border-gray-200">
+                                    <button type="button" id="tab-upload"
+                                        class="px-4 py-2 text-sm font-medium text-blue-900 border-b-2 border-blue-900 focus:outline-none transition-colors duration-200">
+                                        Upload Gambar
+                                    </button>
+                                    <button type="button" id="tab-draw"
+                                        class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition-colors duration-200">
+                                        Buat Tanda Tangan
+                                    </button>
                                 </div>
-                            </div>
-                            @error('id_program_studi')
-                                <span class="text-sm text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
 
-                        <div class="flex flex-col gap-2">
-                            <label for="jurusan"
-                                class="text-sm font-medium text-gray-700 transition-colors duration-200">Jurusan</label>
-                            <input type="text" id="jurusan" name="jurusan"
-                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
-                                value="Teknologi Informasi" readonly required maxlength="100">
-                            {{-- @error('jurusan')
-                            <span class="text-sm text-red-500">{{ $message }}</span>
-                            @enderror --}}
-                        </div>
-
-                        <!-- Password -->
-                        <div>
-                            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi</label>
-                            <input type="password" id="password" name="password"
-                                class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50"
-                                placeholder="Masukkan Password" maxlength="100">
-                            @error('password')
-                                <span class="text-sm text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <p class="text-sm text-gray-500">Tinggalkan password kosong jika tidak ingin diubah</p>
-
-                        <div class="flex flex-col gap-3">
-                            <label class="text-sm font-medium text-gray-700">Tanda Tangan</label>
-                            {{-- @if($dosen->tanda_tangan)
-                            <img src="{{ Storage::url($dosen->tanda_tangan) }}" alt="Tanda Tangan {{ $dosen->nama_dosen }}"
-                                class="max-h-48 rounded-lg shadow-sm">
-                            @else
-                            <p class="text-sm text-gray-500">Tanda tangan belum tersedia.</p>
-                            @endif --}}
-
-                            <!-- Tab Navigation -->
-                            <div class="flex border-b border-gray-200">
-                                <button type="button" id="tab-upload"
-                                    class="px-4 py-2 text-sm font-medium text-blue-900 border-b-2 border-blue-900 focus:outline-none transition-colors duration-200">
-                                    Upload Gambar
-                                </button>
-                                <button type="button" id="tab-draw"
-                                    class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition-colors duration-200">
-                                    Buat Tanda Tangan
-                                </button>
-                            </div>
-
-                            <!-- Upload Image Tab -->
-                            <div id="content-upload" class="py-3">
-                                <div class="flex flex-col gap-3">
-                                    <div
-                                        class="relative border-2 border-dashed border-gray-300 rounded-xl p-20 transition-colors duration-200 hover:border-gray-400 bg-gray-50">
-                                        <input type="file" id="signature-upload" name="tanda_tangan" accept="image/*"
-                                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                            onchange="previewSignature(event)">
-                                        <div class="text-center" id="upload-placeholder">
-                                            <svg class="mx-auto h-10 w-10 text-gray-400" stroke="currentColor" fill="none"
-                                                viewBox="0 0 48 48" aria-hidden="true">
-                                                <path
-                                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            <div class="flex flex-col items-center text-sm text-gray-600 mt-2">
-                                                <p>Klik untuk upload atau seret gambar ke sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">PNG, JPG, GIF hingga 2MB</p>
+                                <!-- Upload Image Tab -->
+                                <div id="content-upload" class="py-3">
+                                    <div class="flex flex-col gap-3">
+                                        <div
+                                            class="relative border-2 border-dashed border-gray-300 rounded-xl p-20 transition-colors duration-200 hover:border-gray-400 bg-gray-50">
+                                            <input type="file" id="signature-upload" name="tanda_tangan" accept="image/*"
+                                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                                onchange="previewSignature(event)">
+                                            <div class="text-center" id="upload-placeholder">
+                                                <svg class="mx-auto h-10 w-10 text-gray-400" stroke="currentColor" fill="none"
+                                                    viewBox="0 0 48 48" aria-hidden="true">
+                                                    <path
+                                                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                                <div class="flex flex-col items-center text-sm text-gray-600 mt-2">
+                                                    <p>Klik untuk upload atau seret gambar ke sini</p>
+                                                    <p class="text-xs text-gray-500 mt-1">PNG, JPG, GIF hingga 2MB</p>
+                                                </div>
+                                            </div>
+                                            <div id="preview-container" class="hidden flex justify-center">
+                                                <div class="relative">
+                                                    <img id="signature-preview" class="max-h-48 rounded-lg shadow-sm"
+                                                        src="/placeholder.svg" alt="Preview tanda tangan">
+                                                    <button type="button" onclick="removeSignature()"
+                                                        class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-sm hover:bg-red-600 transition-colors duration-200 focus:outline-none">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div id="preview-container" class="hidden flex justify-center">
+                                        <input type="hidden" id="signature-upload-data" name="signature_upload_data">
+                                    </div>
+                                </div>
+
+                                <!-- Draw Signature Tab -->
+                                <div id="content-draw" class="py-3 hidden">
+                                    <div class="flex flex-col gap-3">
+                                        <div class="border border-gray-300 rounded-lg bg-white">
                                             <div class="relative">
-                                                <img id="signature-preview" class="max-h-48 rounded-lg shadow-sm"
-                                                    src="/placeholder.svg" alt="Preview tanda tangan">
-                                                <button type="button" onclick="removeSignature()"
-                                                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-sm hover:bg-red-600 transition-colors duration-200 focus:outline-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                </button>
+                                                <canvas id="signature-pad"
+                                                    class="w-full h-62 rounded-lg cursor-crosshair touch-none"></canvas>
+                                                <div id="signature-pad-placeholder"
+                                                    class="absolute inset-0 flex items-center justify-center text-gray-400 pointer-events-none">
+                                                    <span class="text-sm">Klik dan geser untuk membuat tanda tangan</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <input type="hidden" id="signature-upload-data" name="signature_upload_data">
-                                </div>
-                            </div>
-
-                            <!-- Draw Signature Tab -->
-                            <div id="content-draw" class="py-3 hidden">
-                                <div class="flex flex-col gap-3">
-                                    <div class="border border-gray-300 rounded-lg bg-white">
-                                        <div class="relative">
-                                            <canvas id="signature-pad"
-                                                class="w-full h-62 rounded-lg cursor-crosshair touch-none"></canvas>
-                                            <div id="signature-pad-placeholder"
-                                                class="absolute inset-0 flex items-center justify-center text-gray-400 pointer-events-none">
-                                                <span class="text-sm">Klik dan geser untuk membuat tanda tangan</span>
-                                            </div>
+                                        <div class="flex gap-2">
+                                            <button type="button" id="clear-signature"
+                                                class="px-3 py-1.5 text-xs text-gray-700 bg-gray-100 rounded hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                                                Hapus
+                                            </button>
+                                            <button type="button" id="save-signature"
+                                                class="px-3 py-1.5 text-xs text-white bg-blue-900 rounded hover:bg-blue-950 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                                Simpan Tanda Tangan
+                                            </button>
                                         </div>
+                                        <input type="hidden" id="signature-pad-data" name="signature_pad_data">
                                     </div>
-                                    <div class="flex gap-2">
-                                        <button type="button" id="clear-signature"
-                                            class="px-3 py-1.5 text-xs text-gray-700 bg-gray-100 rounded hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                                            Hapus
-                                        </button>
-                                        <button type="button" id="save-signature"
-                                            class="px-3 py-1.5 text-xs text-white bg-blue-900 rounded hover:bg-blue-950 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                                            Simpan Tanda Tangan
-                                        </button>
-                                    </div>
-                                    <input type="hidden" id="signature-pad-data" name="signature_pad_data">
                                 </div>
+
+                                <!-- Signature Method Selection -->
+                                <input type="hidden" id="signature-method" name="signature_method" value="upload">
+
+                                @error('tanda_tangan')
+                                    <span class="text-sm text-red-500">{{ $message }}</span>
+                                @enderror
                             </div>
 
-                            <!-- Signature Method Selection -->
-                            <input type="hidden" id="signature-method" name="signature_method" value="upload">
-
-                            @error('tanda_tangan')
-                                <span class="text-sm text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <!-- Submit and Cancel Buttons -->
-                        <div class="flex justify-end gap-3">
-                            <button type="submit"
-                                class="px-6 py-2.5 bg-blue-900 text-white font-medium rounded-lg hover:bg-blue-950 transition-all duration-200 shadow-sm hover:shadow-md">
-                                Simpan
-                            </button>
-                            <a href="/dosen/profile"
-                                class="inline-flex items-center px-6 py-2.5 border border-gray-200 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-all duration-200">
-                                Batal Editl
-                            </a>
-                        </div>
-                    </form>
+                            <!-- Submit and Cancel Buttons -->
+                            <div class="flex justify-end gap-3">
+                                <button type="submit"
+                                    class="px-6 py-2.5 bg-blue-900 text-white font-medium rounded-lg hover:bg-blue-950 transition-all duration-200 shadow-sm hover:shadow-md">
+                                    Simpan
+                                </button>
+                                <a href="{{ route('dosen.profile') }}"
+                                    class="inline-flex items-center px-6 py-2.5 border border-gray-200 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-all duration-200">
+                                    Batal
+                                </a>
+                            </div>
+                        </form>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

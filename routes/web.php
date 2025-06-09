@@ -85,11 +85,17 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
     });
 });
 
-Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->group(function () {
+Route::middleware(['auth', 'role:dosen'])->group(function () {
+    Route::get('/dosen/profile', [App\Http\Controllers\Dosen\ProfileDosenController::class, 'index'])->name('dosen.profile');
+    Route::put('/dosen/profile/update', [App\Http\Controllers\Dosen\ProfileDosenController::class, 'update'])->name('dosen.profile.update');
+    
     Route::get('/chat', [ChatController::class, 'index'])->name('dosen.chat');
     Route::post('/chat/send', [ChatController::class, 'sendMessage']);
     Route::get('/chat/messages', [ChatController::class, 'getMessages']);
 });
+
+// Allow guest access to dosen profile with NIDN parameter
+Route::get('/dosen/profile', [App\Http\Controllers\Dosen\ProfileDosenController::class, 'index'])->name('dosen.profile');
 
 Route::middleware(['auth', 'authorize:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
@@ -231,13 +237,6 @@ Route::get('/rekomendasi-magang/hasil', [RekomendasiMagangMahasiswaController::c
 
 Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
-});
-Route::get('/dosen/profile', function () {
-    return view('dosen.profile');
-});
-
-Route::middleware([\App\Http\Middleware\App::class])->group(function () {
-
 });
 
 
