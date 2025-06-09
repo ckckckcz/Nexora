@@ -1,0 +1,135 @@
+\documentclass[a4paper,12pt]{article}
+
+% Mengatur margin normal (1 inci = 2,54 cm)
+\usepackage[margin=1in]{geometry}
+
+% Encoding dan bahasa
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+
+% Font Times New Roman
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+% Spasi antarbaris 1,15
+\usepackage{setspace}
+\linespread{1.15}
+
+% Paket untuk gambar
+\usepackage{graphicx}
+\graphicspath{{./images/}} % Direktori gambar
+
+% Paket untuk daftar isi dan daftar gambar
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % Titik-titik pada daftar isi
+
+% Paket untuk URL dan hyperlink
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdfpagemode=FullScreen,
+}
+
+% Paket untuk daftar
+\usepackage{enumitem}
+
+% Mengatur halaman judul
+\title{\textbf{BUKU PETUNJUK PENGGUNAAN SISTEM REKOMENDASI MAGANG}}
+\author{
+    \textbf{TIM PENGANBANG:} \\
+    \begin{tabular}{l}
+        1. Cakra Wangsa May Ahmad Widodo \\
+        2. Galung Bahasa \\
+        3. Muchammad Arieya Candra Pangestu \\
+        4. Riovaldo Alfiyan Anggara \\
+        5. Tri Sukma Sarah \\
+    \end{tabular} \\
+    \vspace{1cm} \\
+    \textbf{PROGRAM STUDI D-4 TEKNIK INFORMATIKA} \\
+    \textbf{POLITEKNIK NEGERI MALANG} \\
+    2025
+}
+\date{}
+
+\begin{document}
+
+% Halaman judul
+\maketitle
+\thispagestyle{empty}
+\clearpage
+
+% Daftar isi
+\tableofcontents
+\clearpage
+
+% Daftar gambar
+\listoffigures
+\clearpage
+
+% Pendahuluan
+\section{Pendahuluan}
+Nexora adalah sistem rekomendasi magang berbasis Sistem Penunjang Keputusan (SPK) yang dirancang untuk membantu mahasiswa menemukan peluang magang yang sesuai dengan keahlian, minat, dan tujuan karier mereka. Sistem ini mengumpulkan data profil pengguna, seperti latar belakang akademik, keterampilan teknis, pengalaman proyek, dan preferensi industri, serta data lowongan magang dari berbagai perusahaan. Dengan pendekatan SPK, Nexora menggunakan metode perhitungan terstruktur untuk mengevaluasi dan memeringkat lowongan magang berdasarkan kecocokan dengan profil pengguna, memberikan rekomendasi yang akurat dan relevan.
+
+% Prosedur
+\section{Prosedur}
+\begin{enumerate}[label=\arabic*.]
+    \item Buka aplikasi browser yang ada pada komputer anda, contohnya: Zen, Chrome, Arc, dll.
+    \item Ketik alamat URL \url{current-alpaca-prepared.ngrok-free.app} pada baris alamat.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{image1.png}
+        \caption{Address Bar URL Nexora}
+        \label{fig:address-bar}
+    \end{figure}
+    \item Tekan tombol Enter, maka akan muncul halaman \textit{landing page} dari website Nexora.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{image2.png}
+        \caption{Halaman Landing Page}
+        \label{fig:landing-page}
+    \end{figure}
+\end{enumerate}
+
+Berikut ini adalah penjelasan beberapa bagian dari halaman \textit{landing page}:
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Menu}: Pada \textit{landing page} Nexora, bagian ini akan menampilkan beberapa menu di antaranya Home, Rekomendasi Magang, Log Aktivitas, Lowongan, Daftar, dan Login.
+    \item \textbf{Konten Utama}: Bagian ini berisi tombol ``Cari Magang Yuk! \emoji{👷🏽‍♂️}'' dan menampilkan beberapa mahasiswa yang magang di tempat ternama.
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{image3.png}
+    \caption{Tampilan Konten Utama Landing Page}
+    \label{fig:konten-utama}
+\end{figure}
+
+% Cara Menjalankan File LaTeX di VSCode
+\section{Cara Menjalankan File LaTeX di VSCode}
+\begin{enumerate}[label=\arabic*.]
+    \item Pastikan VSCode sudah terinstall di komputer Anda
+    \item Install ekstensi LaTeX Workshop di VSCode
+    \begin{itemize}
+        \item Buka VSCode
+        \item Klik icon Extensions di sidebar (atau tekan Ctrl+Shift+X)
+        \item Cari "LaTeX Workshop"
+        \item Klik Install pada ekstensi LaTeX Workshop
+    \end{itemize}
+    \item Install MiKTeX atau TeX Live di komputer Anda
+    \begin{itemize}
+        \item Kunjungi \url{https://miktex.org/download} untuk MiKTeX atau
+        \item \url{https://tug.org/texlive/} untuk TeX Live
+        \item Download dan install sesuai sistem operasi Anda
+    \end{itemize}
+    \item Buka file .tex di VSCode
+    \item Untuk mengkompilasi dan melihat hasilnya:
+    \begin{itemize}
+        \item Tekan Ctrl+Alt+B untuk build
+        \item Tekan Ctrl+Alt+V untuk preview PDF
+        \item Atau klik icon "TeXDoc" di pojok kanan atas editor
+    \end{itemize}
+    \item File PDF hasil kompilasi akan muncul di panel sebelah kanan
+\end{enumerate}
+
+\end{document}

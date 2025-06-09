@@ -234,6 +234,10 @@ Route::get('/unggah-dokumen', function () {
 Route::get('/dosen/profile', function () {
     return view('dosen.profile');
 });
+
+Route::get('/dosen/magang/rekomendasi-magang/profile', function () {
+    return view('dosen.detail_profile_mahasiswa');
+});
 Route::middleware([\App\Http\Middleware\App::class])->group(function () {
 
 });
