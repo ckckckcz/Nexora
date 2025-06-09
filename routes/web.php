@@ -241,6 +241,9 @@ Route::get('/rekomendasi-magang/hasil', [RekomendasiMagangMahasiswaController::c
 Route::get('/unggah-dokumen', function () {
     return view('user.function.unggah_dokumen');
 });
+Route::get('/dosen/mahasiswa/log-aktivitas/tambah', function () {
+    return view('dosen.functions.log_aktivitas.tambah');
+});
 
 // Add this route to the middleware auth group or where appropriate
 Route::get('/download/template/{file}', [App\Http\Controllers\User\TemplateController::class, 'download'])->name('download.template');

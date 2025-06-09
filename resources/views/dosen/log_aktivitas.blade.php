@@ -80,10 +80,11 @@
                                 </th>
                             </tr>
                         </thead>
-                            <tbody id="log-table-body" class="bg-white divide-y divide-gray-200">
+                        <tbody id="log-table-body" class="bg-white divide-y divide-gray-200">
                             @if (empty($logAktivitas))
                                 <tr>
-                                    <td colspan="6" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                    <td colspan="6"
+                                        class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
                                         Tidak ada data log aktivitas mingguan.
                                     </td>
                                 </tr>
@@ -91,19 +92,24 @@
                                 @foreach ($logAktivitas as $log)
                                     <tr data-log-id="{{ $log->id_log_aktivitas }}">
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $log->bimbinganMagang->mahasiswa->nama_mahasiswa }}</td>
+                                            {{ $log->bimbinganMagang->mahasiswa->nama_mahasiswa }}
+                                        </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">
                                             Minggu ke-{{ $log->minggu }}</td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">
-                                            {{ date('d-m-Y', strtotime($log->tanggal)) }}</td>
+                                            {{ date('d-m-Y', strtotime($log->tanggal)) }}
+                                        </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">
-                                            {{ $log->kegiatan }}</td>
+                                            {{ $log->kegiatan }}
+                                        </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div class="flex gap-2">
-                                                <button onclick="openEvaluationModal({{ $log->id_log_aktivitas }}, '{{ $log->bimbinganMagang->mahasiswa->nama_mahasiswa }}', '{{ $log->tanggal }}')"
-                                                    class="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">
-                                                    Evaluasi
-                                                </button>
+                                                <a href="/dosen/mahasiswa/log-aktivitas/tambah">
+                                                    <button
+                                                        class="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">
+                                                        Evaluasi
+                                                    </button>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -114,10 +120,13 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="px-4 sm:px-6 py-4 bg-white border-t border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div
+                    class="px-4 sm:px-6 py-4 bg-white border-t border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex-1 flex justify-between sm:hidden">
-                        <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Sebelumnya</button>
-                        <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Selanjutnya</button>
+                        <button
+                            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Sebelumnya</button>
+                        <button
+                            class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Selanjutnya</button>
                     </div>
                     <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
                         <div>
@@ -129,7 +138,8 @@
                         </div>
                         <div>
                             <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                                <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <button
+                                    class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                     <span class="sr-only">Previous</span>
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                         fill="currentColor" aria-hidden="true">
@@ -140,7 +150,8 @@
                                 </button>
                                 <button aria-current="page"
                                     class="z-10 bg-blue-50 border-blue-500 text-blue-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</button>
-                                <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <button
+                                    class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                     <span class="sr-only">Next</span>
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                         fill="currentColor" aria-hidden="true">
@@ -204,7 +215,8 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="4" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                    <td colspan="4"
+                                        class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
                                         Belum ada catatan evaluasi.
                                     </td>
                                 </tr>
@@ -214,7 +226,8 @@
                 </div>
 
                 <!-- Pagination for Evaluation Table -->
-                <div class="px-4 sm:px-6 py-4 bg-white border-t border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div
+                    class="px-4 sm:px-6 py-4 bg-white border-t border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
                         <div>
                             <p class="text-sm text-gray-700">
@@ -229,7 +242,8 @@
                         </div>
                         <div>
                             <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                                <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <button
+                                    class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                     <span class="sr-only">Previous</span>
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                         fill="currentColor" aria-hidden="true">
@@ -240,7 +254,8 @@
                                 </button>
                                 <button aria-current="page"
                                     class="z-10 bg-blue-50 border-blue-500 text-blue-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</button>
-                                <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <button
+                                    class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                     <span class="sr-only">Next</span>
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                         fill="currentColor" aria-hidden="true">
@@ -255,171 +270,5 @@
                 </div>
             </div>
         </section>
-
-        <!-- Modal for Evaluation -->
-        <div id="evaluation-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
-            <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Evaluasi Log Aktivitas</h3>
-                    <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <div id="evaluation-status-message"></div>
-                
-                <form id="evaluation-form">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="log_id" id="log_id">
-                    <input type="hidden" name="student_name" id="student_name">
-                    <input type="hidden" name="submission_date" id="submission_date">
-                    <div class="mb-4">
-                        <label for="evaluation" class="block text-sm font-medium text-gray-700">Catatan Evaluasi</label>
-                        <textarea name="evaluation" id="evaluation" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required></textarea>
-                    </div>
-                    <div class="flex justify-end gap-2">
-                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">Batal</button>
-                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
-    
-    <script>
-        // Debug function to help troubleshoot
-        function showDebug(message) {
-            console.log(message);
-            // You can uncomment this to show debug messages on the page
-            // document.getElementById('evaluation-status-message').innerHTML = `<div class="p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg">${message}</div>`;
-        }
-        
-        // Function to open the evaluation modal
-        function openEvaluationModal(logId, studentName, submissionDate) {
-            showDebug(`Opening modal for log ID: ${logId}, Student: ${studentName}`);
-            
-            try {
-                // Set form values
-                document.getElementById('log_id').value = logId;
-                document.getElementById('student_name').value = studentName;
-                document.getElementById('submission_date').value = submissionDate;
-                
-                // Show the modal
-                const modal = document.getElementById('evaluation-modal');
-                if (modal) {
-                    modal.classList.remove('hidden');
-                    showDebug('Modal displayed successfully');
-                } else {
-                    showDebug('Modal element not found!');
-                    alert('Error: Modal element not found!');
-                }
-                
-                // Check if this log already has an evaluation
-                const evaluations = @json(isset($evaluasi) ? $evaluasi : []);
-                if (evaluations.length > 0) {
-                    for (let i = 0; i < evaluations.length; i++) {
-                        if (evaluations[i].id_log_aktivitas == logId) {
-                            document.getElementById('evaluation').value = evaluations[i].komentar;
-                            showDebug('Found existing evaluation, populated the form');
-                            break;
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Error in openEvaluationModal:', error);
-                alert('Error opening modal: ' + error.message);
-            }
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            showDebug('Closing modal');
-            document.getElementById('evaluation-modal').classList.add('hidden');
-            document.getElementById('evaluation-form').reset();
-        }
-
-        // Submit evaluation form via AJAX
-        document.getElementById('evaluation-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            showDebug('Form submitted');
-            
-            const logId = document.getElementById('log_id').value;
-            const evaluation = document.getElementById('evaluation').value;
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Menyimpan...';
-            submitBtn.disabled = true;
-            
-            fetch('/dosen/log-aktivitas/evaluate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({
-                    log_id: logId,
-                    evaluation: evaluation
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Show success message
-                    document.getElementById('evaluation-status-message').innerHTML = 
-                        '<div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg">Evaluasi berhasil disimpan!</div>';
-                    
-                    // Close modal after delay and reload page
-                    setTimeout(() => {
-                        closeModal();
-                        window.location.reload();
-                    }, 1500);
-                } else {
-                    document.getElementById('evaluation-status-message').innerHTML = 
-                        `<div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">Error: ${data.message}</div>`;
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('evaluation-status-message').innerHTML = 
-                    '<div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">Terjadi kesalahan saat menyimpan evaluasi</div>';
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
-        });
-
-        // Make sure to initialize all elements once DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded, initializing components...');
-            // Any additional initialization can go here
-            
-            // Add event listeners to all evaluation buttons for redundancy
-            const evaluationButtons = document.querySelectorAll('button[onclick^="openEvaluationModal"]');
-            evaluationButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const clickFunction = this.getAttribute('onclick');
-                    console.log('Button clicked with function:', clickFunction);
-                    // This is just for logging - the actual function is called via the onclick attribute
-                });
-            });
-            
-            // Make sure the evaluation form exists
-            const form = document.getElementById('evaluation-form');
-            if (!form) {
-                console.error('Evaluation form not found!');
-            }
-            
-            // Make sure the modal exists
-            const modal = document.getElementById('evaluation-modal');
-            if (!modal) {
-                console.error('Evaluation modal not found!');
-            }
-        });
-    </script>
 @endsection
