@@ -74,7 +74,7 @@
                                     Lihat Profil
                                 </a>
 
-                                <a href="#"
+                                {{-- <a href="#"
                                     class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 text-gray-500" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -84,7 +84,7 @@
                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                     Pengaturan Akun
-                                </a>
+                                </a> --}}
                             </div>
 
                             <div class="py-1 border-t border-gray-100">
