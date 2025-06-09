@@ -27,6 +27,7 @@ use App\Http\Controllers\User\DetailLowonganController;
 use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\RekomendasiMagangMahasiswaController;
+use App\Http\Controllers\User\UnggahDokumenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Testing\SMCController;
 use App\Http\Controllers\User\LowonganMagangMahasiswaController;
@@ -77,9 +78,8 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
     Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
     Route::post('/log-aktivitas/store', [LogAktivitasController::class, 'store']);
 
-    Route::get('/unggah-dokumen', function () {
-        return view('user.function.unggah_dokumen');
-    });
+    Route::get('/unggah-dokumen', [UnggahDokumenController::class, 'createOrUpdate']);
+    Route::post('/unggah-dokumen', [UnggahDokumenController::class, 'storeOrUpdate']);
     Route::get('/unggah-dokumen-perusahaan', function () {
         return view('user.unggah_dokumen_perusahaan');
     });
@@ -229,9 +229,6 @@ Route::post('/rekomendasi-magang/tambah', [RekomendasiMagangMahasiswaController:
 Route::get('/rekomendasi-magang/hasil', [RekomendasiMagangMahasiswaController::class, 'hasil'])->name('user.rekomendasi-magang.hasil');
 
 
-Route::get('/unggah-dokumen', function () {
-    return view('user.function.unggah_dokumen');
-});
 Route::get('/dosen/profile', function () {
     return view('dosen.profile');
 });

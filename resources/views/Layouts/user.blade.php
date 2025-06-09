@@ -24,7 +24,28 @@
     </head>
     <body class="antialiased">
         <div class="min-h-screen">
-            @include('components.widget.user.navbar')
+            @if(session('success'))
+                <div id="success-popup" class="fixed top-5 left-1/2 -translate-x-1/2 bg-green-500 text-white py-4 px-8 rounded-md shadow-lg text-lg z-[9999]">
+                    {{ session('success') }}
+                </div>
+                <script>
+                    setTimeout(function(){
+                        document.getElementById('success-popup').remove();
+                    }, 3000);
+                </script>
+            @endif
+
+            @if(session('error'))
+                <div id="error-popup" class="fixed top-5 left-1/2 -translate-x-1/2 bg-red-500 text-white py-4 px-8 rounded-md shadow-lg text-lg z-[9999]">
+                    {{ session('error') }}
+                </div>
+                <script>
+                    setTimeout(function(){
+                        document.getElementById('error-popup').remove();
+                    }, 3000);
+                </script>
+            @endif
+        @include('components.widget.user.navbar')
     
             <!-- Page Content -->
             <main>

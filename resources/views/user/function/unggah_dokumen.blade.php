@@ -40,48 +40,21 @@
                             <label for="id_mahasiswa" class="block text-sm font-medium text-gray-700 mb-1">
                                 Nama Mahasiswa <span class="text-red-500">*</span>
                             </label>
-                            <input type="number" name="id_mahasiswa" id="id_mahasiswa" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400">
-                        </div>
-                        <!-- Jenis Magang Selection -->
-                        <div class="relative">
-                            <label for="jenis_magang" class="block text-sm font-medium text-gray-700 mb-1">
-                                Jenis Magang <span class="text-red-500">*</span>
-                            </label>
-                            <select id="jenis_magang" name="jenis_magang" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
-                                <option value="">Pilih Jenis Magang</option>
-                                <option value="mandiri">Magang Mandiri</option>
-                                <option value="rekomendasi">Magang Rekomendasi</option>
-                            </select>
+                            <input type="text" name="id_mahasiswa" id="id_mahasiswa" 
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400" value="{{ Auth::user()->mahasiswa->nama_mahasiswa }}"" disabled>
                         </div>
                         <!-- ID Lowongan -->
                         <div class="relative">
                             <label for="id_lowongan" class="block text-sm font-medium text-gray-700 mb-1">
-                                ID Lowongan <span class="text-red-500">*</span>
+                                Nama Perusahaaan <span class="text-red-500">*</span>
                             </label>
-                            <input type="number" name="id_lowongan" id="id_lowongan" disabled
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400 disabled:bg-gray-100 disabled:text-gray-500"
-                                placeholder="Pilih jenis magang terlebih dahulu">
-                        </div>
-                        <!-- Status Pengajuan -->
-                        <div>
-                            <label for="status_pengajuan" class="block text-sm font-medium text-gray-700 mb-1">
-                                Status Pengajuan <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <select name="status_pengajuan" id="status_pengajuan" required
-                                    class="appearance-none w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
-                                    <option value="menunggu">Menunggu</option>
-                                    <option value="diterima">Diterima</option>
-                                    <option value="ditolak">Ditolak</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
+                            <select name="id_lowongan" id="id_lowongan"
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
+                                <option value="">Pilih Lowongan</option>
+                                @foreach ($lowongan as $item)
+                                    <option value="{{ $item->id_lowongan }}">{{ $item->nama_perusahaan }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -100,9 +73,9 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <!-- KTP Upload -->
                             <div>
-                                <label for="ktp" class="block text-sm font-medium text-gray-700 mb-1">KTP</label>
+                                <label for="KTP" class="block text-sm font-medium text-gray-700 mb-1">KTP</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="ktp" id="ktp" accept=".pdf,.jpg,.png,.jpeg"
+                                    <input type="file" name="KTP" id="ktp" accept=".pdf,.jpg,.png,.jpeg"
                                         class="hidden file-input" data-target="ktp-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="ktp">
@@ -124,9 +97,9 @@
                             </div>
                             <!-- KTM Upload -->
                             <div>
-                                <label for="ktm" class="block text-sm font-medium text-gray-700 mb-1">KTM</label>
+                                <label for="KTM" class="block text-sm font-medium text-gray-700 mb-1">KTM</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="ktm" id="ktm" accept=".pdf,.jpg,.png,.jpeg"
+                                    <input type="file" name="KTM" id="ktm" accept=".pdf,.jpg,.png,.jpeg"
                                         class="hidden file-input" data-target="ktm-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="ktm">
@@ -148,9 +121,9 @@
                             </div>
                             <!-- Kartu BPJS Upload -->
                             <div>
-                                <label for="kartu_bpjs" class="block text-sm font-medium text-gray-700 mb-1">Kartu BPJS/Asuransi Lainnya</label>
+                                <label for="Kartu_BPJS_Asuransi_lainnya" class="block text-sm font-medium text-gray-700 mb-1">Kartu BPJS/Asuransi Lainnya</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="kartu_bpjs" id="kartu_bpjs" accept=".pdf,.jpg,.png,.jpeg"
+                                    <input type="file" name="Kartu_BPJS_Asuransi_lainnya" id="kartu_bpjs" accept=".pdf,.jpg,.png,.jpeg"
                                         class="hidden file-input" data-target="bpjs-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="kartu_bpjs">
@@ -172,9 +145,9 @@
                             </div>
                             <!-- SKTM/KIP Kuliah Upload -->
                             <div>
-                                <label for="sktm_kip" class="block text-sm font-medium text-gray-700 mb-1">SKTM/KIP Kuliah</label>
+                                <label for="SKTM_KIP_Kuliah" class="block text-sm font-medium text-gray-700 mb-1">SKTM/KIP Kuliah</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="sktm_kip" id="sktm_kip" accept=".pdf,.jpg,.png,.jpeg"
+                                    <input type="file" name="SKTM_KIP_Kuliah" id="sktm_kip" accept=".pdf,.jpg,.png,.jpeg"
                                         class="hidden file-input" data-target="sktm-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="sktm_kip">
@@ -205,9 +178,9 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <!-- Pakta Integritas Upload -->
                             <div>
-                                <label for="pakta_integritas" class="block text-sm font-medium text-gray-700 mb-1">Pakta Integritas</label>
+                                <label for="Pakta_Integritas" class="block text-sm font-medium text-gray-700 mb-1">Pakta Integritas</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="pakta_integritas" id="pakta_integritas" accept=".pdf"
+                                    <input type="file" name="Pakta_Integritas" id="pakta_integritas" accept=".pdf"
                                         class="hidden file-input" data-target="pakta-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="pakta_integritas">
@@ -229,9 +202,9 @@
                             </div>
                             <!-- Daftar Riwayat Hidup Upload -->
                             <div>
-                                <label for="daftar_riwayat_hidup" class="block text-sm font-medium text-gray-700 mb-1">Daftar Riwayat Hidup</label>
+                                <label for="Daftar_Riwayat_Hidup" class="block text-sm font-medium text-gray-700 mb-1">Daftar Riwayat Hidup</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="daftar_riwayat_hidup" id="daftar_riwayat_hidup" accept=".pdf"
+                                    <input type="file" name="Daftar_Riwayat_Hidup" id="daftar_riwayat_hidup" accept=".pdf"
                                         class="hidden file-input" data-target="riwayat-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="daftar_riwayat_hidup">
@@ -253,9 +226,9 @@
                             </div>
                             <!-- KHS/Cetak Siakad Upload -->
                             <div>
-                                <label for="khs" class="block text-sm font-medium text-gray-700 mb-1">KHS/Cetak Siakad</label>
+                                <label for="KHS_cetak_Siakad" class="block text-sm font-medium text-gray-700 mb-1">KHS/Cetak Siakad</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="khs" id="khs" accept=".pdf" class="hidden file-input"
+                                    <input type="file" name="KHS_cetak_Siakad" id="khs" accept=".pdf" class="hidden file-input"
                                         data-target="khs-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="khs">
@@ -277,9 +250,9 @@
                             </div>
                             <!-- Surat Izin Orang Tua Upload -->
                             <div>
-                                <label for="surat_izin_orang_tua" class="block text-sm font-medium text-gray-700 mb-1">Surat Izin Orang Tua</label>
+                                <label for="Surat_Izin_Orang_Tua" class="block text-sm font-medium text-gray-700 mb-1">Surat Izin Orang Tua</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="surat_izin_orang_tua" id="surat_izin_orang_tua" accept=".pdf"
+                                    <input type="file" name="Surat_Izin_Orang_Tua" id="surat_izin_orang_tua" accept=".pdf"
                                         class="hidden file-input" data-target="izin-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="surat_izin_orang_tua">
@@ -301,9 +274,9 @@
                             </div>
                             <!-- Proposal Magang Upload -->
                             <div>
-                                <label for="proposal_magang" class="block text-sm font-medium text-gray-700 mb-1">Proposal Magang</label>
+                                <label for="Proposal_Magang" class="block text-sm font-medium text-gray-700 mb-1">Proposal Magang</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="proposal_magang" id="proposal_magang" accept=".pdf"
+                                    <input type="file" name="Proposal_Magang" id="proposal_magang" accept=".pdf"
                                         class="hidden file-input" data-target="proposal-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="proposal_magang">
@@ -325,37 +298,13 @@
                             </div>
                             <!-- CV Upload -->
                             <div>
-                                <label for="cv" class="block text-sm font-medium text-gray-700 mb-1">CV</label>
+                                <label for="CV" class="block text-sm font-medium text-gray-700 mb-1">CV</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="cv" id="cv" accept=".pdf" class="hidden file-input"
+                                    <input type="file" name="CV" id="cv" accept=".pdf" class="hidden file-input"
                                         data-target="cv-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="cv">
                                         <div id="cv-preview" class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret & letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
-                                            </div>
-                                            <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Surat Tugas Upload -->
-                            <div>
-                                <label for="surat_tugas" class="block text-sm font-medium text-gray-700 mb-1">Surat Tugas</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="surat_tugas" id="surat_tugas" accept=".pdf"
-                                        class="hidden file-input" data-target="tugas-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
-                                        data-input="surat_tugas">
-                                        <div id="tugas-preview" class="file-preview flex flex-col items-center justify-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                                             </svg>
