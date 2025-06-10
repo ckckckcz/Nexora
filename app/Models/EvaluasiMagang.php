@@ -13,14 +13,13 @@ class EvaluasiMagang extends Model
     protected $fillable = [
         'id_bimbingan_magang',
         'komentar',
-        'id_log_aktivitas',
+        'id_log_aktifitas',
     ];
 
     public function bimbinganMagang() {
         return $this->belongsTo(BimbinganMagang::class, 'id_bimbingan_magang','id_bimbingan');
     }
-
     public function logAktivitas() {
-        return $this->belongsTo(LogAktivitasMagang::class, 'id_log_aktivitas','id_log_aktivitas');
+        return $this->belongsTo(LogAktivitasMagang::class, 'id_log_aktifitas','id_log_aktifitas');
     }
 }

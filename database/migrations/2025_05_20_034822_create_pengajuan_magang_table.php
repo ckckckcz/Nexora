@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('Proposal_Magang', 100);
             $table->string('CV', 255);
             $table->string('Surat_Tugas', 100)->nullable();
+            $table->text('alasan_penolakan')->nullable();
             $table->timestamps();
 
             $table->foreign('id_lowongan')->references('id_lowongan')->on('lowongan_magang');

@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('evaluasi_magang', function (Blueprint $table) {
             $table->id('id_evaluasi');
             $table->unsignedBigInteger('id_bimbingan_magang');
+            $table->unsignedBigInteger('id_log_aktifitas');
             $table->text('komentar');
             $table->timestamps();
 
             $table->foreign('id_bimbingan_magang')->references('id_bimbingan')->on('bimbingan_magang');
+            $table->foreign('id_log_aktifitas')->references('id_log_aktifitas')->on('log_aktivitas_magang');
         });
     }
 

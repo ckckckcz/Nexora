@@ -7,14 +7,15 @@
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
-                <form action="/dosen/log-aktivitas/evaluate" method="POST" class="flex flex-col gap-6">
+                <form action="/dosen/mahasiswa/log-aktivitas/tambah/{{$evaluasi->id_log_aktifitas}}" method="POST" class="flex flex-col gap-6">
+                    {{ method_field('POST') }}
                     @csrf
                     <!-- Text Area for Evaluation -->
                     <div class="flex flex-col gap-2">
                         <label for="evaluation" class="text-sm font-medium text-gray-700">Catatan Evaluasi</label>
                         <textarea id="evaluation" name="evaluation"
                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
-                            placeholder="Masukkan Catatan Evaluasi" required rows="5"></textarea>
+                            placeholder="Masukkan Catatan Evaluasi" required rows="5">{{ old('komentar', $evaluasi->komentar) }}</textarea>
                         @error('evaluation')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror

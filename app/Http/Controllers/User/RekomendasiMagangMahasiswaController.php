@@ -24,6 +24,22 @@ class RekomendasiMagangMahasiswaController extends Controller
         $statusGaji = LowonganMagang::select('status_gaji')->distinct()->get();
         $fleksibilitasKerja = LowonganMagang::select('fleksibilitas_kerja')->distinct()->get();
 
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->username)->first();
+
+        if (
+            empty($mahasiswa->nama_mahasiswa) ||
+            empty($mahasiswa->deskripsi) ||
+            empty($mahasiswa->lokasi) ||
+            empty($mahasiswa->nomor_telepon) ||
+            empty($mahasiswa->linkedin) ||
+            empty($mahasiswa->twitter) ||
+            empty($mahasiswa->github) ||
+            empty($mahasiswa->instagram) ||
+            empty($mahasiswa->profile_mahasiswa)
+        ) {
+            return redirect()->to('profile/'.auth()->user()->username)->with('error', 'Harap lengkapi profil Anda terlebih dahulu.');
+        }
+
         return view('user.rekomendasi_magang', compact('bidangKeahlian', 'tipePerusahaan', 'fasilitasPerusahaan', 'statusGaji', 'fleksibilitasKerja'));
     }
 

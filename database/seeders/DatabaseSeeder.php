@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
             PosisiMagangSeeder::class,
             LowonganMagangSeeder::class,
             BimbinganMagangSeeder::class,
+            LogAktivitasMagangSeeder::class,
             EvaluasiMagangSeeder::class,
             PengajuanMagangSeeder::class,
             KriteriaSeeder::class,
             FeedbackMagangSeeder::class,
-            LogAktivitasMagangSeeder::class,
         ]);
     }
 }

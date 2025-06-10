@@ -140,7 +140,7 @@
                             
                             <div class="border-l-4 border-[#DEFC79] pl-3 sm:pl-4">
                                 <h3 class="font-semibold text-gray-800 text-xs sm:text-sm">Skema Magang</h3>
-                                <p class="text-gray-700 mt-1 text-sm sm:text-base break-words">{{ $lowongan->skemaMagang->nama_skema ?? 'Tidak ada' }}</p>
+                                <p class="text-gray-700 mt-1 text-sm sm:text-base break-words">{{ strtoupper($lowongan->skemaMagang->nama_skema_magang) ?? 'Tidak ada' }}</p>
                             </div>
                         </div>
                     </div>
@@ -179,11 +179,19 @@
                     <div class="bg-gradient-to-r cursor-pointer from-blue-900 to-blue-800 rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 text-center">
                         <h3 class="text-white font-bold mb-2 text-sm sm:text-base">Tertarik dengan lowongan ini?</h3>
                         <p class="text-blue-100 text-xs sm:text-sm mb-4">Daftar sekarang dan mulai perjalanan magang Anda!</p>
-                        <a href="/" class="cursor-pointer">
+                        @auth
+                            <a href="/unggah-dokumen" class="cursor-pointer">
+                                <button class="w-full bg-[#DEFC79] cursor-pointer text-blue-900 font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-[#d4f066] transition duration-200 shadow-md text-sm sm:text-base">
+                                    Daftar Sekarang
+                                </button>
+                            </a>
+                        @else
+                        <a href="/login" class="cursor-pointer">
                             <button class="w-full bg-[#DEFC79] cursor-pointer text-blue-900 font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-[#d4f066] transition duration-200 shadow-md text-sm sm:text-base">
                                 Daftar Sekarang
                             </button>
                         </a>
+                        @endif
                     </div>
                 </div>
             </div>

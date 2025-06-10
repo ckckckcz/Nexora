@@ -104,7 +104,7 @@
                                         </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div class="flex gap-2">
-                                                <a href="/dosen/mahasiswa/log-aktivitas/tambah">
+                                                <a href="/dosen/mahasiswa/log-aktivitas/tambah/{{ $log->id_log_aktifitas }}">
                                                     <button
                                                         class="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">
                                                         Evaluasi
@@ -201,7 +201,7 @@
                                             {{ $eval->bimbinganMagang->mahasiswa->nama_mahasiswa ?? 'Nama tidak tersedia' }}
                                         </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">
-                                            {{ isset($eval->logAktivitas) ? date('d-m-Y', strtotime($eval->logAktivitas->tanggal)) : 'Tidak tersedia' }}
+                                            {{ isset($eval->logAktivitas->tanggal) ? date('d-m-Y', strtotime($eval->logAktivitas->tanggal)) : 'Tidak tersedia' }}
                                         </td>
                                         <td class="px-4 sm:px-6 py-4 text-sm text-gray-900">
                                             <div class="max-w-xs md:max-w-md lg:max-w-lg overflow-hidden">

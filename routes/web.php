@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\LowonganMagangController;
 use App\Http\Controllers\Admin\PengajuanMagangController;
-use App\Http\Controllers\Admin\PenilaianLowonganController;
 use App\Http\Controllers\Admin\PosisiMagangController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\ProfileDosenController;
@@ -19,23 +18,22 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dosen\DosenDashboardController;
 use App\Http\Controllers\Dosen\BimbinganMagangDosenController;
-use App\Http\Controllers\Dosen\ProfileMahasiswaDosenController;
-use App\Http\Controllers\Dosen\LogAktivitasMagangController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\RekomendasiController;
 use App\Http\Controllers\User\DetailLowonganController;
 use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\RekomendasiMagangMahasiswaController;
 use App\Http\Controllers\User\UnggahDokumenController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Testing\SMCController;
-use App\Http\Controllers\User\LowonganMagangMahasiswaController;
 use App\Http\Controllers\Dosen\RekomendasiMagangDosenController;
 
 Route::get('/', [DashboardController::class, 'index']);
-Route::get('/dosen/dashboard', [DosenDashboardController::class, 'index']);
 
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'postlogin']);
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+// PROFILE MAHASISWA
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/{nim}', [ProfileController::class, 'index'])->name('user.profile');
     Route::middleware('auth')->group(function () {
@@ -44,48 +42,44 @@ Route::group(['prefix' => 'profile'], function () {
     });
 });
 
-// PENGAJUAN MAGANG
-Route::group(['prefix' => 'admin/pengajuan-magang'], function () {
-    Route::get('/', [PengajuanMagangController::class, 'index'])->name('admin.pengajuan-magang');
-    Route::get('/edit/{id}', [PengajuanMagangController::class, 'edit']);
-    Route::put('/edit/{id}', [PengajuanMagangController::class, 'update']);
-});
-
-
-
-Route::get('/dosen/magang/bimbingan-magang', [BimbinganMagangDosenController::class, 'index'])->name('dosen.bimbingan-magang');
-
-Route::get('/dosen/magang/bimbingan-magang/chat', function () {
-    return view('dosen.bimbingan_magang.chat');
-});
-Route::get('/dosen/magang/rekomendasi-magang', [RekomendasiMagangDosenController::class, 'index'])->name('dosen.rekomendasi_magang');
-Route::get('/dosen/magang/rekomendasi-magang/profile/{nim}', [RekomendasiMagangDosenController::class, 'showProfile'])->name('dosen.mahasiswa.profile');
-Route::get('/dosen/mahasiswa/log-aktivitas', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'index'])->name('dosen.log-aktivitas');
-Route::get('/dosen/mahasiswa/profile', [App\Http\Controllers\Dosen\ProfileMahasiswaDosenController::class, 'index']);
-
+// DETAIL LOWONGAN
 Route::group(['prefix' => 'detail-lowongan'], function () {
     Route::get('/', [DetailLowonganController::class, 'index']);
     Route::get('/{id}', [DetailLowonganController::class, 'view'])->name('user.detail-lowongan.view');
 });
 
-
-
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'postlogin']);
-Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
-
 Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
+    // LOG AKTIVITAS
     Route::get('/log-aktivitas', [LogAktivitasController::class, 'create']);
     Route::post('/log-aktivitas/store', [LogAktivitasController::class, 'store']);
 
+    // UNGGAH DOKUMEN
     Route::get('/unggah-dokumen', [UnggahDokumenController::class, 'createOrUpdate']);
     Route::post('/unggah-dokumen', [UnggahDokumenController::class, 'storeOrUpdate']);
     Route::get('/unggah-dokumen-perusahaan', function () {
         return view('user.unggah_dokumen_perusahaan');
     });
+
+    // REKOMENDASI MAGANG
+    Route::get('/rekomendasi-magang', [RekomendasiMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');
+    Route::post('/rekomendasi-magang/tambah', [RekomendasiMagangMahasiswaController::class, 'store'])->name('user.rekomendasi-magang.store');
+    Route::get('/rekomendasi-magang/hasil', [RekomendasiMagangMahasiswaController::class, 'hasil'])->name('user.rekomendasi-magang.hasil');
+
+    //DOWNLOAD TEMPLATE
+    Route::get('/download/template/{file}', [App\Http\Controllers\User\TemplateController::class, 'download'])->name('download.template');
+
+    // PENGAJUAN MAGANG
+    Route::group(['prefix' => 'admin/pengajuan-magang'], function () {
+        Route::get('/', [PengajuanMagangController::class, 'index'])->name('admin.pengajuan-magang');
+        Route::get('/edit/{id}', [PengajuanMagangController::class, 'edit']);
+        Route::put('/edit/{id}', [PengajuanMagangController::class, 'update']);
+    });
 });
 
-Route::middleware(['auth', 'role:dosen'])->group(function () {
+Route::middleware(['auth', 'authorize:dosen'])->group(function () {
+    Route::get('/dosen/dashboard', [DosenDashboardController::class, 'index']);
+    
+    // PROFILE DOSEN
     Route::get('/dosen/profile', [App\Http\Controllers\Dosen\ProfileDosenController::class, 'index'])->name('dosen.profile');
     Route::put('/dosen/profile/update', [App\Http\Controllers\Dosen\ProfileDosenController::class, 'update'])->name('dosen.profile.update');
     
@@ -93,12 +87,27 @@ Route::middleware(['auth', 'role:dosen'])->group(function () {
     Route::post('/chat/send', [ChatController::class, 'sendMessage']);
     Route::get('/chat/messages', [ChatController::class, 'getMessages']);
     
-    // Add route for evaluation submission
-    Route::post('/dosen/log-aktivitas/evaluate', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'saveEvaluation']);
-});
+    // EVALUASI DOSEN
+    Route::get('/dosen/mahasiswa/log-aktivitas/tambah/{id}', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'create']);
+    Route::post('/dosen/mahasiswa/log-aktivitas/tambah/{id}', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'update']);
 
-// Allow guest access to dosen profile with NIDN parameter
-Route::get('/dosen/profile', [App\Http\Controllers\Dosen\ProfileDosenController::class, 'index'])->name('dosen.profile');
+    // BIMBINGAN MAGANG
+    Route::get('/dosen/magang/bimbingan-magang', [BimbinganMagangDosenController::class, 'index'])->name('dosen.bimbingan-magang');
+    Route::get('/dosen/magang/bimbingan-magang/chat', function () {
+        return view('dosen.bimbingan_magang.chat');
+    });
+
+    // REKOMENDASI MAGANG
+    Route::get('/dosen/magang/rekomendasi-magang', [RekomendasiMagangDosenController::class, 'index'])->name('dosen.rekomendasi_magang');
+    Route::get('/dosen/magang/rekomendasi-magang/profile/{nim}', [RekomendasiMagangDosenController::class, 'showProfile'])->name('dosen.mahasiswa.profile');
+
+    // LOG AKTIVITAS
+    Route::get('/dosen/mahasiswa/log-aktivitas', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'index'])->name('dosen.log-aktivitas');
+
+    // PROFILE MAHASISWA
+    Route::get('/dosen/mahasiswa/profile', [App\Http\Controllers\Dosen\ProfileMahasiswaDosenController::class, 'index']);
+
+});
 
 Route::middleware(['auth', 'authorize:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
@@ -226,26 +235,3 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
     });
 
 });
-
-
-// YANG BARU DISINI
-
-// POV ADMINT
-
-// POV USER
-Route::get('/rekomendasi-magang', [RekomendasiMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');
-Route::post('/rekomendasi-magang/tambah', [RekomendasiMagangMahasiswaController::class, 'store'])->name('user.rekomendasi-magang.store');
-Route::get('/rekomendasi-magang/hasil', [RekomendasiMagangMahasiswaController::class, 'hasil'])->name('user.rekomendasi-magang.hasil');
-
-
-Route::get('/unggah-dokumen', function () {
-    return view('user.function.unggah_dokumen');
-});
-Route::get('/dosen/mahasiswa/log-aktivitas/tambah', function () {
-    return view('dosen.functions.log_aktivitas.tambah');
-});
-
-// Add this route to the middleware auth group or where appropriate
-Route::get('/download/template/{file}', [App\Http\Controllers\User\TemplateController::class, 'download'])->name('download.template');
-
-

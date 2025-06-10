@@ -32,70 +32,43 @@ class LogAktivitasMagangController extends Controller
         $evaluasi = EvaluasiMagang::whereIn('id_bimbingan_magang', $bimbinganIds)
             ->with(['bimbinganMagang.mahasiswa', 'logAktivitas'])
             ->get();
+        // dd($evaluasi);
+        // dd($evaluasi->pluck('logAktivitas.tanggal'));
 
         return view('dosen.log_aktivitas', compact('logAktivitas', 'evaluasi'));
     }
+
+    public function create($id) {
+        $evaluasi = EvaluasiMagang::where('id_log_aktifitas',$id)->first();
+        // dd($evaluasi);
+        return view('dosen.functions.log_aktivitas.tambah', compact('evaluasi'));
+    }
     
-    /**
-     * Save evaluation for a log activity
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function saveEvaluation(Request $request)
+
+    public function update(Request $request, String     $id)
     {
+        $logAktivitas = LogAktivitasMagang::where('id_log_aktifitas', $id)->first();
         // Validate request data
         $validator = Validator::make($request->all(), [
-            'log_id' => 'required|exists:log_aktivitas_magang,id_log_aktivitas',
             'evaluation' => 'required|string|max:500',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors()
-            ], 422);
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
-        
-        try {
-            // Get the log activity
-            $logAktivitas = LogAktivitasMagang::findOrFail($request->log_id);
-            
-            // Check if the dosen has permission to evaluate this log
-            $dosenId = Auth::user()->dosen->id_dosen;
-            $bimbingan = BimbinganMagang::where('id_bimbingan', $logAktivitas->id_bimbingan)
-                                       ->where('id_dosen', $dosenId)
-                                       ->first();
-            
-            if (!$bimbingan) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Anda tidak memiliki akses untuk mengevaluasi log aktivitas ini'
-                ], 403);
-            }
-            
-            // Create or update the evaluation
-            $evaluasi = EvaluasiMagang::updateOrCreate(
-                ['id_log_aktivitas' => $request->log_id],
-                [
-                    'id_bimbingan_magang' => $logAktivitas->id_bimbingan,
-                    'komentar' => $request->evaluation,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]
-            );
-            
-            return response()->json([
-                'success' => true,
-                'message' => 'Evaluasi berhasil disimpan',
-                'data' => $evaluasi
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
-            ], 500);
-        }
+
+        // Update the log activity
+        EvaluasiMagang::updateOrCreate(
+        ['id_log_aktifitas' => $id],
+        [
+            'id_bimbingan_magang' => $logAktivitas->id_bimbingan,
+            'komentar' => $request->evaluation,
+            'updated_at' => now(),
+        ]
+        );
+
+        return redirect()->to('dosen/mahasiswa/log-aktivitas')->with('success', 'Log aktivitas berhasil diperbarui.');
     }
 }

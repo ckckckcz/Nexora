@@ -226,7 +226,7 @@
 
                                 <div>
                                     <h4 class="text-xs text-gray-500">Location</h4>
-                                    <p class="text-sm text-gray-900 font-medium">{{ $mahasiswa->nomor_telepon }}</p>
+                                    <p class="text-sm text-gray-900 font-medium">{{ $mahasiswa->lokasi }}</p>
                                 </div>
 
                                 <div class="pt-2">

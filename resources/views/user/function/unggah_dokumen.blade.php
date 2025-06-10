@@ -132,9 +132,9 @@
                             <select name="id_lowongan" id="id_lowongan"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
                                 <option value="">Pilih Lowongan</option>
-                                {{-- @foreach ($lowongan as $item)
+                                @foreach ($lowongan as $item)
                                     <option value="{{ $item->id_lowongan }}">{{ $item->nama_perusahaan }}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                         </div>
                     </div>
