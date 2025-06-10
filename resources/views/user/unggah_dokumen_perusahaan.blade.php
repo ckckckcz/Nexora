@@ -9,7 +9,7 @@
                         <a href="/unggah-dokumen" class="inline-block py-2 px-4 text-gray-600 hover:text-blue-900">Unggah Dokumen</a>
                     </li>
                     <li class="mr-1">
-                        <a href="/unggah-dokumen-perusahaan" class="inline-block py-2 px-4 text-blue-900 font-semibold border-b-2 border-blue-900">Unggah Dokumen + Bio Data Perusahaan</a>
+                        <a href="/unggah-dokumen-perusahaan" class="inline-block py-2 px-4 text-blue-900 font-semibold border-b-2 border-blue-900">Unggah Dokumen + Magang Mandiri</a>
                     </li>
                 </ul>
             </div>
@@ -27,6 +27,86 @@
                 </div>
             </div>
 
+            <div class="mb-8 p-5 bg-blue-50 rounded-xl border border-blue-100">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                    <span class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                        </svg>
+                        Template Dokumen
+                    </span>
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">Download template dokumen berikut untuk memudahkan proses pengajuan magang Anda:</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex flex-col">
+                        <div class="flex items-start mb-3">
+                            <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800">Riwayat Hidup</h4>
+                                <p class="text-xs text-gray-500 mt-1">Format Doc (100 KB)</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('download.template', ['file' => 'riwayat-hidup']) }}" class="mt-auto">
+                            <button type="button" class="w-full bg-blue-900 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download Template
+                            </button>
+                        </a>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex flex-col">
+                        <div class="flex items-start mb-3">
+                            <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800">Izin Orang Tua</h4>
+                                <p class="text-xs text-gray-500 mt-1">Format Docs (85 KB)</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('download.template', ['file' => 'izin-ortu']) }}" class="mt-auto">
+                            <button type="button" class="w-full bg-blue-900 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download Template
+                            </button>
+                        </a>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex flex-col">
+                        <div class="flex items-start mb-3">
+                            <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800">Pakta Integritas</h4>
+                                <p class="text-xs text-gray-500 mt-1">Format Docs (120 KB)</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('download.template', ['file' => 'pakta-integritas']) }}" class="mt-auto">
+                            <button type="button" class="w-full bg-blue-900 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download Template
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                
             <form action="" method="POST" enctype="multipart/form-data" class="space-y-8">
                 @csrf
                 <!-- Basic Information Section -->
@@ -34,54 +114,14 @@
                     <h3 class="text-lg font-semibold text-gray-800 border-l-4 border-blue-900 rounded-sm pl-3">
                         Informasi Dasar
                     </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="grid gap-6">
                         <!-- ID Mahasiswa -->
-                        <div class="relative">
+                        <div class="relative w-full">
                             <label for="id_mahasiswa" class="block text-sm font-medium text-gray-700 mb-1">
                                 Nama Mahasiswa <span class="text-red-500">*</span>
                             </label>
-                            <input type="number" name="id_mahasiswa" id="id_mahasiswa" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400">
-                        </div>
-                        <!-- Jenis Magang Selection -->
-                        <div class="relative">
-                            <label for="jenis_magang" class="block text-sm font-medium text-gray-700 mb-1">
-                                Jenis Magang <span class="text-red-500">*</span>
-                            </label>
-                            <select id="jenis_magang" name="jenis_magang" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
-                                <option value="">Pilih Jenis Magang</option>
-                                <option value="mandiri">Magang Mandiri</option>
-                                <option value="rekomendasi">Magang Rekomendasi</option>
-                            </select>
-                        </div>
-                        <!-- ID Lowongan -->
-                        <div class="relative">
-                            <label for="id_lowongan" class="block text-sm font-medium text-gray-700 mb-1">
-                                ID Lowongan <span class="text-red-500">*</span>
-                            </label>
-                            <input type="number" name="id_lowongan" id="id_lowongan" disabled
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400 disabled:bg-gray-100 disabled:text-gray-500"
-                                placeholder="Pilih jenis magang terlebih dahulu">
-                        </div>
-                        <!-- Status Pengajuan -->
-                        <div>
-                            <label for="status_pengajuan" class="block text-sm font-medium text-gray-700 mb-1">
-                                Status Pengajuan <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <select name="status_pengajuan" id="status_pengajuan" required
-                                    class="appearance-none w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
-                                    <option value="menunggu">Menunggu</option>
-                                    <option value="diterima">Diterima</option>
-                                    <option value="ditolak">Ditolak</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
+                            <input type="text" name="id_mahasiswa" id="id_mahasiswa" 
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400" value="{{ Auth::user()->mahasiswa->nama_mahasiswa }}"" disabled>
                         </div>
                     </div>
                 </div>
@@ -90,40 +130,230 @@
                         Informasi Magang
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Nama Perusahaan -->
+                        <div class="flex flex-col gap-2">
+                        <label for="nama_perusahaan"
+                            class="text-sm font-medium text-gray-700 transition-colors duration-200">Nama Perusahaan</label>
+                        <input type="text" id="nama_perusahaan" name="nama_perusahaan"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
+                            placeholder="Masukkan Nama Perusahaan" required maxlength="50">
+                        @error('nama_perusahaan')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Skema Magang -->
+                    <div class="flex flex-col gap-2">
+                        <label for="id_skema_magang"
+                            class="text-sm font-medium text-gray-700 transition-colors duration-200">Skema Magang</label>
                         <div class="relative">
-                            <label for="id_mahasiswa" class="block text-sm font-medium text-gray-700 mb-1">
-                                Nama Perusahaan <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" name="id_mahasiswa" id="id_mahasiswa" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400">
-                        </div>
-                        <!-- Skema Magang Selection -->
-                        <div class="relative">
-                            <label for="jenis_magang" class="block text-sm font-medium text-gray-700 mb-1">
-                                Skema Magang <span class="text-red-500">*</span>
-                            </label>
-                            <select id="jenis_magang" name="jenis_magang" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800">
-                                <option value="">Pilih Skema Magang</option>
-                                <option value="mandiri">Magang Mandiri</option>
+                            <select id="id_skema_magang" name="id_skema_magang"
+                                class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
+                                required>
+                                <option value="" disabled selected>Pilih Skema Magang</option>
+                                <!-- Dynamic options to be populated from Skema Magang table -->
+                                @foreach($skemaMagangs as $skema)
+                                    <option value="{{ $skema->id_skema_magang }}">{{ strtoupper($skema->nama_skema_magang) }}</option>
+                                @endforeach
                             </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4 transition-transform duration-200"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
                         </div>
-                        <!-- Nama Perusahaan -->
+                        @error('id_skema_magang')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Posisi Magang -->
+                    <div class="flex flex-col gap-2">
+                        <label for="id_posisi_magang"
+                            class="text-sm font-medium text-gray-700 transition-colors duration-200">Posisi Magang</label>
                         <div class="relative">
-                            <label for="posisi_magang" class="block text-sm font-medium text-gray-700 mb-1">
-                                Posisi Magang  <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" name="posisi_magang" id="posisi_magang" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400">
+                            <select id="id_posisi_magang" name="id_posisi_magang"
+                                class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
+                                required>
+                                <option value="" disabled selected>Pilih Posisi Magang</option>
+                                <!-- Dynamic options to be populated from Posisi Magang table -->
+                                @foreach($posisiMagangs as $posisi)
+                                    <option value="{{ $posisi->id_posisi_magang }}">{{ $posisi->nama_posisi }}</option>
+                                @endforeach
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4 transition-transform duration-200"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
                         </div>
-                        <!-- Nama Perusahaan -->
-                        <div class="relative">
-                            <label for="lokasi_magang" class="block text-sm font-medium text-gray-700 mb-1">
-                                Lokasi Magang  <span class="text-red-500">*</span>
+                        @error('id_posisi_magang')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="tipe_perusahaan" class="text-sm font-medium text-gray-700">Tipe Perusahaan</label>
+                        <select id="tipe_perusahaan" name="tipe_perusahaan"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            required>
+                            <option value="" disabled selected>Pilih Tipe Perusahaan</option>
+                            <option value="BUMN">BUMN</option>
+                            <option value="PT">PT</option>
+                            <option value="CV">CV</option>
+                            <option value="startup">Startup</option>
+                        </select>
+                        @error('tipe_perusahaan')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Deskripsi -->
+                    <div class="flex flex-col gap-2">
+                        <label for="deskripsi"
+                            class="text-sm font-medium text-gray-700 transition-colors duration-200">Deskripsi</label>
+                        <textarea id="deskripsi" name="deskripsi"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
+                            placeholder="Masukkan Deskripsi Lowongan" required rows="5"></textarea>
+                        @error('deskripsi')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Bidang Keahlian -->
+                    <div class="flex flex-col gap-2 w-full">
+                        <label for="bidang_keahlian"
+                            class="text-sm font-medium text-gray-700 transition-colors duration-200">Bidang Keahlian</label>
+                        <textarea id="bidang_keahlian" name="bidang_keahlian"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
+                            placeholder="Masukkan Bidang Keahlian" required rows="5"></textarea>
+                        @error('bidang_keahlian')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>  
+
+                    <!-- Lokasi -->
+                    <div class="flex flex-col gap-2 col-span-1 sm:col-span-2">
+                        <label for="lokasi"
+                            class="text-sm font-medium text-gray-700 transition-colors duration-200">Lokasi</label>
+                        <input type="text" id="lokasi" name="lokasi"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200"
+                            placeholder="Masukkan Lokasi (contoh: Jakarta)" required maxlength="100">
+                        @error('lokasi')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Status Gaji -->
+                    <div class="flex flex-col gap-2">
+                        <label for="status_gaji" class="text-sm font-medium text-gray-700">Status Gaji</label>
+                        <select id="status_gaji" name="status_gaji"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            required>
+                            <option value="" disabled selected>Pilih Status Gaji</option>
+                            <option value="dibayar">Gaji</option>
+                            <option value="tidak dibayar">Tidak Di Gaji</option>
+                        </select>
+                        @error('status_gaji')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Fleksibilitas Kerja -->
+                    <div class="flex flex-col gap-2">
+                        <label for="fleksibilitas_kerja" class="text-sm font-medium text-gray-700">Fleksibilitas Kerja</label>
+                        <select id="fleksibilitas_kerja" name="fleksibilitas_kerja"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            required>
+                            <option value="" disabled selected>Pilih Fleksibilitas Kerja</option>
+                            <option value="remote">Remote</option>
+                            <option value="onsite">Onsite</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                        @error('fleksibilitas_kerja')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Fasilitas Perusahaan -->
+                    <div class="flex flex-col w-full gap-2 col-span-1 sm:col-span-2">
+                        <label for="fasilitas_perusahaan" class="text-sm font-medium text-gray-700">Fasilitas Perusahaan</label>
+                        <textarea id="fasilitas_perusahaan" name="fasilitas_perusahaan"
+                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            placeholder="Masukkan Fasilitas Perusahaan" rows="3"></textarea>
+                        @error('fasilitas_perusahaan')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <h3 class="text-lg font-semibold text-gray-800 border-l-4 border-blue-900 rounded-sm pl-3">
+                        Informasi Keterseidiaan Lowongan
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="flex flex-col gap-2">
+                            <label for="status_lowongan"
+                                class="text-sm font-medium text-gray-700 transition-colors duration-200">Status Lowongan</label>
+                            <div class="relative">
+                                <select id="status_lowongan" name="status_lowongan"
+                                    class="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm transition-colors duration-200 bg-white cursor-pointer"
+                                    required>
+                                    <option value="" disabled selected>Pilih Status</option>
+                                    <option value="open">Open</option>
+                                    <option value="close">Close</option>
+                                </select>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <svg class="fill-current h-4 w-4 transition-transform duration-200"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            @error('status_lowongan')
+                                <span class="text-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- Tanggal Pendaftaran & Penutupan (Sejajar) -->
+                    <div class="flex flex-col sm:flex-row gap-6 col-span-1 sm:col-span-2">
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="tanggal_pendaftaran" class="text-sm font-medium text-gray-700">Tanggal Pendaftaran</label>
+                            <input type="date" id="tanggal_pendaftaran" name="tanggal_pendaftaran"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                required>
+                            @error('tanggal_pendaftaran')
+                                <span class="text-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="tanggal_penutupan" class="text-sm font-medium text-gray-700">Tanggal Penutupan</label>
+                            <input type="date" id="tanggal_penutupan" name="tanggal_penutupan"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                required>
+                            @error('tanggal_penutupan')
+                                <span class="text-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-lg font-semibold text-gray-800 border-l-4 border-blue-900 rounded-sm pl-3">
+                        Informasi Dasar
+                    </h3>
+                    <div class="grid gap-6">
+                        <!-- ID Mahasiswa -->
+                        <div class="relative w-full">
+                            <label for="id_mahasiswa" class="block text-sm font-medium text-gray-700 mb-1">
+                                Nama Mahasiswa <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" name="lokasi_magang" id="lokasi_magang" required
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400">
+                            <input type="text" name="id_mahasiswa" id="id_mahasiswa" 
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400" value="{{ Auth::user()->mahasiswa->nama_mahasiswa }}"" disabled>
                         </div>
                     </div>
                 </div>
@@ -142,9 +372,9 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <!-- KTP Upload -->
                             <div>
-                                <label for="ktp" class="block text-sm font-medium text-gray-700 mb-1">KTP</label>
+                                <label for="KTP" class="block text-sm font-medium text-gray-700 mb-1">KTP</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="ktp" id="ktp" accept=".pdf,.jpg,.png,.jpeg"
+                                    <input type="file" name="KTP" id="ktp" accept=".pdf,.jpg,.png,.jpeg"
                                         class="hidden file-input" data-target="ktp-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="ktp">
@@ -166,9 +396,9 @@
                             </div>
                             <!-- KTM Upload -->
                             <div>
-                                <label for="ktm" class="block text-sm font-medium text-gray-700 mb-1">KTM</label>
+                                <label for="KTM" class="block text-sm font-medium text-gray-700 mb-1">KTM</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="ktm" id="ktm" accept=".pdf,.jpg,.png,.jpeg"
+                                    <input type="file" name="KTM" id="ktm" accept=".pdf,.jpg,.png,.jpeg"
                                         class="hidden file-input" data-target="ktm-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="ktm">
@@ -190,9 +420,9 @@
                             </div>
                             <!-- Kartu BPJS Upload -->
                             <div>
-                                <label for="kartu_bpjs" class="block text-sm font-medium text-gray-700 mb-1">Kartu BPJS/Asuransi Lainnya</label>
+                                <label for="Kartu_BPJS_Asuransi_lainnya" class="block text-sm font-medium text-gray-700 mb-1">Kartu BPJS/Asuransi Lainnya</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="kartu_bpjs" id="kartu_bpjs" accept=".pdf,.jpg,.png,.jpeg"
+                                    <input type="file" name="Kartu_BPJS_Asuransi_lainnya" id="kartu_bpjs" accept=".pdf,.jpg,.png,.jpeg"
                                         class="hidden file-input" data-target="bpjs-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="kartu_bpjs">
@@ -214,9 +444,9 @@
                             </div>
                             <!-- SKTM/KIP Kuliah Upload -->
                             <div>
-                                <label for="sktm_kip" class="block text-sm font-medium text-gray-700 mb-1">SKTM/KIP Kuliah</label>
+                                <label for="SKTM_KIP_Kuliah" class="block text-sm font-medium text-gray-700 mb-1">SKTM/KIP Kuliah</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="sktm_kip" id="sktm_kip" accept=".pdf,.jpg,.png,.jpeg"
+                                    <input type="file" name="SKTM_KIP_Kuliah" id="sktm_kip" accept=".pdf,.jpg,.png,.jpeg"
                                         class="hidden file-input" data-target="sktm-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="sktm_kip">
@@ -247,9 +477,9 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <!-- Pakta Integritas Upload -->
                             <div>
-                                <label for="pakta_integritas" class="block text-sm font-medium text-gray-700 mb-1">Pakta Integritas</label>
+                                <label for="Pakta_Integritas" class="block text-sm font-medium text-gray-700 mb-1">Pakta Integritas</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="pakta_integritas" id="pakta_integritas" accept=".pdf"
+                                    <input type="file" name="Pakta_Integritas" id="pakta_integritas" accept=".pdf"
                                         class="hidden file-input" data-target="pakta-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="pakta_integritas">
@@ -271,9 +501,9 @@
                             </div>
                             <!-- Daftar Riwayat Hidup Upload -->
                             <div>
-                                <label for="daftar_riwayat_hidup" class="block text-sm font-medium text-gray-700 mb-1">Daftar Riwayat Hidup</label>
+                                <label for="Daftar_Riwayat_Hidup" class="block text-sm font-medium text-gray-700 mb-1">Daftar Riwayat Hidup</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="daftar_riwayat_hidup" id="daftar_riwayat_hidup" accept=".pdf"
+                                    <input type="file" name="Daftar_Riwayat_Hidup" id="daftar_riwayat_hidup" accept=".pdf"
                                         class="hidden file-input" data-target="riwayat-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="daftar_riwayat_hidup">
@@ -295,9 +525,9 @@
                             </div>
                             <!-- KHS/Cetak Siakad Upload -->
                             <div>
-                                <label for="khs" class="block text-sm font-medium text-gray-700 mb-1">KHS/Cetak Siakad</label>
+                                <label for="KHS_cetak_Siakad" class="block text-sm font-medium text-gray-700 mb-1">KHS/Cetak Siakad</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="khs" id="khs" accept=".pdf" class="hidden file-input"
+                                    <input type="file" name="KHS_cetak_Siakad" id="khs" accept=".pdf" class="hidden file-input"
                                         data-target="khs-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="khs">
@@ -319,9 +549,9 @@
                             </div>
                             <!-- Surat Izin Orang Tua Upload -->
                             <div>
-                                <label for="surat_izin_orang_tua" class="block text-sm font-medium text-gray-700 mb-1">Surat Izin Orang Tua</label>
+                                <label for="Surat_Izin_Orang_Tua" class="block text-sm font-medium text-gray-700 mb-1">Surat Izin Orang Tua</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="surat_izin_orang_tua" id="surat_izin_orang_tua" accept=".pdf"
+                                    <input type="file" name="Surat_Izin_Orang_Tua" id="surat_izin_orang_tua" accept=".pdf"
                                         class="hidden file-input" data-target="izin-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="surat_izin_orang_tua">
@@ -343,9 +573,9 @@
                             </div>
                             <!-- Proposal Magang Upload -->
                             <div>
-                                <label for="proposal_magang" class="block text-sm font-medium text-gray-700 mb-1">Proposal Magang</label>
+                                <label for="Proposal_Magang" class="block text-sm font-medium text-gray-700 mb-1">Proposal Magang</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="proposal_magang" id="proposal_magang" accept=".pdf"
+                                    <input type="file" name="Proposal_Magang" id="proposal_magang" accept=".pdf"
                                         class="hidden file-input" data-target="proposal-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="proposal_magang">
@@ -367,37 +597,13 @@
                             </div>
                             <!-- CV Upload -->
                             <div>
-                                <label for="cv" class="block text-sm font-medium text-gray-700 mb-1">CV</label>
+                                <label for="CV" class="block text-sm font-medium text-gray-700 mb-1">CV</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="cv" id="cv" accept=".pdf" class="hidden file-input"
+                                    <input type="file" name="CV" id="cv" accept=".pdf" class="hidden file-input"
                                         data-target="cv-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
                                         data-input="cv">
                                         <div id="cv-preview" class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret & letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
-                                            </div>
-                                            <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Surat Tugas Upload -->
-                            <div>
-                                <label for="surat_tugas" class="block text-sm font-medium text-gray-700 mb-1">Surat Tugas</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="surat_tugas" id="surat_tugas" accept=".pdf"
-                                        class="hidden file-input" data-target="tugas-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors file-drop-area"
-                                        data-input="surat_tugas">
-                                        <div id="tugas-preview" class="file-preview flex flex-col items-center justify-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                                             </svg>

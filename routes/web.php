@@ -56,9 +56,9 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
     // UNGGAH DOKUMEN
     Route::get('/unggah-dokumen', [UnggahDokumenController::class, 'createOrUpdate']);
     Route::post('/unggah-dokumen', [UnggahDokumenController::class, 'storeOrUpdate']);
-    Route::get('/unggah-dokumen-perusahaan', function () {
-        return view('user.unggah_dokumen_perusahaan');
-    });
+    Route::get('/unggah-dokumen-perusahaan', [UnggahDokumenController::class, 'createOrUpdateWithLowongan']);
+    Route::post('/unggah-dokumen-perusahaan', [UnggahDokumenController::class, 'storeOrUpdateWithLowongan']);
+
 
     // REKOMENDASI MAGANG
     Route::get('/rekomendasi-magang', [RekomendasiMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');

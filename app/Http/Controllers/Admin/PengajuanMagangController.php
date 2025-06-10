@@ -63,41 +63,40 @@ class PengajuanMagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $pengajuan = PengajuanMagang::findOrFail($id);
+
         $validator = Validator::make($request->all(), [
-            'nama_perusahaan' => 'required|string',
-            'id_skema_magang' => 'required|exists:skema_magang,id_skema_magang',
-            'id_posisi_magang' => 'required|exists:posisi_magang,id_posisi_magang',
-            'deskripsi' => 'required|min:10',
-            'lokasi' => 'required|string',
-            'bidang_keahlian' => 'required|string',
-            'status_lowongan' => 'required',
+            'status_pengajuan' => 'required|in:menunggu,diterima,ditolak',
+            'alasan_penolakan' => 'nullable|string|max:1000',
+            'surat_tugas' => 'nullable|file|mimes:pdf|max:51200', // 50MB
         ], [
-            'nama_perusahaan.required' => 'Nama Perusahaan Harus Diisi',
-            'id_skema_magang.required' => 'Skema Magang Harus Diisi',
-            'id_posisi_magang.required' => 'Posisi Magang Harus Diisi',
-            'deskripsi.required' => 'Deskripsi Harus Diisi',
-            'lokasi.required' => 'Lokasi Harus Diisi',
-            'bidang_keahlian.required' => 'Bidang Harus Diisi',
-            'status_lowongan.required' => 'Status Harus Diisi', 
+            'status_pengajuan.required' => 'Status pengajuan harus diisi.',
+            'status_pengajuan.in' => 'Status pengajuan tidak valid.',
+            'alasan_penolakan.max' => 'Alasan penolakan tidak boleh lebih dari 1000 karakter.',
+            'surat_tugas.mimes' => 'Surat tugas harus berformat PDF.',
+            'surat_tugas.max' => 'Surat tugas tidak boleh lebih dari 50MB.',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        
-        LowonganMagang::find($id)->update([
-            'nama_perusahaan' => $request->nama_perusahaan,
-            'id_skema_magang' => $request->id_skema_magang,
-            'id_posisi_magang' => $request->id_posisi_magang,
-            'deskripsi' => $request->deskripsi,
-            'lokasi' => $request->lokasi,
-            'bidang_keahlian' => $request->bidang_keahlian,
-            'status_lowongan' => $request->status_lowongan,
-        ]);
 
-        return redirect()->route('admin.lowongan-magang')->with('success', 'Lowongan Magang berhasil diperbarui');
+        $data = [
+            'status_pengajuan' => $request->status_pengajuan,
+            'alasan_penolakan' => $request->status_pengajuan === 'ditolak' ? $request->alasan_penolakan : null,
+        ];
+
+        if ($request->hasFile('surat_tugas')) {
+            // Delete old file if exists
+            if ($pengajuan->surat_tugas && Storage::exists($pengajuan->surat_tugas)) {
+                Storage::delete($pengajuan->surat_tugas);
+            }
+            $data['surat_tugas'] = $request->file('surat_tugas')->store('surat_tugas', 'public');
+        }
+
+        $pengajuan->update($data);
+
+        return redirect()->route('admin.pengajuan-magang')->with('success', 'Pengajuan magang berhasil diperbarui.');
     }
 
     /**

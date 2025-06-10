@@ -389,6 +389,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <h1>{{$pengajuan->CV}}</h1>
+
+                            <iframe src="{{Storage::url($pengajuan->CV)}}" width="100%" height="600px" class="border-0"></iframe>
 
                             <!-- Surat Tugas Upload -->
                             <div>
@@ -560,36 +563,6 @@
             });
         });
 
-        // Function to remove a file
-        function removeFile(inputId, previewId) {
-            const input = document.getElementById(inputId);
-            const preview = document.getElementById(previewId);
-            const dropArea = document.querySelector(`.file-drop-area[data-input="${inputId}"]`);
-
-            // Clear the file input
-            input.value = '';
-
-            // Reset the preview
-            const accept = input.accept.includes('.pdf') ? 'Format PDF, maks 50MB' : 'Format JPEG, PNG, PDF, maks 50MB';
-            preview.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                            </svg>
-                            <div>
-                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret & letakkan di sini</p>
-                                <p class="text-xs text-gray-500 mt-1">${accept}</p>
-                            </div>
-                            <button type="button" class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                Pilih File
-                            </button>
-                        `;
-
-            // Reset the drop area styling
-            if (dropArea) {
-                dropArea.classList.remove('bg-blue-50', 'border-blue-300');
-                dropArea.classList.add('border-gray-300');
-            }
-        }
 
         // Update the file preview function
         function updateFilePreview(file, previewElement, input) {
