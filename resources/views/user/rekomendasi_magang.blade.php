@@ -114,27 +114,32 @@
                         @endforeach
                     </div>
                     
-                    <div class="space-y-8">
-                        <div class="grid grid-cols-1 gap-4">
+                    <div class="space-y-8 mt-8">
+                        <div class="lg:grid lg:grid-cols-2 grid grid-cols-1 gap-4">
                             @foreach ($kriterias as $kriteria)
                             <div class="mb-4">
-                                <label for="nilai_{{ $kriteria->id_kriteria }}" class="block text-sm font-medium text-gray-700">
+                                <label for="nilai_{{ $kriteria->id_kriteria }}" class="block text-sm font-medium text-gray-700 mb-2">
                                     {{ $kriteria->nama_kriteria }}
                                 </label>
                                 <input type="hidden" name="id_kriteria[]" value="{{ $kriteria->id_kriteria }}">
-                                <input 
-                                    type="number" 
-                                    name="nilai[]" 
-                                    id="nilai_{{ $kriteria->id }}" 
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    required
-                                    step="0.01"
-                                    min="0"
-                                    max="100"
-                                    placeholder="Masukkan nilai (0-100)"
-                                >
+                                <div class="relative">
+                                    <input 
+                                        type="number" 
+                                        name="nilai[]" 
+                                        id="nilai_{{ $kriteria->id }}" 
+                                        class="block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-900 focus:border-blue-950 text-gray-900 sm:text-sm p-3"
+                                        required
+                                        step="0.01"
+                                        min="0"
+                                        max="100"
+                                        placeholder="Masukkan nilai (0-100)"
+                                    >
+                                    <span class="absolute inset-y-0 right-4 flex items-center text-gray-400">
+                                        %
+                                    </span>
+                                </div>
                                 @error('nilai.' . $loop->index)
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             @endforeach
