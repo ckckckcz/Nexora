@@ -108,6 +108,9 @@ Route::middleware(['auth', 'authorize:dosen'])->group(function () {
     Route::get('/dosen/mahasiswa/profile', [App\Http\Controllers\Dosen\ProfileMahasiswaDosenController::class, 'index']);
 
     Route::post('/dosen/rekomendasi-magang/recommend/{mahasiswaId}', [RekomendasiMagangDosenController::class, 'recommendStudent'])->name('dosen.rekomendasi.recommend');
+
+    Route::get('/dosen/laporan-log', [App\Http\Controllers\Dosen\LaporanController::class, 'index']);
+    Route::get('/dosen/export-log/{id}',[App\Http\Controllers\Dosen\LaporanController::class, 'exportLog']);
 });
 
 Route::middleware(['auth', 'authorize:admin'])->group(function () {
