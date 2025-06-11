@@ -6,7 +6,7 @@
     <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
     
     <div class="p-8 md:p-12 lg:p-16 h-full flex flex-col relative z-10">
-        <div class="mb-8 transform transition duration-500">
+        {{-- <div class="mb-8 transform transition duration-500">
             <h2 class="text-3xl font-bold inline-block bg-[#c9eb5b] bg-opacity-70 px-3 py-1 rounded-lg shadow-sm">Selamat Datang di</h2>
             <h2 class="text-3xl font-bold inline-block ml-2">Nexora</h2>
             <p class="text-gray-700 mt-3 max-w-md">Welcome to the Nexora: Your Comprehensive Resource for Educational Excellence</p>
@@ -66,7 +66,7 @@
                 </svg>
                 122 Monique Valley Suite 714, Carterville
             </div>
-        </div>
+        </div> --}}
         
         <div class="mt-auto">
             <div class="flex justify-between items-center mb-4">
