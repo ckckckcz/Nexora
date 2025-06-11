@@ -1,5 +1,8 @@
 @extends('layouts.spk')
 @section('spk')
+    <!-- Include Toast Display Component -->
+    @include('components.ui.toast.toast_display')
+
     <div class="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 flex items-center justify-center py-12 px-4 sm:px-6">
         <div class="bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 w-full max-w-6xl shadow-xl transition-all duration-300">
             <!-- Tab Navigation -->

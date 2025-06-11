@@ -23,7 +23,10 @@ class UnggahDokumenController extends Controller
         if ($pengajuan) {
             if ($pengajuan->status_pengajuan !== 'ditolak' && $existingPengajuan) {
                 // User can update the documents
-                return redirect()->to('profile/'. auth()->user()->username)->with('error', 'Anda sudah mengajukan magang dan tidak dapat mengakses halaman ini.');
+                return redirect()->to('profile/'. auth()->user()->username)->with('toast', [
+                    'type' => 'warning',
+                    'message' => 'Anda sudah mengajukan magang dan tidak dapat mengakses halaman ini.'
+                ]);
             }
         }
         
@@ -51,7 +54,10 @@ class UnggahDokumenController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput()->with('toast', [
+                'type' => 'danger',
+                'message' => 'Terjadi kesalahan validasi. Periksa format dan ukuran file Anda.'
+            ]);
         }
 
         $username = auth()->user()->username;
@@ -137,13 +143,19 @@ class UnggahDokumenController extends Controller
 
         if ($pengajuan) {
             $pengajuan->update($data);
-            return redirect()->back()->with('success', 'Dokumen berhasil diperbarui.');
+            return redirect()->back()->with('toast', [
+                'type' => 'success',
+                'message' => 'Dokumen berhasil diperbarui.'
+            ]);
         } else {
             $data['id_mahasiswa'] = $id_mahasiswa;
             $data['id_lowongan'] = $id_lowongan;
             $data['status_pengajuan'] = 'menunggu';
             PengajuanMagang::create($data);
-            return redirect()->back()->with('success', 'Dokumen berhasil diunggah.');
+            return redirect()->back()->with('toast', [
+                'type' => 'success',
+                'message' => 'Dokumen berhasil diunggah.'
+            ]);
         }
     }
 
@@ -204,7 +216,10 @@ class UnggahDokumenController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput()->with('toast', [
+                'type' => 'danger',
+                'message' => 'Terjadi kesalahan validasi. Periksa kembali semua input Anda.'
+            ]);
         }
 
         LowonganMagang::create([
@@ -305,13 +320,19 @@ class UnggahDokumenController extends Controller
 
         if ($pengajuan) {
             $pengajuan->update($data);
-            return redirect()->back()->with('success', 'Dokumen berhasil diperbarui.');
+            return redirect()->back()->with('toast', [
+                'type' => 'success',
+                'message' => 'Dokumen dan lowongan magang berhasil diperbarui.'
+            ]);
         } else {
             $data['id_mahasiswa'] = $id_mahasiswa;
             $data['id_lowongan'] = $id_lowongan;
             $data['status_pengajuan'] = 'menunggu';
             PengajuanMagang::create($data);
-            return redirect()->back()->with('success', 'Dokumen berhasil diunggah.');
+            return redirect()->back()->with('toast', [
+                'type' => 'success',
+                'message' => 'Dokumen dan lowongan magang berhasil diunggah.'
+            ]);
         }
     }
 }

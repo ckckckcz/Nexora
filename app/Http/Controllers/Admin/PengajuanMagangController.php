@@ -54,23 +54,9 @@ class PengajuanMagangController extends Controller
         $pengajuan = PengajuanMagang::findOrFail($id);
         $lowongan = LowonganMagang::all();
         $mahasiswa = Mahasiswa::all();
-        
-        // Prepare file data for display
-        $files = [
-            'ktp' => $pengajuan->KTP,
-            'ktm' => $pengajuan->KTM,
-            'kartu_bpjs' => $pengajuan->Kartu_BPJS_Asuransi_lainnya,
-            'sktm_kip' => $pengajuan->SKTM_KIP_Kuliah,
-            'pakta_integritas' => $pengajuan->Pakta_Integritas,
-            'daftar_riwayat_hidup' => $pengajuan->Daftar_Riwayat_Hidup,
-            'khs' => $pengajuan->KHS_cetak_Siakad,
-            'surat_izin_orang_tua' => $pengajuan->Surat_Izin_Orang_Tua,
-            'proposal_magang' => $pengajuan->Proposal_Magang,
-            'cv' => $pengajuan->CV,
-            'surat_tugas' => $pengajuan->Surat_Tugas,
-        ];
+        // dd($pengajuan->KTP);
 
-        return view('admin.function.pengajuan_magang.edit', compact('lowongan', 'mahasiswa', 'pengajuan', 'files'));
+        return view('admin.function.pengajuan_magang.edit', compact('lowongan', 'mahasiswa', 'pengajuan'));
     }
 
     /**
@@ -83,13 +69,13 @@ class PengajuanMagangController extends Controller
         $validator = Validator::make($request->all(), [
             'status_pengajuan' => 'required|in:menunggu,diterima,ditolak',
             'alasan_penolakan' => 'nullable|string|max:1000',
-            'Surat_Tugas' => 'nullable|file|mimes:pdf|max:51200', // 50MB
+            'surat_tugas' => 'nullable|file|mimes:pdf|max:51200', // 50MB
         ], [
             'status_pengajuan.required' => 'Status pengajuan harus diisi.',
             'status_pengajuan.in' => 'Status pengajuan tidak valid.',
             'alasan_penolakan.max' => 'Alasan penolakan tidak boleh lebih dari 1000 karakter.',
-            'Surat_Tugas.mimes' => 'Surat tugas harus berformat PDF.',
-            'Surat_Tugas.max' => 'Surat tugas tidak boleh lebih dari 50MB.',
+            'surat_tugas.mimes' => 'Surat tugas harus berformat PDF.',
+            'surat_tugas.max' => 'Surat tugas tidak boleh lebih dari 50MB.',
         ]);
 
         if ($validator->fails()) {
@@ -101,12 +87,12 @@ class PengajuanMagangController extends Controller
             'alasan_penolakan' => $request->status_pengajuan === 'ditolak' ? $request->alasan_penolakan : null,
         ];
 
-        if ($request->hasFile('Surat_Tugas')) {
+        if ($request->hasFile('surat_tugas')) {
             // Delete old file if exists
-            if ($pengajuan->Surat_Tugas && Storage::exists($pengajuan->Surat_Tugas)) {
-                Storage::delete($pengajuan->Surat_Tugas);
+            if ($pengajuan->surat_tugas && Storage::exists($pengajuan->surat_tugas)) {
+                Storage::delete($pengajuan->surat_tugas);
             }
-            $data['Surat_Tugas'] = $request->file('Surat_Tugas')->store('surat_tugas', 'public');
+            $data['surat_tugas'] = $request->file('surat_tugas')->store('surat_tugas', 'public');
         }
 
         $pengajuan->update($data);

@@ -1,5 +1,8 @@
 @extends('layouts.user')
 @section('user')
+    <!-- Include Toast Display Component -->
+    @include('components.ui.toast.toast_display')
+
     <!-- Profile Header with Background Image -->
     <section
         class="w-full bg-center bg-no-repeat bg-cover bg-[url('https://i.ibb.co.com/1JrpYCGV/profiel-header.png')] h-64 relative">
