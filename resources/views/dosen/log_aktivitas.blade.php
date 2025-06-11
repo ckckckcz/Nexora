@@ -58,63 +58,40 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nama Mahasiswa
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
-                                    Minggu
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
-                                    Tanggal Pengumpulan
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">
-                                    Kegiatan
-                                </th>
-                                <th scope="col"
-                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Aksi
-                                </th>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Mahasiswa</th>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Kegiatan</th>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal Pengumpulan</th>
+                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="log-table-body" class="bg-white divide-y divide-gray-200">
-                            @if (empty($logAktivitas))
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($logAktivitas as $item)
                                 <tr>
-                                    <td colspan="6"
-                                        class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                        Tidak ada data log aktivitas mingguan.
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $item->bimbinganMagang->mahasiswa->nama_mahasiswa }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $item->kegiatan }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                        {{ $item->tanggal }}
+                                    </td>
+                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">
+                                        <div class="flex gap-2">
+                                            <a href="/dosen/mahasiswa/log-aktivitas/tambah/{{ $item->id_log_aktifitas }}">
+                                                <button
+                                                    class="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm mb-1">
+                                                    Evaluasi
+                                                </button>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
-                            @else
-                                @foreach ($logAktivitas as $log)
-                                    <tr data-log-id="{{ $log->id_log_aktivitas }}">
-                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $log->bimbinganMagang->mahasiswa->nama_mahasiswa }}
-                                        </td>
-                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden sm:table-cell">
-                                            Minggu ke-{{ $log->minggu }}</td>
-                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">
-                                            {{ date('d-m-Y', strtotime($log->tanggal)) }}
-                                        </td>
-                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">
-                                            {{ $log->kegiatan }}
-                                        </td>
-                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <div class="flex gap-2">
-                                                <a href="/dosen/mahasiswa/log-aktivitas/tambah/{{ $log->id_log_aktifitas }}">
-                                                    <button
-                                                        class="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">
-                                                        Evaluasi
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -177,6 +154,10 @@
                             <tr>
                                 <th scope="col"
                                     class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    No
+                                </th>
+                                <th scope="col"
+                                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Nama Mahasiswa
                                 </th>
                                 <th scope="col"
@@ -197,6 +178,9 @@
                             @if(isset($evaluasi) && $evaluasi->count() > 0)
                                 @foreach($evaluasi as $eval)
                                     <tr>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $loop->iteration }}
+                                        </td>
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $eval->bimbinganMagang->mahasiswa->nama_mahasiswa ?? 'Nama tidak tersedia' }}
                                         </td>

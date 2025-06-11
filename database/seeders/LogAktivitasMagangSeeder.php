@@ -22,6 +22,16 @@ class LogAktivitasMagangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'id_bimbingan' => 1,
+                'tanggal' => '2025-03-02',
+                'jam_masuk' => '08:00:00',
+                'jam_pulang' => '17:00:00',
+                'kegiatan' => 'Testing.',
+                'status_log' => 'diterima',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'id_bimbingan' => 2,
                 'tanggal' => '2025-02-05',
                 'jam_masuk' => '08:00:00',

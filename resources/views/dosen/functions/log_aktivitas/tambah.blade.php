@@ -8,7 +8,6 @@
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
             <div class="p-4 sm:p-6 flex flex-col gap-6">
                 <form action="/dosen/mahasiswa/log-aktivitas/tambah/{{$evaluasi->id_log_aktifitas}}" method="POST" class="flex flex-col gap-6">
-                    {{ method_field('POST') }}
                     @csrf
                     <!-- Text Area for Evaluation -->
                     <div class="flex flex-col gap-2">

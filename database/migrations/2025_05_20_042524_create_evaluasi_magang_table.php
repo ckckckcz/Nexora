@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_evaluasi');
             $table->unsignedBigInteger('id_bimbingan_magang');
             $table->unsignedBigInteger('id_log_aktifitas');
-            $table->text('komentar');
+            $table->text('komentar')->nullable();
             $table->timestamps();
 
             $table->foreign('id_bimbingan_magang')->references('id_bimbingan')->on('bimbingan_magang');

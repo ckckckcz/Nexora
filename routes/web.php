@@ -89,7 +89,7 @@ Route::middleware(['auth', 'authorize:dosen'])->group(function () {
     
     // EVALUASI DOSEN
     Route::get('/dosen/mahasiswa/log-aktivitas/tambah/{id}', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'create']);
-    Route::post('/dosen/mahasiswa/log-aktivitas/tambah/{id}', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'update']);
+    Route::post('/dosen/mahasiswa/log-aktivitas/tambah/{id}', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'createOrUpdate']);
 
     // BIMBINGAN MAGANG
     Route::get('/dosen/magang/bimbingan-magang', [BimbinganMagangDosenController::class, 'index'])->name('dosen.bimbingan-magang');
