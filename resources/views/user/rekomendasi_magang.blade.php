@@ -113,6 +113,33 @@
                             </div>
                         @endforeach
                     </div>
+                    
+                    <div class="space-y-8">
+                        <div class="grid grid-cols-1 gap-4">
+                            @foreach ($kriterias as $kriteria)
+                            <div class="mb-4">
+                                <label for="nilai_{{ $kriteria->id_kriteria }}" class="block text-sm font-medium text-gray-700">
+                                    {{ $kriteria->nama_kriteria }}
+                                </label>
+                                <input type="hidden" name="id_kriteria[]" value="{{ $kriteria->id_kriteria }}">
+                                <input 
+                                    type="number" 
+                                    name="nilai[]" 
+                                    id="nilai_{{ $kriteria->id }}" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    required
+                                    step="0.01"
+                                    min="0"
+                                    max="100"
+                                    placeholder="Masukkan nilai (0-100)"
+                                >
+                                @error('nilai.' . $loop->index)
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
 
                     <div class="mt-8 text-center">
                         <button

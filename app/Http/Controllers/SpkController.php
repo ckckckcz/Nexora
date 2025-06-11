@@ -63,8 +63,8 @@ class SpkController extends Controller
         return $normalized;
     }
 
-    public function scoreWmsc($normalized) {
-        $bobot = ['C1' => 0.4, 'C2' => 0.25, 'C3' => 0.1, 'C4' => 0.15, 'C5' => 0.1];
+    public function scoreWmsc($normalized, $bobot) {
+        // $bobot = ['C1' => 0.4, 'C2' => 0.25, 'C3' => 0.1, 'C4' => 0.15, 'C5' => 0.1];
         $n = count($normalized[0]);
         $wmsc_scores = [];
         foreach ($normalized as $index => $row) {
@@ -82,8 +82,8 @@ class SpkController extends Controller
         // $wmsc_scores);
         return $wmsc_scores;
     }    
-    public function hitungVIKOR($matriks, $v = 0.5) {
-        $bobot = ['C1' => 0.4, 'C2' => 0.25, 'C3' => 0.1, 'C4' => 0.15, 'C5' => 0.1];
+    public function hitungVIKOR($matriks, $bobot, $v = 0.5) {
+        // $bobot = ['C1' => 0.4, 'C2' => 0.25, 'C3' => 0.1, 'C4' => 0.15, 'C5' => 0.1];
         $n = count($matriks[0]);
         $max_values = [];
         $min_values = [];

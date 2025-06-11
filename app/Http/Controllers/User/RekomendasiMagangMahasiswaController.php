@@ -5,8 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SpkController;
 use App\Models\HasilRekomendasi;
+use App\Models\Kriteria;
 use App\Models\LowonganMagang;
 use App\Models\Mahasiswa;
+use App\Models\PembobotanKriteria;
 use App\Models\PreferensiMahasiswa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -18,6 +20,7 @@ class RekomendasiMagangMahasiswaController extends Controller
      */
     public function index()
     {
+        $kriterias = Kriteria::all();
         $bidangKeahlian = LowonganMagang::select('bidang_keahlian')->distinct()->get();
         $tipePerusahaan = LowonganMagang::select('tipe_perusahaan')->distinct()->get();
         $fasilitasPerusahaan = LowonganMagang::select('fasilitas_perusahaan')->distinct()->get();
@@ -26,21 +29,21 @@ class RekomendasiMagangMahasiswaController extends Controller
 
         $mahasiswa = Mahasiswa::where('nim', auth()->user()->username)->first();
 
-        if (
-            empty($mahasiswa->nama_mahasiswa) ||
-            empty($mahasiswa->deskripsi) ||
-            empty($mahasiswa->lokasi) ||
-            empty($mahasiswa->nomor_telepon) ||
-            empty($mahasiswa->linkedin) ||
-            empty($mahasiswa->twitter) ||
-            empty($mahasiswa->github) ||
-            empty($mahasiswa->instagram) ||
-            empty($mahasiswa->profile_mahasiswa)
-        ) {
-            return redirect()->to('profile/'.auth()->user()->username)->with('error', 'Harap lengkapi profil Anda terlebih dahulu.');
-        }
+        // if (
+        //     empty($mahasiswa->nama_mahasiswa) ||
+        //     empty($mahasiswa->deskripsi) ||
+        //     empty($mahasiswa->lokasi) ||
+        //     empty($mahasiswa->nomor_telepon) ||
+        //     empty($mahasiswa->linkedin) ||
+        //     empty($mahasiswa->twitter) ||
+        //     empty($mahasiswa->github) ||
+        //     empty($mahasiswa->instagram) ||
+        //     empty($mahasiswa->profile_mahasiswa)
+        // ) {
+        //     return redirect()->to('profile/'.auth()->user()->username)->with('error', 'Harap lengkapi profil Anda terlebih dahulu.');
+        // }
 
-        return view('user.rekomendasi_magang', compact('bidangKeahlian', 'tipePerusahaan', 'fasilitasPerusahaan', 'statusGaji', 'fleksibilitasKerja'));
+        return view('user.rekomendasi_magang', compact('bidangKeahlian', 'tipePerusahaan', 'fasilitasPerusahaan', 'statusGaji', 'fleksibilitasKerja', 'kriterias'));
     }
 
     /**
@@ -66,13 +69,17 @@ class RekomendasiMagangMahasiswaController extends Controller
      * Store a new preferensi mahasiswa.
      */
     public function store(Request $request)
-    {
+    {        
         $request->validate([
             'Bidang_Keahlian' => 'nullable|array',
             'Tipe_Perusahaan' => 'nullable|string',
             'Fasilitas_Perusahaan' => 'nullable|array',
             'Status_Gaji' => 'nullable|string',
             'Fleksibilitas_Kerja' => 'nullable|string',
+            'id_kriteria' => 'required|array',
+            'id_kriteria.*' => 'required|integer',
+            'nilai' => 'required|array',
+            'nilai.*' => 'required|numeric',
         ]);
 
         $preferensi = [
@@ -85,13 +92,36 @@ class RekomendasiMagangMahasiswaController extends Controller
 
         $mahasiswaId = Mahasiswa::where('nim', auth()->user()->username)->first();
 
+        $id_kriteria = $request->input('id_kriteria');
+        $nilai = $request->input('nilai');
+
+        foreach ($id_kriteria as $key => $kriteriaId) {
+            PembobotanKriteria::updateOrCreate(
+                [
+                    'id_mahasiswa' => $mahasiswaId->id_mahasiswa,
+                    'id_kriteria' => $kriteriaId,
+                ],
+                [
+                    'id_mahasiswa' => $mahasiswaId->id_mahasiswa,
+                    'id_kriteria' => $kriteriaId,
+                    'nilai' => $nilai[$key],
+                ]
+            );
+        }
+
+        $bobot = PembobotanKriteria::select('nilai')->where('id_mahasiswa', $mahasiswaId->id_mahasiswa);
+
+        foreach ($bobot->get() as $item) {
+            $bobotArray[] = $item->nilai / 100;
+        }
+
         $spk = new SpkController();
 
         $matriks = $spk->matriksPerbandingan($preferensi);
         $normalisasi = $spk->normalisasiWmsc($matriks);
-        $wmscScore = $spk->scoreWmsc($normalisasi);
+        $wmscScore = $spk->scoreWmsc($normalisasi, $bobotArray);
         $filtered = $spk->filterWmsc($wmscScore, $matriks);
-        $vikor = $spk->hitungVIKOR($filtered[0]);
+        $vikor = $spk->hitungVIKOR($filtered[0], $bobotArray);
         $output = $spk->ValidasiAkhir($vikor, $wmscScore, $filtered[0]);
 
         PreferensiMahasiswa::updateOrCreate(
@@ -135,7 +165,5 @@ class RekomendasiMagangMahasiswaController extends Controller
 
         return view('user.hasil_rekomendasi', compact('hasilRekomendasi'));
     }
-
-
     
 }
