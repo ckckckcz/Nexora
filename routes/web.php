@@ -107,6 +107,7 @@ Route::middleware(['auth', 'authorize:dosen'])->group(function () {
     // PROFILE MAHASISWA
     Route::get('/dosen/mahasiswa/profile', [App\Http\Controllers\Dosen\ProfileMahasiswaDosenController::class, 'index']);
 
+    Route::post('/dosen/rekomendasi-magang/recommend/{mahasiswaId}', [RekomendasiMagangDosenController::class, 'recommendStudent'])->name('dosen.rekomendasi.recommend');
 });
 
 Route::middleware(['auth', 'authorize:admin'])->group(function () {

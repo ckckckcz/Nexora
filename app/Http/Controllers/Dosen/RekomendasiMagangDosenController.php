@@ -5,33 +5,37 @@ namespace App\Http\Controllers\Dosen;
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\BimbinganMagang;
+use App\Models\HasilRekomendasi;
 use Illuminate\Http\Request;
 
 class RekomendasiMagangDosenController extends Controller
 {
     public function index()
     {
-        // Get mahasiswa data with proper relationships
-        $mahasiswas = BimbinganMagang::with('mahasiswa')
-            ->where('id_dosen', auth()->user()->dosen->id_dosen)
+        // Get student IDs that are under this lecturer's guidance
+        $mahasiswaIds = BimbinganMagang::where('id_dosen', auth()->user()->dosen->id_dosen)
+            ->pluck('id_mahasiswa')
+            ->toArray();
+
+        // Get recommendation results for those students - filter only ranking 1
+        $mahasiswas = HasilRekomendasi::with(['mahasiswa', 'lowongan'])
+            ->whereIn('id_mahasiswa', $mahasiswaIds)
+            ->where('ranking', 1) // Only show rank 1 recommendations
             ->get()
-            ->pluck('mahasiswa')
-            ->filter() // Remove null values
-            ->unique('id_mahasiswa')
-            ->map(function ($mahasiswa) {
+            ->map(function ($hasil) {
                 return [
-                    'id' => $mahasiswa->id_mahasiswa,           // Map id_mahasiswa to id
-                    'name' => $mahasiswa->nama_mahasiswa,       // Map nama_mahasiswa to name
-                    'nim' => $mahasiswa->nim,                   // Keep nim as is
-                    'jurusan' => $mahasiswa->jurusan,          // Additional fields
-                    'jenis_kelamin' => $mahasiswa->jenis_kelamin,
-                    'status' => 'Direkomendasikan',             // Default status
-                    'vikor' => rand(1, 100) / 100,            // Mock data for demo
-                    'ranking' => rand(1, 10),                  // Mock data for demo
-                    'company' => 'PT. Example Corp',           // Mock data for demo
+                    'id' => $hasil->mahasiswa->id_mahasiswa,
+                    'name' => $hasil->mahasiswa->nama_mahasiswa,
+                    'nim' => $hasil->mahasiswa->nim,
+                    'jurusan' => $hasil->mahasiswa->jurusan,
+                    'jenis_kelamin' => $hasil->mahasiswa->jenis_kelamin,
+                    'status' => $hasil->rekomendasi_dosen ?? 'Direkomendasikan',
+                    'vikor' => number_format($hasil->wmsc, 3),
+                    'ranking' => $hasil->ranking,
+                    'company' => $hasil->lowongan->nama_perusahaan,
+                    'hasil_rekomendasi' => $hasil, // Include full recommendation data
                 ];
-            })
-            ->values(); // Reset array keys
+            });
 
         return view('dosen.rekomendasi_magang', compact('mahasiswas'));
     }
@@ -43,6 +47,70 @@ class RekomendasiMagangDosenController extends Controller
         $mahasiswa = Mahasiswa::where('nim', $nim)->firstOrFail();
         
         return view('dosen.detail_profile_mahasiswa', compact('mahasiswa'));
+    }
+
+    public function getRecommendationData($mahasiswaId)
+    {
+        // Check if this student is under the current lecturer's guidance
+        $isUnderGuidance = BimbinganMagang::where('id_dosen', auth()->user()->dosen->id_dosen)
+            ->where('id_mahasiswa', $mahasiswaId)
+            ->exists();
+
+        if (!$isUnderGuidance) {
+            return response()->json(['error' => 'Anda tidak memiliki akses ke data mahasiswa ini'], 403);
+        }
+
+        $recommendation = HasilRekomendasi::with(['mahasiswa', 'lowongan'])
+            ->where('id_mahasiswa', $mahasiswaId)
+            ->first();
+
+        if (!$recommendation) {
+            return response()->json(['error' => 'Data rekomendasi tidak ditemukan'], 404);
+        }
+
+        return response()->json([
+            'id_hasil_rekomendasi' => $recommendation->id_hasil_rekomendasi,
+            'id_mahasiswa' => $recommendation->id_mahasiswa,
+            'id_lowongan' => $recommendation->id_lowongan,
+            'wmsc' => number_format($recommendation->wmsc, 3),
+            'qi' => number_format($recommendation->qi, 3),
+            'ranking' => $recommendation->ranking,
+            'rekomendasi_dosen' => $recommendation->rekomendasi_dosen,
+            'nama_mahasiswa' => $recommendation->mahasiswa->nama_mahasiswa,
+            'nim' => $recommendation->mahasiswa->nim,
+            'nama_perusahaan' => $recommendation->lowongan->nama_perusahaan,
+        ]);
+    }
+
+    public function updateRecommendation(Request $request, $mahasiswaId)
+    {
+        $request->validate([
+            'rekomendasi_dosen' => 'required|in:Direkomendasikan,Tidak Direkomendasikan'
+        ]);
+
+        // Check if this student is under the current lecturer's guidance
+        $isUnderGuidance = BimbinganMagang::where('id_dosen', auth()->user()->dosen->id_dosen)
+            ->where('id_mahasiswa', $mahasiswaId)
+            ->exists();
+
+        if (!$isUnderGuidance) {
+            return response()->json(['error' => 'Anda tidak memiliki akses ke data mahasiswa ini'], 403);
+        }
+
+        $recommendation = HasilRekomendasi::where('id_mahasiswa', $mahasiswaId)->first();
+
+        if (!$recommendation) {
+            return response()->json(['error' => 'Data rekomendasi tidak ditemukan'], 404);
+        }
+
+        $recommendation->update([
+            'rekomendasi_dosen' => $request->rekomendasi_dosen
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Rekomendasi berhasil diperbarui'
+        ]);
     }
 
     // Alternative method using Eloquent accessors

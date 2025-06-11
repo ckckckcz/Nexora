@@ -1,5 +1,8 @@
 @extends('layouts.dosen')
 @section('dosen')
+    <!-- Include Toast Display Component -->
+    @include('components.ui.toast.toast_display')
+
     <html lang="en">
 
     <head>
@@ -20,11 +23,23 @@
 
             // Komponen untuk dropdown status rekomendasi
             const StatusDropdown = ({ initialStatus, onChange }) => {
+                // Convert integer to text for display
+                const getStatusText = (value) => {
+                    if (value === 1 || value === "1") return "Direkomendasikan";
+                    if (value === 0 || value === "0") return "Tidak Direkomendasikan";
+                    return value; // fallback for existing text values
+                };
+
+                // Convert text to integer for storage
+                const getStatusValue = (text) => {
+                    return text === "Direkomendasikan" ? 1 : 0;
+                };
+
                 return (
                     <select
                         className="border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                        value={initialStatus}
-                        onChange={(e) => onChange(e.target.value)}
+                        value={getStatusText(initialStatus)}
+                        onChange={(e) => onChange(getStatusValue(e.target.value))}
                     >
                         <option value="Direkomendasikan">Direkomendasikan</option>
                         <option value="Tidak Direkomendasikan">Tidak Direkomendasikan</option>
@@ -35,6 +50,18 @@
             // Komponen untuk modal detail mahasiswa
             const DetailModal = ({ student, onClose, onStatusChange, onSave }) => {
                 const [tempStatus, setTempStatus] = useState(student.status);
+
+                // Convert integer to text for display
+                const getStatusText = (value) => {
+                    if (value === 1 || value === "1") return "Direkomendasikan";
+                    if (value === 0 || value === "0") return "Tidak Direkomendasikan";
+                    return value; // fallback
+                };
+
+                // Convert text to integer for storage
+                const getStatusValue = (text) => {
+                    return text === "Direkomendasikan" ? 1 : 0;
+                };
 
                 return (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -47,10 +74,14 @@
                                 <p><strong className="text-gray-700">Perusahaan:</strong> {student.company}</p>
                                 <div className="flex items-center space-x-2">
                                     <strong className="text-gray-700">Status:</strong>
-                                    <StatusDropdown
-                                        initialStatus={tempStatus}
-                                        onChange={setTempStatus}
-                                    />
+                                    <select
+                                        className="border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                        value={getStatusText(tempStatus)}
+                                        onChange={(e) => setTempStatus(getStatusValue(e.target.value))}
+                                    >
+                                        <option value="Direkomendasikan">Direkomendasikan</option>
+                                        <option value="Tidak Direkomendasikan">Tidak Direkomendasikan</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="mt-4 flex justify-end space-x-2">
@@ -241,6 +272,169 @@
             // Render aplikasi
             const root = ReactDOM.createRoot(document.getElementById('root'));
             root.render(<App />);
+        </script>
+
+        <!-- Recommendation Data Modal -->
+        <div id="recommendation-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+            <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="w-full">
+                                <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Data Rekomendasi Mahasiswa</h3>
+                                    <div class="space-y-3">
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">Nama Mahasiswa:</p>
+                                                <p id="modal-nama" class="text-sm text-gray-900 font-semibold"></p>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">NIM:</p>
+                                                <p id="modal-nim" class="text-sm text-gray-900"></p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-700">Perusahaan:</p>
+                                            <p id="modal-perusahaan" class="text-sm text-gray-900"></p>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">Nilai Vikor:</p>
+                                                <p id="modal-vikor" class="text-sm text-gray-900 font-mono"></p>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">Ranking:</p>
+                                                <p id="modal-ranking" class="text-sm text-gray-900 font-semibold"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">WMSC:</p>
+                                                <p id="modal-wmsc" class="text-sm text-gray-900 font-mono"></p>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">QI:</p>
+                                                <p id="modal-qi" class="text-sm text-gray-900 font-mono"></p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="modal-status" class="block text-sm font-medium text-gray-700 mb-1">Status:</label>
+                                            <select id="modal-status" name="rekomendasi_dosen" 
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                                <option value="1">Direkomendasikan</option>
+                                                <option value="0">Tidak Direkomendasikan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button type="button" id="save-recommendation" 
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                            Simpan
+                        </button>
+                        <button type="button" id="close-recommendation-modal"
+                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let currentMahasiswaId = null;
+
+            function showRecommendationModal(mahasiswaId) {
+                currentMahasiswaId = mahasiswaId;
+                
+                // Fetch recommendation data
+                fetch(`/dosen/rekomendasi-magang/data/${mahasiswaId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert('Data tidak ditemukan');
+                            return;
+                        }
+
+                        // Populate modal with data
+                        document.getElementById('modal-nama').textContent = data.nama_mahasiswa;
+                        document.getElementById('modal-nim').textContent = data.nim;
+                        document.getElementById('modal-perusahaan').textContent = data.nama_perusahaan;
+                        document.getElementById('modal-vikor').textContent = data.qi;
+                        document.getElementById('modal-ranking').textContent = data.ranking;
+                        document.getElementById('modal-wmsc').textContent = data.wmsc;
+                        document.getElementById('modal-qi').textContent = data.qi;
+                        document.getElementById('modal-status').value = data.rekomendasi_dosen || 'Direkomendasikan';
+
+                        // Show modal
+                        document.getElementById('recommendation-modal').classList.remove('hidden');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat mengambil data');
+                    });
+            }
+
+            // Close modal
+            document.getElementById('close-recommendation-modal').addEventListener('click', function() {
+                document.getElementById('recommendation-modal').classList.add('hidden');
+            });
+
+            // Save recommendation
+            document.getElementById('save-recommendation').addEventListener('click', function() {
+                if (!currentMahasiswaId) return;
+
+                const statusText = document.getElementById('modal-status').value;
+                const statusValue = statusText === 'Direkomendasikan' ? 1 : 0;
+                
+                fetch(`/dosen/rekomendasi-magang/update/${currentMahasiswaId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        rekomendasi_dosen: statusValue
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Close modal
+                        document.getElementById('recommendation-modal').classList.add('hidden');
+                        
+                        // Show success message
+                        alert('Rekomendasi berhasil diperbarui');
+                        
+                        // Reload page to see updated data
+                        location.reload();
+                    } else {
+                        alert('Terjadi kesalahan saat menyimpan data');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menyimpan data');
+                });
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('recommendation-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('hidden');
+                }
+            });
         </script>
     </body>
 
