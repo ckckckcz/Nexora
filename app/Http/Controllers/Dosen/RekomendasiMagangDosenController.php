@@ -30,6 +30,7 @@ class RekomendasiMagangDosenController extends Controller
                     'jurusan' => $hasil->mahasiswa->jurusan,
                     'jenis_kelamin' => $hasil->mahasiswa->jenis_kelamin,
                     'status' => $hasil->rekomendasi_dosen ?? 'Direkomendasikan',
+                    'rekomendasi_dosen' => $hasil->rekomendasi_dosen ?? 0, // Add this field for button logic
                     'vikor' => number_format($hasil->wmsc, 3),
                     'ranking' => $hasil->ranking,
                     'company' => $hasil->lowongan->nama_perusahaan,
@@ -38,6 +39,42 @@ class RekomendasiMagangDosenController extends Controller
             });
 
         return view('dosen.rekomendasi_magang', compact('mahasiswas'));
+    }
+
+    // New method to handle recommendation action (0 -> 1)
+    public function recommendStudent($mahasiswaId)
+    {
+        // Check if this student is under the current lecturer's guidance
+        $isUnderGuidance = BimbinganMagang::where('id_dosen', auth()->user()->dosen->id_dosen)
+            ->where('id_mahasiswa', $mahasiswaId)
+            ->exists();
+
+        if (!$isUnderGuidance) {
+            return response()->json(['error' => 'Anda tidak memiliki akses ke data mahasiswa ini'], 403);
+        }
+
+        $recommendation = HasilRekomendasi::where('id_mahasiswa', $mahasiswaId)
+            ->where('ranking', 1) // Only update rank 1 recommendation
+            ->first();
+
+        if (!$recommendation) {
+            return response()->json(['error' => 'Data rekomendasi tidak ditemukan'], 404);
+        }
+
+        // Check if already recommended
+        if ($recommendation->rekomendasi_dosen == 1) {
+            return response()->json(['error' => 'Mahasiswa sudah direkomendasikan'], 400);
+        }
+
+        // Update recommendation status from 0 to 1
+        $recommendation->update([
+            'rekomendasi_dosen' => 1
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Mahasiswa berhasil direkomendasikan'
+        ]);
     }
     
     // New method to show student profile details
@@ -85,7 +122,7 @@ class RekomendasiMagangDosenController extends Controller
     public function updateRecommendation(Request $request, $mahasiswaId)
     {
         $request->validate([
-            'rekomendasi_dosen' => 'required|in:Direkomendasikan,Tidak Direkomendasikan'
+            'rekomendasi_dosen' => 'required|in:0,1'
         ]);
 
         // Check if this student is under the current lecturer's guidance
