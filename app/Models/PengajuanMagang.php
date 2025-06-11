@@ -14,6 +14,7 @@ class PengajuanMagang extends Model
         'id_mahasiswa',
         'id_lowongan',
         'status_pengajuan',
+        'alasan_penolakan',
         'Pakta_Integritas',
         'Daftar_Riwayat_Hidup',
         'KHS_cetak_Siakad',

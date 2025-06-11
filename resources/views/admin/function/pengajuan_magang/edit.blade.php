@@ -70,6 +70,17 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Alasan Penolakan -->
+                    <div id="alasan-penolakan-container" class="relative" style="display: none;">
+                        <label for="alasan_penolakan" class="block text-sm font-medium text-gray-700 mb-1">
+                            Alasan Penolakan <span class="text-red-500">*</span>
+                        </label>
+                        <textarea name="alasan_penolakan" id="alasan_penolakan" rows="4"
+                            class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 placeholder-gray-400"
+                            placeholder="Masukkan alasan penolakan pengajuan magang...">{{ old('alasan_penolakan', $pengajuan->alasan_penolakan) }}</textarea>
+                        <p class="text-xs text-gray-500 mt-1">Maksimal 1000 karakter</p>
+                    </div>
                 </div>
 
                 <!-- Documents Section -->
@@ -84,121 +95,168 @@
                             Dokumen Identitas
                         </h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            <!-- KTP Upload -->
+                            <!-- KTP Display -->
                             <div>
-                                <label for="ktp" class="block text-sm font-medium text-gray-700 mb-1">KTP</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="ktp" id="ktp" accept=".pdf,.jpg,.png,.jpeg"
-                                        class="hidden file-input" data-target="ktp-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="ktp">
-                                        <div id="ktp-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format JPEG, PNG, PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">KTP</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['ktp'])
+                                        @php
+                                            $fileName = basename($files['ktp']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                @if(in_array(strtolower($fileExt), ['jpg', 'jpeg', 'png']))
+                                                    <svg class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                @else
+                                                    <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                    </svg>
+                                                @endif
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['ktp']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
 
-                            <!-- KTM Upload -->
+                            <!-- KTM Display -->
                             <div>
-                                <label for="ktm" class="block text-sm font-medium text-gray-700 mb-1">KTM</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="ktm" id="ktm" accept=".pdf,.jpg,.png,.jpeg"
-                                        class="hidden file-input" data-target="ktm-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="ktm">
-                                        <div id="ktm-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format JPEG, PNG, PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">KTM</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['ktm'])
+                                        @php
+                                            $fileName = basename($files['ktm']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                @if(in_array(strtolower($fileExt), ['jpg', 'jpeg', 'png']))
+                                                    <svg class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                @else
+                                                    <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                    </svg>
+                                                @endif
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['ktm']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
 
-                            <!-- Kartu BPJS Upload -->
+                            <!-- Kartu BPJS Display -->
                             <div>
-                                <label for="kartu_bpjs" class="block text-sm font-medium text-gray-700 mb-1">Kartu
-                                    BPJS/Asuransi Lainnya</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="kartu_bpjs" id="kartu_bpjs" accept=".pdf,.jpg,.png,.jpeg"
-                                        class="hidden file-input" data-target="bpjs-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="kartu_bpjs">
-                                        <div id="bpjs-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format JPEG, PNG, PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Kartu BPJS/Asuransi
+                                    Lainnya</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['kartu_bpjs'])
+                                        @php
+                                            $fileName = basename($files['kartu_bpjs']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                @if(in_array(strtolower($fileExt), ['jpg', 'jpeg', 'png']))
+                                                    <svg class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                @else
+                                                    <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                    </svg>
+                                                @endif
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['kartu_bpjs']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
 
-                            <!-- SKTM/KIP Kuliah Upload -->
+                            <!-- SKTM/KIP Kuliah Display -->
                             <div>
-                                <label for="sktm_kip" class="block text-sm font-medium text-gray-700 mb-1">SKTM/KIP
-                                    Kuliah</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="sktm_kip" id="sktm_kip" accept=".pdf,.jpg,.png,.jpeg"
-                                        class="hidden file-input" data-target="sktm-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="sktm_kip">
-                                        <div id="sktm-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format JPEG, PNG, PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">SKTM/KIP Kuliah</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['sktm_kip'])
+                                        @php
+                                            $fileName = basename($files['sktm_kip']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                @if(in_array(strtolower($fileExt), ['jpg', 'jpeg', 'png']))
+                                                    <svg class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                @else
+                                                    <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                    </svg>
+                                                @endif
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['sktm_kip']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -211,213 +269,257 @@
                             Dokumen Akademik dan Magang
                         </h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            <!-- Pakta Integritas Upload -->
+                            <!-- Pakta Integritas Display -->
                             <div>
-                                <label for="pakta_integritas" class="block text-sm font-medium text-gray-700 mb-1">Pakta
-                                    Integritas</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="pakta_integritas" id="pakta_integritas" accept=".pdf"
-                                        class="hidden file-input" data-target="pakta-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="pakta_integritas">
-                                        <div id="pakta-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Pakta Integritas</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['pakta_integritas'])
+                                        @php
+                                            $fileName = basename($files['pakta_integritas']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['pakta_integritas']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
 
-                            <!-- Daftar Riwayat Hidup Upload -->
+                            <!-- Daftar Riwayat Hidup Display -->
                             <div>
-                                <label for="daftar_riwayat_hidup"
-                                    class="block text-sm font-medium text-gray-700 mb-1">Daftar Riwayat Hidup</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="daftar_riwayat_hidup" id="daftar_riwayat_hidup" accept=".pdf"
-                                        class="hidden file-input" data-target="riwayat-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="daftar_riwayat_hidup">
-                                        <div id="riwayat-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Daftar Riwayat Hidup</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['daftar_riwayat_hidup'])
+                                        @php
+                                            $fileName = basename($files['daftar_riwayat_hidup']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['daftar_riwayat_hidup']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
 
-                            <!-- KHS/Cetak Siakad Upload -->
+                            <!-- KHS/Cetak Siakad Display -->
                             <div>
-                                <label for="khs" class="block text-sm font-medium text-gray-700 mb-1">KHS/Cetak
-                                    Siakad</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="khs" id="khs" accept=".pdf" class="hidden file-input"
-                                        data-target="khs-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="khs">
-                                        <div id="khs-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">KHS/Cetak Siakad</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['khs'])
+                                        @php
+                                            $fileName = basename($files['khs']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['khs']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
 
-                            <!-- Surat Izin Orang Tua Upload -->
+                            <!-- Surat Izin Orang Tua Display -->
                             <div>
-                                <label for="surat_izin_orang_tua" class="block text-sm font-medium text-gray-700 mb-1">Surat
-                                    Izin Orang Tua</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="surat_izin_orang_tua" id="surat_izin_orang_tua" accept=".pdf"
-                                        class="hidden file-input" data-target="izin-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="surat_izin_orang_tua">
-                                        <div id="izin-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Surat Izin Orang Tua</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['surat_izin_orang_tua'])
+                                        @php
+                                            $fileName = basename($files['surat_izin_orang_tua']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['surat_izin_orang_tua']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
 
-                            <!-- Proposal Magang Upload -->
+                            <!-- Proposal Magang Display -->
                             <div>
-                                <label for="proposal_magang" class="block text-sm font-medium text-gray-700 mb-1">Proposal
-                                    Magang</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="proposal_magang" id="proposal_magang" accept=".pdf"
-                                        class="hidden file-input" data-target="proposal-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="proposal_magang">
-                                        <div id="proposal-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Proposal Magang</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['proposal_magang'])
+                                        @php
+                                            $fileName = basename($files['proposal_magang']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['proposal_magang']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
 
-                            <!-- CV Upload -->
+                            <!-- CV Display -->
                             <div>
-                                <label for="cv" class="block text-sm font-medium text-gray-700 mb-1">CV</label>
-                                <div class="file-upload-container">
-                                    <input type="file" name="cv" id="cv" accept=".pdf" class="hidden file-input"
-                                        data-target="cv-preview">
-                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
-                                        data-input="cv">
-                                        <div id="cv-preview"
-                                            class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">CV</label>
+                                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                    @if($files['cv'])
+                                        @php
+                                            $fileName = basename($files['cv']);
+                                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                        @endphp
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">{{ $fileName }}</p>
+                                                    <p class="text-xs text-gray-500">{{ strtoupper($fileExt) }}</p>
+                                                </div>
                                             </div>
                                             <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
+                                                onclick="previewExistingFile('{{ Storage::url($files['cv']) }}', '{{ $fileName }}')"
+                                                class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                Lihat File
                                             </button>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p class="text-sm text-gray-500 italic">Tidak ada file</p>
+                                    @endif
                                 </div>
                             </div>
-                            <h1>{{$pengajuan->CV}}</h1>
-
-                            <iframe src="{{Storage::url($pengajuan->CV)}}" width="100%" height="600px" class="border-0"></iframe>
 
                             <!-- Surat Tugas Upload -->
                             <div>
-                                <label for="surat_tugas" class="block text-sm font-medium text-gray-700 mb-1">Surat
+                                <label for="Surat_Tugas" class="block text-sm font-medium text-gray-700 mb-1">Surat
                                     Tugas</label>
                                 <div class="file-upload-container">
-                                    <input type="file" name="surat_tugas" id="surat_tugas" accept=".pdf"
+                                    <input type="file" name="Surat_Tugas" id="surat_tugas" accept=".pdf"
                                         class="hidden file-input" data-target="tugas-preview">
                                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors file-drop-area"
                                         data-input="surat_tugas">
                                         <div id="tugas-preview"
                                             class="file-preview flex flex-col items-center justify-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                            </svg>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
-                                                    letakkan di sini</p>
-                                                <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
-                                            </div>
-                                            <button type="button"
-                                                class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Pilih File
-                                            </button>
+                                            @if($files['surat_tugas'])
+                                                @php
+                                                    $fileName = basename($files['surat_tugas']);
+                                                    $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                                                @endphp
+                                                <svg class="h-10 w-10 text-green-500" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">File sudah ada: {{ $fileName }}
+                                                    </p>
+                                                    <p class="text-xs text-gray-500 mt-1">Upload file baru untuk mengganti</p>
+                                                </div>
+                                                <div class="flex gap-2 mt-2">
+                                                    <button type="button"
+                                                        onclick="previewExistingFile('{{ Storage::url($files['surat_tugas']) }}', '{{ $fileName }}')"
+                                                        class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm">
+                                                        Lihat File
+                                                    </button>
+                                                    <button type="button"
+                                                        class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                        Pilih File Baru
+                                                    </button>
+                                                </div>
+                                            @else
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                                </svg>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-700">Pilih file atau seret &
+                                                        letakkan di sini</p>
+                                                    <p class="text-xs text-gray-500 mt-1">Format PDF, maks 50MB</p>
+                                                </div>
+                                                <button type="button"
+                                                    class="mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                    Pilih File
+                                                </button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -444,6 +546,7 @@
                             </button>
                         </div>
                     </div>
+                </div>
             </form>
         </div>
     </div>
@@ -481,6 +584,28 @@
     <!-- JavaScript for file upload handling -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Handle status pengajuan dropdown change
+            const statusSelect = document.getElementById('status_pengajuan');
+            const alasanContainer = document.getElementById('alasan-penolakan-container');
+            const alasanTextarea = document.getElementById('alasan_penolakan');
+
+            function toggleAlasanPenolakan() {
+                if (statusSelect.value === 'ditolak') {
+                    alasanContainer.style.display = 'block';
+                    alasanTextarea.setAttribute('required', 'required');
+                } else {
+                    alasanContainer.style.display = 'none';
+                    alasanTextarea.removeAttribute('required');
+                    alasanTextarea.value = '';
+                }
+            }
+
+            // Check initial state
+            toggleAlasanPenolakan();
+
+            // Listen for changes
+            statusSelect.addEventListener('change', toggleAlasanPenolakan);
+
             // Setup all file inputs
             const fileInputs = document.querySelectorAll('.file-input');
             const dropAreas = document.querySelectorAll('.file-drop-area');
@@ -563,7 +688,6 @@
             });
         });
 
-
         // Update the file preview function
         function updateFilePreview(file, previewElement, input) {
             const fileExt = file.name.split('.').pop().toLowerCase();
@@ -571,26 +695,26 @@
 
             if (fileExt === 'pdf') {
                 iconPath = `<svg class="h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                        </svg>`;
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>`;
             } else if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
                 iconPath = `<svg class="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>`;
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>`;
             }
 
             previewElement.innerHTML = `
-                        <div class="w-full flex flex-col items-center">
-                            ${iconPath}
-                            <p class="text-sm font-medium text-gray-800 mt-2">${file.name}</p>
-                            <p class="text-xs text-gray-500">${(file.size / (1024 * 1024)).toFixed(2)} MB</p>
-                            <div class="flex gap-2 mt-2">
-                                <button type="button" class="px-4 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm" onclick="previewFile('${input.id}', '${file.name}')">
-                                    Preview File
-                                </button>
-                            </div>
-                        </div>
-                    `;
+                                <div class="w-full flex flex-col items-center">
+                                    ${iconPath}
+                                    <p class="text-sm font-medium text-gray-800 mt-2">${file.name}</p>
+                                    <p class="text-xs text-gray-500">${(file.size / (1024 * 1024)).toFixed(2)} MB</p>
+                                    <div class="flex gap-2 mt-2">
+                                        <button type="button" class="px-4 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-sm" onclick="previewFile('${input.id}', '${file.name}')">
+                                            Preview File
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
         }
 
         // Add preview modal functions
@@ -610,16 +734,47 @@
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         previewContent.innerHTML = `
-                                    <img src="${e.target.result}" class="max-w-full max-h-[70vh] mx-auto" alt="${file.name}">
-                                `;
+                                            <img src="${e.target.result}" class="max-w-full max-h-[70vh] mx-auto" alt="${file.name}">
+                                        `;
                     };
                     reader.readAsDataURL(file);
                 } else if (fileExt === 'pdf') {
                     const fileUrl = URL.createObjectURL(file);
                     previewContent.innerHTML = `
-                                <iframe src="${fileUrl}" width="100%" height="600px" class="border-0"></iframe>
-                            `;
+                                        <iframe src="${fileUrl}" width="100%" height="600px" class="border-0"></iframe>
+                                    `;
                 }
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function previewExistingFile(fileUrl, fileName) {
+            const modal = document.getElementById('preview-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const previewContent = document.getElementById('preview-content');
+
+            modalTitle.textContent = fileName;
+
+            const fileExt = fileName.split('.').pop().toLowerCase();
+
+            if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
+                previewContent.innerHTML = `
+                            <img src="${fileUrl}" class="max-w-full max-h-[70vh] mx-auto" alt="${fileName}">
+                        `;
+            } else if (fileExt === 'pdf') {
+                previewContent.innerHTML = `
+                            <iframe src="${fileUrl}" width="100%" height="600px" class="border-0"></iframe>
+                        `;
+            } else {
+                previewContent.innerHTML = `
+                            <div class="text-center py-8">
+                                <p class="text-gray-500">Pratinjau tidak tersedia untuk file ini.</p>
+                                <a href="${fileUrl}" target="_blank" class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                                    Unduh File
+                                </a>
+                            </div>
+                        `;
             }
 
             modal.classList.remove('hidden');
@@ -632,23 +787,18 @@
             previewContent.innerHTML = '';
         }
 
-        // Update event listeners
-        document.addEventListener('DOMContentLoaded', function () {
-            // ...existing code...
+        // Add ESC key listener for modal
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closePreviewModal();
+            }
+        });
 
-            // Add ESC key listener for modal
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') {
-                    closePreviewModal();
-                }
-            });
-
-            // Close modal when clicking outside
-            document.getElementById('preview-modal').addEventListener('click', function (e) {
-                if (e.target === this) {
-                    closePreviewModal();
-                }
-            });
+        // Close modal when clicking outside
+        document.getElementById('preview-modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closePreviewModal();
+            }
         });
     </script>
 @endsection
