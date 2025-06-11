@@ -7,6 +7,7 @@ use App\Http\Controllers\SpkController;
 use App\Models\HasilRekomendasi;
 use App\Models\Kriteria;
 use App\Models\LowonganMagang;
+use App\Models\PembobotanKriteria;
 use App\Models\PenilaianLowongan;
 use App\Models\PreferensiMahasiswa; // Added import for PreferensiMahasiswa
 use App\Models\SkorKecocokan;
@@ -40,13 +41,20 @@ class DetailPerhitunganSPKController extends Controller
             'fleksibilitas_kerja' => $preferensi[0]['fleksibilitas_kerja'] ?? null,
         ];
 
+        $bobot = PembobotanKriteria::select('nilai')->where('id_mahasiswa', $id);
+        $bobotMahasiswa = PembobotanKriteria::all()->where('id_mahasiswa', $id);
+
+        foreach ($bobot->get() as $item) {
+            $bobotArray[] = $item->nilai / 100;
+        }
+        // dd($bobotMahasiswa);;
         $spk = new SpkController();
 
         $matriks = $spk->matriksPerbandingan($data);
         $normalisasi = $spk->normalisasiWmsc($matriks);
-        $wmscScore = $spk->scoreWmsc($normalisasi);
+        $wmscScore = $spk->scoreWmsc($normalisasi, $bobotArray);
         $filtered = $spk->filterWmsc($wmscScore, $matriks);
-        $vikor = $spk->hitungVIKOR($filtered[0]);
+        $vikor = $spk->hitungVIKOR($filtered[0], $bobotArray);
         $output = $spk->ValidasiAkhir($vikor, $wmscScore, $filtered[0]);
 
         $final = [];
@@ -112,6 +120,7 @@ class DetailPerhitunganSPKController extends Controller
         return view('admin.sistemRekomendasi.detail_spk', compact(
             'data',
             'kriteria',
+            'bobotMahasiswa',
             'matriksPerbandingan',
             'maxMinKriteria',
             'normalisasi',

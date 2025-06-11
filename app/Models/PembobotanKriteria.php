@@ -15,4 +15,8 @@ class PembobotanKriteria extends Model
         'id_kriteria',
         'nilai',
     ];
+
+    public function kriteria() {
+        return $this->belongsTo(Kriteria::class, 'id_kriteria', 'id_kriteria');
+    }
 }

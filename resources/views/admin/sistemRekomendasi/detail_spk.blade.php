@@ -27,6 +27,35 @@
             <!-- Kriteria Table -->
             <div x-data="{ open: false }" class="border rounded-lg overflow-hidden">
                 <button @click="open = !open" class="w-full px-4 py-3 flex justify-between items-center bg-gray-50 hover:bg-gray-100">
+                    <h2 class="text-lg font-semibold text-gray-800">Pembobotan</h2>
+                    <svg :class="{'rotate-180': open}" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div x-show="open" x-transition class="overflow-x-auto">
+                    <!-- Table for Kriteria -->
+                    <table class="min-w-full divide-y divide-gray-200 mb-8">
+                        <thead class="bg-gray-50"></thead>
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Kriteria</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipe</th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($bobotMahasiswa as $k)
+                                <tr>
+                                    <td class="px-4 py-4 text-sm text-gray-900">{{ $loop->iteration }}</td>
+                                    <td class="px-4 py-4 text-sm text-gray-900">{{ ucwords($k->kriteria->nama_kriteria) }}</td>
+                                    <td class="px-4 py-4 text-sm text-gray-900">{{ $k->nilai }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div x-data="{ open: false }" class="border rounded-lg overflow-hidden">
+                <button @click="open = !open" class="w-full px-4 py-3 flex justify-between items-center bg-gray-50 hover:bg-gray-100">
                     <h2 class="text-lg font-semibold text-gray-800">Kriteria</h2>
                     <svg :class="{'rotate-180': open}" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
