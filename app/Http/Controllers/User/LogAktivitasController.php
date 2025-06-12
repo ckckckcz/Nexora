@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\BimbinganMagang;
 use App\Models\LogAktivitasMagang;
+use App\Models\EvaluasiMagang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,10 +25,19 @@ class LogAktivitasController extends Controller
 
         $logAktivitas = LogAktivitasMagang::where('id_bimbingan', $userId)->get()->sortDesc();
 
+        // Query evaluasi magang untuk mahasiswa yang login
+        $evaluasiMagang = collect();
+        if ($bimbingan) {
+            $evaluasiMagang = EvaluasiMagang::where('id_bimbingan_magang', $bimbingan->id_bimbingan)
+                ->with(['logAktivitas'])
+                ->get();
+        }
+
         return view('user.log_aktivitas', [
             'hasFilledLog' => $existingLog,
             'isAccessible' => $isAccessible,
-            'logAktivitas' => $logAktivitas
+            'logAktivitas' => $logAktivitas,
+            'evaluasiMagang' => $evaluasiMagang
         ]);
     }
 

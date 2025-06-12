@@ -26,7 +26,7 @@ class EvaluasiMagangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id_bimbingan_magang' => 3,
+                'id_bimbingan_magang' => 2,
                 'id_log_aktifitas' => 3,
                 'komentar' => 'Hasil desain UI/UX sangat memuaskan. Mahasiswa telah menyelesaikan proyek dengan baik dan sesuai timeline.',
                 'created_at' => now(),

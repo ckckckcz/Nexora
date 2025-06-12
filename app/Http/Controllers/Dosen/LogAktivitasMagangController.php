@@ -41,16 +41,21 @@ class LogAktivitasMagangController extends Controller
         $logAktivitas = LogAktivitasMagang::where('id_log_aktifitas', $id)->first();
         $evaluasi = EvaluasiMagang::where('id_log_aktifitas',$id)->first();
 
-        if ($evaluasi == null) {
-            EvaluasiMagang::updateOrCreate(
-            ['id_log_aktifitas' => $id],
-            [
-                'id_bimbingan_magang' => $logAktivitas->id_bimbingan,
-                'komentar' => '',
-                'updated_at' => now(),
-            ]);
-        }
+        if ($logAktivitas) {
+            $evaluasi = EvaluasiMagang::where('id_log_aktifitas', $id)->first();
 
+            if (!$evaluasi) {
+                // Create a new EvaluasiMagang if none exists
+                $evaluasi = EvaluasiMagang::create([
+                    'id_log_aktifitas' => $id,
+                    'id_bimbingan_magang' => $logAktivitas->id_bimbingan,
+                    'komentar' => '',
+                    'updated_at' => now(),
+                ]);
+            }
+        } else {
+            $evaluasi = null;
+        }
         return view('dosen.functions.log_aktivitas.tambah', compact('evaluasi'));
     }
     

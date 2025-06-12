@@ -38,6 +38,13 @@
                     </svg>
                     <span class="text-left">Riwayat Log Aktivitas</span>
                 </button>
+                <button onclick="switchTab('evaluasi')" id="evaluasi-tab"
+                    class="flex items-center cursor-pointer space-x-3 px-4 py-2.5 rounded-xl transition-colors duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h3m4 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-left">Evaluasi Log Aktivitas</span>
+                </button>
                 <hr class="my-2 border-gray-200">
                 <a href="/"
                     class="flex items-center cursor-pointer hover:bg-gray-50 space-x-3 px-4 py-2.5 rounded-xl transition-colors duration-200">
@@ -186,6 +193,50 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Evaluaasi Content -->
+            <div id="evaluasi-content" class="tab-content hidden">
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-800">Evaluasi Log Aktivitas</h2>
+                        <p class="text-sm text-gray-500 mt-1">Evaluasi log aktivitas magang Anda</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-50 text-xs text-gray-500 uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-3">No</th>
+                                    <th class="px-6 py-3">Tanggal Pengumpulan</th>
+                                    <th class="px-6 py-3">Catatan Evaluasi</th>
+                                    <th class="px-6 py-3">Tanggal Evaluasi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 text-sm text-gray-700">
+                                @if(isset($evaluasiMagang) && $evaluasiMagang->count() > 0)
+                                    @foreach($evaluasiMagang as $eval)
+                                        <tr>
+                                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                                            <td class="px-6 py-4">
+                                                {{ isset($eval->logAktivitas->tanggal) ? date('d-m-Y', strtotime($eval->logAktivitas->tanggal)) : 'Tidak tersedia' }}
+                                            </td>
+                                            <td class="px-6 py-4 max-w-md">
+                                                {{ $eval->komentar }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ date('d-m-Y H:i', strtotime($eval->created_at)) }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4" class="px-6 py-4 text-center text-gray-500">Belum ada catatan evaluasi.</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </div>
@@ -230,74 +281,40 @@ function switchTab(tabName) {
     // Update tab buttons styling
     const formTab = document.getElementById('form-tab');
     const historyTab = document.getElementById('history-tab');
-    
+    const evaluasiTab = document.getElementById('evaluasi-tab');
     if (tabName === 'form') {
         formTab.classList.add('bg-blue-50', 'text-blue-900', 'font-semibold');
         formTab.classList.remove('text-gray-700', 'hover:bg-gray-50', 'font-medium');
         historyTab.classList.remove('bg-blue-50', 'text-blue-900', 'font-semibold');
         historyTab.classList.add('text-gray-700', 'hover:bg-gray-50', 'font-medium');
-    } else {
+        evaluasiTab.classList.remove('bg-blue-50', 'text-blue-900', 'font-semibold');
+        evaluasiTab.classList.add('text-gray-700', 'hover:bg-gray-50', 'font-medium');
+    } else if (tabName === 'history') {
         historyTab.classList.add('bg-blue-50', 'text-blue-900', 'font-semibold');
         historyTab.classList.remove('text-gray-700', 'hover:bg-gray-50', 'font-medium');
         formTab.classList.remove('bg-blue-50', 'text-blue-900', 'font-semibold');
         formTab.classList.add('text-gray-700', 'hover:bg-gray-50', 'font-medium');
+        evaluasiTab.classList.remove('bg-blue-50', 'text-blue-900', 'font-semibold');
+        evaluasiTab.classList.add('text-gray-700', 'hover:bg-gray-50', 'font-medium');
+    } else if (tabName === 'evaluasi') {
+        evaluasiTab.classList.add('bg-blue-50', 'text-blue-900', 'font-semibold');
+        evaluasiTab.classList.remove('text-gray-700', 'hover:bg-gray-50', 'font-medium');
+        formTab.classList.remove('bg-blue-50', 'text-blue-900', 'font-semibold');
+        formTab.classList.add('text-gray-700', 'hover:bg-gray-50', 'font-medium');
+        historyTab.classList.remove('bg-blue-50', 'text-blue-900', 'font-semibold');
+        historyTab.classList.add('text-gray-700', 'hover:bg-gray-50', 'font-medium');
     }
 
     // Show/hide content
     document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
     document.getElementById(`${tabName}-content`).classList.remove('hidden');
-
-    // Load history data if history tab is selected
     if (tabName === 'history') {
         loadHistoryData();
     }
 }
 
-// Initialize active tab on page load
 document.addEventListener('DOMContentLoaded', () => {
-    switchTab('form'); // Set form tab as active by default
-});
-
-function loadHistoryData() {
-    fetch('/log-aktivitas/history')
-        .then(response => response.json())
-        .then(data => {
-            const historyContainer = document.getElementById('history-data');
-            historyContainer.innerHTML = data.map(log => `
-                <div class="p-6 hover:bg-gray-50 transition-colors">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex items-center space-x-2 text-sm text-gray-500">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span>${new Date(log.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                            </div>
-                            <span class="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
-                            <div class="flex items-center space-x-2 text-sm text-gray-500">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>${log.jam_masuk} - ${log.jam_pulang}</span>
-                            </div>
-                        </div>
-                        <span class="px-3 py-1 text-xs font-medium rounded-full ${
-                            log.status_log === 'diterima' ? 'bg-green-100 text-green-800' :
-                            log.status_log === 'ditolak' ? 'bg-red-100 text-red-800' :
-                            'bg-yellow-100 text-yellow-800'
-                        }">
-                            ${log.status_log.charAt(0).toUpperCase() + log.status_log.slice(1)}
-                        </span>
-                    </div>
-                    <p class="text-gray-600 text-sm">${log.kegiatan}</p>
-                </div>
-            `).join('');
-        });
-}
-
-// Add active tab styles
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('form-tab').classList.add('border-blue-900', 'text-blue-900');
+    switchTab('form');
 });
 </script>
 
