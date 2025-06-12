@@ -58,6 +58,10 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
     Route::post('/unggah-dokumen', [UnggahDokumenController::class, 'storeOrUpdate']);
     Route::get('/unggah-dokumen-perusahaan', [UnggahDokumenController::class, 'createOrUpdateWithLowongan']);
     Route::post('/unggah-dokumen-perusahaan', [UnggahDokumenController::class, 'storeOrUpdateWithLowongan']);
+    
+    // EDIT UPLOAD DOKUMEN
+    Route::get('/unggah-dokumen/edit/{id}', [UnggahDokumenController::class, 'edit'])->name('user.edit-upload');
+    Route::post('/unggah-dokumen/update/{id}', [UnggahDokumenController::class, 'updateDocuments']);
 
 
     // REKOMENDASI MAGANG
