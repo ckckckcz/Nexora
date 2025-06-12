@@ -19,6 +19,22 @@ class UnggahDokumenController extends Controller
         $pengajuan = PengajuanMagang::where('id_mahasiswa', $id_mahasiswa)
         ->where('id_mahasiswa', $id_mahasiswa)
         ->first();
+
+        if ($pengajuan != null) {
+            $files = [
+                'ktp' => $pengajuan->KTP ? $pengajuan->KTP : null,
+                'ktm' => $pengajuan->KTM ? $pengajuan->KTM : null,
+                'kartu_bpjs' => $pengajuan->Kartu_BPJS_Asuransi_lainnya ? $pengajuan->Kartu_BPJS_Asuransi_lainnya : null,
+                'sktm_kip' => $pengajuan->SKTM_KIP_Kuliah ? $pengajuan->SKTM_KIP_Kuliah : null,
+                'pakta_integritas' => $pengajuan->Pakta_Integritas ? $pengajuan->Pakta_Integritas : null,
+                'daftar_riwayat_hidup' => $pengajuan->Daftar_Riwayat_Hidup ? $pengajuan->Daftar_Riwayat_Hidup : null,
+                'khs' => $pengajuan->KHS_cetak_Siakad ? $pengajuan->KHS_cetak_Siakad : null,
+                'surat_izin_orang_tua' => $pengajuan->Surat_Izin_Orang_Tua ? $pengajuan->Surat_Izin_Orang_Tua : null,
+                'proposal_magang' => $pengajuan->Proposal_Magang ? $pengajuan->Proposal_Magang : null,
+                'cv' => $pengajuan->CV ? $pengajuan->CV : null,
+                'surat_tugas' => $pengajuan->Surat_Tugas ? $pengajuan->Surat_Tugas : null,
+            ];
+        }
         
         if ($pengajuan) {
             if ($pengajuan->status_pengajuan !== 'ditolak' && $existingPengajuan) {
@@ -27,6 +43,8 @@ class UnggahDokumenController extends Controller
                     'type' => 'warning',
                     'message' => 'Anda sudah mengajukan magang dan tidak dapat mengakses halaman ini.'
                 ]);
+            } else if ($pengajuan->status_pengajuan === 'ditolak') {
+                return view('user.function.edit_upload', compact('lowongan', 'files', 'pengajuan'));
             }
         }
         
@@ -334,5 +352,79 @@ class UnggahDokumenController extends Controller
                 'message' => 'Dokumen dan lowongan magang berhasil diunggah.'
             ]);
         }
+    }
+
+    public function update($id, Request $request) {
+        $pengajuan = PengajuanMagang::findOrFail($id);
+
+        // Validasi hanya untuk file yang diupload
+        $rules = [
+            'Pakta_Integritas' => 'mimes:pdf|max:2048',
+            'Daftar_Riwayat_Hidup' => 'mimes:pdf|max:2048',
+            'KHS_cetak_Siakad' => 'mimes:pdf|max:2048',
+            'KTP' => 'mimes:pdf|max:2048',
+            'KTM' => 'mimes:pdf|max:2048',
+            'Surat_Izin_Orang_Tua' => 'mimes:pdf|max:2048',
+            'Kartu_BPJS_Asuransi_lainnya' => 'mimes:pdf|max:2048',
+            'SKTM_KIP_Kuliah' => 'mimes:pdf|max:2048',
+            'Proposal_Magang' => 'mimes:pdf|max:2048',
+            'CV' => 'mimes:pdf|max:2048',
+        ];
+
+        $inputRules = [];
+        foreach ($rules as $field => $rule) {
+            if ($request->hasFile($field)) {
+                $inputRules[$field] = $rule;
+            }
+        }
+
+        $validator = \Validator::make($request->all(), $inputRules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('toast', [
+                'type' => 'danger',
+                'message' => 'Terjadi kesalahan validasi. Periksa format dan ukuran file Anda.'
+            ]);
+        }
+
+        $username = auth()->user()->username;
+        $destinationPath = storage_path('/storage/app/public/uploads/' . $username);
+
+        if (!\File::exists($destinationPath)) {
+            \File::makeDirectory($destinationPath, 0777, true);
+        }
+
+        $data = [];
+        // Proses hanya file yang diupload
+        $fields = [
+            'CV' => 'CV',
+            'Daftar_Riwayat_Hidup' => 'Daftar Riwayat Hidup',
+            'Kartu_BPJS_Asuransi_lainnya' => 'Kartu BPJS',
+            'KHS_cetak_Siakad' => 'KHS',
+            'KTM' => 'KTM',
+            'KTP' => 'KTP',
+            'Pakta_Integritas' => 'Pakta Integritas',
+            'Proposal_Magang' => 'Proposal Magang',
+            'SKTM_KIP_Kuliah' => 'SKTM',
+            'Surat_Izin_Orang_Tua' => 'Surat Izin Orang Tua',
+        ];
+        foreach ($fields as $field => $filenamePrefix) {
+            if ($request->hasFile($field)) {
+                $file = $request->file($field);
+                $filename = $filenamePrefix . '.' . $file->getClientOriginalExtension();
+                $file->move($destinationPath, $filename);
+                $data[$field] = 'uploads/' . $username . '/' . $filename;
+            }
+        }
+
+        // Update hanya field yang ada
+        if (!empty($data)) {
+            $pengajuan->update($data);
+        }
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'message' => 'Dokumen berhasil diperbarui.'
+        ]);
     }
 }

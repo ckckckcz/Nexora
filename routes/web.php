@@ -64,6 +64,7 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
     Route::get('/rekomendasi-magang', [RekomendasiMagangMahasiswaController::class, 'index'])->name('user.rekomendasi-magang');
     Route::post('/rekomendasi-magang/tambah', [RekomendasiMagangMahasiswaController::class, 'store'])->name('user.rekomendasi-magang.store');
     Route::get('/rekomendasi-magang/hasil', [RekomendasiMagangMahasiswaController::class, 'hasil'])->name('user.rekomendasi-magang.hasil');
+    Route::post('/rekomendasi-magang/update/{id}', [RekomendasiMagangMahasiswaController::class, 'update']);
 
     //DOWNLOAD TEMPLATE
     Route::get('/download/template/{file}', [App\Http\Controllers\User\TemplateController::class, 'download'])->name('download.template');

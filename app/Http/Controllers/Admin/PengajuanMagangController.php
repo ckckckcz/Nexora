@@ -54,9 +54,22 @@ class PengajuanMagangController extends Controller
         $pengajuan = PengajuanMagang::findOrFail($id);
         $lowongan = LowonganMagang::all();
         $mahasiswa = Mahasiswa::all();
-        // dd($pengajuan->KTP);
+        
+        $files = [
+            'ktp' => $pengajuan->KTP ? $pengajuan->KTP : null,
+            'ktm' => $pengajuan->KTM ? $pengajuan->KTM : null,
+            'kartu_bpjs' => $pengajuan->Kartu_BPJS_Asuransi_lainnya ? $pengajuan->Kartu_BPJS_Asuransi_lainnya : null,
+            'sktm_kip' => $pengajuan->SKTM_KIP_Kuliah ? $pengajuan->SKTM_KIP_Kuliah : null,
+            'pakta_integritas' => $pengajuan->Pakta_Integritas ? $pengajuan->Pakta_Integritas : null,
+            'daftar_riwayat_hidup' => $pengajuan->Daftar_Riwayat_Hidup ? $pengajuan->Daftar_Riwayat_Hidup : null,
+            'khs' => $pengajuan->KHS_cetak_Siakad ? $pengajuan->KHS_cetak_Siakad : null,
+            'surat_izin_orang_tua' => $pengajuan->Surat_Izin_Orang_Tua ? $pengajuan->Surat_Izin_Orang_Tua : null,
+            'proposal_magang' => $pengajuan->Proposal_Magang ? $pengajuan->Proposal_Magang : null,
+            'cv' => $pengajuan->CV ? $pengajuan->CV : null,
+            'surat_tugas' => $pengajuan->Surat_Tugas ? $pengajuan->Surat_Tugas : null,
+        ];
 
-        return view('admin.function.pengajuan_magang.edit', compact('lowongan', 'mahasiswa', 'pengajuan'));
+        return view('admin.function.pengajuan_magang.edit', compact('lowongan', 'mahasiswa', 'pengajuan', 'files'));
     }
 
     /**
@@ -69,7 +82,7 @@ class PengajuanMagangController extends Controller
         $validator = Validator::make($request->all(), [
             'status_pengajuan' => 'required|in:menunggu,diterima,ditolak',
             'alasan_penolakan' => 'nullable|string|max:1000',
-            'surat_tugas' => 'nullable|file|mimes:pdf|max:51200', // 50MB
+            'surat_tugas' => 'nullable|file|mimes:pdf|max:20400', // 50MB
         ], [
             'status_pengajuan.required' => 'Status pengajuan harus diisi.',
             'status_pengajuan.in' => 'Status pengajuan tidak valid.',

@@ -108,7 +108,7 @@
                 </div>
             </div>
 
-            <form action="" method="POST" enctype="multipart/form-data" class="space-y-8">
+            <form action="/unggah-dokumen/" method="POST" enctype="multipart/form-data" class="space-y-8">
                 @csrf
                 <!-- Basic Information Section -->
                 <div class="space-y-6">
