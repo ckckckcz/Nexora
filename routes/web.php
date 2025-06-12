@@ -20,6 +20,7 @@ use App\Http\Controllers\Dosen\DosenDashboardController;
 use App\Http\Controllers\Dosen\BimbinganMagangDosenController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\User\DetailLowonganController;
+use App\Http\Controllers\user\EvaluasiController;
 use App\Http\Controllers\User\LogAktivitasController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\RekomendasiMagangMahasiswaController;
@@ -80,6 +81,9 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
         Route::put('/edit/{id}', [PengajuanMagangController::class, 'update']);
     });
     Route::get('/export-pengajuan/{id}',[UnggahDokumenController::class, 'exportPengajuan']);
+
+    Route::get('/evaluasi',[EvaluasiController::class, 'create']);
+    Route::post('/evaluasi',[EvaluasiController::class, 'store']);
 });
 
 Route::middleware(['auth', 'authorize:dosen'])->group(function () {

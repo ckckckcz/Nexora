@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\BimbinganMagang;
 use App\Models\Mahasiswa;
 use App\Models\PengajuanMagang;
 use App\Models\User;
@@ -18,7 +19,11 @@ class ProfileController extends Controller
             $pengajuan = PengajuanMagang::where('id_mahasiswa', Auth::user()->mahasiswa->id_mahasiswa)->first();
         }
         $mahasiswa = Mahasiswa::where('nim', $id)->firstOrFail();
-        return view('user.profile', compact('mahasiswa', 'pengajuan'));
+        $bimbingan = BimbinganMagang::where('id_mahasiswa', $mahasiswa->id_mahasiswa)
+        ->where('status_bimbingan', 'selesai')
+        ->first();
+
+        return view('user.profile', compact('mahasiswa', 'pengajuan', 'bimbingan'));
     }
     
     public function edit($nim)
