@@ -11,32 +11,42 @@ use App\Models\HasilRekomendasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdminDashboardController extends Controller
+class DashboardController extends Controller
 {
     public function index()
     {
+        // Total counts
         $totalDosen = Dosen::count();
         $totalMahasiswa = Mahasiswa::count();
-        $totalLowongan = LowonganMagang::where('status_lowongan', 'open')->count();
+        $totalLowongan = LowonganMagang::where('status_lowongan', 'aktif')->count();
         
+        // Total mahasiswa magang (yang sedang dalam bimbingan aktif)
         $totalMahasiswaMagang = BimbinganMagang::distinct('id_mahasiswa')
             ->where('status_bimbingan', 'aktif')
             ->count('id_mahasiswa');
         
+        // Hitung rasio dosen pembimbing
         $rasio = $totalDosen > 0 ? round($totalMahasiswaMagang / $totalDosen, 2) : 0;
         
+        // Pertumbuhan magang (contoh: perbandingan bulan ini vs bulan lalu)
         $pertumbuhanMagang = $this->hitungPertumbuhanMagang();
         
+        // Statistik status magang mahasiswa
         $statistikMagang = $this->getStatistikMagang();
         
+        // Distribusi beban dosen
         $distribusiBeban = $this->getDistribusiBebanDosen();
         
-        // $efektivitasRekomendasi = $this->getEfektivitasRekomendasi();
+        // Efektivitas sistem rekomendasi
+        $efektivitasRekomendasi = $this->getEfektivitasRekomendasi();
         
+        // Tren industri
         $trenIndustri = $this->getTrenIndustri();
         
+        // Distribusi per fakultas
         $distribusiFakultas = $this->getDistribusiFakultas();
         
+        // Data untuk chart
         $chartData = $this->getChartData();
 
         return view('admin.dashboard', compact(
@@ -48,7 +58,7 @@ class AdminDashboardController extends Controller
             'pertumbuhanMagang',
             'statistikMagang',
             'distribusiBeban',
-            // 'efektivitasRekomendasi',
+            'efektivitasRekomendasi',
             'trenIndustri',
             'distribusiFakultas',
             'chartData'
@@ -57,7 +67,7 @@ class AdminDashboardController extends Controller
     
     private function hitungPertumbuhanMagang()
     {
-        return 12;
+        return 12; // Contoh: 12% pertumbuhan
     }
     
     private function getStatistikMagang()
@@ -79,48 +89,43 @@ class AdminDashboardController extends Controller
     
     private function getDistribusiBebanDosen()
     {
+        // Implementasi distribusi beban dosen berdasarkan rasio
+        $optimal = Dosen::whereHas('bimbinganMagang', function($query) {
+            $query->selectRaw('count(*) as jumlah')
+                  ->groupBy('id_dosen')
+                  ->havingRaw('count(*) <= 5');
+        })->count();
+        
+        return [
+            'optimal' => $optimal,
+            'normal' => 28, // Contoh
+            'overload' => 8, // Contoh
+        ];
+    }
+    
+    private function getEfektivitasRekomendasi()
+    {
+        // Check if HasilRekomendasi model exists, if not return default values
         try {
-            $optimal = Dosen::whereHas('bimbinganMagang', function($query) {
-                $query->selectRaw('count(*) as jumlah')
-                      ->groupBy('id_dosen')
-                      ->havingRaw('count(*) <= 5');
-            })->count();
+            $totalRekomendasi = HasilRekomendasi::count();
+            $rekomendasiDiterima = HasilRekomendasi::where('status_rekomendasi', 'diterima')->count();
             
             return [
-                'optimal' => $optimal,
-                'normal' => 28, // Contoh
-                'overload' => 8, // Contoh
+                'total' => $totalRekomendasi,
+                'diterima' => $rekomendasiDiterima,
+                'tingkat_keberhasilan' => $totalRekomendasi > 0 ? round(($rekomendasiDiterima / $totalRekomendasi) * 100, 1) : 0,
+                'akurasi_matching' => 92.3, // Contoh
             ];
         } catch (\Exception $e) {
+            // Return default values if table doesn't exist
             return [
-                'optimal' => 0,
-                'normal' => 0,
-                'overload' => 0,
+                'total' => 0,
+                'diterima' => 0,
+                'tingkat_keberhasilan' => 0,
+                'akurasi_matching' => 0,
             ];
         }
     }
-    
-    // private function getEfektivitasRekomendasi()
-    // {
-    //     try {
-    //         $totalRekomendasi = HasilRekomendasi::count();
-    //         $rekomendasiDiterima = HasilRekomendasi::where('status_rekomendasi', 'diterima')->count();
-            
-    //         return [
-    //             'total' => $totalRekomendasi,
-    //             'diterima' => $rekomendasiDiterima,
-    //             'tingkat_keberhasilan' => $totalRekomendasi > 0 ? round(($rekomendasiDiterima / $totalRekomendasi) * 100, 1) : 0,
-    //             'akurasi_matching' => 92.3, // Contoh
-    //         ];
-    //     } catch (\Exception $e) {
-    //         return [
-    //             'total' => 0,
-    //             'diterima' => 0,
-    //             'tingkat_keberhasilan' => 0,
-    //             'akurasi_matching' => 0,
-    //         ];
-    //     }
-    // }
     
     private function getTrenIndustri()
     {

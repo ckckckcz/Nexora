@@ -23,13 +23,13 @@
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">Total Mahasiswa Magang</dt>
                                     <dd class="flex items-baseline">
-                                        <div class="text-2xl font-bold text-blue-900" data-stat="totalInternStudents">342</div>
+                                        <div class="text-2xl font-bold text-blue-900" data-stat="totalInternStudents">{{ $totalMahasiswaMagang }}</div>
                                         <div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
                                             <svg class="self-center flex-shrink-0 h-3 w-3 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                             </svg>
                                             <span class="sr-only">Meningkat</span>
-                                            12%
+                                            {{ $pertumbuhanMagang }}%
                                         </div>
                                     </dd>
                                 </dl>
@@ -52,7 +52,7 @@
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">Total Mahasiswa</dt>
                                     <dd class="flex items-baseline">
-                                        <div class="text-2xl font-bold text-blue-900" data-stat="totalStudents">1,234</div>
+                                        <div class="text-2xl font-bold text-blue-900" data-stat="totalStudents">{{ number_format($totalMahasiswa) }}</div>
                                         <div class="ml-2 flex items-baseline text-sm font-semibold text-blue-600">
                                             <span class="text-gray-500">Aktif</span>
                                         </div>
@@ -77,7 +77,7 @@
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">Total Lowongan Magang</dt>
                                     <dd class="flex items-baseline">
-                                        <div class="text-2xl font-bold text-blue-900" data-stat="totalVacancies">156</div>
+                                        <div class="text-2xl font-bold text-blue-900" data-stat="totalVacancies">{{ $totalLowongan }}</div>
                                         <div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
                                             <span class="text-gray-500">Aktif</span>
                                         </div>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <!-- Total Dosen Pembimbing (from monitoring requirement) -->
+                <!-- Total Dosen Pembimbing -->
                 <div class="bg-white overflow-hidden shadow-lg rounded-xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                     <div class="p-6">
                         <div class="flex items-center">
@@ -102,7 +102,7 @@
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">Dosen Pembimbing</dt>
                                     <dd class="flex items-baseline">
-                                        <div class="text-2xl font-bold text-blue-900" data-stat="totalSupervisors">48</div>
+                                        <div class="text-2xl font-bold text-blue-900" data-stat="totalSupervisors">{{ $totalDosen }}</div>
                                         <div class="ml-2 flex items-baseline text-sm font-semibold text-blue-600">
                                             <span class="text-gray-500">Aktif</span>
                                         </div>
@@ -122,7 +122,7 @@
                 </div>
 
                 <!-- Statistics Cards Grid -->
-                <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-8">
+                <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 mb-8">
                     <!-- Statistik Mahasiswa Mendapat Magang -->
                     <div class="bg-white shadow-lg rounded-xl p-6 transition-all duration-300 hover:shadow-xl">
                         <div class="flex items-center justify-between mb-4">
@@ -136,24 +136,24 @@
                         <div class="space-y-3">
                             <div class="flex justify-between items-center">
                                 <span class="text-sm text-gray-600">Sudah Magang</span>
-                                <span class="text-sm font-semibold text-green-600">342 (27.7%)</span>
+                                <span class="text-sm font-semibold text-green-600">{{ $statistikMagang['sudah_magang'] }} ({{ $statistikMagang['persentase_sudah'] }}%)</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-green-500 h-2 rounded-full" style="width: 27.7%;"></div>
+                                <div class="bg-green-500 h-2 rounded-full" style="width: {{ $statistikMagang['persentase_sudah'] }}%;"></div>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-sm text-gray-600">Sedang Mencari</span>
-                                <span class="text-sm font-semibold text-yellow-600">456 (37.0%)</span>
+                                <span class="text-sm font-semibold text-yellow-600">{{ $statistikMagang['sedang_mencari'] }} ({{ $statistikMagang['persentase_mencari'] }}%)</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-yellow-500 h-2 rounded-full" style="width: 37.0%;"></div>
+                                <div class="bg-yellow-500 h-2 rounded-full" style="width: {{ $statistikMagang['persentase_mencari'] }}%;"></div>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-sm text-gray-600">Belum Mulai</span>
-                                <span class="text-sm font-semibold text-gray-600">436 (35.3%)</span>
+                                <span class="text-sm font-semibold text-gray-600">{{ $statistikMagang['belum_mulai'] }} ({{ $statistikMagang['persentase_belum'] }}%)</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-gray-500 h-2 rounded-full" style="width: 35.3%;"></div>
+                                <div class="bg-gray-500 h-2 rounded-full" style="width: {{ $statistikMagang['persentase_belum'] }}%;"></div>
                             </div>
                         </div>
                     </div>
@@ -169,58 +169,30 @@
                             </div>
                         </div>
                         <div class="text-center mb-4">
-                            <div class="text-3xl font-bold text-blue-900">7:1</div>
+                            <div class="text-3xl font-bold text-blue-900">{{ $rasio }}:1</div>
                             <div class="text-sm text-gray-600">Mahasiswa per Dosen</div>
                         </div>
                         <div class="space-y-2">
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-600">Optimal (≤ 5:1)</span>
-                                <span class="text-green-600">12 Dosen</span>
+                                <span class="text-green-600">{{ $distribusiBeban['optimal'] }} Dosen</span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-600">Normal (6-8:1)</span>
-                                <span class="text-yellow-600">28 Dosen</span>
+                                <span class="text-yellow-600">{{ $distribusiBeban['normal'] }} Dosen</span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-600">Overload (≥ 9:1)</span>
-                                <span class="text-red-600">8 Dosen</span>
+                                <span class="text-red-600">{{ $distribusiBeban['overload'] }} Dosen</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Efektivitas Sistem Rekomendasi -->
-                    <div class="bg-white shadow-lg rounded-xl p-6 transition-all duration-300 hover:shadow-xl">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-blue-900">Efektivitas Rekomendasi</h3>
-                            <div class="p-2 bg-green-100 rounded-lg">
-                                <svg class="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="text-center mb-4">
-                            <div class="text-3xl font-bold text-green-600">87.5%</div>
-                            <div class="text-sm text-gray-600">Tingkat Keberhasilan</div>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-600">Rekomendasi Diterima</span>
-                                <span class="text-green-600">298</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-600">Total Rekomendasi</span>
-                                <span class="text-blue-600">341</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-600">Akurasi Matching</span>
-                                <span class="text-blue-600">92.3%</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Charts Section -->
-                <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 mb-8">
+                {{-- <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 mb-8">
                     <!-- Tren Peminatan Industri -->
                     <div class="bg-white shadow-lg rounded-xl p-6 transition-all duration-300 hover:shadow-xl">
                         <div class="flex items-center justify-between mb-6">
@@ -232,66 +204,20 @@
                             </div>
                         </div>
                         <div class="space-y-4">
+                            @foreach($trenIndustri as $industri)
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                                    <span class="text-sm font-medium">Teknologi Informasi</span>
+                                    <div class="w-3 h-3 rounded-full mr-3" style="background-color: {{ $industri['color'] }}"></div>
+                                    <span class="text-sm font-medium">{{ $industri['nama'] }}</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="text-sm text-gray-600 mr-2">34.2%</span>
+                                    <span class="text-sm text-gray-600 mr-2">{{ $industri['persentase'] }}%</span>
                                     <div class="w-20 bg-gray-200 rounded-full h-2">
-                                        <div class="bg-blue-500 h-2 rounded-full" style="width: 34.2%;"></div>
+                                        <div class="h-2 rounded-full" style="width: {{ $industri['persentase'] }}%; background-color: {{ $industri['color'] }}"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                                    <span class="text-sm font-medium">Keuangan & Perbankan</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-sm text-gray-600 mr-2">22.8%</span>
-                                    <div class="w-20 bg-gray-200 rounded-full h-2">
-                                        <div class="bg-green-500 h-2 rounded-full" style="width: 22.8%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
-                                    <span class="text-sm font-medium">Manufaktur</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-sm text-gray-600 mr-2">18.5%</span>
-                                    <div class="w-20 bg-gray-200 rounded-full h-2">
-                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 18.5%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
-                                    <span class="text-sm font-medium">Kesehatan</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-sm text-gray-600 mr-2">12.1%</span>
-                                    <div class="w-20 bg-gray-200 rounded-full h-2">
-                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 12.1%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-3 h-3 bg-red-500 rounded-full mr-3"></div>
-                                    <span class="text-sm font-medium">Lainnya</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-sm text-gray-600 mr-2">12.4%</span>
-                                    <div class="w-20 bg-gray-200 rounded-full h-2">
-                                        <div class="bg-red-500 h-2 rounded-full" style="width: 12.4%;"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
@@ -302,45 +228,21 @@
                             <div class="text-sm text-gray-500">Per Fakultas</div>
                         </div>
                         <div class="space-y-4">
+                            @foreach($distribusiFakultas as $fakultas)
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="font-medium text-blue-900">Teknik</span>
-                                    <span class="text-sm font-semibold">18 Dosen</span>
+                                    <span class="font-medium text-blue-900">{{ $fakultas['nama'] }}</span>
+                                    <span class="text-sm font-semibold">{{ $fakultas['jumlah_dosen'] }} Dosen</span>
                                 </div>
                                 <div class="flex justify-between text-sm text-gray-600 mb-2">
-                                    <span>Membimbing: 142 mahasiswa</span>
-                                    <span>Rasio: 7.9:1</span>
+                                    <span>Membimbing: {{ $fakultas['jumlah_mahasiswa'] }} mahasiswa</span>
+                                    <span>Rasio: {{ $fakultas['rasio'] }}:1</span>
                                 </div>
                                 <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 37.5%;"></div>
+                                    <div class="h-2 rounded-full" style="width: {{ $fakultas['persentase'] }}%; background-color: {{ $fakultas['color'] }}"></div>
                                 </div>
                             </div>
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="font-medium text-blue-900">Ekonomi</span>
-                                    <span class="text-sm font-semibold">15 Dosen</span>
-                                </div>
-                                <div class="flex justify-between text-sm text-gray-600 mb-2">
-                                    <span>Membimbing: 98 mahasiswa</span>
-                                    <span>Rasio: 6.5:1</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-green-500 h-2 rounded-full" style="width: 31.3%;"></div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="font-medium text-blue-900">Sains & Teknologi</span>
-                                    <span class="text-sm font-semibold">15 Dosen</span>
-                                </div>
-                                <div class="flex justify-between text-sm text-gray-600 mb-2">
-                                    <span>Membimbing: 102 mahasiswa</span>
-                                    <span>Rasio: 6.8:1</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 31.2%;"></div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -358,7 +260,11 @@
                     <div class="relative h-80">
                         <canvas id="chartRef" height="320"></canvas>
                     </div>
-                </div>
+                    <script>
+                        // Pass PHP data to JavaScript for chart
+                        const chartData = @json($chartData);
+                    </script>
+                </div> --}}
             </div>
         </main>
     </div>
