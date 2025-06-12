@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
+use App\Models\PengajuanMagang;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -13,8 +14,11 @@ class ProfileController extends Controller
 {
     public function index($id)
     {
+        if (Auth::user()->mahasiswa) {
+            $pengajuan = PengajuanMagang::where('id_mahasiswa', Auth::user()->mahasiswa->id_mahasiswa)->first();
+        }
         $mahasiswa = Mahasiswa::where('nim', $id)->firstOrFail();
-        return view('user.profile', compact('mahasiswa'));
+        return view('user.profile', compact('mahasiswa', 'pengajuan'));
     }
     
     public function edit($nim)

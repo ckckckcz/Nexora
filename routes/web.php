@@ -79,6 +79,7 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
         Route::get('/edit/{id}', [PengajuanMagangController::class, 'edit']);
         Route::put('/edit/{id}', [PengajuanMagangController::class, 'update']);
     });
+    Route::get('/export-pengajuan/{id}',[UnggahDokumenController::class, 'exportPengajuan']);
 });
 
 Route::middleware(['auth', 'authorize:dosen'])->group(function () {
@@ -120,7 +121,7 @@ Route::middleware(['auth', 'authorize:dosen'])->group(function () {
 
 Route::middleware(['auth', 'authorize:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
-
+    
     // MAHASISWA
     Route::group(['prefix' => 'admin/manajemen-akun/mahasiswa'], function () {
         Route::get('/', [AkunMahasiswaController::class, 'index'])->name('admin.manajemen-akun.mahasiswa');
@@ -129,7 +130,7 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [AkunMahasiswaController::class, 'show']);
         Route::delete('/hapus/{id}', [AkunMahasiswaController::class, 'destroy']);
     });
-
+    
     // MAHASISWA
     Route::group(['prefix' => 'admin/profile/mahasiswa'], function () {
         Route::get('/', [ProfileMahasiswaController::class, 'index'])->name('admin.profile.mahasiswa');
@@ -140,7 +141,7 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [ProfileMahasiswaController::class, 'show']);
         Route::delete('/hapus/{id}', [ProfileMahasiswaController::class, 'destroy']);
     });
-
+    
     // DOSEN
     Route::group(['prefix' => 'admin/manajemen-akun/dosen'], function () {
         Route::get('/', [AkunDosenController::class, 'index'])->name('admin.manajemen-akun.dosen');
@@ -149,7 +150,7 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [AkunDosenController::class, 'show']);
         Route::delete('/hapus/{id}', [AkunDosenController::class, 'destroy']);
     });
-
+    
     // DOSEN
     Route::group(['prefix' => 'admin/profile/dosen'], function () {
         Route::get('/', [ProfileDosenController::class, 'index'])->name('admin.profile.dosen');
@@ -160,9 +161,9 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [ProfileDosenController::class, 'show']);
         Route::delete('/hapus/{id}', [ProfileDosenController::class, 'destroy']);
     });
-
+    
     // MAGANG
-
+    
     // BIMBINGAN MAGANG
     Route::group(['prefix' => 'admin/bimbingan-magang'], function () {
         Route::get('/', [BimbinganMagangController::class, 'index'])->name('admin.bimbingan-magang');
@@ -173,7 +174,7 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [BimbinganMagangController::class, 'show']);
         Route::delete('/hapus/{id}', [BimbinganMagangController::class, 'destroy']);
     });
-
+    
     // SKEMA MAGANG
     Route::group(['prefix' => '/admin/skema-magang/'], function () {
         Route::get('/', [SkemaMagangController::class, 'index'])->name('admin.skema-magang');
@@ -184,7 +185,7 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [SkemaMagangController::class, 'show']);
         Route::delete('/hapus/{id}', [SkemaMagangController::class, 'destroy']);
     });
-
+    
     // PROGRAM STUDI
     Route::group(['prefix' => '/admin/program-studi/'], function () {
         Route::get('/', [ProdiController::class, 'index'])->name('admin.program-studi');;
@@ -195,7 +196,7 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::get('/detail/{id}', [ProdiController::class, 'show']);
         Route::delete('/hapus/{id}', [ProdiController::class, 'destroy']);
     });
-
+    
     // LOWONGAN MAGANG
     Route::group(['prefix' => '/admin/lowongan-magang/'], function () {
         Route::get('/', [LowonganMagangController::class, 'index'])->name('admin.lowongan-magang');

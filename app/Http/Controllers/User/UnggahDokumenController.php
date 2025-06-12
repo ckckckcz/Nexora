@@ -9,6 +9,7 @@ use App\Models\PosisiMagang;
 use App\Models\SkemaMagang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class UnggahDokumenController extends Controller
 {
@@ -426,5 +427,57 @@ class UnggahDokumenController extends Controller
             'type' => 'success',
             'message' => 'Dokumen berhasil diperbarui.'
         ]);
+    }
+
+    public function exportPengajuan($id) {
+        // Check if the user is authenticated and has a mahasiswa profile
+        if (!Auth::check() || !Auth::user()->mahasiswa) {
+            return redirect()->back()->with('toast', [
+                'type' => 'danger',
+                'message' => 'Anda tidak memiliki akses untuk mengunduh dokumen ini.'
+            ]);
+        }
+
+        // Fetch the PengajuanMagang record
+        $pengajuan = PengajuanMagang::findOrFail($id);
+
+        // Check if the user owns the pengajuan
+        if ($pengajuan->id_mahasiswa !== Auth::user()->mahasiswa->id_mahasiswa) {
+            return redirect()->back()->with('toast', [
+                'type' => 'danger',
+                'message' => 'Anda tidak diizinkan mengunduh dokumen ini karena bukan milik Anda.'
+            ]);
+        }
+
+        // Check if the status is valid for download
+        if (in_array($pengajuan->status_pengajuan, ['ditolak', 'menunggu'])) {
+            return redirect()->back()->with('toast', [
+                'type' => 'danger',
+                'message' => 'Dokumen tidak dapat diunduh karena status pengajuan ' . $pengajuan->status_pengajuan . '.'
+            ]);
+        }
+
+        // Check if the CV file exists
+        if (!$pengajuan->CV || !Storage::disk('public')->exists($pengajuan->CV)) {
+            return redirect()->back()->with('toast', [
+                'type' => 'danger',
+                'message' => 'File CV tidak ditemukan.'
+            ]);
+        }
+
+        // Ensure the file is a PDF
+        $fileExtension = pathinfo($pengajuan->CV, PATHINFO_EXTENSION);
+        if (strtolower($fileExtension) !== 'pdf') {
+            return redirect()->back()->with('toast', [
+                'type' => 'danger',
+                'message' => 'File CV harus berformat PDF.'
+            ]);
+        }
+
+        // Generate a safe filename
+        $filename = 'Pengajuan_Magang_' . $pengajuan->id_mahasiswa . '_' . time() . '.pdf';
+
+        // Return the file download response
+        return Storage::disk('public')->download($pengajuan->CV, $filename);
     }
 }

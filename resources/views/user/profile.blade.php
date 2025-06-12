@@ -178,6 +178,25 @@
                                             </button>
                                         </a>
                                     </div>
+                                    @if (auth()->user()->role == 'mahasiswa' && $pengajuan->status_pengajuan == 'diterima')
+                                    <div class="mt-4">
+                                        <a href="/export-pengajuan/{{auth()->user()->mahasiswa->id_mahasiswa}}">
+                                            <button
+                                                class="text-xs font-medium text-white cursor-pointer bg-blue-900 hover:bg-blue-950 px-4 rounded-md py-2">Download Surat Tugas
+                                            </button>
+                                        </a>
+                                    </div>
+                                    @elseif ($pengajuan->status_pengajuan == 'ditolak')
+                                    <div class="mt-4">
+                                        <p class="text-xs text-red-600">Pengajuan magang Anda ditolak. Silakan periksa kembali
+                                            dokumen yang diunggah.</p>
+                                    </div>
+                                    @elseif ($pengajuan->status_pengajuan == 'menunggu')
+                                    <div class="mt-4">
+                                        <p class="text-xs text-yellow-600">Pengajuan magang Anda masih dalam proses
+                                            verifikasi.</p>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
