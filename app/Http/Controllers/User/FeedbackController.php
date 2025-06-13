@@ -11,24 +11,61 @@ class FeedbackController extends Controller
 {
     public function index()
     {
-        return view('user.evaluasi');
+        $mahasiswa = auth()->user()->mahasiswa;
+        
+        // Ambil data bimbingan magang yang sudah selesai
+        $bimbingan = BimbinganMagang::where('id_mahasiswa', $mahasiswa->id_mahasiswa)
+            ->where('status_bimbingan', 'selesai')
+            ->with(['dosen', 'lowongan'])
+            ->first();
+        
+        // Ambil feedback yang sudah ada (jika ada)
+        $existingFeedback = null;
+        if ($bimbingan) {
+            $existingFeedback = FeedbackMagang::where('id_bimbingan_magang', $bimbingan->id_bimbingan)->first();
+        }
+        
+        // Ambil semua feedback untuk statistik (opsional)
+        $allFeedbacks = FeedbackMagang::with(['bimbinganMagang.mahasiswa', 'bimbinganMagang.lowongan'])
+            ->latest()
+            ->take(5)
+            ->get();
+        
+        return view('user.evaluasi', compact('bimbingan', 'existingFeedback', 'allFeedbacks', 'mahasiswa'));
     }
 
     public function store(Request $request)
     {
-        $bimbingan = BimbinganMagang::where('id_mahasiswa', auth()->user()->mahasiswa->id_mahasiswa)
+        $mahasiswa = auth()->user()->mahasiswa;
+        
+        $bimbingan = BimbinganMagang::where('id_mahasiswa', $mahasiswa->id_mahasiswa)
             ->where('status_bimbingan', 'selesai')
             ->first();
 
+        if (!$bimbingan) {
+            return redirect()->back()->with('error', 'Anda belum menyelesaikan magang atau tidak memiliki bimbingan yang valid.');
+        }
+
+        // Cek apakah sudah ada feedback
+        $existingFeedback = FeedbackMagang::where('id_bimbingan_magang', $bimbingan->id_bimbingan)->first();
+        
+        if ($existingFeedback) {
+            return redirect()->back()->with('warning', 'Anda sudah memberikan feedback untuk magang ini.');
+        }
+
         // Validasi input
         $validated = $request->validate([
-            'id_bimbingan_magang' => $bimbingan->id_bimbingan,
             'testimoni_magang' => 'required|string|max:1000',
+            'rating_perusahaan' => 'required|integer|min:1|max:5',
+            'rating_sistem' => 'required|integer|min:1|max:5',
+            'saran_perbaikan' => 'nullable|string|max:500',
         ]);
 
-        // Simpan feedback ke database menggunakan model FeedbackMagang
+        $validated['id_bimbingan_magang'] = $bimbingan->id_bimbingan;
+
+        // Simpan feedback ke database
         FeedbackMagang::create($validated);
 
-        return redirect()->back()->with('success', 'Feedback berhasil disimpan.');
+        return redirect()->back()->with('success', 'Feedback berhasil disimpan. Terima kasih atas evaluasi Anda!');
     }
 }
