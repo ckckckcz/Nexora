@@ -65,12 +65,13 @@
                                         </span>
                                     </td>
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                            </button>
-                                        </form>
-                                        <a href="https://wa.me/{{ $guidance->mahasiswa->no_telp }}"
-                                            class="inline-flex items-center px-3 py-1.5 bg-green-100 text-green-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
-                                            Hubungi Mahasiswa
-                                        </a>
+                                        <button onclick="openChat({{ $guidance->id_bimbingan }}, '{{ $guidance->mahasiswa->nama_mahasiswa }}', {{ $guidance->mahasiswa->id_mahasiswa }})"
+                                            class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors duration-200">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.255-.949L5 20l1.395-3.72C7.512 15.042 9.201 13 12 13c4.418 0 8-3.582 8-1z"/>
+                                            </svg>
+                                            Chat Mahasiswa
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -119,4 +120,149 @@
             </div>
         </section>
     </div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full max-h-96 flex flex-col">
+                <div class="flex items-center justify-between p-4 border-b">
+                    <h3 id="chatTitle" class="text-lg font-medium text-gray-900">Chat dengan Mahasiswa</h3>
+                    <button onclick="closeChat()" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-2" style="max-height: 300px;">
+                    <!-- Messages will be loaded here -->
+                </div>
+                <div class="p-4 border-t">
+                    <div class="flex space-x-2">
+                        <input type="text" id="messageInput" placeholder="Ketik pesan..." 
+                            class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            onkeypress="if(event.key === 'Enter') sendMessage()">
+                        <button onclick="sendMessage()" 
+                            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                            Kirim
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentChatRoom = null;
+        let currentMahasiswaId = null;
+        let currentMahasiswaName = null;
+
+        function openChat(idBimbingan, namaMahasiswa, idMahasiswa) {
+            currentChatRoom = `chat_${idBimbingan}`;
+            currentMahasiswaId = idMahasiswa;
+            currentMahasiswaName = namaMahasiswa;
+            
+            document.getElementById('chatTitle').textContent = `Chat dengan ${namaMahasiswa}`;
+            document.getElementById('chatModal').classList.remove('hidden');
+            
+            loadMessages();
+            document.getElementById('messageInput').focus();
+        }
+
+        function closeChat() {
+            document.getElementById('chatModal').classList.add('hidden');
+            currentChatRoom = null;
+            currentMahasiswaId = null;
+            currentMahasiswaName = null;
+        }
+
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem(currentChatRoom) || '[]');
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '';
+
+            messages.forEach(message => {
+                displayMessage(message);
+            });
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function displayMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            const isFromDosen = message.sender_type === 'dosen';
+            messageDiv.className = `flex ${isFromDosen ? 'justify-end' : 'justify-start'}`;
+            
+            messageDiv.innerHTML = `
+                <div class="max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                    isFromDosen 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-gray-200 text-gray-900'
+                }">
+                    <p class="text-sm">${message.message}</p>
+                    <p class="text-xs ${isFromDosen ? 'text-blue-200' : 'text-gray-500'} mt-1">
+                        ${new Date(message.timestamp).toLocaleTimeString('id-ID', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}
+                    </p>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const messageText = messageInput.value.trim();
+            
+            if (!messageText || !currentChatRoom) return;
+
+            const message = {
+                id: Date.now(),
+                message: messageText,
+                sender_type: 'dosen',
+                sender_id: {{ auth()->user()->dosen->id_dosen }},
+                receiver_id: currentMahasiswaId,
+                timestamp: new Date().toISOString(),
+                room: currentChatRoom
+            };
+
+            // Save to localStorage
+            const messages = JSON.parse(localStorage.getItem(currentChatRoom) || '[]');
+            messages.push(message);
+            localStorage.setItem(currentChatRoom, JSON.stringify(messages));
+
+            // Save to database via AJAX
+            fetch('/dosen/chat/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify(message)
+            });
+
+            displayMessage(message);
+            messageInput.value = '';
+            
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Poll for new messages every 5 seconds
+        setInterval(() => {
+            if (currentChatRoom) {
+                fetch(`/dosen/chat/messages/${currentChatRoom}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.messages) {
+                            localStorage.setItem(currentChatRoom, JSON.stringify(data.messages));
+                            loadMessages();
+                        }
+                    });
+            }
+        }, 5000);
+    </script>
 @endsection

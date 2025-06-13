@@ -7,21 +7,28 @@ use App\Models\BimbinganMagang;
 use App\Models\Mahasiswa;
 use App\Models\PengajuanMagang;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
     public function index($id)
     {
+        $pengajuan = null;
         if (Auth::user()->mahasiswa) {
             $pengajuan = PengajuanMagang::where('id_mahasiswa', Auth::user()->mahasiswa->id_mahasiswa)->first();
         }
+        
         $mahasiswa = Mahasiswa::where('nim', $id)->firstOrFail();
-        $bimbingan = BimbinganMagang::where('id_mahasiswa', $mahasiswa->id_mahasiswa)
-        ->where('status_bimbingan', 'selesai')
-        ->first();
+        
+        // Get bimbingan data for chat functionality and evaluation
+        $bimbingan = null;
+        if (auth()->check() && auth()->user()->role == 'mahasiswa' && auth()->user()->username == $id) {
+            $bimbingan = \App\Models\BimbinganMagang::with(['dosen', 'mahasiswa'])
+                ->where('id_mahasiswa', $mahasiswa->id_mahasiswa)
+                ->first();
+        }
 
         return view('user.profile', compact('mahasiswa', 'pengajuan', 'bimbingan'));
     }

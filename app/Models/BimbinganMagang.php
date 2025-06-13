@@ -32,4 +32,19 @@ class BimbinganMagang extends Model
     {
         return $this->belongsTo(LowonganMagang::class, 'id_lowongan_magang', 'id_lowongan');
     }
+
+    // Get chat room name
+    public function getChatRoomAttribute()
+    {
+        return 'chat_' . $this->id_bimbingan;
+    }
+
+    // Get chat messages for this bimbingan
+    public function chatMessages()
+    {
+        return \Illuminate\Support\Facades\DB::table('chat_messages')
+            ->where('room', $this->chat_room)
+            ->orderBy('created_at', 'asc')
+            ->get();
+    }
 }

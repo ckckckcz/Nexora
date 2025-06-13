@@ -24,6 +24,7 @@
         @vite(['resources/css/app.css', 'resources/css/podium.css',  'resources/js/app.js', 'resources/js/admin/navbar.js', 'resources/js/admin/layout.js', 'resources/js/admin/dashboardDummy.js',])
     @else
     @endif
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="antialiased">

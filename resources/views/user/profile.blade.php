@@ -69,7 +69,7 @@
                     </a>
                 </div>
                 @endif
-                @if (auth()->user()->username == $mahasiswa->nim && $bimbingan->status_bimbingan == 'selesai')
+                @if (auth()->user()->username == $mahasiswa->nim && isset($bimbingan) && $bimbingan->status_bimbingan == 'selesai')
                 <a href="/evaluasi/"
                     class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
@@ -89,10 +89,16 @@
                         class="tab-button border-blue-900 text-blue-900 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm active">
                         Profile
                     </button>
-                    {{-- <button data-tab="activity"
+                    @if (auth()->user()->username == $mahasiswa->nim && isset($bimbingan))
+                    <button data-tab="activity"
                         class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                         Log Aktivitas
-                    </button> --}}
+                    </button>
+                    <button data-tab="chat"
+                        class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        Chat Dosen Pembimbing
+                    </button>
+                    @endif
                 </nav>
             </div>
 
@@ -290,7 +296,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path
-                                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.645.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                             </svg>
                                         </a>
                                     </div>
@@ -503,7 +509,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path
-                                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.645.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                             </svg>
                                         </a>
                                     </div>
@@ -512,12 +518,57 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Chat Content -->
+                @if (auth()->user()->username == $mahasiswa->nim && isset($bimbingan))
+                <div id="chat-content" class="tab-content hidden">
+                    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm">
+                        <!-- Chat Header -->
+                        <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <div class="h-10 w-1.5 bg-blue-900 rounded-full"></div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Chat dengan Dosen Pembimbing</h3>
+                                    <p class="text-sm text-gray-600">{{ $bimbingan->dosen->nama_dosen }}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+                                    Online
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Chat Messages -->
+                        <div id="chatMessages" class="h-96 overflow-y-auto p-6 space-y-4 bg-gray-50">
+                            <!-- Messages will be loaded here -->
+                        </div>
+
+                        <!-- Chat Input -->
+                        <div class="p-6 border-t border-gray-200 bg-white">
+                            <div class="flex space-x-3">
+                                <input type="text" id="messageInput" placeholder="Ketik pesan untuk dosen pembimbing..." 
+                                    class="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    onkeypress="if(event.key === 'Enter') sendMessage()">
+                                <button onclick="sendMessage()" 
+                                    class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors font-medium">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </section>
 
-    <!-- JavaScript for Tab Switching -->
+    <!-- JavaScript for Tab Switching and Chat -->
     <script>
+        // Tab switching functionality
         document.addEventListener('DOMContentLoaded', function () {
             const tabs = document.querySelectorAll('.tab-button');
             const contents = document.querySelectorAll('.tab-content');
@@ -543,9 +594,172 @@
                     const targetContent = document.getElementById(`${tab.dataset.tab}-content`);
                     if (targetContent) {
                         targetContent.classList.remove('hidden');
+                        
+                        // Load chat messages when chat tab is opened
+                        if (tab.dataset.tab === 'chat') {
+                            loadChatMessages();
+                        }
                     }
                 });
             });
+
+            // Auto-load chat messages if chat tab exists
+            @if (auth()->user()->username == $mahasiswa->nim && isset($bimbingan))
+            loadChatMessages();
+            @endif
         });
+
+        // Chat functionality
+        @if (auth()->user()->username == $mahasiswa->nim && isset($bimbingan))
+        const chatRoom = 'chat_{{ $bimbingan->id_bimbingan }}';
+        const mahasiswaId = {{ $mahasiswa->id_mahasiswa }};
+        const dosenId = {{ $bimbingan->dosen->id_dosen }};
+
+        function loadChatMessages() {
+            fetch(`/mahasiswa/chat/messages/${chatRoom}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.messages) {
+                        localStorage.setItem(chatRoom, JSON.stringify(data.messages));
+                        displayMessages(data.messages);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading messages:', error);
+                    // Load from localStorage if server fails
+                    const localMessages = JSON.parse(localStorage.getItem(chatRoom) || '[]');
+                    displayMessages(localMessages);
+                });
+        }
+
+        function displayMessages(messages) {
+            const chatMessages = document.getElementById('chatMessages');
+            if (!chatMessages) return;
+            
+            chatMessages.innerHTML = '';
+
+            if (messages.length === 0) {
+                chatMessages.innerHTML = '<div class="text-center text-gray-500 py-8">Belum ada pesan. Mulai percakapan dengan dosen pembimbing Anda!</div>';
+                return;
+            }
+
+            messages.forEach(message => {
+                displayMessage(message);
+            });
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function displayMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            if (!chatMessages) return;
+            
+            const messageDiv = document.createElement('div');
+            
+            const isFromMahasiswa = message.sender_type === 'mahasiswa';
+            messageDiv.className = `flex ${isFromMahasiswa ? 'justify-end' : 'justify-start'} mb-4`;
+            
+            messageDiv.innerHTML = `
+                <div class="max-w-xs lg:max-w-md px-4 py-3 rounded-xl ${
+                    isFromMahasiswa 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-white text-gray-900 border border-gray-200'
+                }">
+                    <p class="text-sm">${message.message}</p>
+                    <p class="text-xs ${isFromMahasiswa ? 'text-blue-200' : 'text-gray-500'} mt-1">
+                        ${new Date(message.timestamp).toLocaleTimeString('id-ID', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}
+                    </p>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            if (!messageInput) return;
+            
+            const messageText = messageInput.value.trim();
+            
+            if (!messageText) {
+                alert('Pesan tidak boleh kosong!');
+                return;
+            }
+
+            const message = {
+                id: Date.now(),
+                message: messageText,
+                sender_type: 'mahasiswa',
+                sender_id: mahasiswaId,
+                receiver_id: dosenId,
+                timestamp: new Date().toISOString(),
+                room: chatRoom
+            };
+
+            // Disable input while sending
+            messageInput.disabled = true;
+            const sendButton = messageInput.nextElementSibling;
+            sendButton.disabled = true;
+
+            // Save to database via AJAX
+            fetch('/mahasiswa/chat/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify(message)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    // Save to localStorage
+                    const messages = JSON.parse(localStorage.getItem(chatRoom) || '[]');
+                    messages.push(message);
+                    localStorage.setItem(chatRoom, JSON.stringify(messages));
+
+                    displayMessage(message);
+                    messageInput.value = '';
+                    
+                    const chatMessages = document.getElementById('chatMessages');
+                    if (chatMessages) {
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }
+                } else {
+                    alert('Gagal mengirim pesan: ' + (data.message || 'Error tidak diketahui'));
+                }
+            })
+            .catch(error => {
+                console.error('Error sending message:', error);
+                alert('Gagal mengirim pesan. Silakan coba lagi.');
+            })
+            .finally(() => {
+                // Re-enable input
+                messageInput.disabled = false;
+                sendButton.disabled = false;
+                messageInput.focus();
+            });
+        }
+
+        // Poll for new messages every 5 seconds
+        setInterval(() => {
+            if (document.getElementById('chat-content') && !document.getElementById('chat-content').classList.contains('hidden')) {
+                loadChatMessages();
+            }
+        }, 5000);
+        @endif
     </script>
 @endsection

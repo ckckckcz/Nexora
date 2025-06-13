@@ -21,6 +21,8 @@
             @vite(['resources/css/user.css', 'resources/js/app.js'])
         @else
         @endif
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body class="antialiased">
         <div class="min-h-screen">

@@ -84,6 +84,10 @@ Route::middleware(['auth', 'authorize:mahasiswa,admin'])->group(function () {
 
     Route::get('/evaluasi',[FeedbackController::class, 'index']);
     Route::post('/evaluasi',[FeedbackController::class, 'store']);
+
+    // CHAT MAHASISWA
+    Route::post('/mahasiswa/chat/send', [App\Http\Controllers\MahasiswaChatController::class, 'sendMessage']);
+    Route::get('/mahasiswa/chat/messages/{room}', [App\Http\Controllers\MahasiswaChatController::class, 'getMessages']);
 });
 
 Route::middleware(['auth', 'authorize:dosen'])->group(function () {
@@ -125,6 +129,12 @@ Route::middleware(['auth', 'authorize:dosen'])->group(function () {
 
     Route::get('/dosen/laporan-log', [App\Http\Controllers\Dosen\LaporanController::class, 'index']);
     Route::get('/dosen/export-log/{id}',[App\Http\Controllers\Dosen\LaporanController::class, 'exportLog']);
+});
+
+// Chat routes for Dosen
+Route::middleware(['auth'])->prefix('dosen')->group(function () {
+    Route::post('/chat/send', [App\Http\Controllers\DosenChatController::class, 'sendMessage']);
+    Route::get('/chat/messages/{room}', [App\Http\Controllers\DosenChatController::class, 'getMessages']);
 });
 
 Route::middleware(['auth', 'authorize:admin'])->group(function () {
