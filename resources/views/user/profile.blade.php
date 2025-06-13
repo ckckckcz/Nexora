@@ -13,72 +13,64 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 relative z-10 pb-16">
         <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
             <!-- Profile Header -->
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                    <img class="w-32 h-32 rounded-full border-4 border-white shadow-md object-cover"
-                        src="{{ Storage::url($mahasiswa->profile_mahasiswa) }}" alt="Riovaldo Alfiyan's Profile Photo">
-                    <div>
-                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-2 sm:mt-0">{{ $mahasiswa->nama_mahasiswa}}
-                        </h1>
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 flex-1">
+                    @if($mahasiswa->profile_mahasiswa)
+                        <img class="w-32 h-32 rounded-full border-4 border-white shadow-md object-cover"
+                            src="{{ Storage::url($mahasiswa->profile_mahasiswa) }}" alt="{{ $mahasiswa->nama_mahasiswa }}'s Profile Photo">
+                    @else
+                        <div class="w-32 h-32 rounded-full border-4 border-white shadow-md bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                    @endif
+                    
+                    <div class="flex-1">
+                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-2 sm:mt-0">{{ $mahasiswa->nama_mahasiswa }}</h1>
                         <p class="text-gray-600 mt-1 max-w-2xl">
-                            {{-- Informatics Engineering Student at State Polytechnic of Malang | Frontend Web Developer | UI/UX
-                            Designer | Framer Designer Enthusiast | Member of Workshop Riset Informatika --}}
                             {{ $mahasiswa->deskripsi }}
                         </p>
                         <div class="flex items-center gap-3 mt-2">
                             <span class="flex items-center text-gray-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                                 Indonesia, Malang
                             </span>
-                            {{-- <span class="flex items-center text-blue-900 font-semibold">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                2,000 pengikut
-                            </span> --}}
                         </div>
                     </div>
                 </div>
+                
+                <!-- Enhanced Action Buttons Container -->
                 @if (auth()->user()->username == $mahasiswa->nim)
-                <div class="flex flex-col gap-3 mt-4 sm:mt-0">
+                <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto min-w-fit">
                     <a href="/profile/edit/{{ auth()->user()->username }}"
-                        class="inline-flex items-center bg-[#DEFC79] hover:bg-[#c9eb5b] text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        class="group inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                         </svg>
                         Edit Profile
                     </a>
                     <a href="/rekomendasi-magang"
-                        class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        class="group inline-flex items-center justify-center bg-white hover:bg-gray-50 text-blue-700 font-semibold px-6 py-3 rounded-xl transition-all duration-300 border-2 border-blue-200 hover:border-blue-300 hover:shadow-xl transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
-                        Cari Rekomendasi Magang Kamu
+                        Cari Magang
                     </a>
+                    
+                    @if (isset($bimbingan) && $bimbingan->status_bimbingan == 'selesai')
+                    <a href="/evaluasi/"
+                        class="group inline-flex items-center justify-center bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Evaluasi
+                    </a>
+                    @endif
                 </div>
-                @endif
-                @if (auth()->user()->username == $mahasiswa->nim && isset($bimbingan) && $bimbingan->status_bimbingan == 'selesai')
-                <a href="/evaluasi/"
-                    class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-blue-900 font-medium px-5 py-2.5 rounded-xl transition-colors text-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Evaluasi
-                </a>
                 @endif
             </div>
 
@@ -205,7 +197,7 @@
                                     </div>
                                     @elseif ($pengajuan->status_pengajuan == 'ditolak')
                                     <div class="mt-4">
-                                        <p class="text-xs text-red-600">Pengajuan magang Anda ditolak. Silakan periksa kembali
+                                        <p class="text-xs text-red-600 bg-red-200/50 p-3 rounded-lg">Pengajuan magang Anda ditolak. Silakan periksa kembali
                                             dokumen yang diunggah.</p>
                                     </div>
                                     @elseif ($pengajuan->status_pengajuan == 'menunggu')
@@ -662,7 +654,7 @@
                     }
                     return response.json();
                 })
-                .then(data => {
+                .then data => {
                     if (data.messages) {
                         localStorage.setItem(chatRoom, JSON.stringify(data.messages));
                         displayMessages(data.messages);
