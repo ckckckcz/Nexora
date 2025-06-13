@@ -101,6 +101,10 @@ Route::middleware(['auth', 'authorize:dosen'])->group(function () {
     Route::get('/dosen/mahasiswa/log-aktivitas/tambah/{id}', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'create']);
     Route::post('/dosen/mahasiswa/log-aktivitas/tambah/{id}', [App\Http\Controllers\Dosen\LogAktivitasMagangController::class, 'createOrUpdate']);
 
+    // FEEDBACK MAGANG
+    Route::get('/dosen/feedback', [App\Http\Controllers\Dosen\FeedbackDosenController::class, 'index'])->name('dosen.feedback');
+    Route::post('/dosen/feedback/pesan/{id}', [App\Http\Controllers\Dosen\FeedbackDosenController::class, 'updatePesanDosen'])->name('dosen.feedback.pesan');
+
     // BIMBINGAN MAGANG
     Route::get('/dosen/magang/bimbingan-magang', [BimbinganMagangDosenController::class, 'index'])->name('dosen.bimbingan-magang');
     Route::get('/dosen/magang/bimbingan-magang/chat', function () {
