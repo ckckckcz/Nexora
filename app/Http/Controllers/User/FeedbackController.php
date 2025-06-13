@@ -19,7 +19,7 @@ class FeedbackController extends Controller
             ->with(['dosen', 'lowongan'])
             ->first();
         
-        // Ambil feedback yang sudah ada (jika ada)
+        // Ambil feedback yang sudah ada (jika ada) - termasuk yang hanya ada pesan_dosen
         $existingFeedback = null;
         if ($bimbingan) {
             $existingFeedback = FeedbackMagang::where('id_bimbingan_magang', $bimbingan->id_bimbingan)->first();
@@ -43,20 +43,37 @@ class FeedbackController extends Controller
         // Cek apakah sudah ada feedback
         $existingFeedback = FeedbackMagang::where('id_bimbingan_magang', $bimbingan->id_bimbingan)->first();
         
-        if ($existingFeedback) {
-            return redirect()->back()->with('warning', 'Anda sudah memberikan feedback untuk magang ini.');
+        // Cek apakah testimoni sudah pernah diisi
+        if ($existingFeedback && !empty(trim($existingFeedback->testimoni_magang))) {
+            return redirect()->back()->with('warning', 'Anda sudah memberikan testimoni untuk magang ini.');
         }
 
         // Validasi input
         $validated = $request->validate([
-            'testimoni_magang' => 'required|string|max:1000',
+            'testimoni_magang' => 'required|string|min:50|max:1000',
+        ], [
+            'testimoni_magang.required' => 'Testimoni magang wajib diisi.',
+            'testimoni_magang.min' => 'Testimoni magang minimal 50 karakter.',
+            'testimoni_magang.max' => 'Testimoni magang maksimal 1000 karakter.',
         ]);
 
-        $validated['id_bimbingan_magang'] = $bimbingan->id_bimbingan;
-
-        // Simpan feedback ke database
-        FeedbackMagang::create($validated);
-
-        return redirect()->back()->with('success', 'Feedback berhasil disimpan. Terima kasih atas evaluasi Anda!');
+        try {
+            if ($existingFeedback) {
+                // Update existing record
+                $existingFeedback->update([
+                    'testimoni_magang' => $validated['testimoni_magang']
+                ]);
+            } else {
+                // Create new record
+                FeedbackMagang::create([
+                    'id_bimbingan_magang' => $bimbingan->id_bimbingan,
+                    'testimoni_magang' => $validated['testimoni_magang']
+                ]);
+            }
+            
+            return redirect()->back()->with('success', 'Testimoni berhasil disimpan. Terima kasih atas evaluasi Anda!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan testimoni. Silakan coba lagi.');
+        }
     }
 }
