@@ -270,7 +270,7 @@
         function openPesanModal(feedbackId, studentName, currentPesan) {
             document.getElementById('studentName').textContent = studentName;
             document.getElementById('pesan_dosen').value = currentPesan;
-            document.getElementById('pesanForm').action = `/dosen/feedback/pesan/${feedbackId}`;
+            document.getElementById('pesanForm').action = `/dosen/mahasiswa/feedback/pesan/${feedbackId}`;
             document.getElementById('pesanModal').classList.remove('hidden');
         }
 

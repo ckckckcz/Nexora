@@ -74,6 +74,10 @@
                         class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
                         <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Log Aktivitas</span>
                     </a>
+                    <a href="/dosen/mahasiswa/feedback"
+                        class="flex items-center text-sm text-gray-600 hover:bg-[#DEFC79]/50 hover:text-blue-900 rounded-md px-3 py-2 font-medium {{ request()->routeIs('users.supervisors') ? 'bg-green-50 text-[#DEFC79] font-medium' : '' }}">
+                        <span class="transition-all duration-200 whitespace-nowrap sidebar-text">Feedback</span>
+                    </a>
                 </div>
             </div>
             <div x-data="{ open: false }" class="space-y-1">
