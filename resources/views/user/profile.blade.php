@@ -522,41 +522,80 @@
                 <!-- Chat Content -->
                 @if (auth()->user()->username == $mahasiswa->nim && isset($bimbingan))
                 <div id="chat-content" class="tab-content hidden">
-                    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm">
-                        <!-- Chat Header -->
-                        <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                            <div class="flex items-center space-x-3">
-                                <div class="h-10 w-1.5 bg-blue-900 rounded-full"></div>
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-800">Chat dengan Dosen Pembimbing</h3>
-                                    <p class="text-sm text-gray-600">{{ $bimbingan->dosen->nama_dosen }}</p>
+                    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+                        <!-- Elegant Chat Header -->
+                        <div class="relative bg-gradient-to-r from-blue-600 to-blue-700 p-6">
+                            <div class="absolute inset-0 bg-blue-800/10"></div>
+                            <div class="relative flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="relative">
+                                        <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 border-2 border-white rounded-full"></div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold text-white">{{ $bimbingan->dosen->nama_dosen }}</h3>
+                                        <p class="text-blue-100 text-sm">Dosen Pembimbing</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white/15 text-white border border-white/20">
+                                        <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                                        Online
+                                    </span>
                                 </div>
                             </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                    <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
-                                    Online
-                                </span>
+                        </div>
+
+                        <!-- Chat Messages Area -->
+                        <div id="chatMessages" class="h-96 overflow-y-auto p-6 bg-gradient-to-b from-blue-50/30 via-white to-gray-50">
+                            <!-- Welcome State -->
+                            <div class="text-center py-16">
+                                <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.255-.949L5 20l1.395-3.72C7.512 15.042 9.201 13 12 13c4.418 0 8-3.582 8-1z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="text-blue-900 font-semibold mb-2">Mulai Chat dengan Dosen</h4>
+                                <p class="text-blue-600/70 text-sm max-w-sm mx-auto leading-relaxed">
+                                    Kirim pesan pertama untuk memulai diskusi bimbingan dengan dosen pembimbing Anda
+                                </p>
                             </div>
                         </div>
 
-                        <!-- Chat Messages -->
-                        <div id="chatMessages" class="h-96 overflow-y-auto p-6 space-y-4 bg-gray-50">
-                            <!-- Messages will be loaded here -->
-                        </div>
-
-                        <!-- Chat Input -->
-                        <div class="p-6 border-t border-gray-200 bg-white">
-                            <div class="flex space-x-3">
-                                <input type="text" id="messageInput" placeholder="Ketik pesan untuk dosen pembimbing..." 
-                                    class="flex-1 border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    onkeypress="if(event.key === 'Enter') sendMessage()">
-                                <button onclick="sendMessage()" 
-                                    class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors font-medium">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        <!-- Elegant Chat Input -->
+                        <div class="p-6 bg-white border-t border-gray-100">
+                            <div class="flex items-end space-x-3">
+                                <div class="flex-1 relative">
+                                    <textarea id="messageInput" 
+                                        placeholder="Ketik pesan untuk dosen pembimbing..." 
+                                        rows="1"
+                                        class="w-full resize-none border border-gray-300 bg-gray-50 rounded-2xl px-5 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white focus:border-blue-400 transition-all duration-200 placeholder-gray-400 text-gray-900 text-sm leading-relaxed max-h-20 overflow-y-auto"
+                                        onkeydown="handleChatKeyDown(event)"
+                                        oninput="autoResizeChat(this)"></textarea>
+                                    
+                                    <button onclick="sendMessage()" id="chatSendButton"
+                                        class="absolute right-2 bottom-2 w-8 h-8 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:bg-gray-400 flex items-center justify-center group shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95">
+                                        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-3">
+                                <p class="text-xs text-gray-500 flex items-center">
+                                    <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                                     </svg>
-                                </button>
+                                    Enter untuk kirim • Shift+Enter untuk baris baru
+                                </p>
+                                <div class="flex items-center space-x-1">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span class="text-xs text-gray-600 font-medium">Terhubung</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -641,42 +680,56 @@
             const chatMessages = document.getElementById('chatMessages');
             if (!chatMessages) return;
             
-            chatMessages.innerHTML = '';
-
             if (messages.length === 0) {
-                chatMessages.innerHTML = '<div class="text-center text-gray-500 py-8">Belum ada pesan. Mulai percakapan dengan dosen pembimbing Anda!</div>';
+                chatMessages.innerHTML = `
+                    <div class="text-center py-16">
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.255-.949L5 20l1.395-3.72C7.512 15.042 9.201 13 12 13c4.418 0 8-3.582 8-1z"/>
+                            </svg>
+                        </div>
+                        <h4 class="text-blue-900 font-semibold mb-2">Mulai Chat dengan Dosen</h4>
+                        <p class="text-blue-600/70 text-sm max-w-sm mx-auto leading-relaxed">
+                            Kirim pesan pertama untuk memulai diskusi bimbingan dengan dosen pembimbing Anda
+                        </p>
+                    </div>
+                `;
                 return;
             }
 
-            messages.forEach(message => {
-                displayMessage(message);
+            chatMessages.innerHTML = '';
+            messages.forEach((message, index) => {
+                displayMessage(message, index === messages.length - 1);
             });
 
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            setTimeout(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 100);
         }
 
-        function displayMessage(message) {
+        function displayMessage(message, isLatest = false) {
             const chatMessages = document.getElementById('chatMessages');
             if (!chatMessages) return;
             
             const messageDiv = document.createElement('div');
             
             const isFromMahasiswa = message.sender_type === 'mahasiswa';
-            messageDiv.className = `flex ${isFromMahasiswa ? 'justify-end' : 'justify-start'} mb-4`;
+            messageDiv.className = `flex ${isFromMahasiswa ? 'justify-end' : 'justify-start'} mb-6 ${isLatest ? 'animate-fade-in' : ''}`;
+            
+            const timeString = new Date(message.timestamp).toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
             
             messageDiv.innerHTML = `
-                <div class="max-w-xs lg:max-w-md px-4 py-3 rounded-xl ${
-                    isFromMahasiswa 
-                        ? 'bg-blue-600 text-white' 
-                        : 'bg-white text-gray-900 border border-gray-200'
-                }">
-                    <p class="text-sm">${message.message}</p>
-                    <p class="text-xs ${isFromMahasiswa ? 'text-blue-200' : 'text-gray-500'} mt-1">
-                        ${new Date(message.timestamp).toLocaleTimeString('id-ID', {
-                            hour: '2-digit',
-                            minute: '2-digit'
-                        })}
-                    </p>
+                <div class="max-w-sm group">
+                    <div class="relative px-4 py-3 rounded-2xl shadow-sm ${
+                        isFromMahasiswa 
+                            ? 'bg-blue-600 text-white rounded-br-md' 
+                            : 'bg-white text-gray-800 border border-gray-200 rounded-bl-md'
+                    } transform hover:scale-[1.02] transition-all duration-200">
+                        <p class="text-sm leading-relaxed whitespace-pre-wrap break-words">${message.message}</p>
+                    </div>
                 </div>
             `;
             
@@ -690,7 +743,6 @@
             const messageText = messageInput.value.trim();
             
             if (!messageText) {
-                alert('Pesan tidak boleh kosong!');
                 return;
             }
 
@@ -704,10 +756,16 @@
                 room: chatRoom
             };
 
-            // Disable input while sending
+            // Visual feedback
             messageInput.disabled = true;
-            const sendButton = messageInput.nextElementSibling;
+            const sendButton = document.getElementById('chatSendButton');
             sendButton.disabled = true;
+            sendButton.innerHTML = `
+                <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            `;
 
             // Save to database via AJAX
             fetch('/mahasiswa/chat/send', {
@@ -731,35 +789,65 @@
                     messages.push(message);
                     localStorage.setItem(chatRoom, JSON.stringify(messages));
 
-                    displayMessage(message);
+                    displayMessage(message, true);
                     messageInput.value = '';
+                    messageInput.style.height = 'auto';
                     
-                    const chatMessages = document.getElementById('chatMessages');
-                    if (chatMessages) {
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                    }
-                } else {
-                    alert('Gagal mengirim pesan: ' + (data.message || 'Error tidak diketahui'));
+                    setTimeout(() => {
+                        const chatMessages = document.getElementById('chatMessages');
+                        if (chatMessages) {
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        }
+                    }, 100);
                 }
             })
             .catch(error => {
                 console.error('Error sending message:', error);
-                alert('Gagal mengirim pesan. Silakan coba lagi.');
             })
             .finally(() => {
                 // Re-enable input
                 messageInput.disabled = false;
                 sendButton.disabled = false;
+                sendButton.innerHTML = `
+                    <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                `;
                 messageInput.focus();
             });
         }
 
-        // Poll for new messages every 5 seconds
-        setInterval(() => {
-            if (document.getElementById('chat-content') && !document.getElementById('chat-content').classList.contains('hidden')) {
-                loadChatMessages();
+        // Enhanced textarea functionality for chat
+        function handleChatKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
             }
-        }, 5000);
+        }
+
+        function autoResizeChat(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 80) + 'px';
+        }
+
+        // Add elegant CSS animations
+        const chatStyle = document.createElement('style');
+        chatStyle.textContent = `
+            @keyframes animate-fade-in {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px) scale(0.98);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+            .animate-fade-in {
+                animation: animate-fade-in 0.3s ease-out;
+            }
+        `;
+        document.head.appendChild(chatStyle);
         @endif
     </script>
 @endsection
