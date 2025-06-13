@@ -4,6 +4,8 @@
     @include('components.ui.anon.hero')
     <!-- Company Logo Section -->
     @include('components.ui.anon.company-logo')
+    <!-- Partner Companies Section -->
+    @include('components.ui.anon.partner-companies')
     <!-- Why Us Section -->
     @include('components.ui.anon.whyus')
     <!-- Talented Section -->
