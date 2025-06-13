@@ -25,13 +25,7 @@ class FeedbackController extends Controller
             $existingFeedback = FeedbackMagang::where('id_bimbingan_magang', $bimbingan->id_bimbingan)->first();
         }
         
-        // Ambil semua feedback untuk statistik (opsional)
-        $allFeedbacks = FeedbackMagang::with(['bimbinganMagang.mahasiswa', 'bimbinganMagang.lowongan'])
-            ->latest()
-            ->take(5)
-            ->get();
-        
-        return view('user.evaluasi', compact('bimbingan', 'existingFeedback', 'allFeedbacks', 'mahasiswa'));
+        return view('user.evaluasi', compact('bimbingan', 'existingFeedback', 'mahasiswa'));
     }
 
     public function store(Request $request)
@@ -56,9 +50,6 @@ class FeedbackController extends Controller
         // Validasi input
         $validated = $request->validate([
             'testimoni_magang' => 'required|string|max:1000',
-            'rating_perusahaan' => 'required|integer|min:1|max:5',
-            'rating_sistem' => 'required|integer|min:1|max:5',
-            'saran_perbaikan' => 'nullable|string|max:500',
         ]);
 
         $validated['id_bimbingan_magang'] = $bimbingan->id_bimbingan;
