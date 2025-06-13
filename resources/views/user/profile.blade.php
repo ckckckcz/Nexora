@@ -654,7 +654,7 @@
                     }
                     return response.json();
                 })
-                .then data => {
+                .then(data => {
                     if (data.messages) {
                         localStorage.setItem(chatRoom, JSON.stringify(data.messages));
                         displayMessages(data.messages);
