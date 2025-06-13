@@ -30,14 +30,14 @@
                 x-transition:leave-end="transform opacity-0 scale-95"
                 class="absolute right-0 mt-2 w-96 rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5 z-50 overflow-hidden border">
 
-                <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gradient-to-r from-blue-50 to-blue-100">
+                {{-- <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gradient-to-r from-blue-50 to-blue-100">
                     <h3 class="text-base font-bold text-gray-800">Notifikasi</h3>
                     <button @click="markAllAsRead()"
                         x-show="unreadCount > 0"
                         class="text-xs text-blue-600 hover:text-blue-800 font-semibold px-3 py-1 rounded-full bg-white hover:bg-blue-50 transition-colors">
                         Tandai sudah dibaca
                     </button>
-                </div>
+                </div> --}}
 
                 <div class="max-h-96 overflow-y-auto" x-show="!loading">
                     <template x-if="notifications.length === 0">
@@ -312,7 +312,19 @@ function notificationDropdown() {
                 });
                 
                 if (response.ok) {
+                    // Reset unread count immediately
                     this.unreadCount = 0;
+                    
+                    // Mark all notifications as read in the current array
+                    this.notifications = this.notifications.map(notification => ({
+                        ...notification,
+                        read_at: new Date().toISOString(),
+                        is_read: true
+                    }));
+                    
+                    // Reload notifications from server to ensure sync
+                    await this.loadNotifications();
+                    
                     this.showToast('Semua notifikasi telah ditandai sebagai sudah dibaca', 'success');
                 }
             } catch (error) {
