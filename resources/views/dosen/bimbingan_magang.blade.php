@@ -10,6 +10,41 @@
             <div class="p-4 sm:p-6 flex flex-col gap-4">
                 <div class="flex flex-col lg:flex-row sm:items-left sm:justify-between gap-4">
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">
+                        <!-- Search Input -->
+                        <div class="relative flex-grow max-w-full sm:max-w-md">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400" id="search-icon"></i>
+                            </div>
+                            <input type="text" id="search-input"
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                placeholder="Cari berdasarkan Nama Perusahaan atau Lokasi" />
+                        </div>
+
+                        <!-- Filter Dropdown for Status Lowongan -->
+                        <div class="relative w-full sm:w-auto">
+                            <button id="status-filter-btn"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
+                                <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
+                                <span id="status-filter-text">Semua Status</span>
+                                <i class="fas fa-chevron-down text-gray-300" id="status-chevron"></i>
+                            </button>
+                            <div id="status-dropdown"
+                                class="absolute z-10 mt-1 w-full sm:w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+                                <ul class="py-1">
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="Semua">Semua Status</button></li>
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="open">Open</button></li>
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="close">Close</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">
                         <div id="status-dropdown"
                             class="absolute z-10 mt-1 w-full sm:w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
                             <ul class="py-1 max-h-60 overflow-auto">
@@ -30,6 +65,10 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
+                            <th scope="col"
+                                class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                No
+                            </th>
                             <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                                 Mahasiswa</th>
                             <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dosen
@@ -43,9 +82,12 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                         @foreach ($guidances as $guidance)
                             <tr>
+                                <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
+                                    {{ $loop->iteration }}
+                                </td>
                                 <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
                                     {{ $guidance->mahasiswa->nama_mahasiswa }}
                                 </td>
@@ -220,6 +262,30 @@
     </div>
 
     <script>
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const tableRows = document.querySelectorAll('#table-body tr');
+                
+                tableRows.forEach(row => {
+                    const mahasiswaName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                    const dosenName = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                    const perusahaanName = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                    
+                    if (mahasiswaName.includes(searchTerm) || 
+                        dosenName.includes(searchTerm) || 
+                        perusahaanName.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+
         let currentChatRoom = null;
         let currentMahasiswaId = null;
         let currentMahasiswaName = null;
@@ -280,7 +346,7 @@
 
             fetch(`/dosen/chat/messages/${currentChatRoom}`)
                 .then(response => response.json())
-                .then(data => {
+                .then data => {
                     if (data.messages) {
                         localStorage.setItem(currentChatRoom, JSON.stringify(data.messages));
                         displayMessages(data.messages);
@@ -299,15 +365,15 @@
 
             if (messages.length === 0) {
                 chatMessages.innerHTML = `
-                        <div class="text-center py-12">
-                            <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-blue-200">
-                                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.255-.949L5 20l1.395-3.72C7.512 15.042 9.201 13 12 13c4.418 0 8-3.582 8-1z"/>
-                            </div>
-                            <h4 class="text-blue-900 font-bold mb-2">Mulai Percakapan dengan ${currentMahasiswaName}</h4>
-                            <p class="text-blue-700/70 text-sm leading-relaxed px-4">Ketik pesan pertama untuk memulai diskusi bimbingan</p>
-                        </div>
-                    `;
+                                <div class="text-center py-12">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-blue-200">
+                                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.255-.949L5 20l1.395-3.72C7.512 15.042 9.201 13 12 13c4.418 0 8-3.582 8-1z"/>
+                                    </div>
+                                    <h4 class="text-blue-900 font-bold mb-2">Mulai Percakapan dengan ${currentMahasiswaName}</h4>
+                                    <p class="text-blue-700/70 text-sm leading-relaxed px-4">Ketik pesan pertama untuk memulai diskusi bimbingan</p>
+                                </div>
+                            `;
                 return;
             }
 
@@ -334,26 +400,26 @@
             });
 
             messageDiv.innerHTML = `
-                    <div class="max-w-[280px] group">
-                        <div class="relative px-5 py-3 rounded-2xl shadow-md ${isFromDosen
+                            <div class="max-w-[280px] group">
+                                <div class="relative px-5 py-3 rounded-2xl shadow-md ${isFromDosen
                     ? 'bg-white text-blue-900 border border-blue-200 rounded-br-md shadow-blue-100'
                     : 'bg-white text-blue-900 border border-blue-200 rounded-bl-md shadow-blue-100'
                 } transform hover:scale-[1.02] transition-all duration-200">
-                            <p class="text-sm leading-relaxed whitespace-pre-wrap break-words font-medium">${message.message}</p>
-                            {{-- ${isFromDosen ? `
-                                <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-red-500 border-l border-b border-blue-200 rotate-45 transform"></div>
-                            ` : `
-                                <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-red-500 border-l border-b border-blue-200 rotate-45 transform"></div>
-                            `} --}}
-                        </div>
-                        {{-- <div class="flex items-center mt-2 ${isFromDosen ? 'justify-end' : 'justify-start'}">
-                            <p class="text-xs text-blue-500/60 font-medium">
-                                ${timeString}
-                                ${isFromDosen ? ' • Terkirim' : ' • Diterima'}
-                            </p>
-                        </div> --}}
-                    </div>
-                `;
+                                    <p class="text-sm leading-relaxed whitespace-pre-wrap break-words font-medium">${message.message}</p>
+                                    {{-- ${isFromDosen ? `
+                                        <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-red-500 border-l border-b border-blue-200 rotate-45 transform"></div>
+                                    ` : `
+                                        <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-red-500 border-l border-b border-blue-200 rotate-45 transform"></div>
+                                    `} --}}
+                                </div>
+                                {{-- <div class="flex items-center mt-2 ${isFromDosen ? 'justify-end' : 'justify-start'}">
+                                    <p class="text-xs text-blue-500/60 font-medium">
+                                        ${timeString}
+                                        ${isFromDosen ? ' • Terkirim' : ' • Diterima'}
+                                    </p>
+                                </div> --}}
+                            </div>
+                        `;
 
             chatMessages.appendChild(messageDiv);
         }
@@ -369,11 +435,11 @@
             messageInput.disabled = true;
             sendButton.disabled = true;
             sendButton.innerHTML = `
-                    <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                `;
+                            <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        `;
 
             const message = {
                 id: Date.now(),
@@ -422,10 +488,10 @@
                     messageInput.disabled = false;
                     sendButton.disabled = false;
                     sendButton.innerHTML = `
-                        <svg class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                        </svg>
-                    `;
+                                <svg class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                </svg>
+                            `;
                     messageInput.focus();
                 });
         }
@@ -453,20 +519,20 @@
         // Add CSS animations
         const style = document.createElement('style');
         style.textContent = `
-                @keyframes animate-in {
-                    from {
-                        opacity: 0;
-                        transform: translateY(10px) scale(0.95);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0) scale(1);
-                    }
-                }
-                .animate-in {
-                    animation: animate-in 0.3s ease-out;
-                }
-            `;
+                        @keyframes animate-in {
+                            from {
+                                opacity: 0;
+                                transform: translateY(10px) scale(0.95);
+                            }
+                            to {
+                                opacity: 1;
+                                transform: translateY(0) scale(1);
+                            }
+                        }
+                        .animate-in {
+                            animation: animate-in 0.3s ease-out;
+                        }
+                    `;
         document.head.appendChild(style);
 
         function startChatPolling() {

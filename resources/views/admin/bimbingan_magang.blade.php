@@ -17,6 +17,41 @@
                             </div>
                             <input type="text" id="search-input"
                                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                placeholder="Cari berdasarkan Nama Perusahaan atau Lokasi" />
+                        </div>
+
+                        <!-- Filter Dropdown for Status Lowongan -->
+                        <div class="relative w-full sm:w-auto">
+                            <button id="status-filter-btn"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
+                                <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
+                                <span id="status-filter-text">Semua Status</span>
+                                <i class="fas fa-chevron-down text-gray-300" id="status-chevron"></i>
+                            </button>
+                            <div id="status-dropdown"
+                                class="absolute z-10 mt-1 w-full sm:w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+                                <ul class="py-1">
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="Semua">Semua Status</button></li>
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="open">Open</button></li>
+                                    <li><button
+                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                                            data-status="close">Close</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap flex-grow">
+                        <!-- Search Input -->
+                        <div class="relative flex-grow max-w-full sm:max-w-md">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400" id="search-icon"></i>
+                            </div>
+                            <input type="text" id="search-input"
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
                                 placeholder="Cari berdasarkan Nama Mahasiswa atau Nama Dosen" />
                         </div>
 

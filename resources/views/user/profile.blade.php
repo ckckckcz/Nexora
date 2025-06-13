@@ -82,10 +82,6 @@
                         Profile
                     </button>
                     @if (auth()->user()->username == $mahasiswa->nim && isset($bimbingan))
-                    <button data-tab="activity"
-                        class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        Log Aktivitas
-                    </button>
                     <button data-tab="chat"
                         class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                         Chat Dosen Pembimbing
@@ -187,7 +183,7 @@
                                             </button>
                                         </a>
                                     </div>
-                                    @if (auth()->user()->role == 'mahasiswa' && $pengajuan->status_pengajuan == 'diterima')
+                                    @if (isset($pengajuan) && $pengajuan->status_pengajuan == 'diterima')
                                     <div class="mt-4">
                                         <a href="/export-pengajuan/{{auth()->user()->mahasiswa->id_mahasiswa}}">
                                             <button
@@ -195,12 +191,12 @@
                                             </button>
                                         </a>
                                     </div>
-                                    @elseif ($pengajuan->status_pengajuan == 'ditolak')
+                                    @elseif (isset($pengajuan) && $pengajuan->status_pengajuan == 'ditolak')
                                     <div class="mt-4">
                                         <p class="text-xs text-red-600 bg-red-200/50 p-3 rounded-lg">Pengajuan magang Anda ditolak. Silakan periksa kembali
                                             dokumen yang diunggah.</p>
                                     </div>
-                                    @elseif ($pengajuan->status_pengajuan == 'menunggu')
+                                    @elseif (isset($pengajuan) && $pengajuan->status_pengajuan == 'menunggu')
                                     <div class="mt-4">
                                         <p class="text-xs text-yellow-600">Pengajuan magang Anda masih dalam proses
                                             verifikasi.</p>
@@ -570,8 +566,8 @@
                                         oninput="autoResizeChat(this)"></textarea>
                                     
                                     <button onclick="sendMessage()" id="chatSendButton"
-                                        class="absolute right-2 bottom-2 w-8 h-8 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:bg-gray-400 flex items-center justify-center group shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95">
-                                        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        class="absolute right-2 bottom-4 w-8 h-8 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:bg-gray-400 flex items-center justify-center group shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                                         </svg>
                                     </button>

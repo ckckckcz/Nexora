@@ -23,16 +23,6 @@
                                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
                                 placeholder="Cari berdasarkan NIM atau Nama" />
                         </div>
-
-                        <!-- Filter Dropdown for Skema Magang -->
-                        <div class="relative w-full sm:w-auto">
-                            <button
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
-                                <i class="fas fa-filter text-gray-500"></i>
-                                <span>Semua Skema</span>
-                                <i class="fas fa-chevron-down text-gray-300"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
 
@@ -61,7 +51,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             @if(empty($mahasiswas) || count($mahasiswas) == 0)
                                 <tr>
                                     <td colspan="6" class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
@@ -339,6 +329,39 @@
         document.getElementById('update-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.add('hidden');
+            }
+        });
+
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const tableRows = document.querySelectorAll('#table-body tr');
+                    
+                    tableRows.forEach(row => {
+                        // Skip the "no data" row
+                        if (row.querySelector('td[colspan]')) {
+                            return;
+                        }
+                        
+                        // Get text content from relevant columns
+                        const studentName = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase() || '';
+                        const nim = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase() || '';
+                        const company = row.querySelector('td:nth-child(4)')?.textContent.toLowerCase() || '';
+                        
+                        // Search in nama mahasiswa, NIM, and company name
+                        if (studentName.includes(searchTerm) || 
+                            nim.includes(searchTerm) || 
+                            company.includes(searchTerm)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
             }
         });
     </script>

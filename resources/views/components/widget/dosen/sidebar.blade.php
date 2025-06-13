@@ -127,7 +127,7 @@
         </nav>
 
         <!-- Logout Section -->
-        <div class="p-4 border-t border-gray-200">
+        {{-- <div class="p-4 border-t border-gray-200">
             <form method="POST" action="#">
                 @csrf
                 <button type="submit"
@@ -145,7 +145,7 @@
                         Out</span>
                 </button>
             </form>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Toggle Button (Placed outside sidebar) -->

@@ -42,33 +42,6 @@
                                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
                                 placeholder="Cari berdasarkan Nama Mahasiswa" />
                         </div>
-
-                        <!-- Filter Dropdown for Status -->
-                        <div class="relative w-full sm:w-auto">
-                            <button id="status-filter-btn"
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
-                                <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
-                                <span id="status-filter-text">Semua Status</span>
-                                <i class="fas fa-chevron-down text-gray-300" id="status-chevron"></i>
-                            </button>
-                            <div id="status-dropdown"
-                                class="absolute z-10 mt-1 w-full sm:w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
-                                <ul class="py-1 max-h-60 overflow-auto">
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-status="all">Semua Status</button></li>
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-status="complete">Lengkap</button></li>
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-status="pending">Perlu Balasan</button></li>
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-status="waiting">Menunggu</button></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -85,7 +58,7 @@
                                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             @forelse($feedbackMagang as $feedback)
                                 <tr class="hover:bg-gray-50 transition-colors duration-200">
                                     <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -298,22 +271,35 @@
             document.getElementById('detailModal').classList.add('hidden');
         }
 
-        // Search functionality
-        document.getElementById('search-input').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            const tableRows = document.querySelectorAll('tbody tr');
+        // Enhanced search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
             
-            tableRows.forEach(row => {
-                if (row.children.length > 1) {
-                    const studentName = row.children[1]?.textContent.toLowerCase() || '';
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const tableRows = document.querySelectorAll('#table-body tr');
                     
-                    if (studentName.includes(searchValue)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                }
-            });
+                    tableRows.forEach(row => {
+                        // Skip the "no data" row
+                        if (row.querySelector('td[colspan]')) {
+                            return;
+                        }
+                        
+                        // Get text content from relevant columns
+                        const studentName = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase() || '';
+                        const company = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase() || '';
+                        
+                        // Search in nama mahasiswa and company name
+                        if (studentName.includes(searchTerm) || 
+                            company.includes(searchTerm)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            }
         });
 
         // Status filter dropdown

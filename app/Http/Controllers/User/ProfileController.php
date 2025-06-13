@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function index($id)
     {
         $pengajuan = null;
-        if (Auth::user()->mahasiswa) {
+        if (Auth::user()->mahasiswa && auth()->user()->role == 'mahasiswa' && auth()->user()->username == $id) {
             $pengajuan = PengajuanMagang::where('id_mahasiswa', Auth::user()->mahasiswa->id_mahasiswa)->first();
         }
         
@@ -29,7 +29,7 @@ class ProfileController extends Controller
                 ->where('id_mahasiswa', $mahasiswa->id_mahasiswa)
                 ->first();
         }
-
+        
         return view('user.profile', compact('mahasiswa', 'pengajuan', 'bimbingan'));
     }
     

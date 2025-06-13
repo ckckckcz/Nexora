@@ -3,7 +3,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-blue-900">Log Aktivitas Mingguan 🕰</h1>
+            <h1 class="text-3xl font-bold text-blue-900">Log Aktivitas Harian 🕰</h1>
             <p class="mt-2 text-gray-600 font-medium">Kelola log aktivitas mingguan mahasiswa bimbingan</p>
         </header>
 
@@ -20,36 +20,6 @@
                                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
                                 placeholder="Cari berdasarkan Nama Mahasiswa" />
                         </div>
-
-                        <!-- Filter Dropdown for Weeks -->
-                        <div class="relative w-full sm:w-auto">
-                            <button id="week-filter-btn"
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto text-sm">
-                                <i class="fas fa-filter text-gray-500" id="filter-icon"></i>
-                                <span id="week-filter-text">Semua Minggu</span>
-                                <i class="fas fa-chevron-down text-gray-300" id="week-chevron"></i>
-                            </button>
-                            <div id="week-dropdown"
-                                class="absolute z-10 mt-1 w-full sm:w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
-                                <ul class="py-1 max-h-60 overflow-auto">
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-week="Semua Minggu">Semua Minggu</button></li>
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-week="Minggu 1">Minggu 1</button></li>
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-week="Minggu 2">Minggu 2</button></li>
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-week="Minggu 3">Minggu 3</button></li>
-                                    <li><button
-                                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                                            data-week="Minggu 4">Minggu 4</button></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -65,7 +35,7 @@
                                 <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
                             @foreach ($logAktivitas as $item)
                                 <tr>
                                     <td class="px-4 py-4 text-sm text-gray-900 sm:px-6 whitespace-nowrap">
@@ -255,4 +225,34 @@
             </div>
         </section>
     </div>
+
+    <script>
+        // Search functionality for log aktivitas table
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const tableRows = document.querySelectorAll('#table-body tr');
+                    
+                    tableRows.forEach(row => {
+                        // Get text content from relevant columns
+                        const studentName = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase() || '';
+                        const kegiatan = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase() || '';
+                        const tanggal = row.querySelector('td:nth-child(4)')?.textContent.toLowerCase() || '';
+                        
+                        // Search in nama mahasiswa, kegiatan, and tanggal
+                        if (studentName.includes(searchTerm) || 
+                            kegiatan.includes(searchTerm) || 
+                            tanggal.includes(searchTerm)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 @endsection
