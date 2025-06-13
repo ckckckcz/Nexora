@@ -27,6 +27,7 @@ use App\Http\Controllers\User\RekomendasiMagangMahasiswaController;
 use App\Http\Controllers\User\UnggahDokumenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dosen\RekomendasiMagangDosenController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', [DashboardController::class, 'index']);
 
@@ -262,4 +263,10 @@ Route::middleware(['auth', 'authorize:admin'])->group(function () {
         Route::get('/export-excel', [LaporanController::class, 'export_excel']);
     });
 
+});
+
+// Admin Notification Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/notifications', [NotificationController::class, 'getAdminNotifications'])->name('admin.notifications');
+    Route::post('/admin/notifications/mark-read', [NotificationController::class, 'markAsRead'])->name('admin.notifications.mark-read');
 });

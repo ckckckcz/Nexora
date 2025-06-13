@@ -2,121 +2,136 @@
     class="w-full bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8 shadow-sm">
     <!-- Left side: Search -->
     <div class="w-full max-w-xs lg:max-w-md">
-        {{-- <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </div>
-            <input type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5 transition-colors"
-                placeholder="Search..." />
-        </div> --}}
+        <!-- Search can be added here later -->
     </div>
 
     <!-- Right side: Actions -->
     <div class="flex items-center space-x-1">
         <!-- Notifications Dropdown -->
-        <div x-data="{ open: false, notificationCount: 3 }" class="relative">
-            <button @click="open = !open"
-                class="relative p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+        <div x-data="notificationDropdown()" x-init="init()" class="relative">
+            <button @click="toggleDropdown()"
+                class="relative p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
                 aria-label="Notifications">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M15 17h5l-1.405-1.405A2 2 0 0118 14v-5a6 6 0 00-6-6v0a6 6 0 00-6 6v5a2 2 0 01-.595 1.42L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9" />
                 </svg>
-                <span x-show="notificationCount > 0" x-text="notificationCount"
-                    class="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 text-[10px] font-bold text-white">
+                <span x-show="unreadCount > 0" x-text="unreadCount > 99 ? '99+' : unreadCount"
+                    class="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white min-w-[16px] px-1">
                 </span>
             </button>
 
-            <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-100"
+            <div x-show="open" @click.away="closeDropdown()" x-transition:enter="transition ease-out duration-100"
                 x-transition:enter-start="transform opacity-0 scale-95"
                 x-transition:enter-end="transform opacity-100 scale-100"
                 x-transition:leave="transition ease-in duration-75"
                 x-transition:leave-start="transform opacity-100 scale-100"
                 x-transition:leave-end="transform opacity-0 scale-95"
-                class="absolute right-0 mt-2 w-80 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
+                class="absolute right-0 mt-2 w-96 rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5 z-50 overflow-hidden border">
 
-                <div class="p-3 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                    <h3 class="text-sm font-semibold text-gray-700">Notifications</h3>
-                    <button @click="notificationCount = 0"
-                        class="text-xs text-green-600 hover:text-green-800 font-medium">
-                        Mark all as read
+                <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gradient-to-r from-blue-50 to-blue-100">
+                    <h3 class="text-base font-bold text-gray-800">Notifikasi</h3>
+                    <button @click="markAllAsRead()"
+                        x-show="unreadCount > 0"
+                        class="text-xs text-blue-600 hover:text-blue-800 font-semibold px-3 py-1 rounded-full bg-white hover:bg-blue-50 transition-colors">
+                        Tandai sudah dibaca
                     </button>
                 </div>
 
-                <div class="max-h-80 overflow-y-auto divide-y divide-gray-100">
-                    <!-- Notification Item 1 -->
-                    <div class="p-4 hover:bg-gray-50 transition-colors">
-                        <div class="flex">
-                            <div class="flex-shrink-0 mr-3">
-                                <div class="h-9 w-9 rounded-full bg-green-100 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 4v16m8-8H4" />
-                                    </svg>
-                                </div>
+                <div class="max-h-96 overflow-y-auto" x-show="!loading">
+                    <template x-if="notifications.length === 0">
+                        <div class="p-8 text-center">
+                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2 2 0 0118 14v-5a6 6 0 00-6-6v0a6 6 0 00-6 6v5a2 2 0 01-.595 1.42L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9"/>
+                                </svg>
                             </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">Pendaftaran Magang Baru</p>
-                                <p class="text-xs text-gray-500 mt-1">Mahasiswa Budi Santoso telah mendaftar program
-                                    magang</p>
-                                <p class="text-xs text-gray-400 mt-1">2 menit yang lalu</p>
-                            </div>
+                            <p class="text-gray-500 text-sm">Tidak ada notifikasi baru</p>
                         </div>
-                    </div>
+                    </template>
 
-                    <!-- Notification Item 2 -->
-                    <div class="p-4 hover:bg-gray-50 transition-colors">
-                        <div class="flex">
-                            <div class="flex-shrink-0 mr-3">
-                                <div class="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
+                    <template x-for="notification in notifications" :key="notification.id">
+                        <div class="p-4 hover:bg-gray-50 transition-colors border-b border-gray-50 cursor-pointer"
+                             @click="handleNotificationClick(notification)">
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="h-10 w-10 rounded-full flex items-center justify-center"
+                                         :class="{
+                                             'bg-blue-100': notification.color === 'blue',
+                                             'bg-green-100': notification.color === 'green',
+                                             'bg-yellow-100': notification.color === 'yellow',
+                                             'bg-red-100': notification.color === 'red'
+                                         }">
+                                        <!-- User Plus Icon -->
+                                        <template x-if="notification.icon === 'user-plus'">
+                                            <svg class="h-5 w-5" :class="{
+                                                'text-blue-600': notification.color === 'blue',
+                                                'text-green-600': notification.color === 'green',
+                                                'text-yellow-600': notification.color === 'yellow',
+                                                'text-red-600': notification.color === 'red'
+                                            }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                                            </svg>
+                                        </template>
+                                        
+                                        <!-- Clock Icon -->
+                                        <template x-if="notification.icon === 'clock'">
+                                            <svg class="h-5 w-5" :class="{
+                                                'text-blue-600': notification.color === 'blue',
+                                                'text-green-600': notification.color === 'green',
+                                                'text-yellow-600': notification.color === 'yellow',
+                                                'text-red-600': notification.color === 'red'
+                                            }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </template>
+                                        
+                                        <!-- Check Circle Icon -->
+                                        <template x-if="notification.icon === 'check-circle'">
+                                            <svg class="h-5 w-5" :class="{
+                                                'text-blue-600': notification.color === 'blue',
+                                                'text-green-600': notification.color === 'green',
+                                                'text-yellow-600': notification.color === 'yellow',
+                                                'text-red-600': notification.color === 'red'
+                                            }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-semibold text-gray-800" x-text="notification.title"></p>
+                                    <p class="text-xs text-gray-600 mt-1 leading-relaxed" x-text="notification.message"></p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <p class="text-xs text-gray-400" x-text="notification.time"></p>
+                                        <template x-if="notification.status">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium"
+                                                  :class="{
+                                                      'bg-yellow-100 text-yellow-800': notification.status === 'menunggu',
+                                                      'bg-green-100 text-green-800': notification.status === 'diterima',
+                                                      'bg-red-100 text-red-800': notification.status === 'ditolak'
+                                                  }"
+                                                  x-text="notification.status === 'menunggu' ? 'Menunggu' : 
+                                                          notification.status === 'diterima' ? 'Diterima' : 'Ditolak'">
+                                            </span>
+                                        </template>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">Bimbingan Disetujui</p>
-                                <p class="text-xs text-gray-500 mt-1">Dosen Pembimbing telah menyetujui jadwal bimbingan
-                                </p>
-                                <p class="text-xs text-gray-400 mt-1">1 jam yang lalu</p>
-                            </div>
                         </div>
-                    </div>
-
-                    <!-- Notification Item 3 -->
-                    <div class="p-4 hover:bg-gray-50 transition-colors">
-                        <div class="flex">
-                            <div class="flex-shrink-0 mr-3">
-                                <div class="h-9 w-9 rounded-full bg-yellow-100 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">Pengajuan Menunggu Persetujuan</p>
-                                <p class="text-xs text-gray-500 mt-1">5 pengajuan magang menunggu persetujuan anda</p>
-                                <p class="text-xs text-gray-400 mt-1">3 jam yang lalu</p>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
 
-                <div class="p-2 border-t border-gray-100 bg-gray-50">
-                    <a href="# class=" block w-full text-center text-xs font-medium text-green-600 hover:text-green-800
-                        py-1.5">
-                        Lihat semua notifikasi
+                <div x-show="loading" class="p-8 text-center">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                    <p class="text-gray-500 text-sm mt-2">Memuat notifikasi...</p>
+                </div>
+
+                <div class="p-3 border-t border-gray-100 bg-gray-50">
+                    <a href="/admin/pengajuan" 
+                       class="block w-full text-center text-sm font-semibold text-blue-600 hover:text-blue-800 py-2 rounded-md hover:bg-blue-50 transition-colors">
+                        Lihat semua pengajuan
                     </a>
                 </div>
             </div>
@@ -215,3 +230,165 @@
         </div>
     </div>
 </header>
+
+<script>
+function notificationDropdown() {
+    return {
+        open: false,
+        loading: false,
+        notifications: [],
+        unreadCount: 0,
+        
+        async init() {
+            await this.loadNotifications();
+            // Auto refresh every 15 seconds to catch new applications quickly
+            setInterval(() => {
+                if (!this.open) { // Only refresh when dropdown is closed to avoid UI disruption
+                    this.loadNotifications();
+                }
+            }, 15000);
+        },
+        
+        toggleDropdown() {
+            this.open = !this.open;
+            if (this.open) {
+                this.loadNotifications();
+            }
+        },
+        
+        closeDropdown() {
+            this.open = false;
+        },
+        
+        async loadNotifications() {
+            try {
+                if (!this.open) {
+                    this.loading = true;
+                }
+                
+                const response = await fetch('/admin/notifications', {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                
+                this.notifications = data.notifications || [];
+                this.unreadCount = data.unread_count || 0;
+                
+                // Show browser notification for new applications (if permission granted)
+                if (data.notifications) {
+                    data.notifications.forEach(notification => {
+                        if (notification.isNew && notification.type === 'new_application') {
+                            this.showBrowserNotification(notification);
+                        }
+                    });
+                }
+                
+            } catch (error) {
+                console.error('Error loading notifications:', error);
+                this.notifications = [];
+                this.unreadCount = 0;
+            } finally {
+                this.loading = false;
+            }
+        },
+        
+        async markAllAsRead() {
+            try {
+                const response = await fetch('/admin/notifications/mark-read', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                
+                if (response.ok) {
+                    this.unreadCount = 0;
+                    this.showToast('Semua notifikasi telah ditandai sebagai sudah dibaca', 'success');
+                }
+            } catch (error) {
+                console.error('Error marking notifications as read:', error);
+                this.showToast('Gagal menandai notifikasi', 'error');
+            }
+        },
+        
+        handleNotificationClick(notification) {
+            if (notification.url) {
+                window.location.href = notification.url;
+            }
+            this.closeDropdown();
+        },
+        
+        showBrowserNotification(notification) {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification('Pengajuan Magang Baru', {
+                    body: notification.message,
+                    icon: '/favicon.ico',
+                    tag: 'internship-application'
+                });
+            }
+        },
+        
+        requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+        },
+        
+        showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 text-white transform transition-transform duration-300 translate-x-full ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+            }`;
+            toast.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        ${type === 'success' ? 
+                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>' :
+                            type === 'error' ?
+                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>' :
+                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>'
+                        }
+                    </svg>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Remove after 4 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 4000);
+        }
+    }
+}
+
+// Request notification permission when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    if ('Notification' in window && Notification.permission === 'default') {
+        // Auto request permission for admin users
+        Notification.requestPermission();
+    }
+});
+</script>

@@ -93,24 +93,7 @@ $partnerCompanies = [
                             <div class="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-gray-100 opacity-60"></div>
                             <!-- Brand color accent -->
                             <div class="absolute top-0 left-0 w-full h-1.5 opacity-30" style="background: {{ $company['color'] }}"></div>
-                            
-                            <!-- Logo with fallback -->
-                            <img src="{{ $company['logo'] }}" 
-                                 alt="{{ $company['name'] }}" 
-                                 class="max-w-full max-h-24 object-contain filter brightness-110 contrast-110 relative z-10"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            
-                            <!-- Fallback content when image fails to load -->
-                            <div class="hidden w-full h-full items-center justify-center relative z-10">
-                                <div class="text-center">
-                                    <div class="w-12 h-12 rounded-lg mx-auto mb-2 flex items-center justify-center" style="background-color: {{ $company['color'] }}20;">
-                                        <svg class="w-6 h-6" style="color: {{ $company['color'] }}" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a2 2 0 104 0 2 2 0 00-4 0zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                                        </svg>
-                                    </div>
-                                    <p class="text-sm font-semibold text-gray-700">{{ $company['name'] }}</p>
-                                </div>
-                            </div>
+                            <img src="{{ $company['logo'] }}" alt="{{ $company['name'] }}" class="max-w-full max-h-24 object-contain filter brightness-110 contrast-110 relative z-10">
                         </div>
                     </div>
                     @endforeach
@@ -129,15 +112,13 @@ $partnerCompanies = [
                             <div class="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-gray-100 opacity-60"></div>
                             <!-- Brand color accent -->
                             <div class="absolute top-0 left-0 w-full h-1.5 opacity-30" style="background: {{ $company['color'] }}"></div>
-                            
-                            <!-- Logo with fallback -->
-                            <img src="{{ $company['logo'] }}" 
-                                 alt="{{ $company['name'] }}" 
-                                 class="max-w-full max-h-24 object-contain filter brightness-110 contrast-110 relative z-10"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            
-                            <!-- Fallback content when image fails to load -->
-                            <div class="hidden w-full h-full items-center justify-center relative z-10">
-                                <div class="text-center">
-                                    <div class="w-12 h-12 rounded-lg mx-auto mb-2 flex items-center justify-center" style="background-color: {{ $company['color'] }}20;">
-                                        <svg class="w-6 h-6" style="color: {{ $company['color'] }}" fill="currentColor" viewBox="0
+                            <img src="{{ $company['logo'] }}" alt="{{ $company['name'] }}" class="max-w-full max-h-24 object-contain filter brightness-110 contrast-110 relative z-10">
+                            <!-- Company name at bottom -->
+                        </div>
+                    </div>
+                    @endforeach
+                @endfor
+            </div>
+        </div>
+    </div>
+</section>
