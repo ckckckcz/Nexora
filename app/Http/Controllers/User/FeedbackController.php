@@ -67,7 +67,8 @@ class FeedbackController extends Controller
                 // Create new record
                 FeedbackMagang::create([
                     'id_bimbingan_magang' => $bimbingan->id_bimbingan,
-                    'testimoni_magang' => $validated['testimoni_magang']
+                    'testimoni_magang' => $validated['testimoni_magang'],
+                    'pesan_dosen' => '',
                 ]);
             }
             
