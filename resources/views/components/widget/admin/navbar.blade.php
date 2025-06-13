@@ -129,7 +129,7 @@
                 </div>
 
                 <div class="p-3 border-t border-gray-100 bg-gray-50">
-                    <a href="/admin/pengajuan" 
+                    <a href="/admin/pengajuan-magang" 
                        class="block w-full text-center text-sm font-semibold text-blue-600 hover:text-blue-800 py-2 rounded-md hover:bg-blue-50 transition-colors">
                         Lihat semua pengajuan
                     </a>
