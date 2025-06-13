@@ -13,5 +13,5 @@
     <!-- Featured Job Section -->
     @include('components.ui.anon.featured-job')
     <!-- Tutorial Apply Section -->
-    @include('components.ui.anon.tutorial')
+    {{-- @include('components.ui.anon.tutorial') --}}
 @endsection
