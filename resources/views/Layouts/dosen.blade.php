@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/css/podium.css',  'resources/js/app.js', 'resources/js/search.js', 'resources/js/admin/navbar.js', 'resources/js/admin/layout.js', 'resources/js/admin/dashboardDummy.js',])
+        @vite(['resources/css/app.css', 'resources/css/podium.css',  'resources/js/app.js', 'resources/js/admin/navbar.js', 'resources/js/admin/layout.js', 'resources/js/admin/dashboardDummy.js',])
     @else
     @endif
     <meta name="csrf-token" content="{{ csrf_token() }}">

@@ -296,7 +296,7 @@
             currentMahasiswaId = idMahasiswa;
             currentMahasiswaName = namaMahasiswa;
 
-            document.getElementById('chatTitle').textContent = `${namaMahasiswa}`;
+            document.getElementById('chatTitle').textContent = `Chat dengan ${namaMahasiswa}`;
 
             // Show modal with enhanced animation
             const modal = document.getElementById('chatModal');
@@ -304,8 +304,6 @@
             modal.classList.remove('hidden');
 
             setTimeout(() => {
-                modal.classList.remove('bg-opacity-60');
-                modal.classList.add('bg-opacity-60');
                 modalContent.classList.remove('scale-95');
                 modalContent.classList.add('scale-100');
             }, 10);
@@ -322,8 +320,6 @@
             const modal = document.getElementById('chatModal');
             const modalContent = document.getElementById('chatModalContent');
 
-            modal.classList.remove('bg-opacity-60');
-            modal.classList.add('bg-opacity-0');
             modalContent.classList.remove('scale-100');
             modalContent.classList.add('scale-95');
 
@@ -346,7 +342,7 @@
 
             fetch(`/dosen/chat/messages/${currentChatRoom}`)
                 .then(response => response.json())
-                .then data => {
+                .then(data => {
                     if (data.messages) {
                         localStorage.setItem(currentChatRoom, JSON.stringify(data.messages));
                         displayMessages(data.messages);
@@ -365,15 +361,15 @@
 
             if (messages.length === 0) {
                 chatMessages.innerHTML = `
-                                <div class="text-center py-12">
-                                    <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-blue-200">
-                                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.255-.949L5 20l1.395-3.72C7.512 15.042 9.201 13 12 13c4.418 0 8-3.582 8-1z"/>
-                                    </div>
-                                    <h4 class="text-blue-900 font-bold mb-2">Mulai Percakapan dengan ${currentMahasiswaName}</h4>
-                                    <p class="text-blue-700/70 text-sm leading-relaxed px-4">Ketik pesan pertama untuk memulai diskusi bimbingan</p>
-                                </div>
-                            `;
+                    <div class="text-center py-12">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-blue-200">
+                            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.255-.949L5 20l1.395-3.72C7.512 15.042 9.201 13 12 13c4.418 0 8-3.582 8-1z"/>
+                        </div>
+                        <h4 class="text-blue-900 font-bold mb-2">Mulai Percakapan dengan ${currentMahasiswaName}</h4>
+                        <p class="text-blue-700/70 text-sm leading-relaxed px-4">Ketik pesan pertama untuk memulai diskusi bimbingan</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -400,26 +396,15 @@
             });
 
             messageDiv.innerHTML = `
-                            <div class="max-w-[280px] group">
-                                <div class="relative px-5 py-3 rounded-2xl shadow-md ${isFromDosen
-                    ? 'bg-white text-blue-900 border border-blue-200 rounded-br-md shadow-blue-100'
-                    : 'bg-white text-blue-900 border border-blue-200 rounded-bl-md shadow-blue-100'
-                } transform hover:scale-[1.02] transition-all duration-200">
-                                    <p class="text-sm leading-relaxed whitespace-pre-wrap break-words font-medium">${message.message}</p>
-                                    {{-- ${isFromDosen ? `
-                                        <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-red-500 border-l border-b border-blue-200 rotate-45 transform"></div>
-                                    ` : `
-                                        <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-red-500 border-l border-b border-blue-200 rotate-45 transform"></div>
-                                    `} --}}
-                                </div>
-                                {{-- <div class="flex items-center mt-2 ${isFromDosen ? 'justify-end' : 'justify-start'}">
-                                    <p class="text-xs text-blue-500/60 font-medium">
-                                        ${timeString}
-                                        ${isFromDosen ? ' • Terkirim' : ' • Diterima'}
-                                    </p>
-                                </div> --}}
-                            </div>
-                        `;
+                <div class="max-w-[280px] group">
+                    <div class="relative px-5 py-3 rounded-2xl shadow-md ${isFromDosen
+                        ? 'bg-white text-blue-900 border border-blue-200 rounded-br-md shadow-blue-100'
+                        : 'bg-white text-blue-900 border border-blue-200 rounded-bl-md shadow-blue-100'
+                    } transform hover:scale-[1.02] transition-all duration-200">
+                        <p class="text-sm leading-relaxed whitespace-pre-wrap break-words font-medium">${message.message}</p>
+                    </div>
+                </div>
+            `;
 
             chatMessages.appendChild(messageDiv);
         }
@@ -435,17 +420,17 @@
             messageInput.disabled = true;
             sendButton.disabled = true;
             sendButton.innerHTML = `
-                            <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                        `;
+                <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            `;
 
             const message = {
                 id: Date.now(),
                 message: messageText,
                 sender_type: 'dosen',
-                sender_id: {{ auth()->user()->dosen->id_dosen }},
+                sender_id: {{ auth()->user()->dosen->id_dosen ?? 'null' }},
                 receiver_id: currentMahasiswaId,
                 timestamp: new Date().toISOString(),
                 room: currentChatRoom
@@ -488,10 +473,10 @@
                     messageInput.disabled = false;
                     sendButton.disabled = false;
                     sendButton.innerHTML = `
-                                <svg class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                                </svg>
-                            `;
+                        <svg class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                    `;
                     messageInput.focus();
                 });
         }
@@ -519,20 +504,20 @@
         // Add CSS animations
         const style = document.createElement('style');
         style.textContent = `
-                        @keyframes animate-in {
-                            from {
-                                opacity: 0;
-                                transform: translateY(10px) scale(0.95);
-                            }
-                            to {
-                                opacity: 1;
-                                transform: translateY(0) scale(1);
-                            }
-                        }
-                        .animate-in {
-                            animation: animate-in 0.3s ease-out;
-                        }
-                    `;
+            @keyframes animate-in {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px) scale(0.95);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+            .animate-in {
+                animation: animate-in 0.3s ease-out;
+            }
+        `;
         document.head.appendChild(style);
 
         function startChatPolling() {

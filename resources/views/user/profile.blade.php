@@ -545,7 +545,6 @@
                                 <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                                     <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.255-.949L5 20l1.395-3.72C7.512 15.042 9.201 13 12 13c4.418 0 8-3.582 8-1z"/>
-                                    </svg>
                                 </div>
                                 <h4 class="text-blue-900 font-semibold mb-2">Mulai Chat dengan Dosen</h4>
                                 <p class="text-blue-600/70 text-sm max-w-sm mx-auto leading-relaxed">
@@ -566,7 +565,7 @@
                                         oninput="autoResizeChat(this)"></textarea>
                                     
                                     <button onclick="sendMessage()" id="chatSendButton"
-                                        class="absolute right-2 bottom-4 w-8 h-8 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:bg-gray-400 flex items-center justify-center group shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95">
+                                        class="absolute right-2 bottom-2 w-8 h-8 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 disabled:bg-gray-400 flex items-center justify-center group shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                                         </svg>
@@ -641,6 +640,8 @@
         const chatRoom = 'chat_{{ $bimbingan->id_bimbingan }}';
         const mahasiswaId = {{ $mahasiswa->id_mahasiswa }};
         const dosenId = {{ $bimbingan->dosen->id_dosen }};
+        let chatPollingInterval = null;
+        let lastMessageId = 0;
 
         function loadChatMessages() {
             fetch(`/mahasiswa/chat/messages/${chatRoom}`)
@@ -654,6 +655,11 @@
                     if (data.messages) {
                         localStorage.setItem(chatRoom, JSON.stringify(data.messages));
                         displayMessages(data.messages);
+                        
+                        // Update last message ID for polling
+                        if (data.messages.length > 0) {
+                            lastMessageId = Math.max(...data.messages.map(m => m.id || 0));
+                        }
                     }
                 })
                 .catch(error => {
@@ -662,6 +668,92 @@
                     const localMessages = JSON.parse(localStorage.getItem(chatRoom) || '[]');
                     displayMessages(localMessages);
                 });
+        }
+
+        function checkForNewMessages() {
+            fetch(`/mahasiswa/chat/check-new/${chatRoom}?lastId=${lastMessageId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.hasNew && data.messages && data.messages.length > 0) {
+                        // Add new messages to localStorage
+                        const existingMessages = JSON.parse(localStorage.getItem(chatRoom) || '[]');
+                        const allMessages = [...existingMessages, ...data.messages];
+                        localStorage.setItem(chatRoom, JSON.stringify(allMessages));
+                        
+                        // Display new messages with animation
+                        data.messages.forEach((message, index) => {
+                            displayMessage(message, index === data.messages.length - 1);
+                            
+                            // Update last message ID
+                            if (message.id && message.id > lastMessageId) {
+                                lastMessageId = message.id;
+                            }
+                        });
+                        
+                        // Scroll to bottom
+                        setTimeout(() => {
+                            const chatMessages = document.getElementById('chatMessages');
+                            if (chatMessages) {
+                                chatMessages.scrollTop = chatMessages.scrollHeight;
+                            }
+                        }, 100);
+                        
+                        // Show notification if chat is not visible
+                        if (document.querySelector('[data-tab="chat"]').classList.contains('border-transparent')) {
+                            showChatNotification();
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking for new messages:', error);
+                });
+        }
+
+        function startChatPolling() {
+            // Clear existing interval
+            if (chatPollingInterval) {
+                clearInterval(chatPollingInterval);
+            }
+            
+            // Start polling every 3 seconds
+            chatPollingInterval = setInterval(() => {
+                checkForNewMessages();
+            }, 3000);
+        }
+
+        function stopChatPolling() {
+            if (chatPollingInterval) {
+                clearInterval(chatPollingInterval);
+                chatPollingInterval = null;
+            }
+        }
+
+        function showChatNotification() {
+            const chatTab = document.querySelector('[data-tab="chat"]');
+            if (chatTab && !chatTab.classList.contains('border-blue-900')) {
+                // Add notification badge
+                if (!chatTab.querySelector('.notification-badge')) {
+                    const badge = document.createElement('span');
+                    badge.className = 'notification-badge absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse';
+                    chatTab.style.position = 'relative';
+                    chatTab.appendChild(badge);
+                }
+            }
+        }
+
+        function clearChatNotification() {
+            const chatTab = document.querySelector('[data-tab="chat"]');
+            if (chatTab) {
+                const badge = chatTab.querySelector('.notification-badge');
+                if (badge) {
+                    badge.remove();
+                }
+            }
         }
 
         function displayMessages(messages) {
@@ -717,7 +809,11 @@
                             : 'bg-white text-gray-800 border border-gray-200 rounded-bl-md'
                     } transform hover:scale-[1.02] transition-all duration-200">
                         <p class="text-sm leading-relaxed whitespace-pre-wrap break-words">${message.message}</p>
+                        <div class="text-xs mt-1 opacity-75">
+                            ${timeString}
+                        </div>
                     </div>
+                    ${!isFromMahasiswa ? '<div class="text-xs text-gray-500 mt-1 text-left">Dosen Pembimbing</div>' : ''}
                 </div>
             `;
             
@@ -818,6 +914,32 @@
             textarea.style.height = Math.min(textarea.scrollHeight, 80) + 'px';
         }
 
+        // Page visibility handling for polling
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                stopChatPolling();
+            } else {
+                // Check for new messages when page becomes visible
+                if (document.querySelector('[data-tab="chat"]').classList.contains('border-blue-900')) {
+                    checkForNewMessages();
+                    startChatPolling();
+                }
+            }
+        });
+
+        // Window focus/blur handling
+        window.addEventListener('focus', function() {
+            if (document.querySelector('[data-tab="chat"]').classList.contains('border-blue-900')) {
+                checkForNewMessages();
+                startChatPolling();
+            }
+        });
+
+        window.addEventListener('blur', function() {
+            // Keep polling even when window is not focused
+            // This ensures real-time updates
+        });
+
         // Add elegant CSS animations
         const chatStyle = document.createElement('style');
         chatStyle.textContent = `
@@ -833,6 +955,9 @@
             }
             .animate-fade-in {
                 animation: animate-fade-in 0.3s ease-out;
+            }
+            .notification-badge {
+                box-shadow: 0 0 0 2px white;
             }
         `;
         document.head.appendChild(chatStyle);
