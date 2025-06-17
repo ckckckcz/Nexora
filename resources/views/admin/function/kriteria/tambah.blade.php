@@ -2,7 +2,7 @@
 @section('admin')
     <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-blue-900">Tambah Data Skema Magang 📅</h1>
+            <h1 class="text-3xl font-bold text-blue-900">Tambah Data Kriteria 🎁</h1>
         </header>
 
         <section class="bg-white rounded-2xl border border-gray-200 transition-shadow duration-300 hover:shadow-lg">
